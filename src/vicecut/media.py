@@ -419,6 +419,7 @@ class VideoFetchItem:
     max_clip_s: float = 3.5
     drop_first_s: float = 2.5   # skips ESRB/PEGI rating card at start of official trailers
     drop_last_s: float = 4.0    # skips publisher logo/date endplate
+    max_clips: int = 90         # cap evenly across long gameplay videos so splitting stays fast
     tags: list[str] = field(default_factory=list)
 
 
@@ -650,6 +651,7 @@ def split_video_into_scenes(
     max_clip_s: float = 3.5,
     drop_first_s: float = 2.5,
     drop_last_s: float = 4.0,
+    max_clips: int = 90,
     tags: list[str] | None = None,
     project_root: Path | None = None,
 ) -> tuple[list[ShotClip], Path | None]:
@@ -685,6 +687,10 @@ def split_video_into_scenes(
         drop_first_s=drop_first_s,
         drop_last_s=drop_last_s,
     )
+    if max_clips > 0 and len(segments) > max_clips:
+        # Evenly sample across the full video duration so long gameplay tours stay fast & varied!
+        step = len(segments) / max_clips
+        segments = [segments[int(i * step)] for i in range(max_clips)]
 
     shots: list[ShotClip] = []
     triplets: list[tuple[str, Path, Path, Path, str]] = []
@@ -875,6 +881,7 @@ def execute_fetch_plan(
                 max_clip_s=v.max_clip_s,
                 drop_first_s=v.drop_first_s,
                 drop_last_s=v.drop_last_s,
+                max_clips=v.max_clips,
                 tags=v.tags,
                 project_root=project_root,
             )

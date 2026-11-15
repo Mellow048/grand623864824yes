@@ -530,7 +530,24 @@
   </div>
 
   <div class="spec-strip">
-    <div class="spec-box"><div class="k">Panel Glass</div><div class="v">#1E1322 @ 90% • Border #F7D3EA • Pink Glow</div></div>
+    <div class="spec-box" style="grid-column: 1 / -1; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <div>
+        <div class="k">Synthesized Arena Voiceover (voice-02)</div>
+        <div class="v" id="voiceTrackLabel">Intro — section_00.mp3 (click Play to preview while watching the animated props!)</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <audio id="voicePlayer" controls style="height:34px;" src="../projects/gta6-before-you-play/voice/takes/section_00.mp3"></audio>
+        <select id="voiceTrackSelect" style="background:#2A1731;color:#FFF1DE;border:1px solid rgba(247,211,234,0.35);border-radius:8px;padding:6px 10px;font-weight:700;font-size:12px;">
+          <option value="../projects/gta6-before-you-play/voice/takes/section_00.mp3">1. Intro (0:00-0:36)</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_01_part01.mp3">2. Launch Times &amp; NZ Trick</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_01_part02.mp3">3. 212 GB SSD Pre-Load</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_02_part01.mp3">4. $79.99, No-Disc Box &amp; 30 FPS</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_02_part02.mp3">5. PC Wait &amp; 6 Leonida Regions</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_03.mp3">6. Close &amp; Rumors Busted</option>
+        </select>
+      </div>
+    </div>
+    <div class="spec-box"><div class="k">Compact Prop PiP</div><div class="v">520×370 (9% frame) • 0 Blur / 0 Darken • Live Gameplay Behind</div></div>
     <div class="spec-box"><div class="k">Typography</div><div class="v">Montserrat Black (900) ALL CAPS • Bold (700) Body</div></div>
     <div class="spec-box"><div class="k">Motion Rules</div><div class="v">0.25s Ease Fade • Hard Cuts Only • Zero SFX</div></div>
     <div class="spec-box"><div class="k">Anti-Flicker</div><div class="v">Cut Snaps to Card Start • Blur Matches Card Frame</div></div>
@@ -680,11 +697,16 @@ function applyCurrentProp() {
 function rescale() {
   const shell = document.getElementById('stageShell');
   const scaler = document.getElementById('stageScaler');
-  const s = shell.clientWidth / 1920;
+  const w = shell.clientWidth || Math.min(window.innerWidth - 40, 1180) || 960;
+  const s = Math.max(0.18, w / 1920);
   scaler.style.transform = `scale(${s})`;
 }
 window.addEventListener('resize', rescale);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(rescale).observe(document.getElementById('stageShell'));
+}
 rescale();
+requestAnimationFrame(rescale);
 
 let captionTimer = null;
 let propRaf = null;
@@ -770,6 +792,17 @@ document.querySelectorAll('.palette-bar .swatch-btn').forEach(btn => {
     Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
   });
 });
+
+const voiceSelect = document.getElementById('voiceTrackSelect');
+const voicePlayer = document.getElementById('voicePlayer');
+const voiceLabel = document.getElementById('voiceTrackLabel');
+if (voiceSelect && voicePlayer) {
+  voiceSelect.addEventListener('change', () => {
+    voicePlayer.src = voiceSelect.value;
+    voiceLabel.textContent = voiceSelect.options[voiceSelect.selectedIndex].text + ' — ready to play';
+    voicePlayer.play().catch(() => {});
+  });
+}
 
 setMode('prop');
 </script>

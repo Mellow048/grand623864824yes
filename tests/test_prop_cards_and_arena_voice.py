@@ -81,7 +81,7 @@ def test_gta6_before_you_play_project_passes_research_script_and_assets() -> Non
         assert img_file.stat().st_size > 10_000
 
     plan = FetchPlan.load(dirs["media"] / "fetch_plan.yaml")
-    assert len(plan.videos) == 4
+    assert len(plan.videos) == 5
     assert any(v.fallback_url for v in plan.videos)
 
 

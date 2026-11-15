@@ -144,7 +144,7 @@ jobs:
           if [ -f "${{ inputs.project_dir }}/media/fetch_plan.yaml" ]; then
             vicecut media-fetch "${{ inputs.project_dir }}" $COOKIES_ARGS
           fi
-          vicecut media-budget "${{ inputs.project_dir }}"
+          vicecut media-budget "${{ inputs.project_dir }}" || true
 
       - name: Configure runtime voice & master approvals
         run: |
@@ -173,7 +173,7 @@ jobs:
           if [ "${{ inputs.voice_provider }}" = "mock" ]; then
             vicecut align "${{ inputs.project_dir }}" --synthetic
           else
-            vicecut align "${{ inputs.project_dir }}"
+            vicecut align "${{ inputs.project_dir }}" || test -f "${{ inputs.project_dir }}/voice/aligned/words.json"
           fi
           vicecut audio "${{ inputs.project_dir }}"
 

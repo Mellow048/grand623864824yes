@@ -45,11 +45,12 @@ videos:
     date: "2025-05-06"
     license: "official-trailer-commentary"
     is_official: true
-    scene_threshold: 0.24
-    min_clip_s: 1.6
-    max_clip_s: 3.3
+    scene_threshold: 0.22
+    min_clip_s: 1.5
+    max_clip_s: 2.8
     drop_first_s: 2.5
     drop_last_s: 5.5
+    max_clips: 75
     tags: [vice_city, leonida, jason, lucia, trailer2]
 
   - id: src_trailer1
@@ -61,12 +62,30 @@ videos:
     date: "2023-12-04"
     license: "official-trailer-commentary"
     is_official: true
-    scene_threshold: 0.24
-    min_clip_s: 1.6
-    max_clip_s: 3.3
+    scene_threshold: 0.22
+    min_clip_s: 1.5
+    max_clip_s: 2.8
     drop_first_s: 2.5
     drop_last_s: 5.5
+    max_clips: 55
     tags: [vice_city, leonida, beach, keys, grassrivers, trailer1]
+
+  - id: src_extended_look
+    title: "Grand Theft Auto VI — An Extended Look (Official Gameplay)"
+    channel_or_outlet: "Rockstar Games"
+    url: "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+    fallback_url: "https://archive.org/download/grand-theft-auto-vi-an-extended-look/Grand.Theft.Auto.VI.An.Extended.Look.2026.NF.WEB-DL.2160p-SOFCJ.ia.mp4"
+    page_url: "https://www.rockstargames.com/VI"
+    date: "2026-10-29"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.26
+    min_clip_s: 1.8
+    max_clip_s: 3.0
+    drop_first_s: 15.0
+    drop_last_s: 20.0
+    max_clips: 75
+    tags: [gameplay, vice_city, leonida, extended_look]
 
 # Studio motion props already live in media/photos/ (zero people, pure #FFFFFF white BG):
 #   prop_consoles.png, prop_ssd_storage.png, prop_code_box.png, prop_midnight_globe.png

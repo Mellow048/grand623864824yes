@@ -233,9 +233,13 @@ def cmd_align(args: argparse.Namespace) -> int:
 
 def cmd_audio(args: argparse.Namespace) -> int:
     _, dirs, _ = _load_project(args.project)
+    script = parse_script_file(dirs["script"] / "script.md")
     align_path = dirs["voice_aligned"] / "words.json"
     alignment = AlignmentResult.load(align_path)
-    takes = sorted(dirs["voice_takes"].glob("section_*.wav"))
+    takes = [dirs["voice_takes"] / f"section_{sec.index:02d}.wav" for sec in script.sections]
+    takes = [p for p in takes if p.exists()]
+    if not takes:
+        takes = sorted(dirs["voice_takes"].glob("section_*.wav"))
     if not takes:
         raise FileNotFoundError(f"No section takes found in {dirs['voice_takes']}")
 
