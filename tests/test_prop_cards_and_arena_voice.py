@@ -327,6 +327,7 @@ def test_audio_pitch_shift_speed_remaster_and_music_sidechain_mix(
 
     # Also verify cmd_audio reads brief.voice pitch/speed settings cleanly without NameError
     import argparse
+    import shutil
     from vicecut.cli import cmd_audio
     from vicecut.align import AlignedWord, AlignmentResult
     from vicecut.audio import AudioMasterStats
