@@ -1435,10 +1435,10 @@ headlines:
   headline_text: GTA 6 Retail Boxed Editions Include Digital Download Code Only With
     No Physical Disc
   date: Nov 2026
-  image_path: ''
-  width_px: 0
-  height_px: 0
-  use_text_fallback: true
+  image_path: /home/runner/work/grand623864824yes/grand623864824yes/projects/gta6-before-you-play/media/headlines/hl_no_disc.png
+  width_px: 1696
+  height_px: 168
+  use_text_fallback: false
   is_mockup: false
 - id: hl_pc_wait
   source_id: src_launch_trailer
