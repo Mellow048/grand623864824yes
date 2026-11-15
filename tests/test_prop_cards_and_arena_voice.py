@@ -325,4 +325,39 @@ def test_audio_pitch_shift_speed_remaster_and_music_sidechain_mix(
     assert "volume=-14dB" in joined
     assert "alimiter" in joined
 
+    # Also verify cmd_audio reads brief.voice pitch/speed settings cleanly without NameError
+    import argparse
+    from vicecut.cli import cmd_audio
+    from vicecut.align import AlignedWord, AlignmentResult
+    from vicecut.audio import AudioMasterStats
+
+    proj = tmp_path / "aud_proj"
+    (proj / "script").mkdir(parents=True)
+    (proj / "voice" / "takes").mkdir(parents=True)
+    (proj / "voice" / "aligned").mkdir(parents=True)
+    (proj / "voice" / "master").mkdir(parents=True)
+    shutil.copy2(GTA6_LAUNCH_PROJ / "project.yaml", proj / "project.yaml")
+    shutil.copy2(GTA6_LAUNCH_PROJ / "script" / "script.md", proj / "script" / "script.md")
+    (proj / "voice" / "takes" / "section_00.wav").write_bytes(b"RIFF")
+    AlignmentResult(
+        words=[AlignedWord(0, 0, 1, "hello", "hello", 0.0, 0.5, True)],
+        mismatches=[],
+        sections_needing_redo=[],
+    ).save(proj / "voice" / "aligned" / "words.json")
+
+    captured_kwargs: dict = {}
+
+    def fake_master(raw_full, master_wav, words, **kwargs):
+        captured_kwargs.update(kwargs)
+        return words, AudioMasterStats(10.0, 9.0, 7.6, 1.18, 200.0, 0.22, -18.0, 2.1, -2.0)
+
+    monkeypatch.setattr("vicecut.cli.subprocess.run", fake_ff)
+    monkeypatch.setattr("vicecut.cli.master_audio_with_ffmpeg", fake_master)
+    rc = cmd_audio(argparse.Namespace(project=str(proj)))
+    assert rc == 0
+    assert captured_kwargs["pitch_semitones"] == -1.75
+    assert captured_kwargs["speed_override"] == 1.18
+    assert captured_kwargs["max_silence_s" if "max_silence_s" in captured_kwargs else "max_keep_silence_s"] == 0.22
+
+
 

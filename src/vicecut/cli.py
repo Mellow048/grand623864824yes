@@ -236,7 +236,7 @@ def cmd_align(args: argparse.Namespace) -> int:
 
 
 def cmd_audio(args: argparse.Namespace) -> int:
-    _, dirs, _ = _load_project(args.project)
+    _, dirs, brief = _load_project(args.project)
     script = parse_script_file(dirs["script"] / "script.md")
     align_path = dirs["voice_aligned"] / "words.json"
     alignment = AlignmentResult.load(align_path)
