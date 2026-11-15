@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+dist/
+build/
+
+# Secrets (NEVER commit API keys!)
+.secrets/
+*.key
+.env
+.env.*
+
+# Heavy local media / renders inside active user & example projects
+projects/*/media/raw/
+projects/*/media/scenes/*.mp4
+projects/*/media/scenes/thumbs/
+projects/*/voice/takes/*.wav
+projects/*/voice/master/*.wav
+projects/*/renders/frames/
+projects/*/renders/*.mp4
+examples/*/media/raw/
+examples/*/media/scenes/*.mp4
+examples/*/media/scenes/thumbs/
+examples/*/voice/takes/*.wav
+examples/*/voice/master/*.wav
+examples/*/renders/frames/
+examples/*/renders/*.mp4
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp

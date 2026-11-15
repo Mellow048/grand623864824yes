@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vicecut"
+version = "1.0.0"
+description = "Faceless 1920x1080 30fps explainer video production framework built for GTA 6 and general launch topics."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+dependencies = [
+    "numpy>=1.24",
+    "Pillow>=10.0",
+    "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+render = [
+    "playwright>=1.45",
+    "yt-dlp>=2024.8",
+]
+voice = [
+    "faster-whisper>=1.0",
+    "kokoro-onnx>=0.3",
+    "soundfile>=0.12",
+]
+all = [
+    "playwright>=1.45",
+    "yt-dlp>=2024.8",
+    "faster-whisper>=1.0",
+    "kokoro-onnx>=0.3",
+    "soundfile>=0.12",
+]
+dev = [
+    "pytest>=8.0",
+]
+
+[project.scripts]
+vicecut = "vicecut.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+vicecut = ["templates/*.html"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

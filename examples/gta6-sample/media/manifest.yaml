@@ -1,0 +1,152 @@
+project: gta6-before-you-buy-sample
+sources:
+  - id: src_trailer1
+    title: "Grand Theft Auto VI Trailer 1"
+    channel_or_outlet: "Rockstar Games"
+    page_url: "https://www.rockstargames.com/VI"
+    asset_url: "https://www.youtube.com/@RockstarGames"
+    date: "2023-12-04"
+    asset_type: "footage"
+    local_path: "media/raw/trailer1.mp4"
+    license: "official-trailer-commentary"
+    is_official: true
+    is_mockup: false
+    age_gated: false
+  - id: src_trailer2
+    title: "Grand Theft Auto VI Trailer 2"
+    channel_or_outlet: "Rockstar Games"
+    page_url: "https://www.rockstargames.com/VI"
+    asset_url: "https://www.youtube.com/@RockstarGames"
+    date: "2025-05-06"
+    asset_type: "footage"
+    local_path: "media/raw/trailer2.mp4"
+    license: "official-trailer-commentary"
+    is_official: true
+    is_mockup: false
+    age_gated: false
+  - id: src_presskit
+    title: "Rockstar Games VI Official Press Stills"
+    channel_or_outlet: "Rockstar Games"
+    page_url: "https://www.rockstargames.com/VI"
+    asset_url: "https://www.rockstargames.com/VI"
+    date: "2025-05-06"
+    asset_type: "photo"
+    local_path: "media/photos/"
+    license: "official-press-kit"
+    is_official: true
+    is_mockup: false
+
+# 36 unique alternating bright/dark scene clips (~28 cuts/min for ~80s sample; zero repeats!)
+shots:
+  - { id: shot_01, source_id: src_trailer1, path: "media/scenes/shot_01.mp4", duration_s: 3.1, is_still: false, luma_mean: 0.72, tags: [vice_city, skyline, sunrise], face_zones: [] }
+  - { id: shot_02, source_id: src_trailer1, path: "media/scenes/shot_02.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.24, tags: [neon, club, night], face_zones: [] }
+  - { id: shot_03, source_id: src_trailer2, path: "media/scenes/shot_03.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.68, tags: [beach, ocean, crowd], face_zones: [] }
+  - { id: shot_04, source_id: src_trailer1, path: "media/scenes/shot_04.mp4", duration_s: 2.7, is_still: false, luma_mean: 0.28, tags: [highway, night, car], face_zones: [] }
+  - { id: shot_05, source_id: src_trailer1, path: "media/scenes/shot_05.mp4", duration_s: 3.2, is_still: false, luma_mean: 0.74, tags: [leonida, aerial, state], face_zones: [] }
+  - { id: shot_06, source_id: src_trailer2, path: "media/scenes/shot_06.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.22, tags: [alley, neon, street], face_zones: [] }
+  - { id: shot_07, source_id: src_trailer1, path: "media/scenes/shot_07.mp4", duration_s: 3.1, is_still: false, luma_mean: 0.70, tags: [marina, yacht, day], face_zones: [] }
+  - { id: shot_08, source_id: src_trailer1, path: "media/scenes/shot_08.mp4", duration_s: 3.3, is_still: false, luma_mean: 0.34, tags: [swamp, airboat, grassrivers], face_zones: [] }
+  - { id: shot_09, source_id: src_trailer2, path: "media/scenes/shot_09.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.66, tags: [keys, bridge, water], face_zones: [] }
+  - { id: shot_10, source_id: src_trailer1, path: "media/scenes/shot_10.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.25, tags: [strip, neon, hotel], face_zones: [] }
+  - { id: shot_11, source_id: src_trailer2, path: "media/scenes/shot_11.mp4", duration_s: 3.5, is_still: false, luma_mean: 0.64, tags: [lucia, jason, car], face_zones: [left] }
+  - { id: shot_12, source_id: src_trailer1, path: "media/scenes/shot_12.mp4", duration_s: 2.7, is_still: false, luma_mean: 0.30, tags: [store, heist, interior], face_zones: [] }
+  - { id: shot_13, source_id: src_trailer2, path: "media/scenes/shot_13.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.71, tags: [drift, muscle_car, palm], face_zones: [] }
+  - { id: shot_14, source_id: src_trailer1, path: "media/scenes/shot_14.mp4", duration_s: 2.6, is_still: false, luma_mean: 0.27, tags: [police, chase, sirens], face_zones: [] }
+  - { id: shot_15, source_id: src_trailer2, path: "media/scenes/shot_15.mp4", duration_s: 3.1, is_still: false, luma_mean: 0.69, tags: [city, skyline, detail], face_zones: [] }
+  - { id: shot_16, source_id: src_trailer1, path: "media/scenes/shot_16.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.23, tags: [rooftop, sunset, party], face_zones: [] }
+  - { id: shot_17, source_id: src_trailer2, path: "media/scenes/shot_17.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.65, tags: [boat, wake, bay], face_zones: [] }
+  - { id: shot_18, source_id: src_trailer1, path: "media/scenes/shot_18.mp4", duration_s: 3.2, is_still: false, luma_mean: 0.26, tags: [downtown, neon, rain], face_zones: [] }
+  - { id: shot_19, source_id: src_trailer2, path: "media/scenes/shot_19.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.73, tags: [strip_mall, traffic, day], face_zones: [] }
+  - { id: shot_20, source_id: src_trailer1, path: "media/scenes/shot_20.mp4", duration_s: 2.7, is_still: false, luma_mean: 0.29, tags: [club, lights, crowd], face_zones: [] }
+  - { id: shot_21, source_id: src_trailer2, path: "media/scenes/shot_21.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.67, tags: [bike, wheelie, road], face_zones: [] }
+  - { id: shot_22, source_id: src_trailer1, path: "media/scenes/shot_22.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.24, tags: [motel, sign, dusk], face_zones: [] }
+  - { id: shot_23, source_id: src_trailer2, path: "media/scenes/shot_23.mp4", duration_s: 3.1, is_still: false, luma_mean: 0.72, tags: [helicopter, port, day], face_zones: [] }
+  - { id: shot_24, source_id: src_trailer1, path: "media/scenes/shot_24.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.21, tags: [bridge, night, traffic], face_zones: [] }
+  - { id: shot_25, source_id: src_trailer2, path: "media/scenes/shot_25.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.68, tags: [boardwalk, skaters, sun], face_zones: [] }
+  - { id: shot_26, source_id: src_trailer1, path: "media/scenes/shot_26.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.27, tags: [garage, tuner, neon], face_zones: [] }
+  - { id: shot_27, source_id: src_trailer2, path: "media/scenes/shot_27.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.70, tags: [beachfront, palms, hotels], face_zones: [] }
+  - { id: shot_28, source_id: src_trailer1, path: "media/scenes/shot_28.mp4", duration_s: 2.7, is_still: false, luma_mean: 0.25, tags: [patrol, highway, night], face_zones: [] }
+  - { id: shot_29, source_id: src_trailer2, path: "media/scenes/shot_29.mp4", duration_s: 3.1, is_still: false, luma_mean: 0.66, tags: [harbor, cargo, sun], face_zones: [] }
+  - { id: shot_30, source_id: src_trailer1, path: "media/scenes/shot_30.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.22, tags: [neon_strip, cars, night], face_zones: [] }
+  - { id: shot_31, source_id: src_trailer2, path: "media/scenes/shot_31.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.74, tags: [airfield, plane, sky], face_zones: [] }
+  - { id: shot_32, source_id: src_trailer1, path: "media/scenes/shot_32.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.28, tags: [alley, rain, neon], face_zones: [] }
+  - { id: shot_33, source_id: src_trailer2, path: "media/scenes/shot_33.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.69, tags: [jetski, ocean, spray], face_zones: [] }
+  - { id: shot_34, source_id: src_trailer1, path: "media/scenes/shot_34.mp4", duration_s: 2.7, is_still: false, luma_mean: 0.26, tags: [diner, lights, dusk], face_zones: [] }
+  - { id: shot_35, source_id: src_trailer2, path: "media/scenes/shot_35.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.71, tags: [sunset, boulevard, palms], face_zones: [] }
+  - { id: shot_36, source_id: src_trailer1, path: "media/scenes/shot_36.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.24, tags: [skyline, vice, night], face_zones: [] }
+  - { id: shot_37, source_id: src_trailer2, path: "media/scenes/shot_37.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.73, tags: [pier, boats, morning], face_zones: [] }
+  - { id: shot_38, source_id: src_trailer1, path: "media/scenes/shot_38.mp4", duration_s: 2.7, is_still: false, luma_mean: 0.26, tags: [club, stage, lasers], face_zones: [] }
+  - { id: shot_39, source_id: src_trailer2, path: "media/scenes/shot_39.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.67, tags: [highway, convoy, sun], face_zones: [] }
+  - { id: shot_40, source_id: src_trailer1, path: "media/scenes/shot_40.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.23, tags: [dock, rain, neon], face_zones: [] }
+  - { id: shot_41, source_id: src_trailer2, path: "media/scenes/shot_41.mp4", duration_s: 3.1, is_still: false, luma_mean: 0.70, tags: [marina, palms, bright], face_zones: [] }
+  - { id: shot_42, source_id: src_trailer1, path: "media/scenes/shot_42.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.25, tags: [neon_strip, night, cars], face_zones: [] }
+  - { id: shot_43, source_id: src_trailer2, path: "media/scenes/shot_43.mp4", duration_s: 2.8, is_still: false, luma_mean: 0.68, tags: [keys, coastline, aerial], face_zones: [] }
+  - { id: shot_44, source_id: src_trailer1, path: "media/scenes/shot_44.mp4", duration_s: 2.7, is_still: false, luma_mean: 0.22, tags: [downtown, billboard, night], face_zones: [] }
+  - { id: shot_45, source_id: src_trailer2, path: "media/scenes/shot_45.mp4", duration_s: 3.0, is_still: false, luma_mean: 0.72, tags: [ocean, yacht, day], face_zones: [] }
+  - { id: shot_46, source_id: src_trailer1, path: "media/scenes/shot_46.mp4", duration_s: 2.9, is_still: false, luma_mean: 0.27, tags: [motel, neon, sunset], face_zones: [] }
+
+headlines:
+  - id: hl_platforms
+    source_id: src_trailer2
+    outlet: "ROCKSTAR GAMES"
+    headline_text: "Grand Theft Auto VI — Coming to PlayStation 5 and Xbox Series X|S"
+    date: "May 2025"
+    image_path: ""
+    width_px: 0
+    height_px: 0
+    use_text_fallback: true
+    is_mockup: false
+  - id: hl_taketwo
+    source_id: src_trailer2
+    outlet: "TAKE-TWO INTERACTIVE"
+    headline_text: "Take-Two Interactive Reaffirms Grand Theft Auto VI Console Rollout Window"
+    date: "May 2025"
+    image_path: ""
+    width_px: 0
+    height_px: 0
+    use_text_fallback: true
+    is_mockup: false
+  - id: hl_pc_gap
+    source_id: src_trailer2
+    outlet: "ROCKSTAR GAMES"
+    headline_text: "Official GTA VI Platform List Shows Console Releases Only — No PC Date Announced"
+    date: "May 2025"
+    image_path: ""
+    width_px: 0
+    height_px: 0
+    use_text_fallback: true
+    is_mockup: false
+
+photos:
+  - id: ph_vice_city
+    source_id: src_presskit
+    label: "VICE CITY • LEONIDA"
+    image_path: ""
+    width_px: 1920
+    height_px: 1080
+    license: "official-press-kit"
+    is_mockup: false
+  - id: ph_lucia
+    source_id: src_presskit
+    label: "LUCIA CAMINOS"
+    image_path: ""
+    width_px: 900
+    height_px: 1200
+    license: "official-press-kit"
+    is_mockup: false
+  - id: ph_leonida_keys
+    source_id: src_presskit
+    label: "GRASSRIVERS & LEONIDA KEYS"
+    image_path: ""
+    width_px: 1920
+    height_px: 1080
+    license: "official-press-kit"
+    is_mockup: false
+  - id: ph_jason
+    source_id: src_presskit
+    label: "JASON DUVAL"
+    image_path: ""
+    width_px: 900
+    height_px: 1200
+    license: "official-press-kit"
+    is_mockup: false

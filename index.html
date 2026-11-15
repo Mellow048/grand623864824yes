@@ -1,0 +1,1562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pelican Riding a Bicycle — Pure SVG &amp; HTML</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, #1E3A52 0%, #152839 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    svg#scene {
+      width: min(100vw, 150vh);
+      height: auto;
+      max-height: 100vh;
+      display: block;
+      border-radius: 12px;
+      box-shadow: 0 24px 70px rgba(7, 18, 30, 0.55);
+    }
+  </style>
+</head>
+<body>
+  <svg id="scene" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" width="1200" height="800"
+       role="img" aria-label="An American white pelican cheerfully riding a vintage coral-red beach cruiser bicycle along a sunlit coastal boardwalk.">
+    <title>Pelican Riding a Bicycle</title>
+    <desc>A pure HTML and SVG illustration of a pelican pedaling a vintage beach cruiser bicycle with a wicker basket of coastal sardines along a golden afternoon seaside boardwalk.</desc>
+
+    <defs>
+      <!-- Sky & Sun Gradients -->
+      <linearGradient id="skyGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4A97C9"/>
+        <stop offset="46%" stop-color="#87C3E0"/>
+        <stop offset="78%" stop-color="#F6D8B4"/>
+        <stop offset="100%" stop-color="#F9C594"/>
+      </linearGradient>
+
+      <radialGradient id="sunHalo" cx="50%" cy="50%" r="50%">
+        <stop offset="0%" stop-color="#FFF9DF" stop-opacity="0.95"/>
+        <stop offset="32%" stop-color="#FFE7A8" stop-opacity="0.55"/>
+        <stop offset="68%" stop-color="#FCD297" stop-opacity="0.18"/>
+        <stop offset="100%" stop-color="#FCD297" stop-opacity="0"/>
+      </radialGradient>
+
+      <radialGradient id="sunCore" cx="45%" cy="40%" r="55%">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="55%" stop-color="#FFF4C2"/>
+        <stop offset="100%" stop-color="#FDE08D"/>
+      </radialGradient>
+
+      <linearGradient id="cloudGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFFDF8"/>
+        <stop offset="68%" stop-color="#F9EFE5"/>
+        <stop offset="100%" stop-color="#E7D3CA"/>
+      </linearGradient>
+
+      <linearGradient id="oceanGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#4696BC"/>
+        <stop offset="42%" stop-color="#2E7FA6"/>
+        <stop offset="100%" stop-color="#1E6084"/>
+      </linearGradient>
+
+      <linearGradient id="deckGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#D4A676"/>
+        <stop offset="45%" stop-color="#C2905E"/>
+        <stop offset="100%" stop-color="#9E6E41"/>
+      </linearGradient>
+
+      <!-- Vintage Coral-Red Cruiser Frame Gradients -->
+      <linearGradient id="frameRed" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#EC6252"/>
+        <stop offset="45%" stop-color="#D44336"/>
+        <stop offset="100%" stop-color="#9D2920"/>
+      </linearGradient>
+
+      <linearGradient id="frameRedHoriz" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#F06B5A"/>
+        <stop offset="50%" stop-color="#D24134"/>
+        <stop offset="100%" stop-color="#9B281F"/>
+      </linearGradient>
+
+      <linearGradient id="fenderCream" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FFF9EB"/>
+        <stop offset="55%" stop-color="#F2E4C8"/>
+        <stop offset="100%" stop-color="#D7C3A1"/>
+      </linearGradient>
+
+      <linearGradient id="chromeGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="28%" stop-color="#DCE4EC"/>
+        <stop offset="62%" stop-color="#9BA8B4"/>
+        <stop offset="100%" stop-color="#E5ECF2"/>
+      </linearGradient>
+
+      <linearGradient id="brassGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FFF0AE"/>
+        <stop offset="45%" stop-color="#DBA43C"/>
+        <stop offset="100%" stop-color="#926318"/>
+      </linearGradient>
+
+      <linearGradient id="leatherGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#A85D2F"/>
+        <stop offset="55%" stop-color="#7E3F1A"/>
+        <stop offset="100%" stop-color="#54270D"/>
+      </linearGradient>
+
+      <linearGradient id="rimGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#EEF3F7"/>
+        <stop offset="45%" stop-color="#B8C4CF"/>
+        <stop offset="100%" stop-color="#7C8A97"/>
+      </linearGradient>
+
+      <!-- Pelican Plumage, Facial Skin, Beak, Pouch & Foot Gradients -->
+      <linearGradient id="pelicanBodyGrad" x1="0.2" y1="0.05" x2="0.85" y2="0.95">
+        <stop offset="0%" stop-color="#FFFDF8"/>
+        <stop offset="52%" stop-color="#F7F1E5"/>
+        <stop offset="82%" stop-color="#E3EBF2"/>
+        <stop offset="100%" stop-color="#C8D6E3"/>
+      </linearGradient>
+
+      <linearGradient id="thighCuffGrad" x1="0.2" y1="0" x2="0.6" y2="1">
+        <stop offset="0%" stop-color="#E5EDF4"/>
+        <stop offset="55%" stop-color="#DDE7F0"/>
+        <stop offset="100%" stop-color="#CEDCE8"/>
+      </linearGradient>
+
+      <linearGradient id="pelicanNeckGrad" x1="0.15" y1="0" x2="0.9" y2="0.85">
+        <stop offset="0%" stop-color="#FFFDF6"/>
+        <stop offset="60%" stop-color="#F8F1E3"/>
+        <stop offset="100%" stop-color="#DCE5EE"/>
+      </linearGradient>
+
+      <linearGradient id="wingUpperGrad" x1="0.15" y1="0" x2="0.85" y2="1">
+        <stop offset="0%" stop-color="#FFFDF7"/>
+        <stop offset="55%" stop-color="#F3ECE0"/>
+        <stop offset="100%" stop-color="#D4DFE9"/>
+      </linearGradient>
+
+      <linearGradient id="wingDarkGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#435261"/>
+        <stop offset="55%" stop-color="#2B3744"/>
+        <stop offset="100%" stop-color="#1B242D"/>
+      </linearGradient>
+
+      <linearGradient id="lorePatchGrad" x1="0" y1="0" x2="1" y2="0.3">
+        <stop offset="0%" stop-color="#FDE38F"/>
+        <stop offset="65%" stop-color="#FBC754"/>
+        <stop offset="100%" stop-color="#F7AF3E"/>
+      </linearGradient>
+
+      <linearGradient id="beakTopGrad" x1="0" y1="0" x2="1" y2="0.45">
+        <stop offset="0%" stop-color="#FFC754"/>
+        <stop offset="52%" stop-color="#F6A232"/>
+        <stop offset="88%" stop-color="#EA7C24"/>
+        <stop offset="100%" stop-color="#D85720"/>
+      </linearGradient>
+
+      <radialGradient id="pouchGrad" cx="46%" cy="54%" r="58%">
+        <stop offset="0%" stop-color="#FFD98C"/>
+        <stop offset="48%" stop-color="#FAA342"/>
+        <stop offset="82%" stop-color="#E8742A"/>
+        <stop offset="100%" stop-color="#C8531B"/>
+      </radialGradient>
+
+      <linearGradient id="legGrad" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#FFB04C"/>
+        <stop offset="52%" stop-color="#EE7F26"/>
+        <stop offset="100%" stop-color="#C75714"/>
+      </linearGradient>
+
+      <linearGradient id="footGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFA946"/>
+        <stop offset="60%" stop-color="#E87722"/>
+        <stop offset="100%" stop-color="#BD5014"/>
+      </linearGradient>
+
+      <linearGradient id="webGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#FFC16E"/>
+        <stop offset="100%" stop-color="#E27A2B"/>
+      </linearGradient>
+
+      <!-- Fish & Basket Gradients -->
+      <linearGradient id="fishGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#457E9F"/>
+        <stop offset="38%" stop-color="#A6CDE0"/>
+        <stop offset="64%" stop-color="#F2F9FC"/>
+        <stop offset="100%" stop-color="#76A4BD"/>
+      </linearGradient>
+
+      <linearGradient id="basketRimGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#EBC282"/>
+        <stop offset="55%" stop-color="#C78E49"/>
+        <stop offset="100%" stop-color="#9A6529"/>
+      </linearGradient>
+
+      <linearGradient id="scarfGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#275C8F"/>
+        <stop offset="60%" stop-color="#1B446C"/>
+        <stop offset="100%" stop-color="#133250"/>
+      </linearGradient>
+
+      <!-- Clip Paths -->
+      <clipPath id="basketClip">
+        <path d="M 744,322 L 846,322 L 833,406 Q 795,412 757,406 Z"/>
+      </clipPath>
+
+      <clipPath id="oceanClip">
+        <rect x="0" y="435" width="1200" height="175"/>
+      </clipPath>
+    </defs>
+
+    <!-- ===================================================================
+         1. SKY, GOLDEN SUN, CLOUDS, DISTANT HEADLAND & LIGHTHOUSE
+         =================================================================== -->
+    <g id="sky-backdrop">
+      <rect x="0" y="0" width="1200" height="445" fill="url(#skyGrad)"/>
+
+      <!-- Afternoon coastal sun & warm halo -->
+      <circle cx="176" cy="144" r="145" fill="url(#sunHalo)"/>
+      <circle cx="176" cy="144" r="42" fill="url(#sunCore)"/>
+
+      <!-- Gently drifting cumulus clouds (staggered speeds for subtle parallax) -->
+      <g id="clouds-back" opacity="0.92">
+        <g>
+          <path d="M 278,136 C 278,120 296,110 314,114 C 324,95 356,91 374,106 C 390,99 415,109 418,126 C 432,129 438,144 426,152 L 284,152 C 270,152 268,139 278,136 Z"
+                fill="url(#cloudGrad)"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; 26 0; 0 0" dur="28s" repeatCount="indefinite"/>
+        </g>
+        <g>
+          <path d="M 852,118 C 852,100 874,90 894,95 C 908,72 948,68 969,88 C 988,80 1018,93 1020,113 C 1038,116 1044,134 1028,142 L 856,142 C 840,142 840,122 852,118 Z"
+                fill="url(#cloudGrad)"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; -34 0; 0 0" dur="34s" repeatCount="indefinite"/>
+        </g>
+        <g opacity="0.78">
+          <path d="M 1012,244 C 1012,232 1028,224 1044,228 C 1054,214 1080,212 1094,224 C 1108,220 1126,230 1126,244 C 1136,247 1137,258 1124,261 L 1016,261 C 1004,261 1004,248 1012,244 Z"
+                fill="url(#cloudGrad)"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; -20 0; 0 0" dur="24s" repeatCount="indefinite"/>
+        </g>
+        <g opacity="0.74">
+          <path d="M 38,248 C 38,236 54,229 70,233 C 80,219 108,218 122,231 C 136,227 154,236 154,249 C 164,252 164,262 151,265 L 42,265 C 30,265 30,251 38,248 Z"
+                fill="url(#cloudGrad)"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; 18 0; 0 0" dur="22s" repeatCount="indefinite"/>
+        </g>
+      </g>
+
+      <!-- Distant soaring seabirds -->
+      <g id="distant-gulls" fill="none" stroke="#4D7491" stroke-width="2" stroke-linecap="round" opacity="0.72">
+        <g>
+          <path d="M 278,205 Q 286,197 294,205 Q 302,197 310,205"/>
+          <path d="M 326,184 Q 332,178 338,184 Q 344,178 350,184" stroke-width="1.6"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; 14 -6; 0 0" dur="9s" repeatCount="indefinite"/>
+        </g>
+        <g>
+          <path d="M 920,196 Q 928,188 936,196 Q 944,188 952,196"/>
+          <path d="M 964,222 Q 970,216 976,222 Q 982,216 988,222" stroke-width="1.5"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; -16 -5; 0 0" dur="11s" repeatCount="indefinite"/>
+        </g>
+      </g>
+
+      <!-- Distant coastal headland & classic red-white lighthouse on left horizon -->
+      <g id="distant-coast">
+        <path d="M 0,438 L 0,388 Q 52,372 112,380 Q 178,386 244,414 Q 272,426 296,438 Z"
+              fill="#7A9EB3" opacity="0.72"/>
+        <path d="M 0,438 L 0,404 Q 76,392 150,402 Q 210,412 266,438 Z"
+              fill="#64899F" opacity="0.82"/>
+        <g id="lighthouse" transform="translate(118, 322)">
+          <polygon points="8,62 14,16 24,16 30,62" fill="#FAF4E8" stroke="#6C7D8A" stroke-width="0.9"/>
+          <polygon points="10.2,48 11.7,37 26.3,37 27.8,48" fill="#CE473B"/>
+          <polygon points="12.8,28 13.7,21 24.3,21 25.2,28" fill="#CE473B"/>
+          <rect x="11" y="13" width="16" height="3.2" rx="1" fill="#465866"/>
+          <rect x="14" y="6" width="10" height="7" fill="#FFF3B8" stroke="#465866" stroke-width="0.9"/>
+          <path d="M 12.5,6 Q 19,-1 25.5,6 Z" fill="#C94136"/>
+          <rect x="28" y="51" width="15" height="11" fill="#F5EBDC"/>
+          <polygon points="26,51 35.5,44 45,51" fill="#B5493D"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         2. SPARKLING COASTAL OCEAN, WAVE CRESTS & HORIZON SAILBOATS
+         =================================================================== -->
+    <g id="ocean" clip-path="url(#oceanClip)">
+      <rect x="0" y="435" width="1200" height="175" fill="url(#oceanGrad)"/>
+      <!-- Painterly golden sun shimmer bars on the water -->
+      <g opacity="0.52" fill="#FFE7AE">
+        <rect x="108" y="442" width="136" height="4.5" rx="2.2"/>
+        <rect x="128" y="451" width="96" height="3.6" rx="1.8" opacity="0.85"/>
+        <rect x="118" y="460" width="72" height="3" rx="1.5" opacity="0.72"/>
+        <rect x="198" y="460" width="32" height="3" rx="1.5" opacity="0.65"/>
+        <rect x="140" y="471" width="66" height="2.6" rx="1.3" opacity="0.62"/>
+        <rect x="154" y="483" width="44" height="2.2" rx="1.1" opacity="0.52"/>
+        <rect x="164" y="497" width="28" height="2" rx="1" opacity="0.4"/>
+        <animate attributeName="opacity" values="0.42;0.64;0.42" dur="4.2s" repeatCount="indefinite"/>
+      </g>
+
+      <!-- Gently undulating stylized ocean wave glints -->
+      <g fill="none" stroke="#9BD6ED" stroke-width="2" stroke-linecap="round" opacity="0.42">
+        <g>
+          <path d="M 40,466 Q 70,461 100,466 M 280,462 Q 315,457 350,462 M 620,468 Q 660,463 700,468 M 910,460 Q 950,455 990,460 M 1090,472 Q 1125,467 1160,472"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; -18 0; 0 0" dur="6.5s" repeatCount="indefinite"/>
+        </g>
+        <g opacity="0.85">
+          <path d="M 110,498 Q 150,492 190,498 M 440,502 Q 485,496 530,502 M 780,494 Q 825,488 870,494 M 1010,508 Q 1055,502 1100,508"/>
+          <animateTransform attributeName="transform" type="translate"
+                            values="0 0; 22 0; 0 0" dur="8s" repeatCount="indefinite"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- Horizon Sailboats (unclipped so white sails rise cleanly into the golden sky) -->
+    <g id="sailboats" opacity="0.92">
+      <g>
+        <ellipse cx="308" cy="442" rx="18" ry="2.2" fill="#235B7A" opacity="0.45"/>
+        <polygon points="308,434 308,402 324,434" fill="#FFFDF6" stroke="#D5C8B8" stroke-width="0.6"/>
+        <polygon points="305.5,434 305.5,410 293,434" fill="#F2E7D8" stroke="#D5C8B8" stroke-width="0.6"/>
+        <line x1="306.8" y1="401" x2="306.8" y2="435" stroke="#6B7E8C" stroke-width="1"/>
+        <path d="M 290,435 L 327,435 L 321,441 L 296,441 Z" fill="#325570"/>
+        <animateTransform attributeName="transform" type="translate"
+                          values="0 0; 20 0; 0 0" dur="22s" repeatCount="indefinite"/>
+      </g>
+      <g>
+        <ellipse cx="972" cy="444" rx="20" ry="2.4" fill="#235B7A" opacity="0.45"/>
+        <polygon points="972,436 972,398 952,436" fill="#FFFDF6" stroke="#D5C8B8" stroke-width="0.6"/>
+        <polygon points="975,436 975,409 989,436" fill="#F0E3D3" stroke="#D5C8B8" stroke-width="0.6"/>
+        <line x1="973.5" y1="397" x2="973.5" y2="437" stroke="#6B7E8C" stroke-width="1"/>
+        <path d="M 949,437 L 992,437 L 986,443 L 955,443 Z" fill="#C44538"/>
+        <animateTransform attributeName="transform" type="translate"
+                          values="0 0; -24 0; 0 0" dur="26s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         3. GRACEFUL FEATHERED COASTAL PALM FRONDS (TOP-RIGHT FRAME ACCENT)
+         =================================================================== -->
+    <g id="coastal-foliage" opacity="0.92">
+      <path d="M 1206,396 Q 1192,265 1196,132" fill="none" stroke="#6E523A" stroke-width="17" stroke-linecap="round"/>
+      <path d="M 1204,396 Q 1190,265 1194,132" fill="none" stroke="#856549" stroke-width="4" stroke-linecap="round" opacity="0.5"/>
+      <g>
+        <path d="M 1196,132 Q 1132,68 1052,56" fill="none" stroke="#367350" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M 1169.2,108 Q 1169.3,99.2 1168.4,90.4 Q 1167.7,101.8 1164,104 Z" fill="#4A8F67"/>
+        <path d="M 1169.2,108 Q 1161.8,111.3 1149.9,117.5 Q 1162.8,108.1 1164,104 Z" fill="#367350"/>
+        <path d="M 1158.1,99.6 Q 1158.2,89.1 1156.4,79.1 Q 1156.3,93.5 1152.7,95.9 Z" fill="#4A8F67"/>
+        <path d="M 1158.1,99.6 Q 1149.7,105.2 1135.1,114.8 Q 1151.7,100 1152.7,95.9 Z" fill="#367350"/>
+        <path d="M 1146.8,91.9 Q 1146.7,80.1 1143.8,69.4 Q 1144.6,85.9 1141.2,88.5 Z" fill="#4A8F67"/>
+        <path d="M 1146.8,91.9 Q 1137.7,99.3 1121.3,111.8 Q 1140.4,92.7 1141.2,88.5 Z" fill="#367350"/>
+        <path d="M 1135.2,84.9 Q 1134.7,72.3 1130.7,61.2 Q 1132.8,79 1129.5,81.8 Z" fill="#4A8F67"/>
+        <path d="M 1135.2,84.9 Q 1125.9,93.8 1108.5,108.6 Q 1128.9,86 1129.5,81.8 Z" fill="#367350"/>
+        <path d="M 1123.5,78.6 Q 1122.3,65.6 1117.2,54.5 Q 1120.7,72.9 1117.6,75.8 Z" fill="#4A8F67"/>
+        <path d="M 1123.5,78.6 Q 1114.2,88.5 1096.6,105 Q 1117.2,80.1 1117.6,75.8 Z" fill="#367350"/>
+        <path d="M 1111.5,73 Q 1109.6,60.1 1103.6,49.3 Q 1108.4,67.4 1105.5,70.5 Z" fill="#4A8F67"/>
+        <path d="M 1111.5,73 Q 1102.5,83.4 1085.5,100.8 Q 1105.3,74.8 1105.5,70.5 Z" fill="#367350"/>
+        <path d="M 1099.3,68.1 Q 1096.7,55.8 1090,45.5 Q 1095.9,62.7 1093.2,65.9 Z" fill="#4A8F67"/>
+        <path d="M 1099.3,68.1 Q 1090.9,78.4 1075,96 Q 1093.2,70.2 1093.2,65.9 Z" fill="#367350"/>
+        <path d="M 1086.9,63.9 Q 1083.6,52.6 1076.6,43.2 Q 1083.2,58.7 1080.6,62.1 Z" fill="#4A8F67"/>
+        <path d="M 1086.9,63.9 Q 1079.2,73.6 1065.1,90.2 Q 1080.9,66.3 1080.6,62.1 Z" fill="#367350"/>
+        <path d="M 1074.2,60.4 Q 1070.4,50.5 1063.7,42.2 Q 1070.3,55.4 1067.9,58.9 Z" fill="#4A8F67"/>
+        <path d="M 1074.2,60.4 Q 1067.5,68.8 1055.6,83.5 Q 1068.4,63.1 1067.9,58.9 Z" fill="#367350"/>
+        <path d="M 1061.3,57.6 Q 1057.3,49.7 1051.3,42.6 Q 1057.1,52.8 1054.9,56.4 Z" fill="#4A8F67"/>
+        <path d="M 1061.3,57.6 Q 1055.6,64.1 1046.5,75.5 Q 1055.7,60.6 1054.9,56.4 Z" fill="#367350"/>
+        <path d="M 1196,138 Q 1112,112 1022,146" fill="none" stroke="#2C6344" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M 1162.6,130.1 Q 1158.4,121.9 1151.8,114.3 Q 1158.3,125.3 1156.2,129.1 Z" fill="#3E805B"/>
+        <path d="M 1162.6,130.1 Q 1156.9,137 1147.4,148.9 Q 1157.1,133.3 1156.2,129.1 Z" fill="#2C6344"/>
+        <path d="M 1149.9,128.3 Q 1144.8,118.5 1136.1,110.4 Q 1145.3,123.8 1143.4,127.6 Z" fill="#3E805B"/>
+        <path d="M 1149.9,128.3 Q 1143.9,137.8 1132.8,154.2 Q 1144.5,131.8 1143.4,127.6 Z" fill="#2C6344"/>
+        <path d="M 1137.1,127.2 Q 1131.1,116.4 1120.4,108.2 Q 1132.3,122.9 1130.6,126.9 Z" fill="#3E805B"/>
+        <path d="M 1137.1,127.2 Q 1131.1,138.7 1119.1,158.9 Q 1131.9,130.9 1130.6,126.9 Z" fill="#2C6344"/>
+        <path d="M 1124.2,126.7 Q 1117.4,115.3 1105,107.3 Q 1119.2,122.7 1117.7,126.7 Z" fill="#3E805B"/>
+        <path d="M 1124.2,126.7 Q 1118.4,139.9 1106.2,162.9 Q 1119.2,130.7 1117.7,126.7 Z" fill="#2C6344"/>
+        <path d="M 1111.3,126.9 Q 1103.6,115.4 1090,107.8 Q 1106.1,123.2 1104.8,127.3 Z" fill="#3E805B"/>
+        <path d="M 1111.3,126.9 Q 1105.8,141.1 1093.9,166.1 Q 1106.5,131.2 1104.8,127.3 Z" fill="#2C6344"/>
+        <path d="M 1098.3,127.8 Q 1090,116.5 1075.4,109.6 Q 1092.9,124.4 1091.8,128.5 Z" fill="#3E805B"/>
+        <path d="M 1098.3,127.8 Q 1093.3,142.6 1082,168.6 Q 1093.7,132.3 1091.8,128.5 Z" fill="#2C6344"/>
+        <path d="M 1085.2,129.4 Q 1076.4,118.6 1061.5,112.5 Q 1079.6,126.2 1078.7,130.4 Z" fill="#3E805B"/>
+        <path d="M 1085.2,129.4 Q 1080.8,144.1 1070.6,170.2 Q 1080.8,134.1 1078.7,130.4 Z" fill="#2C6344"/>
+        <path d="M 1072,131.6 Q 1063,121.8 1048.2,116.5 Q 1066.3,128.7 1065.6,132.9 Z" fill="#3E805B"/>
+        <path d="M 1072,131.6 Q 1068.2,145.7 1059.3,170.9 Q 1067.9,136.6 1065.6,132.9 Z" fill="#2C6344"/>
+        <path d="M 1058.7,134.5 Q 1049.8,126 1035.8,121.5 Q 1052.9,131.9 1052.4,136.2 Z" fill="#3E805B"/>
+        <path d="M 1058.7,134.5 Q 1055.4,147.5 1048.1,170.6 Q 1054.9,139.7 1052.4,136.2 Z" fill="#2C6344"/>
+        <path d="M 1045.4,138.1 Q 1036.9,131.1 1024.3,127.3 Q 1039.5,135.8 1039.2,140 Z" fill="#3E805B"/>
+        <path d="M 1045.4,138.1 Q 1042.6,149.4 1036.8,169.2 Q 1041.8,143.4 1039.2,140 Z" fill="#2C6344"/>
+        <path d="M 1032,142.4 Q 1024.4,137.2 1013.9,133.8 Q 1026,140.3 1025.9,144.5 Z" fill="#3E805B"/>
+        <path d="M 1032,142.4 Q 1029.5,151.4 1025.3,166.7 Q 1028.6,147.8 1025.9,144.5 Z" fill="#2C6344"/>
+        <path d="M 1196,144 Q 1134,166 1066,224" fill="none" stroke="#26573B" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M 1170.9,154.3 Q 1163,150.2 1152.7,148.3 Q 1164.7,152.8 1165,157 Z" fill="#357350"/>
+        <path d="M 1170.9,154.3 Q 1169.1,163.2 1166.4,178.4 Q 1168.1,160 1165,157 Z" fill="#26573B"/>
+        <path d="M 1160.4,159.3 Q 1151.2,154.3 1138.1,153.3 Q 1154.1,158.1 1154.6,162.3 Z" fill="#357350"/>
+        <path d="M 1160.4,159.3 Q 1159.1,170.7 1156.3,190.9 Q 1157.8,165.2 1154.6,162.3 Z" fill="#26573B"/>
+        <path d="M 1149.9,164.9 Q 1139.5,159.3 1124.4,159.2 Q 1143.5,163.8 1144.2,168.1 Z" fill="#357350"/>
+        <path d="M 1149.9,164.9 Q 1149.1,178.1 1146.4,201.8 Q 1147.4,170.8 1144.2,168.1 Z" fill="#26573B"/>
+        <path d="M 1139.2,170.9 Q 1128,165.1 1111.6,165.8 Q 1132.9,170.1 1133.7,174.3 Z" fill="#357350"/>
+        <path d="M 1139.2,170.9 Q 1139,185.3 1136.6,211.5 Q 1137,176.9 1133.7,174.3 Z" fill="#26573B"/>
+        <path d="M 1128.5,177.5 Q 1116.8,171.7 1099.6,173 Q 1122.1,176.8 1123,181 Z" fill="#357350"/>
+        <path d="M 1128.5,177.5 Q 1128.7,192.4 1126.8,219.8 Q 1126.5,183.5 1123,181 Z" fill="#26573B"/>
+        <path d="M 1117.7,184.5 Q 1105.9,179 1088.5,180.9 Q 1111.3,184 1112.3,188.2 Z" fill="#357350"/>
+        <path d="M 1117.7,184.5 Q 1118.2,199.4 1116.9,226.9 Q 1115.8,190.6 1112.3,188.2 Z" fill="#26573B"/>
+        <path d="M 1106.8,192 Q 1095.2,187.1 1078.4,189.2 Q 1100.4,191.7 1101.6,195.8 Z" fill="#357350"/>
+        <path d="M 1106.8,192 Q 1107.5,206.4 1106.7,232.7 Q 1105.1,198.2 1101.6,195.8 Z" fill="#26573B"/>
+        <path d="M 1095.9,200 Q 1084.8,195.9 1069.2,197.9 Q 1089.5,199.9 1090.7,203.9 Z" fill="#357350"/>
+        <path d="M 1095.9,200 Q 1096.5,213.2 1096.3,237.2 Q 1094.3,206.2 1090.7,203.9 Z" fill="#26573B"/>
+        <path d="M 1084.8,208.5 Q 1074.8,205.4 1061,207 Q 1078.4,208.5 1079.8,212.6 Z" fill="#357350"/>
+        <path d="M 1084.8,208.5 Q 1085.3,220 1085.5,240.4 Q 1083.4,214.8 1079.8,212.6 Z" fill="#26573B"/>
+        <path d="M 1073.7,217.5 Q 1065.1,215.5 1054,216.4 Q 1067.3,217.6 1068.7,221.7 Z" fill="#357350"/>
+        <path d="M 1073.7,217.5 Q 1073.8,226.6 1074.2,242.2 Q 1072.5,223.8 1068.7,221.7 Z" fill="#26573B"/>
+        <path d="M 1196,128 Q 1170,56 1122,12" fill="none" stroke="#3E805B" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M 1183.4,97.4 Q 1187,89.9 1190.9,83 Q 1184.8,91.2 1180.6,91.6 Z" fill="#559D73"/>
+        <path d="M 1183.4,97.4 Q 1176.5,97.5 1165.3,98.7 Q 1177.6,94.7 1180.6,91.6 Z" fill="#3E805B"/>
+        <path d="M 1176.9,84.3 Q 1181.3,75.4 1185.6,67.5 Q 1178,78 1173.8,78.6 Z" fill="#559D73"/>
+        <path d="M 1176.9,84.3 Q 1168.5,86 1154.4,89.4 Q 1171,81.8 1173.8,78.6 Z" fill="#3E805B"/>
+        <path d="M 1169.9,71.7 Q 1174.6,61.8 1178.8,53.1 Q 1170.7,65.4 1166.5,66.2 Z" fill="#559D73"/>
+        <path d="M 1169.9,71.7 Q 1160.6,74.8 1144.5,80 Q 1163.9,69.5 1166.5,66.2 Z" fill="#3E805B"/>
+        <path d="M 1162.4,59.8 Q 1167,49.1 1170.7,39.9 Q 1162.9,53.4 1158.8,54.4 Z" fill="#559D73"/>
+        <path d="M 1162.4,59.8 Q 1152.6,63.7 1135.6,70.4 Q 1156.3,57.8 1158.8,54.4 Z" fill="#3E805B"/>
+        <path d="M 1154.5,48.4 Q 1158.6,37.5 1161.4,28.1 Q 1154.7,42 1150.6,43.2 Z" fill="#559D73"/>
+        <path d="M 1154.5,48.4 Q 1144.7,52.9 1127.7,60.4 Q 1148.3,46.8 1150.6,43.2 Z" fill="#3E805B"/>
+        <path d="M 1146.1,37.5 Q 1149.3,27 1151.3,17.8 Q 1146,31.1 1142,32.6 Z" fill="#559D73"/>
+        <path d="M 1146.1,37.5 Q 1136.8,42 1120.7,49.8 Q 1139.8,36.3 1142,32.6 Z" fill="#3E805B"/>
+        <path d="M 1137.3,27.3 Q 1139.3,17.6 1140.4,8.9 Q 1136.8,20.9 1132.8,22.6 Z" fill="#559D73"/>
+        <path d="M 1137.3,27.3 Q 1128.9,31.2 1114.7,38.2 Q 1130.9,26.4 1132.8,22.6 Z" fill="#3E805B"/>
+        <path d="M 1128,17.6 Q 1128.7,9.4 1129,1.7 Q 1127.1,11.3 1123.3,13.1 Z" fill="#559D73"/>
+        <path d="M 1128,17.6 Q 1120.9,20.2 1109.6,25.5 Q 1121.6,17.1 1123.3,13.1 Z" fill="#3E805B"/>
+        <animateTransform attributeName="transform" type="rotate"
+                          values="0 1196 135; -2.2 1196 135; 1.1 1196 135; 0 1196 135"
+                          dur="5.6s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         4. SEASIDE BOARDWALK RAILING & WOODEN DECK
+         =================================================================== -->
+    <g id="boardwalk-railing">
+      <rect x="0" y="534" width="1200" height="9" fill="#EAE0CF" stroke="#C5B69F" stroke-width="1"/>
+      <rect x="0" y="543" width="1200" height="3" fill="#B8A78E" opacity="0.45"/>
+      <rect x="0" y="578" width="1200" height="6" fill="#E4D8C5" stroke="#C5B69F" stroke-width="0.9"/>
+      <g><rect x="29" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="27" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="39" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="147" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="145" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="157" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="265" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="263" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="275" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="383" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="381" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="393" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="501" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="499" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="511" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="619" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="617" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="629" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="737" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="735" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="747" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="855" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="853" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="865" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="973" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="971" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="983" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <g><rect x="1091" y="528" width="14" height="82" rx="1.5" fill="#EDE4D5" stroke="#BFB099" stroke-width="1"/><rect x="1089" y="524" width="18" height="6" rx="1.5" fill="#F6EFE2" stroke="#BFB099" stroke-width="1"/><rect x="1101" y="530" width="4" height="79" fill="#D4C5AE" opacity="0.55"/></g>
+      <path d="M 36,556 Q 95,571 154,556 M 154,556 Q 213,571 272,556 M 272,556 Q 331,571 390,556 M 390,556 Q 449,571 508,556 M 508,556 Q 567,571 626,556 M 626,556 Q 685,571 744,556 M 744,556 Q 803,571 862,556 M 862,556 Q 921,571 980,556 M 980,556 Q 1039,571 1098,556 M 1098,556 Q 1157,571 1216,556" fill="none" stroke="#C9B391" stroke-width="3.2" stroke-linecap="round" opacity="0.72"/>
+    </g>
+
+    <g id="boardwalk-deck">
+      <rect x="0" y="608" width="1200" height="192" fill="url(#deckGrad)"/>
+      <rect x="0" y="606" width="1200" height="7" fill="#DCB486" stroke="#9B6E43" stroke-width="1"/>
+      <rect x="0" y="613" width="1200" height="13" fill="#C79766" opacity="0.42"/>
+      <line x1="0" y1="618.9" x2="360" y2="618.9" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="613" x2="1200" y2="613" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="614.5" x2="1200" y2="614.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="60" y1="613" x2="45.6" y2="626" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="46.8" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="46.8" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="58.8" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="58.8" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="320" y1="613" x2="312.6" y2="626" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="310.3" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="310.3" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="322.3" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="322.3" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="580" y1="613" x2="579.5" y2="626" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="573.7" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="573.7" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="585.7" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="585.7" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="840" y1="613" x2="846.4" y2="626" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="837.2" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="837.2" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="849.2" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="849.2" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="1100" y1="613" x2="1113.3" y2="626" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="1100.6" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1100.6" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1112.6" cy="616.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1112.6" cy="622.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <rect x="0" y="626" width="1200" height="16" fill="#CE9F6E" opacity="0.42"/>
+      <line x1="211" y1="633.2" x2="571" y2="633.2" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="626" x2="1200" y2="626" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="627.5" x2="1200" y2="627.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="197" y1="626" x2="183.8" y2="642" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="184.4" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="184.4" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="196.4" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="196.4" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="457" y1="626" x2="452.3" y2="642" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="448.7" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="448.7" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="460.7" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="460.7" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="717" y1="626" x2="720.8" y2="642" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="712.9" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="712.9" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="724.9" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="724.9" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="977" y1="626" x2="989.3" y2="642" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="977.2" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="977.2" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="989.2" cy="631" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="989.2" cy="637" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <rect x="0" y="642" width="1200" height="19" fill="#C29160" opacity="0.42"/>
+      <line x1="422" y1="650.5" x2="782" y2="650.5" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="642" x2="1200" y2="642" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="643.5" x2="1200" y2="643.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="74" y1="642" x2="53.6" y2="661" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="57.8" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="57.8" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="69.8" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="69.8" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="334" y1="642" x2="323.7" y2="661" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="322.8" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="322.8" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="334.8" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="334.8" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="594" y1="642" x2="593.8" y2="661" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="587.9" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="587.9" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="599.9" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="599.9" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="854" y1="642" x2="863.9" y2="661" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="852.9" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="852.9" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="864.9" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="864.9" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="1114" y1="642" x2="1134" y2="661" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="1118" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1118" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1130" cy="648.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1130" cy="654.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <rect x="0" y="661" width="1200" height="23" fill="#CB9B6A" opacity="0.42"/>
+      <line x1="633" y1="671.4" x2="993" y2="671.4" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="661" x2="1200" y2="661" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="662.5" x2="1200" y2="662.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="211" y1="661" x2="192.7" y2="684" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="195.8" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="195.8" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="207.8" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="207.8" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="471" y1="661" x2="464.9" y2="684" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="462" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="462" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="474" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="474" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="731" y1="661" x2="737.2" y2="684" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="728.1" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="728.1" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="740.1" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="740.1" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="991" y1="661" x2="1009.4" y2="684" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="994.2" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="994.2" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1006.2" cy="669.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1006.2" cy="675.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <rect x="0" y="684" width="1200" height="27" fill="#C49362" opacity="0.42"/>
+      <line x1="144" y1="696.1" x2="504" y2="696.1" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="684" x2="1200" y2="684" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="685.5" x2="1200" y2="685.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="88" y1="684" x2="59.7" y2="711" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="67.9" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="67.9" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="79.9" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="79.9" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="348" y1="684" x2="334.1" y2="711" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="335" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="335" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="347" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="347" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="608" y1="684" x2="608.4" y2="711" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="602.2" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="602.2" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="614.2" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="614.2" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="868" y1="684" x2="882.8" y2="711" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="869.4" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="869.4" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="881.4" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="881.4" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="1128" y1="684" x2="1157.2" y2="711" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="1136.6" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1136.6" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1148.6" cy="694.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1148.6" cy="700.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <rect x="0" y="711" width="1200" height="32" fill="#CE9E6D" opacity="0.42"/>
+      <line x1="355" y1="725.4" x2="715" y2="725.4" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="711" x2="1200" y2="711" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="712.5" x2="1200" y2="712.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="225" y1="711" x2="200.5" y2="743" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="206.7" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="206.7" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="218.7" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="218.7" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="485" y1="711" x2="477.5" y2="743" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="475.2" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="475.2" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="487.2" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="487.2" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="745" y1="711" x2="754.5" y2="743" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="743.7" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="743.7" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="755.7" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="755.7" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="1005" y1="711" x2="1031.5" y2="743" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="1012.3" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1012.3" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1024.3" cy="724" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1024.3" cy="730" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <rect x="0" y="743" width="1200" height="37" fill="#C08E5C" opacity="0.42"/>
+      <line x1="566" y1="759.6" x2="926" y2="759.6" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="743" x2="1200" y2="743" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="744.5" x2="1200" y2="744.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="102" y1="743" x2="64.3" y2="780" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="77.2" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="77.2" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="89.2" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="89.2" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="362" y1="743" x2="344" y2="780" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="347" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="347" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="359" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="359" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="622" y1="743" x2="623.7" y2="780" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="616.8" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="616.8" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="628.8" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="628.8" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="882" y1="743" x2="903.3" y2="780" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="886.7" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="886.7" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="898.7" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="898.7" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="1142" y1="743" x2="1183" y2="780" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="1156.5" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1156.5" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1168.5" cy="758.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1168.5" cy="764.5" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <rect x="0" y="780" width="1200" height="20" fill="#B88553" opacity="0.42"/>
+      <line x1="77" y1="789" x2="437" y2="789" stroke="#E8C79B" stroke-width="1.2" opacity="0.22"/>
+      <line x1="0" y1="780" x2="1200" y2="780" stroke="#8B5E34" stroke-width="1.4" opacity="0.55"/>
+      <line x1="0" y1="781.5" x2="1200" y2="781.5" stroke="#E6C397" stroke-width="0.9" opacity="0.35"/>
+      <line x1="239" y1="780" x2="224.2" y2="800" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="225.6" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="225.6" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="237.6" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="237.6" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="499" y1="780" x2="494.9" y2="800" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="490.9" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="490.9" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="502.9" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="502.9" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="759" y1="780" x2="765.5" y2="800" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="756.3" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="756.3" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="768.3" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="768.3" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <line x1="1019" y1="780" x2="1036.1" y2="800" stroke="#7F542C" stroke-width="1.2" opacity="0.45"/>
+      <circle cx="1021.6" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1021.6" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1033.6" cy="787" r="1.3" fill="#6E4725" opacity="0.5"/>
+      <circle cx="1033.6" cy="793" r="1.3" fill="#6E4725" opacity="0.5"/>
+    </g>
+
+    <!-- Grounded contact shadow beneath the bicycle tires & frame -->
+    <g id="ground-shadow">
+      <ellipse cx="600" cy="672" rx="284" ry="14" fill="#4A2B12" opacity="0.30"/>
+      <ellipse cx="388" cy="669" rx="64" ry="6" fill="#2E1908" opacity="0.48"/>
+      <ellipse cx="812" cy="669" rx="64" ry="6" fill="#2E1908" opacity="0.48"/>
+      <ellipse cx="566" cy="672" rx="110" ry="7.5" fill="#38200C" opacity="0.20"/>
+    </g>
+
+    <!-- ===================================================================
+         5. FAR SIDE ELEMENTS (BEHIND BIKE FRAME: FAR LEG, FAR PEDAL, FAR WING)
+         =================================================================== -->
+
+    <!-- Far Pelican Leg (smooth 2-bone IK locked to far pedal, shaded cooler behind frame) -->
+    <g id="pelican-far-leg">
+      <path d="M 554.4,415.5 L 616.4,450.1 Q 633.5,460.8 618.5,474.2 L 540,529.4 Q 534.9,526.8 533.9,521.2 L 609.6,463.7 Q 618.2,462.1 609.4,461.9 L 545,434.3 Z" fill="#D2661D" stroke="#863B0D" stroke-width="1.35" stroke-linejoin="round">
+        <animate attributeName="d" values="M 554.4,415.5 L 616.4,450.1 Q 633.5,460.8 618.5,474.2 L 540,529.4 Q 534.9,526.8 533.9,521.2 L 609.6,463.7 Q 618.2,462.1 609.4,461.9 L 545,434.3 Z;M 554.3,413.8 L 618.7,444 Q 636.5,453.5 622.3,467.8 L 547.3,527.7 Q 542.1,525.4 540.7,519.9 L 612.7,458 Q 621.2,455.8 612.5,456.2 L 546.3,433.2 Z;M 554.2,412.3 L 620.3,438.6 Q 638.6,447 625.4,462.2 L 554.8,527.3 Q 549.5,525.3 547.7,519.9 L 615.2,453.1 Q 623.5,450.3 614.8,451.2 L 547.3,432.2 Z;M 554.1,411.2 L 621.2,434.5 Q 639.9,441.8 627.9,457.8 L 562.3,528 Q 556.9,526.5 554.7,521.2 L 617,449.5 Q 625,446 616.4,447.3 L 548.1,431.3 Z;M 554,410.5 L 621.8,431.8 Q 640.5,438.4 629.7,455.1 L 569.6,530 Q 564,528.9 561.5,523.8 L 618.2,447.6 Q 625.9,443.4 617.3,444.8 L 548.5,430.8 Z;M 553.9,410.3 L 621.9,430.9 Q 640.6,436.9 630.9,454 L 576.3,533 Q 570.7,532.3 567.8,527.4 L 618.9,447.3 Q 626.3,442.5 617.6,443.9 L 548.7,430.6 Z;M 553.9,410.4 L 621.8,431.5 Q 640.3,437.3 631.6,454.7 L 582.4,537.2 Q 576.7,536.8 573.5,532.1 L 619.2,448.8 Q 626.1,443.3 617.4,444.5 L 548.6,430.8 Z;M 554,411 L 621.4,433.6 Q 639.6,439.5 631.8,456.9 L 587.6,542.2 Q 581.9,542.2 578.4,537.7 L 619,451.8 Q 625.5,445.8 616.7,446.5 L 548.2,431.2 Z;M 554.2,411.9 L 620.7,437 Q 638.4,443.1 631.3,460.5 L 591.7,548 Q 586.1,548.3 582.3,544 L 618.3,456.1 Q 624.4,449.5 615.4,449.7 L 547.6,431.8 Z;M 554.3,413.1 L 619.5,441.4 Q 636.7,447.9 630.2,465.2 L 594.7,554.4 Q 589.1,555 585.2,550.9 L 617,461.4 Q 622.7,454.3 613.6,453.9 L 546.8,432.7 Z;M 554.4,414.5 L 617.8,446.6 Q 634.4,453.6 628.4,470.6 L 596.5,561.2 Q 590.9,562 586.8,558.1 L 615.1,467.4 Q 620.3,459.8 611.2,458.7 L 545.7,433.6 Z;M 554.4,416.1 L 615.5,452.3 Q 631.5,459.9 625.8,476.6 L 597,568.2 Q 591.5,569.2 587.2,565.4 L 612.4,473.8 Q 617.3,465.9 608.2,463.9 L 544.5,434.6 Z;M 554.2,417.8 L 612.7,458.2 Q 627.9,466.4 622.5,482.8 L 596.3,575.2 Q 590.7,576.4 586.4,572.7 L 609,480.4 Q 613.6,472.1 604.6,469.3 L 543,435.6 Z;M 553.9,419.6 L 609.3,464.1 Q 623.7,472.9 618.5,489 L 594.3,581.9 Q 588.8,583.2 584.4,579.6 L 604.9,486.9 Q 609.3,478.3 600.4,474.6 L 541.5,436.5 Z;M 553.5,421.3 L 605.5,469.9 Q 619.1,479.3 613.9,495 L 591.1,588.2 Q 585.6,589.6 581.1,586.1 L 600.3,493 Q 604.4,484.2 595.8,479.6 L 539.9,437.3 Z;M 553,423 L 601.3,475.2 Q 614.1,485.1 608.9,500.5 L 586.8,593.9 Q 581.3,595.3 576.9,591.8 L 595.3,498.6 Q 599.3,489.6 591,484.2 L 538.2,437.9 Z;M 552.4,424.6 L 597,479.9 Q 609,490.4 603.7,505.3 L 581.6,598.8 Q 576.1,600.2 571.6,596.7 L 590.1,503.5 Q 594.1,494.3 586.1,488.2 L 536.7,438.5 Z;M 551.8,425.9 L 592.9,483.9 Q 604.1,494.8 598.6,509.5 L 575.6,602.7 Q 570.1,604.1 565.6,600.5 L 585,507.5 Q 589.1,498.2 581.4,491.5 L 535.2,438.8 Z;M 551.2,427.1 L 589.1,487.2 Q 599.7,498.5 593.9,512.9 L 568.9,605.6 Q 563.4,606.8 559,603.2 L 580.3,510.6 Q 584.6,501.3 577.3,494.2 L 533.9,439.1 Z;M 550.6,428 L 586,489.7 Q 596.1,501.4 589.8,515.5 L 561.8,607.4 Q 556.2,608.4 552,604.6 L 576.3,512.8 Q 580.8,503.6 573.8,496.1 L 532.9,439.2 Z;M 550.2,428.6 L 583.6,491.4 Q 593.3,503.4 586.4,517.3 L 554.5,607.9 Q 548.9,608.7 544.8,604.7 L 573.1,514.1 Q 578,505.1 571.3,497.5 L 532.1,439.3 Z;M 549.9,429 L 582.1,492.4 Q 591.6,504.9 584,518.6 L 547.1,607.2 Q 541.5,607.7 537.6,603.6 L 570.8,514.5 Q 576.2,506 569.7,498.3 L 531.6,439.3 Z;M 549.8,429.2 L 581.4,492.9 Q 590.8,505.7 582.3,519.2 L 540,605.4 Q 534.3,605.5 530.8,601.1 L 569.5,514.3 Q 575.4,506.3 568.9,498.6 L 531.4,439.3 Z;M 549.8,429.2 L 581.4,492.9 Q 590.8,506 581.4,519.3 L 533.3,602.4 Q 527.6,602.1 524.4,597.5 L 569,513.6 Q 575.4,506.1 568.9,498.6 L 531.4,439.3 Z;M 549.9,429 L 582.1,492.4 Q 591.6,505.9 581.3,518.9 L 527.2,598.3 Q 521.6,597.6 518.7,592.7 L 569.2,512.3 Q 576.2,505.5 569.7,498.3 L 531.6,439.3 Z;M 550.2,428.7 L 583.3,491.6 Q 593,505.4 581.7,518 L 521.9,593.2 Q 516.4,592.1 513.8,587.1 L 570.2,510.6 Q 577.6,504.5 571,497.6 L 532,439.3 Z;M 550.5,428.2 L 585,490.4 Q 595,504.5 582.7,516.8 L 517.7,587.4 Q 512.2,585.9 510,580.6 L 571.8,508.5 Q 579.6,503.2 572.8,496.7 L 532.6,439.2 Z;M 550.8,427.7 L 587.1,488.8 Q 597.5,503.1 584.3,515 L 514.5,580.9 Q 509.1,579 507.3,573.7 L 574,506 Q 582.2,501.5 575.1,495.4 L 533.3,439.2 Z;M 551.3,426.9 L 589.6,486.8 Q 600.4,501.3 586.5,512.8 L 512.5,574 Q 507.2,571.8 505.8,566.3 L 576.7,503.1 Q 585.1,499.4 577.9,493.8 L 534.1,439 Z;M 551.7,426.1 L 592.5,484.3 Q 603.8,498.9 589.1,510.1 L 511.8,566.9 Q 506.7,564.4 505.5,558.9 L 580,499.9 Q 588.6,496.9 581,491.8 L 535.1,438.8 Z;M 552.2,425 L 595.7,481.2 Q 607.7,495.8 592.4,506.8 L 512.4,559.9 Q 507.4,557.1 506.5,551.5 L 583.7,496.1 Q 592.4,493.8 584.6,489.3 L 536.2,438.6 Z;M 552.7,423.8 L 599.2,477.6 Q 611.9,492 596.1,502.9 L 514.2,553.1 Q 509.4,550.1 508.7,544.5 L 587.8,491.9 Q 596.6,490.1 588.5,486.3 L 537.4,438.2 Z;M 553.2,422.4 L 602.8,473.3 Q 616.3,487.3 600.3,498.3 L 517.4,546.7 Q 512.5,543.7 512,538 L 592.3,487.2 Q 601,485.7 592.7,482.6 L 538.8,437.7 Z;M 553.7,420.8 L 606.6,468.3 Q 620.9,481.7 604.8,493 L 521.6,541 Q 516.8,537.9 516.3,532.3 L 596.9,481.9 Q 605.6,480.7 597.1,478.2 L 540.3,437.1 Z;M 554,419.1 L 610.2,462.6 Q 625.5,475.3 609.5,487.1 L 526.9,536.1 Q 522.1,533.1 521.5,527.5 L 601.4,476.1 Q 610.1,474.9 601.5,473.2 L 541.9,436.3 Z;M 554.3,417.3 L 613.6,456.5 Q 629.8,468.2 614.2,480.7 L 533.1,532.2 Q 528.2,529.4 527.4,523.7 L 605.7,469.9 Q 614.4,468.6 605.7,467.7 L 543.5,435.3 Z;M 554.4,415.5 L 616.4,450.1 Q 633.5,460.8 618.5,474.2 L 540,529.4 Q 534.9,526.8 533.9,521.2 L 609.6,463.7 Q 618.2,462.1 609.4,461.9 L 545,434.3 Z" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 526.4,413.2 Q 537.9,399.4 562,418.1 Q 565.2,424.6 560.1,426.9 Q 563.1,431.6 557.5,432 Q 558.8,437.5 551.6,438.8 Q 522.1,430.6 526.4,413.2 Z" fill="#D0DCE6">
+        <animate attributeName="d" values="M 526.4,413.2 Q 537.9,399.4 562,418.1 Q 565.2,424.6 560.1,426.9 Q 563.1,431.6 557.5,432 Q 558.8,437.5 551.6,438.8 Q 522.1,430.6 526.4,413.2 Z;M 526.3,413.5 Q 536.7,398.9 562.2,415.9 Q 565.8,422.2 560.8,424.7 Q 564.1,429.3 558.6,430.1 Q 560.3,435.4 553.2,437.3 Q 523.3,431.1 526.3,413.5 Z;M 526.2,413.7 Q 535.8,398.5 562.1,413.9 Q 566.2,420 561.4,422.9 Q 564.9,427.2 559.5,428.3 Q 561.4,433.6 554.5,435.8 Q 524.2,431.5 526.2,413.7 Z;M 526.2,413.9 Q 535,398.2 562.1,412.5 Q 566.4,418.3 561.7,421.4 Q 565.5,425.6 560,427 Q 562.3,432.1 555.4,434.7 Q 525,431.8 526.2,413.9 Z;M 526.1,414 Q 534.5,398.1 562,411.5 Q 566.4,417.3 561.9,420.5 Q 565.7,424.5 560.4,426.1 Q 562.7,431.2 556,433.9 Q 525.5,431.9 526.1,414 Z;M 526.1,414 Q 534.3,398 561.9,411.2 Q 566.5,416.9 561.9,420.2 Q 565.8,424.2 560.5,425.8 Q 562.9,430.8 556.2,433.7 Q 525.7,432 526.1,414 Z;M 526.1,414 Q 534.5,398.1 562,411.4 Q 566.5,417.2 561.9,420.4 Q 565.8,424.4 560.4,426 Q 562.8,431.1 556.1,433.9 Q 525.5,431.9 526.1,414 Z;M 526.2,413.9 Q 534.8,398.2 562,412.2 Q 566.4,418 561.7,421.1 Q 565.6,425.2 560.1,426.7 Q 562.4,431.8 555.6,434.5 Q 525.2,431.8 526.2,413.9 Z;M 526.2,413.8 Q 535.5,398.4 562.1,413.4 Q 566.3,419.4 561.5,422.3 Q 565.1,426.6 559.7,427.8 Q 561.8,433 554.9,435.4 Q 524.5,431.6 526.2,413.8 Z;M 526.3,413.6 Q 536.3,398.7 562.2,414.9 Q 566,421.1 561.1,423.8 Q 564.5,428.3 559,429.3 Q 560.8,434.6 553.8,436.6 Q 523.7,431.3 526.3,413.6 Z;M 526.4,413.4 Q 537.2,399.1 562.1,416.8 Q 565.6,423.2 560.5,425.6 Q 563.7,430.3 558.1,430.9 Q 559.6,436.3 552.5,437.9 Q 522.8,430.9 526.4,413.4 Z;M 526.5,413.1 Q 538.2,399.6 561.9,418.9 Q 565,425.5 559.8,427.6 Q 562.6,432.4 557,432.7 Q 558.2,438.2 551,439.4 Q 521.8,430.4 526.5,413.1 Z;M 526.6,412.9 Q 539.3,400.2 561.6,421.1 Q 564.1,428 558.8,429.7 Q 561.3,434.7 555.7,434.6 Q 556.5,440.1 549.2,440.8 Q 520.7,429.8 526.6,412.9 Z;M 526.8,412.6 Q 540.4,400.9 561,423.4 Q 563.1,430.4 557.7,431.7 Q 559.8,436.9 554.2,436.4 Q 554.6,442 547.3,442.1 Q 519.6,429.1 526.8,412.6 Z;M 527,412.4 Q 541.4,401.7 560.3,425.7 Q 561.9,432.8 556.3,433.7 Q 558.1,439.1 552.6,438.1 Q 552.5,443.7 545.2,443.3 Q 518.6,428.3 527,412.4 Z;M 527.2,412.2 Q 542.3,402.6 559.5,427.9 Q 560.5,435.1 554.9,435.6 Q 556.3,441 550.8,439.7 Q 550.4,445.3 543.2,444.3 Q 517.7,427.4 527.2,412.2 Z;M 527.4,412 Q 543.1,403.4 558.5,429.8 Q 559.1,437.1 553.5,437.2 Q 554.5,442.8 549.1,441.1 Q 548.3,446.6 541.1,445.2 Q 516.9,426.6 527.4,412 Z;M 527.5,411.8 Q 543.8,404.3 557.6,431.6 Q 557.6,438.9 552,438.7 Q 552.7,444.2 547.4,442.2 Q 546.3,447.7 539.2,445.8 Q 516.2,425.7 527.5,411.8 Z;M 527.7,411.7 Q 544.4,405 556.6,433 Q 556.3,440.3 550.7,439.8 Q 551.1,445.4 546,443.1 Q 544.5,448.5 537.6,446.3 Q 515.6,425 527.7,411.7 Z;M 527.9,411.6 Q 544.8,405.6 555.8,434.2 Q 555.2,441.4 549.7,440.7 Q 549.8,446.3 544.8,443.8 Q 543.1,449.1 536.2,446.6 Q 515.2,424.4 527.9,411.6 Z;M 528,411.6 Q 545.1,406.1 555.2,435 Q 554.4,442.2 548.8,441.3 Q 548.8,446.9 543.9,444.2 Q 542,449.5 535.2,446.7 Q 514.9,423.9 528,411.6 Z;M 528,411.5 Q 545.2,406.4 554.8,435.4 Q 553.8,442.7 548.3,441.6 Q 548.2,447.2 543.3,444.5 Q 541.3,449.7 534.6,446.8 Q 514.8,423.6 528,411.5 Z;M 528.1,411.5 Q 545.3,406.6 554.6,435.7 Q 553.6,442.9 548.1,441.8 Q 547.9,447.4 543,444.6 Q 541,449.8 534.3,446.9 Q 514.7,423.4 528.1,411.5 Z;M 528.1,411.5 Q 545.3,406.5 554.6,435.7 Q 553.6,442.9 548.1,441.8 Q 547.9,447.4 543,444.6 Q 541,449.8 534.3,446.9 Q 514.7,423.5 528.1,411.5 Z;M 528,411.5 Q 545.2,406.4 554.8,435.5 Q 553.8,442.7 548.3,441.6 Q 548.2,447.2 543.3,444.5 Q 541.3,449.7 534.6,446.8 Q 514.8,423.6 528,411.5 Z;M 528,411.5 Q 545.1,406.2 555.1,435.1 Q 554.3,442.3 548.7,441.3 Q 548.7,447 543.7,444.3 Q 541.8,449.5 535.1,446.8 Q 514.9,423.8 528,411.5 Z;M 527.9,411.6 Q 544.9,405.8 555.6,434.5 Q 554.9,441.7 549.3,440.9 Q 549.4,446.5 544.4,444 Q 542.6,449.3 535.8,446.6 Q 515.1,424.2 527.9,411.6 Z;M 527.8,411.7 Q 544.6,405.4 556.1,433.8 Q 555.6,441 550.1,440.4 Q 550.3,446 545.2,443.5 Q 543.6,448.9 536.7,446.5 Q 515.4,424.6 527.8,411.7 Z;M 527.7,411.7 Q 544.3,404.9 556.8,432.8 Q 556.5,440.1 550.9,439.6 Q 551.3,445.2 546.2,443 Q 544.7,448.4 537.8,446.2 Q 515.7,425.1 527.7,411.7 Z;M 527.6,411.8 Q 543.9,404.3 557.5,431.7 Q 557.5,439 551.9,438.8 Q 552.5,444.3 547.3,442.3 Q 546.1,447.8 539.1,445.9 Q 516.1,425.7 527.6,411.8 Z;M 527.4,411.9 Q 543.4,403.7 558.2,430.4 Q 558.6,437.7 553,437.7 Q 553.9,443.3 548.6,441.5 Q 547.6,447 540.5,445.4 Q 516.6,426.3 527.4,411.9 Z;M 527.3,412.1 Q 542.7,403 559,428.9 Q 559.8,436.1 554.2,436.4 Q 555.4,441.9 550,440.4 Q 549.3,446 542.1,444.8 Q 517.3,427 527.3,412.1 Z;M 527.1,412.3 Q 542,402.2 559.8,427.1 Q 561,434.3 555.4,434.9 Q 557,440.3 551.5,439.2 Q 551.2,444.8 543.9,444 Q 518,427.8 527.1,412.3 Z;M 526.9,412.5 Q 541.1,401.5 560.5,425.1 Q 562.2,432.2 556.7,433.2 Q 558.6,438.5 553,437.7 Q 553.1,443.3 545.8,443 Q 518.9,428.5 526.9,412.5 Z;M 526.7,412.7 Q 540.1,400.7 561.2,422.8 Q 563.4,429.8 558,431.2 Q 560.2,436.4 554.6,436 Q 555.1,441.5 547.8,441.8 Q 519.9,429.3 526.7,412.7 Z;M 526.6,412.9 Q 539,400 561.7,420.5 Q 564.4,427.2 559.1,429.1 Q 561.7,434 556.1,434 Q 557,439.6 549.8,440.4 Q 521,430 526.6,412.9 Z;M 526.4,413.2 Q 537.9,399.4 562,418.1 Q 565.2,424.6 560.1,426.9 Q 563.1,431.6 557.5,432 Q 558.8,437.5 551.6,438.8 Q 522.1,430.6 526.4,413.2 Z" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 562,418.1 Q 565.2,424.6 560.1,426.9 Q 563.1,431.6 557.5,432 Q 558.8,437.5 551.6,438.8" fill="none" stroke="#96A6B5" stroke-width="1.2" stroke-linecap="round">
+        <animate attributeName="d" values="M 562,418.1 Q 565.2,424.6 560.1,426.9 Q 563.1,431.6 557.5,432 Q 558.8,437.5 551.6,438.8;M 562.2,415.9 Q 565.8,422.2 560.8,424.7 Q 564.1,429.3 558.6,430.1 Q 560.3,435.4 553.2,437.3;M 562.1,413.9 Q 566.2,420 561.4,422.9 Q 564.9,427.2 559.5,428.3 Q 561.4,433.6 554.5,435.8;M 562.1,412.5 Q 566.4,418.3 561.7,421.4 Q 565.5,425.6 560,427 Q 562.3,432.1 555.4,434.7;M 562,411.5 Q 566.4,417.3 561.9,420.5 Q 565.7,424.5 560.4,426.1 Q 562.7,431.2 556,433.9;M 561.9,411.2 Q 566.5,416.9 561.9,420.2 Q 565.8,424.2 560.5,425.8 Q 562.9,430.8 556.2,433.7;M 562,411.4 Q 566.5,417.2 561.9,420.4 Q 565.8,424.4 560.4,426 Q 562.8,431.1 556.1,433.9;M 562,412.2 Q 566.4,418 561.7,421.1 Q 565.6,425.2 560.1,426.7 Q 562.4,431.8 555.6,434.5;M 562.1,413.4 Q 566.3,419.4 561.5,422.3 Q 565.1,426.6 559.7,427.8 Q 561.8,433 554.9,435.4;M 562.2,414.9 Q 566,421.1 561.1,423.8 Q 564.5,428.3 559,429.3 Q 560.8,434.6 553.8,436.6;M 562.1,416.8 Q 565.6,423.2 560.5,425.6 Q 563.7,430.3 558.1,430.9 Q 559.6,436.3 552.5,437.9;M 561.9,418.9 Q 565,425.5 559.8,427.6 Q 562.6,432.4 557,432.7 Q 558.2,438.2 551,439.4;M 561.6,421.1 Q 564.1,428 558.8,429.7 Q 561.3,434.7 555.7,434.6 Q 556.5,440.1 549.2,440.8;M 561,423.4 Q 563.1,430.4 557.7,431.7 Q 559.8,436.9 554.2,436.4 Q 554.6,442 547.3,442.1;M 560.3,425.7 Q 561.9,432.8 556.3,433.7 Q 558.1,439.1 552.6,438.1 Q 552.5,443.7 545.2,443.3;M 559.5,427.9 Q 560.5,435.1 554.9,435.6 Q 556.3,441 550.8,439.7 Q 550.4,445.3 543.2,444.3;M 558.5,429.8 Q 559.1,437.1 553.5,437.2 Q 554.5,442.8 549.1,441.1 Q 548.3,446.6 541.1,445.2;M 557.6,431.6 Q 557.6,438.9 552,438.7 Q 552.7,444.2 547.4,442.2 Q 546.3,447.7 539.2,445.8;M 556.6,433 Q 556.3,440.3 550.7,439.8 Q 551.1,445.4 546,443.1 Q 544.5,448.5 537.6,446.3;M 555.8,434.2 Q 555.2,441.4 549.7,440.7 Q 549.8,446.3 544.8,443.8 Q 543.1,449.1 536.2,446.6;M 555.2,435 Q 554.4,442.2 548.8,441.3 Q 548.8,446.9 543.9,444.2 Q 542,449.5 535.2,446.7;M 554.8,435.4 Q 553.8,442.7 548.3,441.6 Q 548.2,447.2 543.3,444.5 Q 541.3,449.7 534.6,446.8;M 554.6,435.7 Q 553.6,442.9 548.1,441.8 Q 547.9,447.4 543,444.6 Q 541,449.8 534.3,446.9;M 554.6,435.7 Q 553.6,442.9 548.1,441.8 Q 547.9,447.4 543,444.6 Q 541,449.8 534.3,446.9;M 554.8,435.5 Q 553.8,442.7 548.3,441.6 Q 548.2,447.2 543.3,444.5 Q 541.3,449.7 534.6,446.8;M 555.1,435.1 Q 554.3,442.3 548.7,441.3 Q 548.7,447 543.7,444.3 Q 541.8,449.5 535.1,446.8;M 555.6,434.5 Q 554.9,441.7 549.3,440.9 Q 549.4,446.5 544.4,444 Q 542.6,449.3 535.8,446.6;M 556.1,433.8 Q 555.6,441 550.1,440.4 Q 550.3,446 545.2,443.5 Q 543.6,448.9 536.7,446.5;M 556.8,432.8 Q 556.5,440.1 550.9,439.6 Q 551.3,445.2 546.2,443 Q 544.7,448.4 537.8,446.2;M 557.5,431.7 Q 557.5,439 551.9,438.8 Q 552.5,444.3 547.3,442.3 Q 546.1,447.8 539.1,445.9;M 558.2,430.4 Q 558.6,437.7 553,437.7 Q 553.9,443.3 548.6,441.5 Q 547.6,447 540.5,445.4;M 559,428.9 Q 559.8,436.1 554.2,436.4 Q 555.4,441.9 550,440.4 Q 549.3,446 542.1,444.8;M 559.8,427.1 Q 561,434.3 555.4,434.9 Q 557,440.3 551.5,439.2 Q 551.2,444.8 543.9,444;M 560.5,425.1 Q 562.2,432.2 556.7,433.2 Q 558.6,438.5 553,437.7 Q 553.1,443.3 545.8,443;M 561.2,422.8 Q 563.4,429.8 558,431.2 Q 560.2,436.4 554.6,436 Q 555.1,441.5 547.8,441.8;M 561.7,420.5 Q 564.4,427.2 559.1,429.1 Q 561.7,434 556.1,434 Q 557,439.6 549.8,440.4;M 562,418.1 Q 565.2,424.6 560.1,426.9 Q 563.1,431.6 557.5,432 Q 558.8,437.5 551.6,438.8" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Far Crank Arm (rotates 360 deg around BB, opposite near crank) -->
+    <g id="bike-far-crank">
+      <g>
+        <line x1="558" y1="574" x2="545.3" y2="535"
+              stroke="#7A8692" stroke-width="8.5" stroke-linecap="round"/>
+        <line x1="558" y1="574" x2="545.3" y2="535"
+              stroke="#B4C0CA" stroke-width="4" stroke-linecap="round"/>
+        <animateTransform attributeName="transform" type="rotate"
+                          from="0 558 574" to="360 558 574"
+                          dur="2.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- Far Pedal & Far Webbed Foot (translated along crank circle, staying horizontal) -->
+    <g id="bike-far-pedal-and-foot">
+      <g>
+        <rect x="527.3" y="530.5" width="36" height="9" rx="3"
+              fill="#2A3038" stroke="#1C2128" stroke-width="1.2"/>
+        <rect x="530.3" y="532.8" width="30" height="4.4" rx="1.5"
+              fill="#8A95A0"/>
+        <rect x="537.3" y="533.4" width="16" height="3.2" rx="1"
+              fill="#C97D22"/>
+        <circle cx="545.3" cy="535" r="2.6" fill="#E6ECF2" stroke="#5A6470" stroke-width="0.9"/>
+        <g>
+          <!-- Webbing fanning between pelican toes -->
+        <path d="M 535.3,526
+                 C 547.3,524.5 559.3,525.8 568.3,529.5
+                 C 563.8,531.5 553.3,531.5 532.3,531 Z"
+              fill="#C75A18" stroke="#8C3D0E" stroke-width="1.2"/>
+        <!-- Main sturdy foot body & rounded heel resting flat on pedal -->
+        <path d="M 534.3,520.5
+                 C 530.3,524 527.8,528 529.5,530.6
+                 C 533.3,531.3 551.3,531.3 564.8,530.9
+                 C 569.3,530.7 570.3,528.2 566.8,526.7
+                 C 559.3,524.5 548.3,523 543.8,520.5 Z"
+              fill="#D86A1E" stroke="#8C3D0E" stroke-width="1.35" stroke-linejoin="round"/>
+        <!-- Distinct outer & inner webbed toe ridges -->
+        <path d="M 541.3,524.5 Q 554.3,525.8 567.8,528.5"
+              fill="none" stroke="#8C3D0E" stroke-width="1.2" stroke-linecap="round" opacity="0.72"/>
+        <path d="M 539.3,526.8 Q 552.3,528 565.8,530.2"
+              fill="none" stroke="#8C3D0E" stroke-width="1.15" stroke-linecap="round" opacity="0.65"/>
+        <!-- Warm highlight along instep -->
+        <path d="M 541.3,523 Q 551.3,524.4 561.8,527"
+              fill="none" stroke="#F5A155" stroke-width="1.8" stroke-linecap="round" opacity="0.78"/>
+        <!-- Curved ivory toenail gripping the front edge of the pedal -->
+        <path d="M 567.3,528 Q 571.3,528.8 570.5,531.9"
+              fill="none" stroke="#F6E2C4" stroke-width="1.8" stroke-linecap="round"/>
+          <animateTransform attributeName="transform" type="rotate"
+                            values="-2.7 539.3 524;-3.2 539.3 524;-3.6 539.3 524;-3.8 539.3 524;-4 539.3 524;-4 539.3 524;-3.9 539.3 524;-3.7 539.3 524;-3.3 539.3 524;-2.9 539.3 524;-2.4 539.3 524;-1.8 539.3 524;-1.1 539.3 524;-0.5 539.3 524;0.2 539.3 524;0.9 539.3 524;1.6 539.3 524;2.2 539.3 524;2.7 539.3 524;3.2 539.3 524;3.6 539.3 524;3.8 539.3 524;4 539.3 524;4 539.3 524;3.9 539.3 524;3.7 539.3 524;3.3 539.3 524;2.9 539.3 524;2.4 539.3 524;1.8 539.3 524;1.1 539.3 524;0.5 539.3 524;-0.2 539.3 524;-0.9 539.3 524;-1.6 539.3 524;-2.2 539.3 524;-2.7 539.3 524" dur="2.8s" repeatCount="indefinite"/>
+        </g>
+        <animateTransform attributeName="transform" type="translate"
+                          values="0 0;7 -1.6;14.1 -2;21.2 -1.1;28 1;34.4 4.2;40.1 8.5;45 13.8;48.9 19.7;51.7 26.3;53.3 33.3;53.6 40.4;52.8 47.5;50.7 54.4;47.4 60.7;43.1 66.4;37.9 71.3;31.9 75.2;25.3 78;18.4 79.6;11.2 80;4.1 79.1;-2.7 77;-9.1 73.8;-14.8 69.5;-19.6 64.2;-23.5 58.2;-26.3 51.7;-27.9 44.7;-28.3 37.6;-27.4 30.5;-25.3 23.6;-22.1 17.3;-17.8 11.6;-12.6 6.7;-6.6 2.8;0 0" dur="2.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- Far Handlebar Half & Far Grip (sweeping cleanly from stem clamp) -->
+    <g id="bike-far-handlebar">
+      <path d="M 708,306 C 718,296 710,289 694,293 L 680,297"
+            fill="none" stroke="#8592A0" stroke-width="8.8" stroke-linecap="round"/>
+      <path d="M 708,306 C 718,296 710,289 694,293 L 680,297"
+            fill="none" stroke="#E4ECF2" stroke-width="3.6" stroke-linecap="round"/>
+      <line x1="694" y1="293" x2="672" y2="299" stroke="#6E3616" stroke-width="11" stroke-linecap="round"/>
+      <line x1="693" y1="291.5" x2="673" y2="297" stroke="#9E562A" stroke-width="2.8" stroke-linecap="round"/>
+    </g>
+
+    <!-- Far Pelican Wing (reaching from far shoulder across to grip far handlebar) -->
+    <g id="pelican-far-wing">
+      <path d="M 578,278 C 606,272 640,279 668,288 C 679,291 689,293 691,299 C 692,305 683,309 672,308 C 642,307 606,306 576,304 Z"
+            fill="#D5E1EB" stroke="#8FA1B2" stroke-width="1.35" stroke-linejoin="round"/>
+      <path d="M 656,284 C 672,285 688,288 693,296 C 696,302 688,308 676,308 C 668,308 664,303 666,299 C 661,298 654,295 650,291 Z"
+            fill="#32404E" stroke="#1E2832" stroke-width="1.2"/>
+    </g>
+
+    <!-- ===================================================================
+         6. BICYCLE WHEELS (TIRES, WHITEWALLS, RIMS, ROTATING SPOKES, HUBS)
+         =================================================================== -->
+
+    <!-- Rear Wheel -->
+    <g id="bike-rear-wheel">
+      <g id="rear-wheel-spin">
+        <circle cx="388" cy="564" r="97.5" fill="none" stroke="#252B31" stroke-width="13"/>
+        <circle cx="388" cy="564" r="89.5" fill="none" stroke="#F4ECDA" stroke-width="4.5"/>
+        <circle cx="388" cy="564" r="85" fill="none" stroke="url(#rimGrad)" stroke-width="5"/>
+        <circle cx="388" cy="564" r="82" fill="none" stroke="#6E7B87" stroke-width="1.2"/>
+        <line x1="399.2" y1="568.2" x2="469.9" y2="567.3" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="400" y1="563.5" x2="466.9" y2="586.2" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="468.4" cy="567.2" r="1.7" fill="#C9A86A"/>
+        <circle cx="465.5" cy="585.8" r="1.7" fill="#C9A86A"/>
+        <line x1="394.6" y1="574" x2="452.4" y2="614.8" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="398" y1="570.6" x2="438.8" y2="628.4" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="451.2" cy="613.9" r="1.7" fill="#C9A86A"/>
+        <circle cx="437.9" cy="627.2" r="1.7" fill="#C9A86A"/>
+        <line x1="387.5" y1="576" x2="410.2" y2="642.9" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="392.2" y1="575.2" x2="391.3" y2="645.9" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="409.8" cy="641.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="391.2" cy="644.4" r="1.7" fill="#C9A86A"/>
+        <line x1="380.5" y1="573.4" x2="359.6" y2="640.9" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="384.8" y1="575.6" x2="342.5" y2="632.2" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="360.1" cy="639.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="343.3" cy="631" r="1.7" fill="#C9A86A"/>
+        <line x1="376.4" y1="567.2" x2="319.8" y2="609.5" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="378.6" y1="571.5" x2="311.1" y2="592.4" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="321" cy="608.7" r="1.7" fill="#C9A86A"/>
+        <circle cx="312.5" cy="591.9" r="1.7" fill="#C9A86A"/>
+        <line x1="376.8" y1="559.8" x2="306.1" y2="560.7" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="376" y1="564.5" x2="309.1" y2="541.8" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="307.6" cy="560.8" r="1.7" fill="#C9A86A"/>
+        <circle cx="310.5" cy="542.2" r="1.7" fill="#C9A86A"/>
+        <line x1="381.4" y1="554" x2="323.6" y2="513.2" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="378" y1="557.4" x2="337.2" y2="499.6" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="324.8" cy="514.1" r="1.7" fill="#C9A86A"/>
+        <circle cx="338.1" cy="500.8" r="1.7" fill="#C9A86A"/>
+        <line x1="388.5" y1="552" x2="365.8" y2="485.1" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="383.8" y1="552.8" x2="384.7" y2="482.1" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="366.2" cy="486.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="384.8" cy="483.6" r="1.7" fill="#C9A86A"/>
+        <line x1="395.5" y1="554.6" x2="416.4" y2="487.1" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="391.2" y1="552.4" x2="433.5" y2="495.8" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="415.9" cy="488.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="432.7" cy="497" r="1.7" fill="#C9A86A"/>
+        <line x1="399.6" y1="560.8" x2="456.2" y2="518.5" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="397.4" y1="556.5" x2="464.9" y2="535.6" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="455" cy="519.3" r="1.7" fill="#C9A86A"/>
+        <circle cx="463.5" cy="536.1" r="1.7" fill="#C9A86A"/>
+        <line x1="388" y1="482" x2="388" y2="492" stroke="#46525C" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="487.5" y1="564" x2="492.2" y2="567.1" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="479.9" y1="602.1" x2="483" y2="606.7" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="458.4" y1="634.4" x2="459.4" y2="639.9" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="426.1" y1="655.9" x2="425" y2="661.4" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="388" y1="663.5" x2="384.9" y2="668.2" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="349.9" y1="655.9" x2="345.3" y2="659" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="317.6" y1="634.4" x2="312.1" y2="635.4" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="296.1" y1="602.1" x2="290.6" y2="601" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="288.5" y1="564" x2="283.8" y2="560.9" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="296.1" y1="525.9" x2="293" y2="521.3" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="317.6" y1="493.6" x2="316.6" y2="488.1" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="349.9" y1="472.1" x2="351" y2="466.6" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="388" y1="464.5" x2="391.1" y2="459.8" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="426.1" y1="472.1" x2="430.7" y2="469" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="458.4" y1="493.6" x2="463.9" y2="492.6" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="479.9" y1="525.9" x2="485.4" y2="527" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <path d="M 402.6,564 L 402.5,565.7 L 406.3,567.3 L 405.5,570.3 L 401.4,569.8 L 400.6,571.3 L 399.7,572.7 L 402.2,576 L 400,578.2 L 396.7,575.7 L 395.3,576.6 L 393.8,577.4 L 394.3,581.5 L 391.3,582.3 L 389.7,578.5 L 388,578.6 L 386.3,578.5 L 384.7,582.3 L 381.7,581.5 L 382.2,577.4 L 380.7,576.6 L 379.3,575.7 L 376,578.2 L 373.8,576 L 376.3,572.7 L 375.4,571.3 L 374.6,569.8 L 370.5,570.3 L 369.7,567.3 L 373.5,565.7 L 373.4,564 L 373.5,562.3 L 369.7,560.7 L 370.5,557.7 L 374.6,558.2 L 375.4,556.7 L 376.3,555.3 L 373.8,552 L 376,549.8 L 379.3,552.3 L 380.7,551.4 L 382.2,550.6 L 381.7,546.5 L 384.7,545.7 L 386.3,549.5 L 388,549.4 L 389.7,549.5 L 391.3,545.7 L 394.3,546.5 L 393.8,550.6 L 395.3,551.4 L 396.7,552.3 L 400,549.8 L 402.2,552 L 399.7,555.3 L 400.6,556.7 L 401.4,558.2 L 405.5,557.7 L 406.3,560.7 L 402.5,562.3 Z" fill="#5F6B76" stroke="#313942" stroke-width="1.1"/>
+        <circle cx="388" cy="564" r="11" fill="#8C99A5" stroke="#3F4954" stroke-width="1.1"/>
+        <animateTransform attributeName="transform" type="rotate"
+                          from="0 388 564" to="360 388 564"
+                          dur="1.4s" repeatCount="indefinite"/>
+      </g>
+      <path d="M 302,518 A 98,98 0 0,1 434,478"
+            fill="none" stroke="#4D5761" stroke-width="2.4" stroke-linecap="round" opacity="0.55"/>
+    </g>
+
+    <!-- Front Wheel -->
+    <g id="bike-front-wheel">
+      <g id="front-wheel-spin">
+        <circle cx="812" cy="564" r="97.5" fill="none" stroke="#252B31" stroke-width="13"/>
+        <circle cx="812" cy="564" r="89.5" fill="none" stroke="#F4ECDA" stroke-width="4.5"/>
+        <circle cx="812" cy="564" r="85" fill="none" stroke="url(#rimGrad)" stroke-width="5"/>
+        <circle cx="812" cy="564" r="82" fill="none" stroke="#6E7B87" stroke-width="1.2"/>
+        <line x1="823.2" y1="568.2" x2="893.9" y2="567.3" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="824" y1="563.5" x2="890.9" y2="586.2" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="892.4" cy="567.2" r="1.7" fill="#C9A86A"/>
+        <circle cx="889.5" cy="585.8" r="1.7" fill="#C9A86A"/>
+        <line x1="818.6" y1="574" x2="876.4" y2="614.8" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="822" y1="570.6" x2="862.8" y2="628.4" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="875.2" cy="613.9" r="1.7" fill="#C9A86A"/>
+        <circle cx="861.9" cy="627.2" r="1.7" fill="#C9A86A"/>
+        <line x1="811.5" y1="576" x2="834.2" y2="642.9" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="816.2" y1="575.2" x2="815.3" y2="645.9" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="833.8" cy="641.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="815.2" cy="644.4" r="1.7" fill="#C9A86A"/>
+        <line x1="804.5" y1="573.4" x2="783.6" y2="640.9" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="808.8" y1="575.6" x2="766.5" y2="632.2" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="784.1" cy="639.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="767.3" cy="631" r="1.7" fill="#C9A86A"/>
+        <line x1="800.4" y1="567.2" x2="743.8" y2="609.5" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="802.6" y1="571.5" x2="735.1" y2="592.4" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="745" cy="608.7" r="1.7" fill="#C9A86A"/>
+        <circle cx="736.5" cy="591.9" r="1.7" fill="#C9A86A"/>
+        <line x1="800.8" y1="559.8" x2="730.1" y2="560.7" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="800" y1="564.5" x2="733.1" y2="541.8" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="731.6" cy="560.8" r="1.7" fill="#C9A86A"/>
+        <circle cx="734.5" cy="542.2" r="1.7" fill="#C9A86A"/>
+        <line x1="805.4" y1="554" x2="747.6" y2="513.2" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="802" y1="557.4" x2="761.2" y2="499.6" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="748.8" cy="514.1" r="1.7" fill="#C9A86A"/>
+        <circle cx="762.1" cy="500.8" r="1.7" fill="#C9A86A"/>
+        <line x1="812.5" y1="552" x2="789.8" y2="485.1" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="807.8" y1="552.8" x2="808.7" y2="482.1" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="790.2" cy="486.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="808.8" cy="483.6" r="1.7" fill="#C9A86A"/>
+        <line x1="819.5" y1="554.6" x2="840.4" y2="487.1" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="815.2" y1="552.4" x2="857.5" y2="495.8" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="839.9" cy="488.5" r="1.7" fill="#C9A86A"/>
+        <circle cx="856.7" cy="497" r="1.7" fill="#C9A86A"/>
+        <line x1="823.6" y1="560.8" x2="880.2" y2="518.5" stroke="#CBD4DC" stroke-width="1.35" stroke-linecap="round"/>
+        <line x1="821.4" y1="556.5" x2="888.9" y2="535.6" stroke="#EBF1F6" stroke-width="1.25" stroke-linecap="round"/>
+        <circle cx="879" cy="519.3" r="1.7" fill="#C9A86A"/>
+        <circle cx="887.5" cy="536.1" r="1.7" fill="#C9A86A"/>
+        <line x1="812" y1="482" x2="812" y2="492" stroke="#46525C" stroke-width="2.8" stroke-linecap="round"/>
+        <line x1="911.5" y1="564" x2="916.2" y2="567.1" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="903.9" y1="602.1" x2="907" y2="606.7" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="882.4" y1="634.4" x2="883.4" y2="639.9" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="850.1" y1="655.9" x2="849" y2="661.4" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="812" y1="663.5" x2="808.9" y2="668.2" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="773.9" y1="655.9" x2="769.3" y2="659" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="741.6" y1="634.4" x2="736.1" y2="635.4" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="720.1" y1="602.1" x2="714.6" y2="601" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="712.5" y1="564" x2="707.8" y2="560.9" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="720.1" y1="525.9" x2="717" y2="521.3" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="741.6" y1="493.6" x2="740.6" y2="488.1" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="773.9" y1="472.1" x2="775" y2="466.6" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="812" y1="464.5" x2="815.1" y2="459.8" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="850.1" y1="472.1" x2="854.7" y2="469" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="882.4" y1="493.6" x2="887.9" y2="492.6" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <line x1="903.9" y1="525.9" x2="909.4" y2="527" stroke="#3E464E" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        <circle cx="812" cy="564" r="11.5" fill="#9AA7B4" stroke="#45505B" stroke-width="1.2"/>
+        <animateTransform attributeName="transform" type="rotate"
+                          from="0 812 564" to="360 812 564"
+                          dur="1.4s" repeatCount="indefinite"/>
+      </g>
+      <path d="M 726,518 A 98,98 0 0,1 858,478"
+            fill="none" stroke="#4D5761" stroke-width="2.4" stroke-linecap="round" opacity="0.55"/>
+    </g>
+
+    <!-- ===================================================================
+         7. VINTAGE CREAM FENDERS, STAYS, HEADLIGHT & WICKER BASKET WITH FISH
+         =================================================================== -->
+    <g id="bike-fenders-and-basket">
+      <!-- Rear fender stays -->
+      <line x1="388" y1="564" x2="281.5" y2="529.4"
+            stroke="#C5CFD8" stroke-width="2.4"/>
+      <line x1="388" y1="564" x2="319" y2="475.7"
+            stroke="#B4BFC9" stroke-width="2.2"/>
+      <!-- Rear cream cruiser fender -->
+      <path d="M 275.6,552.2 A 113,113 0 0,1 481.7,500.8"
+            fill="none" stroke="#B6A385" stroke-width="11" stroke-linecap="round"/>
+      <path d="M 275.6,552.2 A 113,113 0 0,1 481.7,500.8"
+            fill="none" stroke="url(#fenderCream)" stroke-width="8.5" stroke-linecap="round"/>
+      <path d="M 275.6,552.2 A 113,113 0 0,1 481.7,500.8"
+            fill="none" stroke="#D44336" stroke-width="2" stroke-linecap="round" opacity="0.88"/>
+      <!-- Ruby rear fender reflector -->
+      <g transform="translate(276.7, 527.8) rotate(18)">
+        <rect x="-4" y="-7" width="8" height="14" rx="3" fill="#B5221C" stroke="#E5ECF2" stroke-width="1.5"/>
+        <ellipse cx="-1" cy="-2" rx="1.8" ry="3.5" fill="#FF7B70" opacity="0.85"/>
+      </g>
+
+      <!-- Front fender stays -->
+      <line x1="812" y1="564" x2="731.4" y2="486.2"
+            stroke="#C5CFD8" stroke-width="2.4"/>
+      <line x1="812" y1="564" x2="895.2" y2="489.1"
+            stroke="#B4BFC9" stroke-width="2.2"/>
+      <!-- Front cream cruiser fender -->
+      <path d="M 714.1,507.5 A 113,113 0 0,1 915.2,518"
+            fill="none" stroke="#B6A385" stroke-width="11" stroke-linecap="round"/>
+      <path d="M 714.1,507.5 A 113,113 0 0,1 915.2,518"
+            fill="none" stroke="url(#fenderCream)" stroke-width="8.5" stroke-linecap="round"/>
+      <path d="M 714.1,507.5 A 113,113 0 0,1 915.2,518"
+            fill="none" stroke="#D44336" stroke-width="2" stroke-linecap="round" opacity="0.88"/>
+
+      <!-- Vintage Chrome Bullet Headlight on front fender -->
+      <g id="bike-headlight" transform="translate(838, 444) rotate(12)">
+        <line x1="-2" y1="8" x2="-4" y2="16" stroke="#8C99A6" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M -18,0 C -18,-9 4,-11 12,-7 L 12,7 C 4,11 -18,9 -18,0 Z"
+              fill="url(#chromeGrad)" stroke="#55626E" stroke-width="1.2"/>
+        <ellipse cx="12" cy="0" rx="3.2" ry="7.2" fill="#FFF7D6" stroke="#7A8692" stroke-width="1.2"/>
+        <path d="M -14,-2 Q -4,-6 8,-4" fill="none" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round" opacity="0.8"/>
+      </g>
+
+      <!-- Front Wicker Basket + Fresh Sardines Peeking Out -->
+      <g id="wicker-basket">
+        <!-- Chrome basket support struts bolted cleanly to front wheel axle -->
+        <line x1="768" y1="404" x2="812" y2="564" stroke="#9BA8B4" stroke-width="3"/>
+        <line x1="818" y1="404" x2="812" y2="564" stroke="#C7D2DC" stroke-width="2.6"/>
+
+        <!-- Neat buckled leather straps attaching basket to stem & head tube -->
+        <path d="M 745,334 L 703,339" stroke="#7A3D19" stroke-width="4.6" stroke-linecap="round"/>
+        <path d="M 748,370 L 716,376" stroke="#7A3D19" stroke-width="4.6" stroke-linecap="round"/>
+        <rect x="723" y="333.5" width="5" height="6" rx="1" fill="url(#brassGrad)" stroke="#694510" stroke-width="0.7"/>
+        <rect x="729" y="370" width="5" height="6" rx="1" fill="url(#brassGrad)" stroke="#694510" stroke-width="0.7"/>
+
+        <!-- Basket dark interior behind contents -->
+        <ellipse cx="795" cy="322" rx="50" ry="7.5" fill="#6F471F"/>
+
+        <!-- Folded nautical striped towel tucked on left of basket -->
+        <path d="M 749,322 C 747,306 756,298 768,300 C 779,302 785,310 786,323 Z"
+              fill="#F6F1E6" stroke="#B6A896" stroke-width="1.1"/>
+        <path d="M 753,310 Q 767,307 782,312" fill="none" stroke="#2D6A96" stroke-width="3.5"/>
+        <path d="M 751,318 Q 767,315 784,319" fill="none" stroke="#2D6A96" stroke-width="3.5"/>
+
+        <!-- Gleaming coastal sardine #1 peeking head-up -->
+        <g id="basket-fish-1" transform="translate(792, 316) rotate(-17)">
+          <path d="M -8,14 C -11,-4 -9,-22 0,-33 C 9,-22 11,-4 8,14 Z"
+                fill="url(#fishGrad)" stroke="#37627D" stroke-width="1.2"/>
+          <path d="M -9,-8 Q -14,-4 -9,3 Z" fill="#6D9EB8" stroke="#37627D" stroke-width="0.9"/>
+          <path d="M -5,-20 C -7,-8 -6,4 -4,12" fill="none" stroke="#2B5B7A" stroke-width="2.3" opacity="0.68"/>
+          <path d="M 3,-19 C 5,-6 4,4 2,12" fill="none" stroke="#FFFFFF" stroke-width="2" opacity="0.78"/>
+          <circle cx="2.5" cy="-21.5" r="2.7" fill="#FFFFFF" stroke="#264559" stroke-width="0.7"/>
+          <circle cx="3" cy="-21.9" r="1.4" fill="#182B38"/>
+          <circle cx="2.2" cy="-22.6" r="0.6" fill="#FFFFFF"/>
+          <path d="M -2,-13.5 Q 2.5,-10.5 6.5,-13.5" fill="none" stroke="#3C6B87" stroke-width="1.1"/>
+        </g>
+
+        <!-- Gleaming coastal sardine #2 tail-up -->
+        <g id="basket-fish-2" transform="translate(822, 318) rotate(22)">
+          <path d="M -7,14 C -9,-2 -7,-16 -2,-23 L -10.5,-34 L 0,-27.5 L 10.5,-34 L 2,-23 C 7,-16 9,-2 7,14 Z"
+                fill="url(#fishGrad)" stroke="#37627D" stroke-width="1.2" stroke-linejoin="round"/>
+          <path d="M -3,-22 L -6,-30 M 3,-22 L 6,-30" stroke="#4D7E9B" stroke-width="0.9" opacity="0.65"/>
+          <path d="M 2,-16 C 4,-4 4,5 2,12" fill="none" stroke="#FFFFFF" stroke-width="1.8" opacity="0.78"/>
+        </g>
+
+        <!-- Woven wicker basket body -->
+        <path d="M 744,322 L 846,322 L 833,406 Q 795,412 757,406 Z"
+              fill="#C9934F" stroke="#7E5122" stroke-width="1.6" stroke-linejoin="round"/>
+        <g clip-path="url(#basketClip)">
+          <line x1="736" y1="326" x2="852" y2="326" stroke="#D8A664" stroke-width="5.2"/>
+          <line x1="736" y1="328.8" x2="852" y2="328.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="334" x2="852" y2="334" stroke="#C8924E" stroke-width="5.2"/>
+          <line x1="736" y1="336.8" x2="852" y2="336.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="342" x2="852" y2="342" stroke="#D8A664" stroke-width="5.2"/>
+          <line x1="736" y1="344.8" x2="852" y2="344.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="350" x2="852" y2="350" stroke="#C8924E" stroke-width="5.2"/>
+          <line x1="736" y1="352.8" x2="852" y2="352.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="358" x2="852" y2="358" stroke="#D8A664" stroke-width="5.2"/>
+          <line x1="736" y1="360.8" x2="852" y2="360.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="366" x2="852" y2="366" stroke="#C8924E" stroke-width="5.2"/>
+          <line x1="736" y1="368.8" x2="852" y2="368.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="374" x2="852" y2="374" stroke="#D8A664" stroke-width="5.2"/>
+          <line x1="736" y1="376.8" x2="852" y2="376.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="382" x2="852" y2="382" stroke="#C8924E" stroke-width="5.2"/>
+          <line x1="736" y1="384.8" x2="852" y2="384.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="390" x2="852" y2="390" stroke="#D8A664" stroke-width="5.2"/>
+          <line x1="736" y1="392.8" x2="852" y2="392.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="398" x2="852" y2="398" stroke="#C8924E" stroke-width="5.2"/>
+          <line x1="736" y1="400.8" x2="852" y2="400.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="736" y1="406" x2="852" y2="406" stroke="#D8A664" stroke-width="5.2"/>
+          <line x1="736" y1="408.8" x2="852" y2="408.8" stroke="#8C5B28" stroke-width="1.2" opacity="0.55"/>
+          <line x1="746" y1="322" x2="755.6" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="746.1" y1="323.6" x2="746.9" y2="328.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="748" y1="339.6" x2="748.8" y2="344.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="749.9" y1="355.6" x2="750.7" y2="360.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="751.8" y1="371.6" x2="752.6" y2="376.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="753.8" y1="387.6" x2="754.6" y2="392.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="758" y1="322" x2="765.2" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="758.7" y1="331.6" x2="759.5" y2="336.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="760.1" y1="347.6" x2="760.9" y2="352.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="761.6" y1="363.6" x2="762.4" y2="368.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="763" y1="379.6" x2="763.8" y2="384.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="764.4" y1="395.6" x2="765.2" y2="400.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="770" y1="322" x2="774.8" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="769.8" y1="323.6" x2="770.6" y2="328.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="770.8" y1="339.6" x2="771.6" y2="344.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="771.8" y1="355.6" x2="772.6" y2="360.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="772.7" y1="371.6" x2="773.5" y2="376.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="773.7" y1="387.6" x2="774.5" y2="392.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="782" y1="322" x2="784.4" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="782" y1="331.6" x2="782.8" y2="336.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="782.4" y1="347.6" x2="783.2" y2="352.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="782.9" y1="363.6" x2="783.7" y2="368.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="783.4" y1="379.6" x2="784.2" y2="384.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="783.9" y1="395.6" x2="784.7" y2="400.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="794" y1="322" x2="794" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="793.6" y1="323.6" x2="794.4" y2="328.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="793.6" y1="339.6" x2="794.4" y2="344.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="793.6" y1="355.6" x2="794.4" y2="360.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="793.6" y1="371.6" x2="794.4" y2="376.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="793.6" y1="387.6" x2="794.4" y2="392.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="806" y1="322" x2="803.6" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="805.2" y1="331.6" x2="806" y2="336.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="804.8" y1="347.6" x2="805.6" y2="352.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="804.3" y1="363.6" x2="805.1" y2="368.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="803.8" y1="379.6" x2="804.6" y2="384.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="803.3" y1="395.6" x2="804.1" y2="400.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="818" y1="322" x2="813.2" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="817.4" y1="323.6" x2="818.2" y2="328.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="816.4" y1="339.6" x2="817.2" y2="344.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="815.4" y1="355.6" x2="816.2" y2="360.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="814.5" y1="371.6" x2="815.3" y2="376.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="813.5" y1="387.6" x2="814.3" y2="392.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="830" y1="322" x2="822.8" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="828.5" y1="331.6" x2="829.3" y2="336.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="827.1" y1="347.6" x2="827.9" y2="352.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="825.6" y1="363.6" x2="826.4" y2="368.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="824.2" y1="379.6" x2="825" y2="384.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="822.8" y1="395.6" x2="823.6" y2="400.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="842" y1="322" x2="832.4" y2="408" stroke="#B0793B" stroke-width="4.2" opacity="0.82"/>
+          <line x1="841.1" y1="323.6" x2="841.9" y2="328.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="839.2" y1="339.6" x2="840" y2="344.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="837.3" y1="355.6" x2="838.1" y2="360.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="835.4" y1="371.6" x2="836.2" y2="376.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <line x1="833.4" y1="387.6" x2="834.2" y2="392.4" stroke="#EBC07E" stroke-width="3.4" stroke-linecap="round" opacity="0.85"/>
+          <rect x="740" y="325" width="110" height="7" fill="#593310" opacity="0.22"/>
+          <path d="M 812,320 L 848,320 L 836,410 L 800,410 Z" fill="#6E4117" opacity="0.22"/>
+          <rect x="740" y="394" width="110" height="18" fill="#593310" opacity="0.24"/>
+        </g>
+        <!-- Braided rolled top basket rim -->
+        <rect x="739" y="317" width="112" height="11" rx="5.5"
+              fill="url(#basketRimGrad)" stroke="#7E5122" stroke-width="1.5"/>
+        <path d="M 754,317.5 L 758,327.5 M 772,317.5 L 776,327.5 M 790,317.5 L 794,327.5 M 808,317.5 L 812,327.5 M 826,317.5 L 830,327.5"
+              stroke="#8A5724" stroke-width="1.5" opacity="0.6"/>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         8. VINTAGE CORAL-RED CRUISER BICYCLE FRAME, FORK, SADDLE, BRAKE & STEM
+         =================================================================== -->
+    <g id="bike-frame">
+      <!-- Sweeping front brake cable curving neatly from handlebar to front fork crown -->
+      <path d="M 656,314 C 668,364 696,408 738,430" fill="none" stroke="#3B454F" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Chain Stay (BB -> RW) -->
+      <path d="M 558,574 L 388,564" stroke="#8A2118" stroke-width="10.5" stroke-linecap="round"/>
+      <path d="M 558,574 L 388,564" stroke="url(#frameRed)" stroke-width="8" stroke-linecap="round"/>
+
+      <!-- Bowed Cruiser Seat Stay (STC -> RW) -->
+      <path d="M 506,436 C 464,478 426,520 388,564" fill="none" stroke="#8A2118" stroke-width="9.5" stroke-linecap="round"/>
+      <path d="M 506,436 C 464,478 426,520 388,564" fill="none" stroke="url(#frameRed)" stroke-width="7.2" stroke-linecap="round"/>
+
+      <!-- Rear Dropout Plate & Axle Nut -->
+      <circle cx="388" cy="564" r="8.5" fill="#A82D23" stroke="#6E1B14" stroke-width="1.3"/>
+      <circle cx="388" cy="564" r="4.5" fill="#DCE4EC" stroke="#4A5560" stroke-width="1"/>
+
+      <!-- Chrome Seatpost (STC -> SC) -->
+      <line x1="506" y1="436" x2="494" y2="401"
+            stroke="#5E6A75" stroke-width="10.5" stroke-linecap="round"/>
+      <line x1="506" y1="436" x2="494" y2="401"
+            stroke="url(#chromeGrad)" stroke-width="8" stroke-linecap="round"/>
+
+      <!-- Seat Tube (BB -> STC) -->
+      <line x1="558" y1="574" x2="506" y2="436"
+            stroke="#8A2118" stroke-width="14.5" stroke-linecap="round"/>
+      <line x1="558" y1="574" x2="506" y2="436"
+            stroke="url(#frameRed)" stroke-width="11.5" stroke-linecap="round"/>
+      <line x1="555.5" y1="570" x2="503.5" y2="440"
+            stroke="#F6897B" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+
+      <!-- Curved Cruiser Down Tube (HTB -> BB) -->
+      <path d="M 731,424 C 682,486 622,538 558,574" fill="none" stroke="#8A2118" stroke-width="15" stroke-linecap="round"/>
+      <path d="M 731,424 C 682,486 622,538 558,574" fill="none" stroke="url(#frameRedHoriz)" stroke-width="12" stroke-linecap="round"/>
+      <path d="M 727,422 C 679,482 620,534 559,570" fill="none" stroke="#F89082" stroke-width="2.2" stroke-linecap="round" opacity="0.6"/>
+
+      <!-- Twin Cantilever Cruiser Top Tubes -->
+      <path d="M 514,462 C 574,448 650,428 724,403" fill="none" stroke="#8A2118" stroke-width="9.5" stroke-linecap="round"/>
+      <path d="M 514,462 C 574,448 650,428 724,403" fill="none" stroke="url(#frameRed)" stroke-width="7.2" stroke-linecap="round"/>
+      <path d="M 506,436 C 566,422 646,402 716,378" fill="none" stroke="#8A2118" stroke-width="13.5" stroke-linecap="round"/>
+      <path d="M 506,436 C 566,422 646,402 716,378" fill="none" stroke="url(#frameRed)" stroke-width="10.8" stroke-linecap="round"/>
+      <path d="M 509,433 C 568,419 645,399 713,375" fill="none" stroke="#F89184" stroke-width="2.2" stroke-linecap="round" opacity="0.72"/>
+
+      <!-- Seatpost clamp collar -->
+      <path d="M 499,435 L 514,430" stroke="#DCE4EC" stroke-width="6" stroke-linecap="round"/>
+
+      <!-- Front Fork (HTB gracefully raked forward to FW) -->
+      <path d="M 734,430 C 756,480 780,524 812,564" fill="none" stroke="#8A2118" stroke-width="12.5" stroke-linecap="round"/>
+      <path d="M 734,430 C 756,480 780,524 812,564" fill="none" stroke="url(#frameRed)" stroke-width="9.5" stroke-linecap="round"/>
+      <path d="M 733,432 C 754,478 777,521 808,561" fill="none" stroke="#F89082" stroke-width="2" stroke-linecap="round" opacity="0.65"/>
+      <!-- Front caliper brake & chrome fork crown -->
+      <rect x="738" y="427" width="8" height="12" rx="2" fill="#8C99A6" stroke="#4D5964" stroke-width="1"/>
+      <path d="M 725,429 L 743,423" stroke="url(#chromeGrad)" stroke-width="7" stroke-linecap="round"/>
+      <circle cx="812" cy="564" r="7.5" fill="#DCE4EC" stroke="#4D5964" stroke-width="1.3"/>
+      <circle cx="812" cy="564" r="3.4" fill="#6F7D8A"/>
+
+      <!-- Vintage Cream-Accented Head Tube -->
+      <line x1="712" y1="368" x2="734" y2="430"
+            stroke="#8A2118" stroke-width="17" stroke-linecap="round"/>
+      <line x1="712" y1="368" x2="734" y2="430"
+            stroke="url(#fenderCream)" stroke-width="13.5" stroke-linecap="round"/>
+      <line x1="704" y1="370" x2="720" y2="365" stroke="url(#chromeGrad)" stroke-width="5.5" stroke-linecap="round"/>
+      <line x1="726" y1="432" x2="742" y2="427" stroke="url(#chromeGrad)" stroke-width="5.5" stroke-linecap="round"/>
+      <ellipse cx="723" cy="399" rx="3.2" ry="6.2" transform="rotate(-19 723 399)" fill="url(#brassGrad)" stroke="#7A5216" stroke-width="0.8"/>
+
+      <!-- Chrome Quill Stem + neat leather basket wrap collar -->
+      <path d="M 712,368 L 694,318 Q 692,306 704,306 L 710,306"
+            fill="none" stroke="#667380" stroke-width="10.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M 712,368 L 694,318 Q 692,306 704,306 L 710,306"
+            fill="none" stroke="url(#chromeGrad)" stroke-width="7.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <line x1="697" y1="340" x2="707" y2="337" stroke="#6A3313" stroke-width="5" stroke-linecap="round"/>
+
+      <!-- Vintage Brooks Sprung Leather Saddle -->
+      <g id="bike-saddle">
+        <path d="M 464,405 L 516,400" stroke="#9EAAB5" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M 461,399 C 455,399 455,405 461,405 C 467,405 467,411 461,411"
+              fill="none" stroke="#D8E0E8" stroke-width="2.6" stroke-linecap="round"/>
+        <path d="M 474,399 C 468,399 468,405 474,405 C 480,405 480,411 474,411"
+              fill="none" stroke="#BAC6D0" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M 440,391 C 444,380 472,382 496,386 C 514,389 532,389 534,395 C 535,401 518,404 500,403 C 476,402 450,407 442,401 C 438,398 438,394 440,391 Z"
+              fill="url(#leatherGrad)" stroke="#421D09" stroke-width="1.45"/>
+        <path d="M 448,388 C 468,385 496,388 522,392" fill="none" stroke="#C97E4B" stroke-width="1.8" stroke-linecap="round" opacity="0.72"/>
+        <circle cx="450" cy="396" r="1.8" fill="#E39C6B"/>
+        <circle cx="459" cy="398" r="1.8" fill="#E39C6B"/>
+        <circle cx="468" cy="398" r="1.8" fill="#E39C6B"/>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         9. DRIVETRAIN: EXACT TANGENT CHAIN & REAL-CUTOUT 24-TOOTH CHAINRING
+         =================================================================== -->
+    <g id="bike-drivetrain">
+      <path d="M 387.4,548 L 556.9,542 A 32,32 0 1,1 553.1,605.6 L 385.6,579.8 A 16,16 0 0,1 387.4,548 Z" fill="none" stroke="#2D353E" stroke-width="5.2" stroke-linejoin="round"/>
+      <path d="M 387.4,548 L 556.9,542 A 32,32 0 1,1 553.1,605.6 L 385.6,579.8 A 16,16 0 0,1 387.4,548 Z" fill="none" stroke="#C5CFD8" stroke-width="2.8"
+            stroke-dasharray="4 4.3" stroke-linecap="round">
+        <animate attributeName="stroke-dashoffset"
+                 from="0" to="-200.5"
+                 dur="2.8s" repeatCount="indefinite"/>
+      </path>
+
+      <!-- Rotating Vintage Scalloped Front Chainring with REAL transparent holes (evenodd) -->
+      <g id="front-chainring">
+        <path d="M 588.4,574 L 588.3,575.7 L 593.1,577.1 L 592.7,580.1 L 587.8,580.2 L 587.4,581.9 L 586.9,583.5 L 591.1,586.1 L 589.9,588.8 L 585.2,587.7 L 584.3,589.2 L 583.4,590.7 L 586.8,594.2 L 585,596.6 L 580.7,594.2 L 579.5,595.5 L 578.2,596.7 L 580.6,601 L 578.2,602.8 L 574.7,599.4 L 573.2,600.3 L 571.7,601.2 L 572.8,605.9 L 570.1,607.1 L 567.5,602.9 L 565.9,603.4 L 564.2,603.8 L 564.1,608.7 L 561.1,609.1 L 559.7,604.3 L 558,604.4 L 556.3,604.3 L 554.9,609.1 L 551.9,608.7 L 551.8,603.8 L 550.1,603.4 L 548.5,602.9 L 545.9,607.1 L 543.2,605.9 L 544.3,601.2 L 542.8,600.3 L 541.3,599.4 L 537.8,602.8 L 535.4,601 L 537.8,596.7 L 536.5,595.5 L 535.3,594.2 L 531,596.6 L 529.2,594.2 L 532.6,590.7 L 531.7,589.2 L 530.8,587.7 L 526.1,588.8 L 524.9,586.1 L 529.1,583.5 L 528.6,581.9 L 528.2,580.2 L 523.3,580.1 L 522.9,577.1 L 527.7,575.7 L 527.6,574 L 527.7,572.3 L 522.9,570.9 L 523.3,567.9 L 528.2,567.8 L 528.6,566.1 L 529.1,564.5 L 524.9,561.9 L 526.1,559.2 L 530.8,560.3 L 531.7,558.8 L 532.6,557.3 L 529.2,553.8 L 531,551.4 L 535.3,553.8 L 536.5,552.5 L 537.8,551.3 L 535.4,547 L 537.8,545.2 L 541.3,548.6 L 542.8,547.7 L 544.3,546.8 L 543.2,542.1 L 545.9,540.9 L 548.5,545.1 L 550.1,544.6 L 551.8,544.2 L 551.9,539.3 L 554.9,538.9 L 556.3,543.7 L 558,543.6 L 559.7,543.7 L 561.1,538.9 L 564.1,539.3 L 564.2,544.2 L 565.9,544.6 L 567.5,545.1 L 570.1,540.9 L 572.8,542.1 L 571.7,546.8 L 573.2,547.7 L 574.7,548.6 L 578.2,545.2 L 580.6,547 L 578.2,551.3 L 579.5,552.5 L 580.7,553.8 L 585,551.4 L 586.8,553.8 L 583.4,557.3 L 584.3,558.8 L 585.2,560.3 L 589.9,559.2 L 591.1,561.9 L 586.9,564.5 L 587.4,566.1 L 587.8,567.8 L 592.7,567.9 L 593.1,570.9 L 588.3,572.3 Z M 581.3,574 A 5.7,5.7 0 1,0 569.9,574 A 5.7,5.7 0 1,0 581.3,574 Z M 569.1,590.7 A 5.7,5.7 0 1,0 557.7,590.7 A 5.7,5.7 0 1,0 569.1,590.7 Z M 549.5,584.3 A 5.7,5.7 0 1,0 538.1,584.3 A 5.7,5.7 0 1,0 549.5,584.3 Z M 549.5,563.7 A 5.7,5.7 0 1,0 538.1,563.7 A 5.7,5.7 0 1,0 549.5,563.7 Z M 569.1,557.3 A 5.7,5.7 0 1,0 557.7,557.3 A 5.7,5.7 0 1,0 569.1,557.3 Z" fill="url(#chromeGrad)" fill-rule="evenodd" stroke="#485460" stroke-width="1.3"/>
+        <circle cx="558" cy="574" r="26.5" fill="none" stroke="#7A8692" stroke-width="1.3"/>
+        <circle cx="558" cy="574" r="9.5" fill="#DCE4EC" stroke="#485460" stroke-width="1.3"/>
+        <animateTransform attributeName="transform" type="rotate"
+                          from="0 558 574" to="360 558 574"
+                          dur="2.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         10. THE HERO PELICAN: TAIL, PLUMP BODY, SCARF, S-NECK, HEAD, BEAK & POUCH
+         =================================================================== -->
+    <g id="pelican-hero">
+      <!-- Layered tail feathers poking jauntily behind the leather saddle -->
+      <g id="pelican-tail">
+        <path d="M 444,376 C 414,366 386,358 368,364 C 384,374 406,382 434,386 Z"
+              fill="#2B3744" stroke="#1B242D" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M 452,370 C 420,356 392,344 376,350 C 392,362 416,374 446,382 Z"
+              fill="#EDF2F7" stroke="#9AAAB8" stroke-width="1.3" stroke-linejoin="round"/>
+        <path d="M 460,362 C 428,346 404,336 388,340 C 406,354 428,368 456,376 Z"
+              fill="#FFFDF8" stroke="#A6B4C0" stroke-width="1.3" stroke-linejoin="round"/>
+      </g>
+
+      <!-- Plump, buoyant waterfowl body resting squarely on the leather saddle -->
+      <g id="pelican-body">
+        <path d="M 448,366
+                 C 446,318 476,276 524,259
+                 C 554,248 584,254 600,278
+                 C 618,308 614,352 588,384
+                 C 564,412 518,414 480,398
+                 C 458,390 448,382 448,366 Z"
+              fill="url(#pelicanBodyGrad)" stroke="#9AA9B6" stroke-width="1.55" stroke-linejoin="round"/>
+
+        <!-- Sunlit proud chest rim highlight -->
+        <path d="M 580,278 C 602,304 602,342 584,370"
+              fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round" opacity="0.65"/>
+
+        <!-- Soft ambient coastal-blue underside shadow along belly -->
+        <path d="M 472,390 C 506,408 554,406 584,376 C 570,400 532,414 488,402 C 470,398 458,390 454,380 C 460,384 466,388 472,390 Z"
+              fill="#C3D3E2" opacity="0.56"/>
+
+        <!-- Subtle feather-tuft texture lines on chest -->
+        <path d="M 556,324 Q 570,330 578,322 M 546,346 Q 562,352 574,344 M 536,368 Q 552,374 564,366"
+              fill="none" stroke="#C5D2DE" stroke-width="1.45" stroke-linecap="round" opacity="0.7"/>
+      </g>
+
+      <!-- Breezy Nautical Striped Scarf trailing behind the lower neck -->
+      <g id="pelican-scarf">
+        <path d="M 534,257 C 506,264 474,271 444,268 L 447,280 C 478,281 508,274 536,266 Z" fill="#173A5C" stroke="#0F2840" stroke-width="1.2" stroke-linejoin="round">
+          <animate attributeName="d" values="M 534,257 C 506,264 474,271 444,268 L 447,280 C 478,281 508,274 536,266 Z;M 534,257 C 506,263.8 474,269.4 444,267.6 L 447,279.6 C 478,279.4 508,273.8 536,266 Z;M 534,257 C 506,263.1 474,268 444,266.5 L 447,278.5 C 478,278 508,273.1 536,266 Z;M 534,257 C 506,262.1 474,267.1 444,264.9 L 447,276.9 C 478,277.1 508,272.1 536,266 Z;M 534,257 C 506,261 474,266.8 444,263 L 447,275 C 478,276.8 508,271 536,266 Z;M 534,257 C 506,259.9 474,267.1 444,261.1 L 447,273.1 C 478,277.1 508,269.9 536,266 Z;M 534,257 C 506,258.9 474,268 444,259.5 L 447,271.5 C 478,278 508,268.9 536,266 Z;M 534,257 C 506,258.2 474,269.4 444,258.4 L 447,270.4 C 478,279.4 508,268.2 536,266 Z;M 534,257 C 506,258 474,271 444,258 L 447,270 C 478,281 508,268 536,266 Z;M 534,257 C 506,258.2 474,272.6 444,258.4 L 447,270.4 C 478,282.6 508,268.2 536,266 Z;M 534,257 C 506,258.9 474,274 444,259.5 L 447,271.5 C 478,284 508,268.9 536,266 Z;M 534,257 C 506,259.9 474,274.9 444,261.1 L 447,273.1 C 478,284.9 508,269.9 536,266 Z;M 534,257 C 506,261 474,275.2 444,263 L 447,275 C 478,285.2 508,271 536,266 Z;M 534,257 C 506,262.1 474,274.9 444,264.9 L 447,276.9 C 478,284.9 508,272.1 536,266 Z;M 534,257 C 506,263.1 474,274 444,266.5 L 447,278.5 C 478,284 508,273.1 536,266 Z;M 534,257 C 506,263.8 474,272.6 444,267.6 L 447,279.6 C 478,282.6 508,273.8 536,266 Z;M 534,257 C 506,264 474,271 444,268 L 447,280 C 478,281 508,274 536,266 Z" dur="2.1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 538,248 C 506,236 468,220.9 426,240 L 422,255 C 466,237.9 504,253 538,261 Z" fill="url(#scarfGrad)" stroke="#0F2840" stroke-width="1.3" stroke-linejoin="round">
+          <animate attributeName="d" values="M 538,248 C 506,236 468,220.9 426,240 L 422,255 C 466,237.9 504,253 538,261 Z;M 538,248 C 506,237.1 468,222.8 426,242.3 L 422,257.3 C 466,239.8 504,254.1 538,261 Z;M 538,248 C 506,238.1 468,225.5 426,244.2 L 422,259.2 C 466,242.5 504,255.1 538,261 Z;M 538,248 C 506,238.8 468,228.6 426,245.5 L 422,260.5 C 466,245.6 504,255.8 538,261 Z;M 538,248 C 506,239 468,231.6 426,246 L 422,261 C 466,248.6 504,256 538,261 Z;M 538,248 C 506,238.8 468,234.1 426,245.5 L 422,260.5 C 466,251.1 504,255.8 538,261 Z;M 538,248 C 506,238.1 468,235.6 426,244.2 L 422,259.2 C 466,252.6 504,255.1 538,261 Z;M 538,248 C 506,237.1 468,236 426,242.3 L 422,257.3 C 466,253 504,254.1 538,261 Z;M 538,248 C 506,236 468,235.1 426,240 L 422,255 C 466,252.1 504,253 538,261 Z;M 538,248 C 506,234.9 468,233.2 426,237.7 L 422,252.7 C 466,250.2 504,251.9 538,261 Z;M 538,248 C 506,233.9 468,230.5 426,235.8 L 422,250.8 C 466,247.5 504,250.9 538,261 Z;M 538,248 C 506,233.2 468,227.4 426,234.5 L 422,249.5 C 466,244.4 504,250.2 538,261 Z;M 538,248 C 506,233 468,224.4 426,234 L 422,249 C 466,241.4 504,250 538,261 Z;M 538,248 C 506,233.2 468,221.9 426,234.5 L 422,249.5 C 466,238.9 504,250.2 538,261 Z;M 538,248 C 506,233.9 468,220.4 426,235.8 L 422,250.8 C 466,237.4 504,250.9 538,261 Z;M 538,248 C 506,234.9 468,220 426,237.7 L 422,252.7 C 466,237 504,251.9 538,261 Z;M 538,248 C 506,236 468,220.9 426,240 L 422,255 C 466,237.9 504,253 538,261 Z" dur="2.1s" repeatCount="indefinite"/>
+        </path>
+        <path d="M 534,253 C 504,243 467,228.9 425,247" fill="none" stroke="#FAF4E8" stroke-width="3.6" stroke-linecap="round">
+          <animate attributeName="d" values="M 534,253 C 504,243 467,228.9 425,247;M 534,253 C 504,244.1 467,230.8 425,249.3;M 534,253 C 504,245.1 467,233.5 425,251.2;M 534,253 C 504,245.8 467,236.6 425,252.5;M 534,253 C 504,246 467,239.6 425,253;M 534,253 C 504,245.8 467,242.1 425,252.5;M 534,253 C 504,245.1 467,243.6 425,251.2;M 534,253 C 504,244.1 467,244 425,249.3;M 534,253 C 504,243 467,243.1 425,247;M 534,253 C 504,241.9 467,241.2 425,244.7;M 534,253 C 504,240.9 467,238.5 425,242.8;M 534,253 C 504,240.2 467,235.4 425,241.5;M 534,253 C 504,240 467,232.4 425,241;M 534,253 C 504,240.2 467,229.9 425,241.5;M 534,253 C 504,240.9 467,228.4 425,242.8;M 534,253 C 504,241.9 467,228 425,244.7;M 534,253 C 504,243 467,228.9 425,247" dur="2.1s" repeatCount="indefinite"/>
+        </path>
+      </g>
+
+      <!-- Upper Pelican Assembly: Seamless S-Neck, Integrated Wispy Crest, Head, Eye, Giant Beak & Luminous Pouch -->
+      <g id="pelican-upper-head">
+        <!-- Graceful S-Curved Pelican Neck & Crown WITH organically integrated wispy nape crest plumes! -->
+        <path d="M 526,266
+                 C 517,236 516,204 524,180
+                 C 516,184 510,190 506,196
+                 C 510,183 517,172 528,164
+                 C 518,166 508,171 500,178
+                 C 507,164 518,153 534,146
+                 C 523,144 512,146 503,152
+                 C 514,136 534,129 554,136
+                 C 572,121 602,116 628,127
+                 C 640,133 642,155 632,172
+                 C 616,186 602,204 596,228
+                 C 592,244 592,260 588,274
+                 C 568,280 542,276 526,266 Z"
+              fill="url(#pelicanNeckGrad)" stroke="#9AA9B6" stroke-width="1.55" stroke-linejoin="round"/>
+
+        <!-- Soft warm apricot-cream breeding wash on crown & wispy nape plumes -->
+        <path d="M 548,144 C 568,124 598,120 622,128 C 602,136 576,146 556,166 C 546,176 542,190 538,200 C 534,180 538,158 548,144 Z"
+              fill="#FCE6B4" opacity="0.54"/>
+
+        <!-- Sunlit back-of-neck highlight -->
+        <path d="M 532,252 C 522,220 526,180 554,147"
+              fill="none" stroke="#FFFFFF" stroke-width="3.5" stroke-linecap="round" opacity="0.72"/>
+
+        <!-- ===============================================================
+             HERO FEATURE: LONG HOOKED PELICAN BILL & SLEEK LUMINOUS GULAR POUCH
+             =============================================================== -->
+        <g id="pelican-beak-pouch">
+          <!-- Authentic boat-keel gular throat pouch curving seamlessly from feathered throat to bill tip -->
+          <path d="M 605,193
+                   C 618,225 656,244 704,242
+                   C 756,240 798,212 820,174
+                   L 626,162
+                   C 613,167 608,179 605,193 Z"
+                fill="url(#pouchGrad)" stroke="#B54916" stroke-width="1.65" stroke-linejoin="round"/>
+
+          <!-- Translucent sunlit inner pouch glow -->
+          <path d="M 632,194 C 654,224 698,233 742,222 C 774,212 796,194 806,178 C 760,187 686,184 632,194 Z"
+                fill="#FFE59E" opacity="0.48"/>
+
+          <!-- Soft shadow tucked directly under the lower mandible rim -->
+          <path d="M 628,166 C 694,170 762,174 816,176 C 760,186 694,185 626,178 Z"
+                fill="#BF4B16" opacity="0.34"/>
+
+          <!-- Delicate anatomical pouch skin-fold creases -->
+          <path d="M 622,184 C 638,206 666,222 700,225"
+                fill="none" stroke="#C7541B" stroke-width="1.5" stroke-linecap="round" opacity="0.52"/>
+          <path d="M 648,183 C 664,199 688,211 720,213"
+                fill="none" stroke="#D15D20" stroke-width="1.3" stroke-linecap="round" opacity="0.42"/>
+
+          <!-- Lower mandible rim (slender golden-orange jawbone supporting pouch) -->
+          <path d="M 622,162 C 694,166 762,169 820,173 C 821,176 818,179 813,179 C 756,176 690,174 620,170 Z"
+                fill="#EE8628" stroke="#A84714" stroke-width="1.3" stroke-linejoin="round"/>
+
+          <!-- Long, broad, proud Upper Mandible with signature downward-hooked nail tip -->
+          <path d="M 628,127
+                   C 686,133 752,143 812,155
+                   C 824,158 834,163 836,171
+                   C 837,177 832,184 824,183
+                   C 826,176 821,173 811,172
+                   C 752,168 690,165 624,164
+                   C 622,152 624,137 628,127 Z"
+                fill="url(#beakTopGrad)" stroke="#A84814" stroke-width="1.65" stroke-linejoin="round"/>
+
+          <!-- Distinctive glossy coral-red maxillary nail hook at tip of bill -->
+          <path d="M 812,155 C 824,158 834,163 836,171 C 837,177 832,184 824,183 C 826,176 821,173 813,172 C 815,165 815,160 812,155 Z"
+                fill="#D44D1C" stroke="#8F2E0D" stroke-width="1.2"/>
+
+          <!-- Glossy sunlight highlight along upper culmen ridge -->
+          <path d="M 642,133 C 694,139 754,148 808,159"
+                fill="none" stroke="#FFF2BD" stroke-width="3.6" stroke-linecap="round" opacity="0.82"/>
+
+          <!-- Nostril slit -->
+          <path d="M 650,144 L 676,148" stroke="#B85C1A" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+        </g>
+
+        <!-- Seamless Opaque Golden Facial Skin Patch (Lores) flowing organically into the bill! -->
+        <g id="pelican-face">
+          <path d="M 601,148
+                   C 601,134 615,127 632,128
+                   C 637,129 642,135 642,146
+                   C 642,156 636,163 624,164
+                   C 612,164 601,158 601,148 Z"
+                fill="url(#lorePatchGrad)"/>
+          <!-- Soft feathered cheek curve sweeping neatly under the eye into throat -->
+          <path d="M 599,154 C 605,163 616,166 626,165 C 618,174 610,184 604,195 C 594,186 594,166 599,154 Z"
+                fill="#F9F2E4"/>
+          <!-- Cheerful curved mouth gape smile line -->
+          <path d="M 620,165 Q 629,168 638,164" fill="none" stroke="#9E4212" stroke-width="1.9" stroke-linecap="round"/>
+
+          <!-- Expressive joyful pelican eye -->
+          <circle cx="614" cy="144" r="9.2" fill="#FFFFFF" stroke="#B8832A" stroke-width="1.3"/>
+          <circle cx="616.5" cy="144" r="6.2" fill="#1E344A"/>
+          <circle cx="617.5" cy="143.8" r="3.4" fill="#0B141E"/>
+          <circle cx="613.8" cy="141" r="2.3" fill="#FFFFFF"/>
+          <circle cx="619.2" cy="146.6" r="1.1" fill="#FFFFFF" opacity="0.85"/>
+          <path d="M 604,133 Q 614,128 624,132" fill="none" stroke="#C99B3E" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M 605,152 Q 615,156 625,152" fill="none" stroke="#D99838" stroke-width="1.4" stroke-linecap="round" opacity="0.75"/>
+        </g>
+
+        <!-- Scarf collar wrapped snugly around base of neck -->
+        <path d="M 522,254 C 546,266 574,268 596,258 L 594,272 C 572,282 544,280 520,268 Z"
+              fill="url(#scarfGrad)" stroke="#0F2840" stroke-width="1.35" stroke-linejoin="round"/>
+        <path d="M 523,261 C 546,273 574,275 595,265"
+              fill="none" stroke="#FAF4E8" stroke-width="3.2" stroke-linecap="round"/>
+        <ellipse cx="534" cy="260" rx="8.5" ry="7" fill="#1B446C" stroke="#0F2840" stroke-width="1.2"/>
+
+        <!-- Gentle joyful pedaling head/neck rhythm -->
+        <animateTransform attributeName="transform" type="translate"
+                          values="0 0; 0 2.6; 0 0; 0 2.6; 0 0"
+                          dur="2.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         11. NEAR HANDLEBAR, STEM CLAMP, BRASS BELL, BRAKE LEVER & NEAR WING
+         =================================================================== -->
+
+    <!-- Near Handlebar Half, Stem Clamp, Classic Brass Bell & Brake Lever -->
+    <g id="bike-near-handlebar">
+      <!-- Chrome handlebar sweeping cleanly out from stem clamp to near grip -->
+      <path d="M 710,306 C 702,295 684,296 662,306 L 642,312"
+            fill="none" stroke="#667380" stroke-width="10.5" stroke-linecap="round"/>
+      <path d="M 710,306 C 702,295 684,296 662,306 L 642,312"
+            fill="none" stroke="url(#chromeGrad)" stroke-width="7.2" stroke-linecap="round"/>
+      <!-- Clean chrome quill stem handlebar clamp collar & bolt -->
+      <circle cx="709" cy="306" r="6.2" fill="url(#chromeGrad)" stroke="#55626E" stroke-width="1.3"/>
+      <circle cx="709" cy="306" r="2.3" fill="#6E7C88"/>
+
+      <!-- Classic Shiny Brass Bicycle Bell perched clearly on top of handlebar -->
+      <g id="brass-bell" transform="translate(684, 293) rotate(-14)">
+        <rect x="-3.5" y="0" width="7" height="5" fill="#5D6975"/>
+        <path d="M -9,1 A 9,8.5 0 0,1 9,1 Z" fill="url(#brassGrad)" stroke="#7D5314" stroke-width="1.15"/>
+        <path d="M -5,-2.5 A 6,5 0 0,1 3,-4.5" fill="none" stroke="#FFF6CA" stroke-width="1.7" stroke-linecap="round"/>
+        <line x1="-11" y1="-2" x2="-7" y2="0.5" stroke="#4C5660" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="-11.5" cy="-2.2" r="1.8" fill="#5D6975"/>
+      </g>
+
+      <!-- Vintage Chrome Hand Brake Lever tucked neatly beneath grip -->
+      <path d="M 664,310 L 646,320 Q 642,322 640,319"
+            fill="none" stroke="#586570" stroke-width="4" stroke-linecap="round"/>
+      <path d="M 664,310 L 646,320 Q 642,322 640,319"
+            fill="none" stroke="#DCE4EC" stroke-width="2" stroke-linecap="round"/>
+
+      <!-- Cognac stitched leather near grip -->
+      <line x1="664" y1="305" x2="634" y2="314" stroke="#4D230B" stroke-width="14.5" stroke-linecap="round"/>
+      <line x1="664" y1="305" x2="634" y2="314" stroke="url(#leatherGrad)" stroke-width="11.5" stroke-linecap="round"/>
+      <line x1="661" y1="302.5" x2="637" y2="310" stroke="#C97E4B" stroke-width="2.2" stroke-linecap="round" opacity="0.75"/>
+      <circle cx="633" cy="314.3" r="5.5" fill="url(#chromeGrad)" stroke="#55626E" stroke-width="1.1"/>
+    </g>
+
+    <!-- Near Pelican Wing (layered coverts + slate primaries + feathered pinion tips wrapping grip!) -->
+    <g id="pelican-near-wing">
+      <!-- Bold slate-charcoal primary flight feathers fanning cleanly along lower/outer edge -->
+      <path d="M 484,322
+               C 504,358 548,370 590,356
+               C 616,347 636,332 656,320
+               C 668,313 666,301 652,301
+               C 626,301 596,308 566,310 Z"
+            fill="url(#wingDarkGrad)" stroke="#182028" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M 526,354 L 568,328 M 552,358 L 596,326 M 580,353 L 622,320 M 608,342 L 642,312"
+            stroke="#566778" stroke-width="1.4" stroke-linecap="round" opacity="0.72"/>
+
+      <!-- Creamy-white upper wing fill (blends softly into shoulder) -->
+      <path d="M 502,272
+               C 478,288 474,328 506,342
+               C 538,354 576,338 610,322
+               C 628,314 642,310 654,308
+               C 662,306 662,296 648,294
+               C 622,291 590,297 562,292
+               C 542,288 526,274 514,270 Z"
+            fill="url(#wingUpperGrad)"/>
+      <path d="M 494,284
+               C 476,302 478,332 506,342
+               C 538,354 576,338 610,322
+               C 628,314 642,310 654,308
+               C 662,306 662,296 648,294
+               C 622,291 590,297 562,292
+               C 546,289 532,281 522,275"
+            fill="none" stroke="#95A5B3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- Layered scalloped covert feather rows -->
+      <path d="M 498,312 Q 512,322 526,314 Q 542,324 558,314 Q 574,321 590,310"
+            fill="none" stroke="#B6C4D0" stroke-width="1.6" stroke-linecap="round"/>
+      <path d="M 508,328 Q 524,338 540,328 Q 556,336 572,324 Q 588,328 604,318"
+            fill="none" stroke="#A6B6C4" stroke-width="1.5" stroke-linecap="round"/>
+      <path d="M 502,284 C 522,282 546,296 576,300"
+            fill="none" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round" opacity="0.78"/>
+
+      <!-- Three distinct tapered slate-black pinion feathers curling over the cognac leather grip -->
+      <path d="M 634,296
+               C 645,293 658,295 664,301
+               C 668,305 666,311 660,313
+               C 658,318 652,320 646,317
+               C 643,320 638,318 637,313
+               C 632,310 630,301 634,296 Z"
+            fill="#2B3744" stroke="#182028" stroke-width="1.35" stroke-linejoin="round"/>
+      <!-- Individual pinion feather vane highlights -->
+      <path d="M 642,297 C 651,297 659,301 661,307" fill="none" stroke="#627588" stroke-width="1.25" stroke-linecap="round"/>
+      <path d="M 639,302 C 647,303 654,307 655,313" fill="none" stroke="#627588" stroke-width="1.25" stroke-linecap="round"/>
+      <path d="M 636,307 C 642,308 647,311 647,315" fill="none" stroke="#627588" stroke-width="1.2" stroke-linecap="round"/>
+    </g>
+
+    <!-- ===================================================================
+         12. FOREGROUND: NEAR CRANK ARM, NEAR PEDAL & NEAR PELICAN LEG + WEBBED FOOT
+         =================================================================== -->
+
+    <!-- Near Crank Arm (rotates 360 deg around BB in front of chainring) -->
+    <g id="bike-near-crank">
+      <g>
+        <line x1="558" y1="574" x2="570.7" y2="613"
+              stroke="#525E69" stroke-width="10.5" stroke-linecap="round"/>
+        <line x1="558" y1="574" x2="570.7" y2="613"
+              stroke="url(#chromeGrad)" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="558" cy="574" r="5.5" fill="#DCE4EC" stroke="#485460" stroke-width="1.2"/>
+        <animateTransform attributeName="transform" type="rotate"
+                          from="0 558 574" to="360 558 574"
+                          dur="2.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- Near Pelican Leg (smooth rounded 2-bone IK locked to near pedal) -->
+    <g id="pelican-near-leg">
+      <path d="M 539.2,425 L 577.3,485 Q 587.8,495.7 583.5,510.1 L 569.4,605.1 Q 564,607 559.2,603.8 L 569.8,509.4 Q 572.8,499.4 565.5,492 L 522,437.1 Z" fill="url(#legGrad)" stroke="#9E4210" stroke-width="1.5" stroke-linejoin="round">
+        <animate attributeName="d" values="M 539.2,425 L 577.3,485 Q 587.8,495.7 583.5,510.1 L 569.4,605.1 Q 564,607 559.2,603.8 L 569.8,509.4 Q 572.8,499.4 565.5,492 L 522,437.1 Z;M 538.7,425.8 L 574.6,487.2 Q 584.7,498.3 579.9,512.5 L 562.3,606.9 Q 556.8,608.5 552.2,605.2 L 566.2,511.3 Q 569.6,501.4 562.5,493.8 L 521.1,437.2 Z;M 538.4,426.3 L 572.8,488.5 Q 582.7,500 577.2,514.1 L 554.9,607.5 Q 549.4,608.9 545,605.3 L 563.6,512.2 Q 567.5,502.6 560.6,494.8 L 520.5,437.2 Z;M 538.3,426.5 L 571.9,489.1 Q 581.7,501 575.4,514.9 L 547.6,606.9 Q 542,607.9 537.8,604.1 L 561.9,512.3 Q 566.4,503 559.7,495.3 L 520.2,437.3 Z;M 538.3,426.5 L 571.9,489.2 Q 581.7,501.4 574.5,515.2 L 540.5,605 Q 534.8,605.7 530.8,601.7 L 561.2,511.6 Q 566.3,502.9 559.6,495.3 L 520.2,437.3 Z;M 538.4,426.4 L 572.5,488.7 Q 582.5,501.3 574.3,515 L 533.7,602.1 Q 528.1,602.3 524.4,598 L 561.3,510.4 Q 567.1,502.3 560.3,494.9 L 520.4,437.3 Z;M 538.6,426.1 L 573.7,487.8 Q 583.9,500.7 574.7,514.3 L 527.7,598 Q 522,597.8 518.7,593.2 L 562.1,508.7 Q 568.5,501.3 561.6,494.3 L 520.8,437.2 Z;M 538.9,425.6 L 575.4,486.6 Q 585.8,499.7 575.6,513.1 L 522.4,593 Q 516.8,592.4 513.8,587.6 L 563.5,506.6 Q 570.4,499.9 563.4,493.3 L 521.3,437.1 Z;M 539.2,425 L 577.4,484.9 Q 588.3,498.3 577.1,511.4 L 518.1,587.2 Q 512.5,586.2 509.9,581.1 L 565.5,504.1 Q 572.9,498.1 565.6,491.9 L 522,437 Z;M 539.6,424.3 L 579.8,482.8 Q 591.1,496.4 579,509.3 L 514.9,580.8 Q 509.4,579.4 507.2,574.1 L 568,501.1 Q 575.7,495.9 568.3,490.3 L 522.8,436.9 Z;M 540,423.4 L 582.6,480.3 Q 594.4,494 581.5,506.6 L 513,573.9 Q 507.6,572.2 505.6,566.8 L 570.9,497.8 Q 579,493.3 571.3,488.2 L 523.8,436.7 Z;M 540.5,422.4 L 585.6,477.3 Q 598,491 584.3,503.4 L 512.3,566.9 Q 507,564.8 505.4,559.4 L 574.3,494 Q 582.6,490.2 574.7,485.7 L 524.9,436.4 Z;M 541,421.2 L 588.8,473.8 Q 601.9,487.3 587.7,499.5 L 512.9,559.8 Q 507.7,557.5 506.3,552 L 578.1,489.7 Q 586.5,486.6 578.4,482.7 L 526.1,436 Z;M 541.4,419.9 L 592.2,469.6 Q 606,482.8 591.4,495.1 L 514.8,553 Q 509.7,550.6 508.5,545 L 582.1,485 Q 590.6,482.3 582.3,479.1 L 527.4,435.5 Z;M 541.8,418.4 L 595.6,464.8 Q 610.3,477.4 595.5,490 L 518,546.6 Q 512.9,544.1 511.7,538.6 L 586.3,479.7 Q 594.9,477.4 586.4,474.9 L 528.8,434.9 Z;M 542.1,416.7 L 599,459.3 Q 614.5,471.3 599.7,484.2 L 522.3,540.9 Q 517.2,538.4 516,532.9 L 590.6,473.9 Q 599.1,471.7 590.5,470 L 530.3,434.1 Z;M 542.3,415 L 602.2,453.3 Q 618.5,464.4 604,477.9 L 527.6,536 Q 522.5,533.6 521.2,528.1 L 594.7,467.8 Q 603.2,465.6 594.4,464.6 L 531.8,433.1 Z;M 542.4,413.2 L 604.9,447 Q 622.1,457.1 608,471.2 L 533.8,532.1 Q 528.6,529.9 527.2,524.4 L 598.4,461.5 Q 606.8,459.1 598,458.8 L 533.2,432.1 Z;M 542.3,411.4 L 607.1,440.7 Q 624.9,449.7 611.7,464.6 L 540.7,529.3 Q 535.4,527.3 533.6,521.9 L 601.5,455.4 Q 609.8,452.6 601.1,453.1 L 534.5,430.9 Z;M 542.2,409.9 L 608.7,435 Q 627.1,442.8 614.8,458.6 L 548,527.6 Q 542.6,525.9 540.5,520.6 L 604,450 Q 612.2,446.7 603.4,447.7 L 535.6,429.8 Z;M 542,408.6 L 609.7,430.3 Q 628.4,437 617.3,453.5 L 555.5,527.1 Q 550,525.8 547.6,520.7 L 606,445.7 Q 613.8,441.8 605.1,443.2 L 536.5,428.9 Z;M 541.8,407.8 L 610.3,426.9 Q 629.2,432.7 619.2,449.8 L 563,527.8 Q 557.4,526.9 554.6,522 L 607.3,442.9 Q 614.8,438.3 606.2,440 L 537,428.2 Z;M 541.7,407.3 L 610.5,425.1 Q 629.4,430.3 620.6,447.9 L 570.3,529.6 Q 564.6,529.2 561.4,524.5 L 608.2,441.8 Q 615.3,436.6 606.7,438.3 L 537.3,427.8 Z;M 541.7,407.3 L 610.5,425 Q 629.3,429.8 621.5,447.6 L 577,532.7 Q 571.3,532.7 567.8,528.2 L 608.8,442.4 Q 615.4,436.6 606.7,438.1 L 537.4,427.8 Z;M 541.8,407.6 L 610.3,426.4 Q 628.8,431.2 622,449 L 583,536.8 Q 577.3,537.1 573.6,532.8 L 609,444.7 Q 615.1,438.2 606.3,439.5 L 537.1,428.1 Z;M 541.9,408.4 L 609.9,429.2 Q 628,434.1 622,451.9 L 588.1,541.8 Q 582.5,542.4 578.5,538.4 L 608.8,448.3 Q 614.4,441.4 605.5,442.2 L 536.7,428.7 Z;M 542.1,409.4 L 609.1,433.2 Q 626.8,438.4 621.5,456.1 L 592.3,547.6 Q 586.7,548.5 582.5,544.7 L 608,453.2 Q 613.2,445.7 604.1,445.9 L 536,429.5 Z;M 542.3,410.7 L 607.9,438.1 Q 625,443.8 620.2,461.2 L 595.2,554 Q 589.7,555.2 585.3,551.5 L 606.7,459 Q 611.4,451.1 602.2,450.6 L 535,430.4 Z;M 542.4,412.2 L 606.1,443.7 Q 622.6,450 618.3,467.1 L 597,560.7 Q 591.5,562.2 587,558.7 L 604.7,465.4 Q 608.9,457.1 599.7,455.8 L 533.9,431.5 Z;M 542.4,413.9 L 603.8,449.7 Q 619.6,456.6 615.6,473.4 L 597.5,567.7 Q 592.1,569.4 587.5,566.1 L 601.9,472.1 Q 605.8,463.5 596.5,461.3 L 532.6,432.5 Z;M 542.2,415.7 L 600.8,455.9 Q 615.9,463.5 612.1,479.9 L 596.7,574.7 Q 591.4,576.5 586.6,573.3 L 598.4,479 Q 601.9,470 592.8,467 L 531.1,433.5 Z;M 541.9,417.6 L 597.4,462.1 Q 611.6,470.3 607.9,486.3 L 594.7,581.4 Q 589.4,583.3 584.6,580.3 L 594.2,485.7 Q 597.4,476.5 588.4,472.5 L 529.5,434.5 Z;M 541.5,419.4 L 593.4,467.9 Q 606.8,476.8 603.2,492.4 L 591.6,587.7 Q 586.2,589.7 581.4,586.7 L 589.5,492.1 Q 592.5,482.5 583.7,477.7 L 527.9,435.3 Z;M 541,421.1 L 589.2,473.3 Q 601.7,482.7 598.1,498 L 587.3,593.4 Q 582,595.4 577.1,592.5 L 584.4,497.7 Q 587.2,488 578.8,482.3 L 526.2,436 Z;M 540.4,422.6 L 584.9,478.1 Q 596.6,487.9 592.9,502.8 L 582.1,598.3 Q 576.8,600.3 571.9,597.3 L 579.2,502.6 Q 582,492.7 573.9,486.3 L 524.6,436.5 Z;M 539.8,424 L 580.8,482 Q 591.9,492.3 587.9,506.9 L 576,602.2 Q 570.7,604.2 565.9,601.2 L 574.2,506.5 Q 577.1,496.6 569.4,489.6 L 523.2,436.8 Z;M 539.2,425 L 577.3,485 Q 587.8,495.7 583.5,510.1 L 569.4,605.1 Q 564,607 559.2,603.8 L 569.8,509.4 Q 572.8,499.4 565.5,492 L 522,437.1 Z" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 541.7,439.1 L 574.9,487.9 Q 582.6,497 580,508.7 L 567.5,596.8" fill="none" stroke="#FFD085" stroke-width="2.1" stroke-linecap="round" opacity="0.82">
+        <animate attributeName="d" values="M 541.7,439.1 L 574.9,487.9 Q 582.6,497 580,508.7 L 567.5,596.8;M 540.7,440 L 572.1,490 Q 579.4,499.4 576.5,510.9 L 560.7,598.5;M 540.1,440.5 L 570.2,491.2 Q 577.3,500.9 573.8,512.3 L 553.8,599;M 539.8,440.8 L 569.3,491.8 Q 576.3,501.7 572.2,513 L 546.9,598.4;M 539.8,440.8 L 569.3,491.9 Q 576.3,501.9 571.4,513.1 L 540.4,596.5;M 540,440.6 L 569.9,491.4 Q 577.1,501.6 571.4,512.6 L 534.3,593.6;M 540.4,440.3 L 571.2,490.6 Q 578.5,500.9 572,511.7 L 528.9,589.6;M 541,439.7 L 572.9,489.4 Q 580.4,499.8 573.1,510.3 L 524.2,584.7;M 541.8,439.1 L 575.1,487.8 Q 582.9,498.2 574.8,508.5 L 520.5,579;M 542.6,438.3 L 577.6,485.8 Q 585.7,496.2 576.9,506.2 L 517.9,572.8;M 543.6,437.3 L 580.4,483.4 Q 589,493.8 579.6,503.4 L 516.5,566.1;M 544.7,436.1 L 583.5,480.5 Q 592.6,490.7 582.6,500 L 516.2,559.3;M 545.9,434.7 L 586.9,477 Q 596.5,487 586.1,496.2 L 517.1,552.4;M 547.1,433 L 590.5,472.9 Q 600.6,482.6 589.9,491.6 L 519.3,545.8;M 548.3,431.1 L 594.2,468.2 Q 604.9,477.4 594.1,486.5 L 522.5,539.5;M 549.5,429 L 597.8,462.8 Q 609.1,471.4 598.3,480.7 L 526.8,533.8;M 550.5,426.7 L 601.2,456.9 Q 613.1,464.8 602.5,474.4 L 532,528.8;M 551.4,424.2 L 604.2,450.6 Q 616.7,457.8 606.5,467.8 L 538,524.7;M 552.2,421.8 L 606.7,444.4 Q 619.6,450.7 609.9,461.3 L 544.5,521.6;M 552.7,419.6 L 608.5,438.7 Q 621.8,444.1 612.8,455.4 L 551.3,519.7;M 553,417.8 L 609.7,434 Q 623.3,438.7 615.1,450.5 L 558.3,519;M 553.1,416.6 L 610.4,430.6 Q 624.1,434.7 616.8,447 L 565.2,519.5;M 553.2,415.9 L 610.7,428.8 Q 624.5,432.5 618,445.2 L 571.8,521.3;M 553.2,415.8 L 610.8,428.7 Q 624.4,432.2 618.7,445.1 L 577.9,524.2;M 553.1,416.4 L 610.5,430.1 Q 624,433.6 619.1,446.7 L 583.4,528.3;M 553,417.4 L 609.9,432.9 Q 623.3,436.7 619,449.8 L 588,533.3;M 552.8,418.9 L 609,436.9 Q 622,441 618.3,454.1 L 591.7,539.1;M 552.4,420.8 L 607.6,441.8 Q 620.2,446.3 617,459.4 L 594.3,545.5;M 551.9,423 L 605.6,447.4 Q 617.8,452.5 614.9,465.4 L 595.7,552.3;M 551.1,425.3 L 603,453.3 Q 614.7,459 612.2,471.8 L 596,559.4;M 550.1,427.7 L 599.8,459.5 Q 611,465.8 608.7,478.4 L 595,566.4;M 548.9,430.1 L 596,465.6 Q 606.6,472.5 604.5,484.9 L 592.8,573.1;M 547.5,432.4 L 591.8,471.3 Q 601.8,478.8 599.7,491 L 589.4,579.5;M 546,434.5 L 587.3,476.6 Q 596.6,484.6 594.6,496.6 L 585.1,585.2;M 544.4,436.4 L 582.8,481.2 Q 591.5,489.6 589.4,501.5 L 579.9,590;M 543,437.9 L 578.6,485 Q 586.7,493.8 584.5,505.6 L 573.9,593.9;M 541.7,439.1 L 574.9,487.9 Q 582.6,497 580,508.7 L 567.5,596.8" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+      <!-- Seamless feathered drumstick cuff matching belly underside shadow -->
+      <path d="M 515.7,409.7 Q 532.4,403 544.7,431 Q 544.4,438.2 538.8,437.7 Q 539.2,443.3 534,441.1 Q 532.6,446.5 525.7,444.2 Q 503.6,423 515.7,409.7 Z" fill="url(#thighCuffGrad)">
+        <animate attributeName="d" values="M 515.7,409.7 Q 532.4,403 544.7,431 Q 544.4,438.2 538.8,437.7 Q 539.2,443.3 534,441.1 Q 532.6,446.5 525.7,444.2 Q 503.6,423 515.7,409.7 Z;M 515.8,409.6 Q 532.7,403.5 544,431.9 Q 543.4,439.2 537.9,438.5 Q 538,444.1 533,441.6 Q 531.3,447 524.5,444.5 Q 503.3,422.5 515.8,409.6 Z;M 515.9,409.6 Q 532.9,403.9 543.5,432.6 Q 542.8,439.8 537.3,439 Q 537.3,444.6 532.3,442 Q 530.5,447.3 523.7,444.6 Q 503.1,422.1 515.9,409.6 Z;M 516,409.6 Q 533,404 543.3,432.8 Q 542.5,440.1 537,439.2 Q 536.9,444.8 532,442.2 Q 530.1,447.4 523.4,444.7 Q 503,422 516,409.6 Z;M 516,409.6 Q 533,404.1 543.3,432.9 Q 542.5,440.1 536.9,439.2 Q 536.9,444.8 532,442.2 Q 530.1,447.4 523.4,444.7 Q 503,421.9 516,409.6 Z;M 515.9,409.6 Q 533,403.9 543.5,432.7 Q 542.7,439.9 537.2,439 Q 537.2,444.6 532.2,442 Q 530.4,447.3 523.6,444.7 Q 503,422.1 515.9,409.6 Z;M 515.9,409.6 Q 532.8,403.7 543.8,432.2 Q 543.1,439.5 537.6,438.7 Q 537.7,444.3 532.7,441.8 Q 530.9,447.1 524.1,444.6 Q 503.2,422.3 515.9,409.6 Z;M 515.8,409.7 Q 532.6,403.4 544.2,431.7 Q 543.7,438.9 538.1,438.3 Q 538.4,443.9 533.3,441.5 Q 531.7,446.8 524.8,444.4 Q 503.4,422.6 515.8,409.7 Z;M 515.7,409.7 Q 532.3,403 544.7,430.9 Q 544.4,438.2 538.9,437.7 Q 539.2,443.3 534.1,441 Q 532.7,446.4 525.7,444.2 Q 503.7,423 515.7,409.7 Z;M 515.6,409.8 Q 532,402.5 545.3,430 Q 545.3,437.3 539.7,437 Q 540.3,442.6 535,440.5 Q 533.8,445.9 526.8,443.9 Q 504,423.5 515.6,409.8 Z;M 515.5,409.9 Q 531.6,401.9 546,428.9 Q 546.2,436.2 540.6,436.1 Q 541.4,441.7 536.1,439.8 Q 535.1,445.3 528,443.6 Q 504.4,424.1 515.5,409.9 Z;M 515.3,410 Q 531,401.3 546.7,427.6 Q 547.2,434.9 541.6,435.1 Q 542.7,440.6 537.3,438.9 Q 536.5,444.5 529.4,443.1 Q 505,424.7 515.3,410 Z;M 515.2,410.2 Q 530.4,400.7 547.4,426.1 Q 548.3,433.3 542.7,433.8 Q 544.1,439.3 538.6,437.9 Q 538.1,443.5 530.9,442.5 Q 505.6,425.3 515.2,410.2 Z;M 515,410.3 Q 529.7,400 548.1,424.4 Q 549.5,431.6 543.9,432.3 Q 545.5,437.7 540,436.7 Q 539.8,442.3 532.6,441.7 Q 506.3,426 515,410.3 Z;M 514.9,410.5 Q 528.8,399.3 548.7,422.5 Q 550.6,429.5 545.1,430.7 Q 547.1,435.9 541.5,435.2 Q 541.7,440.8 534.4,440.7 Q 507.2,426.7 514.9,410.5 Z;M 514.7,410.7 Q 527.9,398.5 549.3,420.3 Q 551.6,427.2 546.2,428.7 Q 548.6,433.8 543,433.5 Q 543.5,439.1 536.2,439.5 Q 508.1,427.5 514.7,410.7 Z;M 514.5,411 Q 526.8,397.9 549.8,418 Q 552.6,424.7 547.3,426.7 Q 550,431.6 544.4,431.7 Q 545.4,437.2 538.1,438.1 Q 509.2,428.1 514.5,411 Z;M 514.4,411.3 Q 525.6,397.3 550.1,415.7 Q 553.3,422.2 548.2,424.5 Q 551.3,429.2 545.7,429.7 Q 547.1,435.1 539.9,436.5 Q 510.4,428.7 514.4,411.3 Z;M 514.3,411.5 Q 524.5,396.8 550.2,413.4 Q 553.9,419.6 549,422.3 Q 552.3,426.8 546.8,427.7 Q 548.6,433 541.5,434.9 Q 511.5,429.2 514.3,411.5 Z;M 514.2,411.8 Q 523.5,396.4 550.1,411.3 Q 554.3,417.3 549.5,420.3 Q 553.2,424.5 547.7,425.8 Q 549.8,431 542.9,433.4 Q 512.5,429.6 514.2,411.8 Z;M 514.1,412 Q 522.6,396.1 550,409.7 Q 554.4,415.5 549.8,418.6 Q 553.7,422.7 548.3,424.2 Q 550.7,429.3 543.9,432.1 Q 513.4,429.9 514.1,412 Z;M 514.1,412.1 Q 522,396 549.8,408.5 Q 554.5,414.1 550,417.5 Q 554,421.4 548.7,423.1 Q 551.2,428.1 544.6,431.1 Q 514,430 514.1,412.1 Z;M 514.1,412.2 Q 521.6,395.9 549.8,407.9 Q 554.5,413.4 550.1,416.9 Q 554.2,420.7 548.9,422.5 Q 551.5,427.5 544.9,430.6 Q 514.4,430.1 514.1,412.2 Z;M 514.1,412.2 Q 521.6,395.9 549.7,407.8 Q 554.5,413.4 550.1,416.8 Q 554.2,420.6 548.9,422.5 Q 551.5,427.4 545,430.5 Q 514.4,430.1 514.1,412.2 Z;M 514.1,412.1 Q 521.9,395.9 549.8,408.3 Q 554.5,413.9 550,417.3 Q 554.1,421.2 548.8,423 Q 551.3,427.9 544.7,431 Q 514.1,430.1 514.1,412.1 Z;M 514.1,412 Q 522.4,396.1 550,409.3 Q 554.5,415 549.9,418.3 Q 553.8,422.3 548.4,423.9 Q 550.8,428.9 544.1,431.8 Q 513.6,429.9 514.1,412 Z;M 514.2,411.8 Q 523.1,396.3 550.1,410.7 Q 554.3,416.6 549.6,419.7 Q 553.4,423.8 547.9,425.2 Q 550.1,430.4 543.3,432.9 Q 512.9,429.7 514.2,411.8 Z;M 514.2,411.6 Q 524,396.6 550.2,412.4 Q 554.1,418.6 549.2,421.4 Q 552.7,425.7 547.2,426.8 Q 549.1,432.1 542.2,434.2 Q 512,429.4 514.2,411.6 Z;M 514.3,411.4 Q 525,397 550.1,414.5 Q 553.7,420.8 548.6,423.3 Q 551.9,427.9 546.3,428.6 Q 547.9,434 540.8,435.7 Q 511,429 514.3,411.4 Z;M 514.5,411.1 Q 526.1,397.5 550,416.7 Q 553,423.3 547.9,425.4 Q 550.8,430.2 545.2,430.5 Q 546.4,436 539.2,437.2 Q 509.9,428.5 514.5,411.1 Z;M 514.6,410.9 Q 527.3,398.1 549.6,419 Q 552.2,425.8 546.9,427.6 Q 549.4,432.6 543.8,432.5 Q 544.6,438 537.3,438.7 Q 508.7,427.9 514.6,410.9 Z;M 514.8,410.6 Q 528.4,398.9 549,421.4 Q 551.1,428.4 545.7,429.7 Q 547.8,434.9 542.2,434.4 Q 542.6,440 535.3,440.1 Q 507.6,427.1 514.8,410.6 Z;M 515,410.4 Q 529.4,399.7 548.3,423.7 Q 549.9,430.9 544.3,431.8 Q 546.1,437.1 540.5,436.2 Q 540.5,441.8 533.2,441.3 Q 506.6,426.3 515,410.4 Z;M 515.2,410.2 Q 530.3,400.6 547.4,425.9 Q 548.5,433.1 542.9,433.7 Q 544.2,439.1 538.8,437.8 Q 538.3,443.3 531.1,442.4 Q 505.7,425.4 515.2,410.2 Z;M 515.4,410 Q 531.2,401.5 546.5,427.9 Q 547,435.2 541.4,435.3 Q 542.4,440.8 537,439.1 Q 536.2,444.7 529,443.2 Q 504.8,424.5 515.4,410 Z;M 515.6,409.8 Q 531.8,402.3 545.5,429.6 Q 545.6,436.9 540,436.7 Q 540.7,442.3 535.4,440.2 Q 534.2,445.7 527.2,443.8 Q 504.2,423.7 515.6,409.8 Z;M 515.7,409.7 Q 532.4,403 544.7,431 Q 544.4,438.2 538.8,437.7 Q 539.2,443.3 534,441.1 Q 532.6,446.5 525.7,444.2 Q 503.6,423 515.7,409.7 Z" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+      <path d="M 544.7,431 Q 544.4,438.2 538.8,437.7 Q 539.2,443.3 534,441.1 Q 532.6,446.5 525.7,444.2" fill="none" stroke="#9AA9B6" stroke-width="1.35" stroke-linecap="round">
+        <animate attributeName="d" values="M 544.7,431 Q 544.4,438.2 538.8,437.7 Q 539.2,443.3 534,441.1 Q 532.6,446.5 525.7,444.2;M 544,431.9 Q 543.4,439.2 537.9,438.5 Q 538,444.1 533,441.6 Q 531.3,447 524.5,444.5;M 543.5,432.6 Q 542.8,439.8 537.3,439 Q 537.3,444.6 532.3,442 Q 530.5,447.3 523.7,444.6;M 543.3,432.8 Q 542.5,440.1 537,439.2 Q 536.9,444.8 532,442.2 Q 530.1,447.4 523.4,444.7;M 543.3,432.9 Q 542.5,440.1 536.9,439.2 Q 536.9,444.8 532,442.2 Q 530.1,447.4 523.4,444.7;M 543.5,432.7 Q 542.7,439.9 537.2,439 Q 537.2,444.6 532.2,442 Q 530.4,447.3 523.6,444.7;M 543.8,432.2 Q 543.1,439.5 537.6,438.7 Q 537.7,444.3 532.7,441.8 Q 530.9,447.1 524.1,444.6;M 544.2,431.7 Q 543.7,438.9 538.1,438.3 Q 538.4,443.9 533.3,441.5 Q 531.7,446.8 524.8,444.4;M 544.7,430.9 Q 544.4,438.2 538.9,437.7 Q 539.2,443.3 534.1,441 Q 532.7,446.4 525.7,444.2;M 545.3,430 Q 545.3,437.3 539.7,437 Q 540.3,442.6 535,440.5 Q 533.8,445.9 526.8,443.9;M 546,428.9 Q 546.2,436.2 540.6,436.1 Q 541.4,441.7 536.1,439.8 Q 535.1,445.3 528,443.6;M 546.7,427.6 Q 547.2,434.9 541.6,435.1 Q 542.7,440.6 537.3,438.9 Q 536.5,444.5 529.4,443.1;M 547.4,426.1 Q 548.3,433.3 542.7,433.8 Q 544.1,439.3 538.6,437.9 Q 538.1,443.5 530.9,442.5;M 548.1,424.4 Q 549.5,431.6 543.9,432.3 Q 545.5,437.7 540,436.7 Q 539.8,442.3 532.6,441.7;M 548.7,422.5 Q 550.6,429.5 545.1,430.7 Q 547.1,435.9 541.5,435.2 Q 541.7,440.8 534.4,440.7;M 549.3,420.3 Q 551.6,427.2 546.2,428.7 Q 548.6,433.8 543,433.5 Q 543.5,439.1 536.2,439.5;M 549.8,418 Q 552.6,424.7 547.3,426.7 Q 550,431.6 544.4,431.7 Q 545.4,437.2 538.1,438.1;M 550.1,415.7 Q 553.3,422.2 548.2,424.5 Q 551.3,429.2 545.7,429.7 Q 547.1,435.1 539.9,436.5;M 550.2,413.4 Q 553.9,419.6 549,422.3 Q 552.3,426.8 546.8,427.7 Q 548.6,433 541.5,434.9;M 550.1,411.3 Q 554.3,417.3 549.5,420.3 Q 553.2,424.5 547.7,425.8 Q 549.8,431 542.9,433.4;M 550,409.7 Q 554.4,415.5 549.8,418.6 Q 553.7,422.7 548.3,424.2 Q 550.7,429.3 543.9,432.1;M 549.8,408.5 Q 554.5,414.1 550,417.5 Q 554,421.4 548.7,423.1 Q 551.2,428.1 544.6,431.1;M 549.8,407.9 Q 554.5,413.4 550.1,416.9 Q 554.2,420.7 548.9,422.5 Q 551.5,427.5 544.9,430.6;M 549.7,407.8 Q 554.5,413.4 550.1,416.8 Q 554.2,420.6 548.9,422.5 Q 551.5,427.4 545,430.5;M 549.8,408.3 Q 554.5,413.9 550,417.3 Q 554.1,421.2 548.8,423 Q 551.3,427.9 544.7,431;M 550,409.3 Q 554.5,415 549.9,418.3 Q 553.8,422.3 548.4,423.9 Q 550.8,428.9 544.1,431.8;M 550.1,410.7 Q 554.3,416.6 549.6,419.7 Q 553.4,423.8 547.9,425.2 Q 550.1,430.4 543.3,432.9;M 550.2,412.4 Q 554.1,418.6 549.2,421.4 Q 552.7,425.7 547.2,426.8 Q 549.1,432.1 542.2,434.2;M 550.1,414.5 Q 553.7,420.8 548.6,423.3 Q 551.9,427.9 546.3,428.6 Q 547.9,434 540.8,435.7;M 550,416.7 Q 553,423.3 547.9,425.4 Q 550.8,430.2 545.2,430.5 Q 546.4,436 539.2,437.2;M 549.6,419 Q 552.2,425.8 546.9,427.6 Q 549.4,432.6 543.8,432.5 Q 544.6,438 537.3,438.7;M 549,421.4 Q 551.1,428.4 545.7,429.7 Q 547.8,434.9 542.2,434.4 Q 542.6,440 535.3,440.1;M 548.3,423.7 Q 549.9,430.9 544.3,431.8 Q 546.1,437.1 540.5,436.2 Q 540.5,441.8 533.2,441.3;M 547.4,425.9 Q 548.5,433.1 542.9,433.7 Q 544.2,439.1 538.8,437.8 Q 538.3,443.3 531.1,442.4;M 546.5,427.9 Q 547,435.2 541.4,435.3 Q 542.4,440.8 537,439.1 Q 536.2,444.7 529,443.2;M 545.5,429.6 Q 545.6,436.9 540,436.7 Q 540.7,442.3 535.4,440.2 Q 534.2,445.7 527.2,443.8;M 544.7,431 Q 544.4,438.2 538.8,437.7 Q 539.2,443.3 534,441.1 Q 532.6,446.5 525.7,444.2" dur="2.8s" repeatCount="indefinite"/>
+      </path>
+    </g>
+
+    <!-- Near Pedal & Near Webbed Foot (translated along crank circle, staying horizontal) -->
+    <g id="bike-near-pedal-and-foot">
+      <g>
+        <rect x="552.7" y="608.5" width="36" height="9" rx="3"
+              fill="#343B44" stroke="#1C2128" stroke-width="1.2"/>
+        <rect x="555.7" y="610.8" width="30" height="4.4" rx="1.5"
+              fill="#CFD8E0"/>
+        <rect x="562.7" y="611.4" width="16" height="3.2" rx="1"
+              fill="#F5A623"/>
+        <circle cx="570.7" cy="613" r="2.6" fill="#E6ECF2" stroke="#5A6470" stroke-width="0.9"/>
+        <g>
+          <!-- Webbing fanning between pelican toes -->
+        <path d="M 560.7,604
+                 C 572.7,602.5 584.7,603.8 593.7,607.5
+                 C 589.2,609.5 578.7,609.5 557.7,609 Z"
+              fill="url(#webGrad)" stroke="#A64610" stroke-width="1.2"/>
+        <!-- Main sturdy foot body & rounded heel resting flat on pedal -->
+        <path d="M 559.7,598.5
+                 C 555.7,602 553.2,606 554.9,608.6
+                 C 558.7,609.3 576.7,609.3 590.2,608.9
+                 C 594.7,608.7 595.7,606.2 592.2,604.7
+                 C 584.7,602.5 573.7,601 569.2,598.5 Z"
+              fill="url(#footGrad)" stroke="#A64610" stroke-width="1.35" stroke-linejoin="round"/>
+        <!-- Distinct outer & inner webbed toe ridges -->
+        <path d="M 566.7,602.5 Q 579.7,603.8 593.2,606.5"
+              fill="none" stroke="#A64610" stroke-width="1.2" stroke-linecap="round" opacity="0.72"/>
+        <path d="M 564.7,604.8 Q 577.7,606 591.2,608.2"
+              fill="none" stroke="#A64610" stroke-width="1.15" stroke-linecap="round" opacity="0.65"/>
+        <!-- Warm highlight along instep -->
+        <path d="M 566.7,601 Q 576.7,602.4 587.2,605"
+              fill="none" stroke="#FFD088" stroke-width="1.8" stroke-linecap="round" opacity="0.78"/>
+        <!-- Curved ivory toenail gripping the front edge of the pedal -->
+        <path d="M 592.7,606 Q 596.7,606.8 595.9,609.9"
+              fill="none" stroke="#F6E2C4" stroke-width="1.8" stroke-linecap="round"/>
+          <animateTransform attributeName="transform" type="rotate"
+                            values="2.7 564.7 602;3.2 564.7 602;3.6 564.7 602;3.8 564.7 602;4 564.7 602;4 564.7 602;3.9 564.7 602;3.7 564.7 602;3.3 564.7 602;2.9 564.7 602;2.4 564.7 602;1.8 564.7 602;1.1 564.7 602;0.5 564.7 602;-0.2 564.7 602;-0.9 564.7 602;-1.6 564.7 602;-2.2 564.7 602;-2.7 564.7 602;-3.2 564.7 602;-3.6 564.7 602;-3.8 564.7 602;-4 564.7 602;-4 564.7 602;-3.9 564.7 602;-3.7 564.7 602;-3.3 564.7 602;-2.9 564.7 602;-2.4 564.7 602;-1.8 564.7 602;-1.1 564.7 602;-0.5 564.7 602;0.2 564.7 602;0.9 564.7 602;1.6 564.7 602;2.2 564.7 602;2.7 564.7 602" dur="2.8s" repeatCount="indefinite"/>
+        </g>
+        <animateTransform attributeName="transform" type="translate"
+                          values="0 0;-7 1.6;-14.1 2;-21.2 1.1;-28 -1;-34.4 -4.2;-40.1 -8.5;-45 -13.8;-48.9 -19.7;-51.7 -26.3;-53.3 -33.3;-53.6 -40.4;-52.8 -47.5;-50.7 -54.4;-47.4 -60.7;-43.1 -66.4;-37.9 -71.3;-31.9 -75.2;-25.3 -78;-18.4 -79.6;-11.2 -80;-4.1 -79.1;2.7 -77;9.1 -73.8;14.8 -69.5;19.6 -64.2;23.5 -58.2;26.3 -51.7;27.9 -44.7;28.3 -37.6;27.4 -30.5;25.3 -23.6;22.1 -17.3;17.8 -11.6;12.6 -6.7;6.6 -2.8;0 0" dur="2.8s" repeatCount="indefinite"/>
+      </g>
+    </g>
+
+    <!-- ===================================================================
+         13. SUBTLE ATMOSPHERIC FOREGROUND TOUCHES (COASTAL BREEZE LINES)
+         =================================================================== -->
+    <g id="breeze-accents" fill="none" stroke="#FFFFFF" stroke-linecap="round" opacity="0.34">
+      <g>
+        <path d="M 238,266 C 276,262 312,262 346,268" stroke-width="2.2"/>
+        <path d="M 272,276 C 304,274 328,274 352,278" stroke-width="1.5"/>
+        <animateTransform attributeName="transform" type="translate"
+                          values="22 0; -34 0; 22 0" dur="4.4s" repeatCount="indefinite"/>
+        <animate attributeName="opacity" values="0.12;0.42;0.12" dur="4.4s" repeatCount="indefinite"/>
+      </g>
+    </g>
+  </svg>
+</body>
+</html>

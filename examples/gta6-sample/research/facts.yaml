@@ -1,0 +1,83 @@
+# Structural example fact ledger for testing the ViceCut pipeline.
+# IMPORTANT (<build> #2): For any real video you publish, research every fact FRESH on the day,
+# open every page yourself, paste exact verbatim quotes, and verify dates before recording.
+topic: "everything you need to know about GTA 6 before you buy"
+research_date: "2026-11-15"
+facts:
+  - id: F01
+    claim: "GTA 6 launches first on PlayStation 5 and Xbox Series X and S."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Grand Theft Auto VI heads to the state of Leonida... Coming to PlayStation 5 and Xbox Series X|S."
+    date: "2025-05-06"
+    confidence: "official"
+    second_source_name: "Take-Two Interactive"
+    second_source_url: "https://www.take2games.com/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F02
+    claim: "Rockstar has not shown a PC launch date on its game page yet."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Official platform list displays PlayStation 5 and Xbox Series X|S only."
+    date: "2025-05-06"
+    confidence: "official"
+    second_source_name: "IGN"
+    second_source_url: "https://www.ign.com/games/grand-theft-auto-vi"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F03
+    claim: "The map spans the state of Leonida with Vice City at its heart."
+    source_name: "Rockstar Newswire"
+    source_url: "https://www.rockstargames.com/newswire"
+    exact_quote: "Grand Theft Auto VI heads to the state of Leonida, home to the neon-soaked streets of Vice City and beyond."
+    date: "2023-12-04"
+    confidence: "official"
+    second_source_name: "Rockstar Games VI Page"
+    second_source_url: "https://www.rockstargames.com/VI"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F04
+    claim: "The story pairs two leads, Jason and Lucia, in the official trailers."
+    source_name: "Rockstar Games Trailer"
+    source_url: "https://www.youtube.com/@RockstarGames"
+    exact_quote: "Official Rockstar Games GTA VI character bio and trailer showcase Jason Duval and Lucia Caminos."
+    date: "2025-05-06"
+    confidence: "official"
+    second_source_name: "Rockstar Games VI Page"
+    second_source_url: "https://www.rockstargames.com/VI"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F05
+    claim: "Analysts have estimated the install size could sit around two hundred gigs, though Rockstar has not confirmed a number."
+    source_name: "Digital Foundry"
+    source_url: "https://www.eurogamer.net/digitalfoundry"
+    exact_quote: "Storage estimates remain unconfirmed until official pre-load specs publish."
+    date: "2025-05-10"
+    confidence: "estimate"
+    second_source_name: "Eurogamer"
+    second_source_url: "https://www.eurogamer.net/"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false
+
+  - id: F06
+    claim: "Rumors of a flat one hundred dollar standard box price remain unconfirmed by Take-Two."
+    source_name: "Bloomberg"
+    source_url: "https://www.bloomberg.com/"
+    exact_quote: "Take-Two has not announced a $100 base retail price for GTA VI."
+    date: "2025-05-15"
+    confidence: "unknown"
+    second_source_name: "IGN"
+    second_source_url: "https://www.ign.com/"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false

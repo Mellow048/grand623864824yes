@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ViceCut — 1920×1080 GTA 6 Broadcast Graphics &amp; Card Styleguide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&display=swap');
+
+  :root {
+    --vc-panel-bg: #1E1322;
+    --vc-border: #F7D3EA;
+    --vc-glow-rgb: 255, 120, 205;
+    --vc-grad-start: #FF93DC;
+    --vc-grad-end: #FFB27C;
+    --vc-pill-pink: #FB96E6;
+    --vc-pill-cream: #FFF1DE;
+    --vc-pill-peach: #FFBA90;
+    --vc-pill-text: #1A1020;
+    --vc-font: 'Montserrat', 'Arial Black', system-ui, sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: #120B16;
+    color: #FFF4FA;
+    font-family: var(--vc-font);
+    min-height: 100vh;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+  }
+
+  header {
+    width: 100%;
+    max-width: 1180px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand h1 {
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, var(--vc-grad-start), var(--vc-grad-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .brand p {
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255, 241, 222, 0.78);
+    margin-top: 2px;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+  button.tab {
+    font-family: var(--vc-font);
+    font-weight: 800;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 9px 14px;
+    border-radius: 999px;
+    border: 1.5px solid rgba(247, 211, 234, 0.35);
+    background: rgba(30, 19, 34, 0.9);
+    color: #FFF1DE;
+    cursor: pointer;
+    transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+  }
+  button.tab:hover { border-color: var(--vc-grad-start); transform: translateY(-1px); }
+  button.tab.active {
+    background: linear-gradient(90deg, var(--vc-grad-start), var(--vc-grad-end));
+    color: #1A1020;
+    border-color: transparent;
+    box-shadow: 0 0 18px rgba(var(--vc-glow-rgb), 0.45);
+  }
+
+  .palette-bar {
+    width: 100%;
+    max-width: 1180px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    background: rgba(30, 19, 34, 0.72);
+    border: 1px solid rgba(247, 211, 234, 0.25);
+    border-radius: 14px;
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .swatches { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .swatch-btn {
+    font-family: var(--vc-font);
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    padding: 6px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background: #23162A;
+    color: #FFF1DE;
+    cursor: pointer;
+  }
+  .swatch-btn.active { border-color: #FFF1DE; background: #372042; }
+
+  /* 16:9 Stage Container scaled cleanly from 1920x1080 */
+  .stage-shell {
+    width: 100%;
+    max-width: 1180px;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    border: 2px solid rgba(247, 211, 234, 0.3);
+    box-shadow: 0 24px 72px rgba(0, 0, 0, 0.72), 0 0 40px rgba(var(--vc-glow-rgb), 0.16);
+    background: #140C1A;
+  }
+  .stage-scaler {
+    width: 1920px;
+    height: 1080px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: top left;
+  }
+
+  /* Simulated Vice City night/sunset footage backdrop (blurred + darkened when cards are up) */
+  .footage-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 24% 28%, rgba(255, 120, 205, 0.55) 0%, transparent 45%),
+      radial-gradient(circle at 78% 32%, rgba(255, 178, 124, 0.48) 0%, transparent 48%),
+      radial-gradient(circle at 52% 78%, rgba(92, 54, 155, 0.65) 0%, transparent 55%),
+      linear-gradient(160deg, #1F1133 0%, #3E1C4C 38%, #6D2F5E 68%, #22142D 100%);
+    transition: filter 0.25s ease;
+  }
+  .footage-bg.blurred { filter: blur(26px) scale(1.06); }
+  .footage-grid {
+    position: absolute;
+    inset: 0;
+    opacity: 0.22;
+    background-image:
+      linear-gradient(transparent 92%, rgba(255, 147, 220, 0.6) 100%),
+      repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0 2px, transparent 2px 96px);
+    background-size: 100% 64px, 100% 100%;
+  }
+  .footage-darken {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0);
+    transition: background 0.25s ease;
+  }
+
+  /* Exact ViceCut Overlay Rules */
+  .pills-layer {
+    position: absolute;
+    top: 44px;
+    left: 52px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    z-index: 40;
+  }
+  .source-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 900;
+    font-size: 24px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--vc-pill-text);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.42);
+    width: fit-content;
+  }
+  .pill-pink { background: var(--vc-pill-pink); transform: rotate(-2deg); }
+  .pill-cream { background: var(--vc-pill-cream); transform: rotate(1.6deg); }
+  .pill-peach { background: var(--vc-pill-peach); transform: rotate(-1.4deg); }
+
+  .card-layer {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 25;
+  }
+  .vc-panel {
+    background: rgba(30, 19, 34, 0.90);
+    border: 2.5px solid var(--vc-border);
+    border-radius: 26px;
+    box-shadow:
+      0 0 34px rgba(var(--vc-glow-rgb), 0.35),
+      0 22px 58px rgba(0, 0, 0, 0.65),
+      inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  }
+  .grad-text {
+    background: linear-gradient(90deg, var(--vc-grad-start), var(--vc-grad-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  /* 1. Photo Card */
+  .card-photo {
+    padding: 20px 20px 26px;
+    transform: rotate(-1.4deg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .card-photo .frame {
+    width: 1120px;
+    height: 620px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: linear-gradient(135deg, #2B173D, #752F68 48%, #E07A74 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .card-photo .frame .placeholder-art {
+    text-align: center;
+    color: rgba(255,241,222,0.92);
+  }
+  .card-photo .label {
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* 2. Headline Card */
+  .card-headline {
+    width: 1180px;
+    padding: 46px 56px;
+    background: #FFFFFF;
+    color: #16101B;
+    border-radius: 22px;
+    border: 3px solid var(--vc-border);
+    box-shadow: 0 0 38px rgba(var(--vc-glow-rgb), 0.34), 0 26px 64px rgba(0,0,0,0.68);
+    transform: rotate(1.1deg);
+  }
+  .card-headline .outlet {
+    display: inline-block;
+    padding: 8px 18px;
+    border-radius: 8px;
+    background: #1E1322;
+    color: var(--vc-grad-start);
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+  }
+  .card-headline .title {
+    font-size: 56px;
+    font-weight: 900;
+    line-height: 1.14;
+    letter-spacing: -0.015em;
+    margin-bottom: 22px;
+  }
+  .card-headline .date {
+    font-size: 24px;
+    font-weight: 700;
+    color: #5A4B63;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* 3. Character Card (NO backdrop blur!) */
+  .card-character {
+    position: absolute;
+    top: 50%;
+    left: 64.5%;
+    transform: translateY(-50%);
+    width: 560px;
+    padding: 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .card-character .portrait {
+    width: 100%;
+    height: 410px;
+    border-radius: 16px;
+    background: linear-gradient(155deg, #401B53, #963B74 58%, #E69375);
+    border: 2px solid rgba(247,211,234,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    font-weight: 800;
+    color: #FFF1DE;
+  }
+  .card-character .name {
+    font-size: 46px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    line-height: 1.05;
+  }
+  .card-character .line {
+    font-size: 27px;
+    font-weight: 700;
+    color: #FFF1DE;
+    line-height: 1.3;
+  }
+
+  /* 4. Quote Card */
+  .card-quote {
+    width: 1240px;
+    padding: 58px 68px;
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  .card-quote .mark {
+    font-size: 112px;
+    font-weight: 900;
+    line-height: 0.65;
+  }
+  .card-quote .body {
+    font-size: 50px;
+    font-weight: 800;
+    line-height: 1.24;
+    color: #FFFFFF;
+  }
+  .card-quote .attr {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--vc-pill-peach);
+  }
+
+  /* 5. Big Number Card */
+  .card-number {
+    padding: 64px 96px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .card-number .fig {
+    font-size: 176px;
+    font-weight: 900;
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    filter: drop-shadow(0 0 28px rgba(var(--vc-glow-rgb), 0.42));
+  }
+  .card-number .sub {
+    font-size: 38px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #FFF1DE;
+  }
+
+  /* 6. Chapter Word */
+  .card-chapter {
+    text-align: center;
+    font-size: 158px;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    line-height: 1.02;
+    filter: drop-shadow(0 0 38px rgba(var(--vc-glow-rgb), 0.50)) drop-shadow(0 10px 24px rgba(0,0,0,0.85));
+  }
+
+  /* Key-Word Caption (never shifts layout — words fade in place!) */
+  .caption-layer {
+    position: absolute;
+    left: 96px;
+    right: 96px;
+    top: 80%;
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 35;
+  }
+  .caption-line {
+    display: inline-flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.28em;
+    font-weight: 900;
+    font-size: 106px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    filter: drop-shadow(0 5px 14px rgba(0,0,0,0.92)) drop-shadow(0 0 20px rgba(var(--vc-glow-rgb), 0.35));
+  }
+  .caption-word {
+    background: linear-gradient(90deg, var(--vc-grad-start), var(--vc-grad-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke: 3px rgba(24, 12, 30, 0.92);
+    paint-order: stroke fill;
+    opacity: 0;
+    transition: opacity 0.20s ease;
+  }
+  .caption-word.visible { opacity: 1; }
+
+  .spec-strip {
+    width: 100%;
+    max-width: 1180px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+  }
+  .spec-box {
+    background: rgba(30, 19, 34, 0.72);
+    border: 1px solid rgba(247, 211, 234, 0.22);
+    border-radius: 12px;
+    padding: 12px 14px;
+  }
+  .spec-box .k { font-size: 11px; color: var(--vc-grad-end); text-transform: uppercase; letter-spacing: 0.07em; font-weight: 800; }
+  .spec-box .v { font-size: 13px; color: #FFF1DE; margin-top: 4px; font-weight: 700; }
+</style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <h1>ViceCut — 1920×1080 Broadcast Graphics Playground</h1>
+      <p>Inspect all 6 proof-card families, non-shifting key-word captions, stacked source pills &amp; 26px blur/darken rules</p>
+    </div>
+    <div class="controls" id="cardTabs">
+      <button class="tab active" data-mode="headline">1. Headline</button>
+      <button class="tab" data-mode="photo">2. Photo</button>
+      <button class="tab" data-mode="character">3. Character</button>
+      <button class="tab" data-mode="quote">4. Quote</button>
+      <button class="tab" data-mode="number">5. Big Number</button>
+      <button class="tab" data-mode="chapter">6. Chapter</button>
+      <button class="tab" data-mode="caption">7. Key-Word Caption</button>
+    </div>
+  </header>
+
+  <div class="palette-bar">
+    <div class="swatches">
+      <span>Palette Preset:</span>
+      <button class="swatch-btn active" data-palette="gta6">GTA 6 Vice Neon (#FF93DC → #FFB27C)</button>
+      <button class="swatch-btn" data-palette="cyber">Key-Art Cyan/Violet (#69E6FF → #C18BFF)</button>
+      <button class="swatch-btn" data-palette="gold">Key-Art Gold/Coral (#FFD166 → #FF7E6B)</button>
+    </div>
+    <span id="modeSpec">Blur: 26px | Darken: 50% | Hold: 2.8s | Fade: 0.25s</span>
+  </div>
+
+  <div class="stage-shell" id="stageShell">
+    <div class="stage-scaler" id="stageScaler">
+      <div class="footage-bg blurred" id="footageBg"><div class="footage-grid"></div></div>
+      <div class="footage-darken" id="footageDarken" style="background: rgba(0,0,0,0.50);"></div>
+
+      <div class="pills-layer" id="pillsLayer">
+        <div class="source-pill pill-pink">ROCKSTAR GAMES</div>
+        <div class="source-pill pill-peach">ESTIMATE</div>
+      </div>
+
+      <div class="card-layer" id="cardLayer"></div>
+
+      <div class="caption-layer" id="captionLayer" style="display:none;">
+        <div class="caption-line" id="captionLine"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="spec-strip">
+    <div class="spec-box"><div class="k">Panel Glass</div><div class="v">#1E1322 @ 90% • Border #F7D3EA • Pink Glow</div></div>
+    <div class="spec-box"><div class="k">Typography</div><div class="v">Montserrat Black (900) ALL CAPS • Bold (700) Body</div></div>
+    <div class="spec-box"><div class="k">Motion Rules</div><div class="v">0.25s Ease Fade • Hard Cuts Only • Zero SFX</div></div>
+    <div class="spec-box"><div class="k">Anti-Flicker</div><div class="v">Cut Snaps to Card Start • Blur Matches Card Frame</div></div>
+  </div>
+
+<script>
+const PALETTES = {
+  gta6: {
+    '--vc-grad-start': '#FF93DC', '--vc-grad-end': '#FFB27C',
+    '--vc-border': '#F7D3EA', '--vc-glow-rgb': '255, 120, 205',
+    '--vc-pill-pink': '#FB96E6', '--vc-pill-cream': '#FFF1DE', '--vc-pill-peach': '#FFBA90'
+  },
+  cyber: {
+    '--vc-grad-start': '#69E6FF', '--vc-grad-end': '#C18BFF',
+    '--vc-border': '#D9F3FF', '--vc-glow-rgb': '105, 230, 255',
+    '--vc-pill-pink': '#8CEBFF', '--vc-pill-cream': '#F1F7FF', '--vc-pill-peach': '#CFA6FF'
+  },
+  gold: {
+    '--vc-grad-start': '#FFD166', '--vc-grad-end': '#FF7E6B',
+    '--vc-border': '#FFE8CC', '--vc-glow-rgb': '255, 175, 102',
+    '--vc-pill-pink': '#FFD97D', '--vc-pill-cream': '#FFF6E8', '--vc-pill-peach': '#FFA08E'
+  }
+};
+
+const MODES = {
+  headline: {
+    blur: true, darken: 0.50, spec: 'Blur: 26px | Darken: 50% | Hold: 2.8s | Tilt: +1.1° | White Card Fallback',
+    pills: [['ROCKSTAR GAMES', 'pill-pink']],
+    html: `<div class="card-headline">
+      <div class="outlet">ROCKSTAR GAMES</div>
+      <div class="title">Grand Theft Auto VI — Coming to PlayStation 5 and Xbox Series X|S</div>
+      <div class="date">Official Game Page • Verified Console Launch Lineup</div>
+    </div>`
+  },
+  photo: {
+    blur: true, darken: 0.42, spec: 'Blur: 26px | Darken: 42% | Hold: 2.6s | Tilt: -1.4° | Official Press Still',
+    pills: [['ROCKSTAR NEWSWIRE', 'pill-cream']],
+    html: `<div class="vc-panel card-photo">
+      <div class="frame">
+        <div class="placeholder-art">
+          <div style="font-size:48px;font-weight:900;letter-spacing:0.06em;">OFFICIAL LEONIDA STILL</div>
+          <div style="font-size:24px;margin-top:10px;opacity:0.85;">Full-bleed 16:9 press frame • Rounded corners • Zero crop distortion</div>
+        </div>
+      </div>
+      <div class="label grad-text">VICE CITY • STATE OF LEONIDA</div>
+    </div>`
+  },
+  character: {
+    blur: false, darken: 0.0, spec: 'NO Backdrop Blur! | Side: Right (x=64.5%) — Auto-flips Left (x=10.5%) if face on right | Hold: 2.8s',
+    pills: [['ROCKSTAR GAMES', 'pill-pink']],
+    html: `<div class="vc-panel card-character">
+      <div class="portrait">OFFICIAL CHARACTER PORTRAIT</div>
+      <div class="name grad-text">LUCIA</div>
+      <div class="line">Co-lead in Leonida</div>
+      <div class="line">Featured across both official trailers</div>
+    </div>`
+  },
+  quote: {
+    blur: true, darken: 0.55, spec: 'Blur: 26px | Darken: 55% | Typed word-by-word with voice | Holds 0.9s after last word',
+    pills: [['BLOOMBERG', 'pill-cream'], ['UNCONFIRMED', 'pill-peach']],
+    html: `<div class="vc-panel card-quote">
+      <div class="mark grad-text">“</div>
+      <div class="body">Take-Two has not confirmed a $100 standard retail price on any store page yet.</div>
+      <div class="attr">— BLOOMBERG / IGN</div>
+    </div>`
+  },
+  number: {
+    blur: true, darken: 0.48, spec: 'Blur: 26px | Darken: 48% | Hold: 1.5s | Gradient Figure + Bold Subline',
+    pills: [['DIGITAL FOUNDRY', 'pill-pink'], ['ESTIMATE', 'pill-peach']],
+    html: `<div class="vc-panel card-number">
+      <div class="fig grad-text">200 GB</div>
+      <div class="sub">ESTIMATED CONSOLE INSTALL</div>
+    </div>`
+  },
+  chapter: {
+    blur: true, darken: 0.60, spec: 'Blur: 26px | Darken: 60% | Hold: 2.0s | 1–3 Big Gradient Words (Once Per Section)',
+    pills: [],
+    html: `<div class="card-chapter grad-text">VICE CITY</div>`
+  },
+  caption: {
+    blur: false, darken: 0.0, spec: 'No Blur | 106px (3 words) | 0.20s Fade In-Place (Zero Layout Shift) | Gone at Next Cut',
+    pills: [['ROCKSTAR GAMES', 'pill-pink']],
+    html: ``,
+    captionWords: ['WAIT', 'FOR', 'PROOF']
+  }
+};
+
+function rescale() {
+  const shell = document.getElementById('stageShell');
+  const scaler = document.getElementById('stageScaler');
+  const s = shell.clientWidth / 1920;
+  scaler.style.transform = `scale(${s})`;
+}
+window.addEventListener('resize', rescale);
+rescale();
+
+let captionTimer = null;
+function setMode(name) {
+  const m = MODES[name];
+  document.querySelectorAll('#cardTabs .tab').forEach(b => b.classList.toggle('active', b.dataset.mode === name));
+  document.getElementById('modeSpec').textContent = m.spec;
+  document.getElementById('footageBg').classList.toggle('blurred', m.blur);
+  document.getElementById('footageDarken').style.background = `rgba(0,0,0,${m.darken})`;
+  document.getElementById('pillsLayer').innerHTML = m.pills.map(([t, cls]) => `<div class="source-pill ${cls}">${t}</div>`).join('');
+  document.getElementById('cardLayer').innerHTML = m.html;
+
+  const capLayer = document.getElementById('captionLayer');
+  const capLine = document.getElementById('captionLine');
+  if (captionTimer) clearInterval(captionTimer);
+  if (m.captionWords) {
+    capLayer.style.display = 'block';
+    capLine.innerHTML = m.captionWords.map(w => `<span class="caption-word">${w}</span>`).join('');
+    const spans = Array.from(capLine.querySelectorAll('.caption-word'));
+    let idx = 0;
+    function step() {
+      if (idx === 0) spans.forEach(s => s.classList.remove('visible'));
+      if (idx < spans.length) spans[idx].classList.add('visible');
+      idx = (idx + 1) % (spans.length + 2);
+    }
+    step();
+    captionTimer = setInterval(step, 520);
+  } else {
+    capLayer.style.display = 'none';
+  }
+}
+
+document.querySelectorAll('#cardTabs .tab').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
+document.querySelectorAll('.swatch-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.swatch-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const vars = PALETTES[btn.dataset.palette];
+    Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
+  });
+});
+
+setMode('headline');
+</script>
+</body>
+</html>

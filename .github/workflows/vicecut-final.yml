@@ -1,0 +1,218 @@
+name: ViceCut — 1-Click 1080p Master & Mobile Export
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_dir:
+        description: "Project folder path inside repo (e.g. examples/gta6-sample or projects/gta6-launch-guide)"
+        required: true
+        default: "examples/gta6-sample"
+        type: string
+      voice_provider:
+        description: "Voice engine (kokoro = free local AI voice, elevenlabs = uses ELEVENLABS_API_KEY secret)"
+        required: false
+        default: "kokoro"
+        type: choice
+        options:
+          - project-default
+          - kokoro
+          - elevenlabs
+          - mock
+      music_path:
+        description: "Optional relative path to subtle background music track (mixed at -34 dB)"
+        required: false
+        default: ""
+        type: string
+      publish_draft_release:
+        description: "Attach final_1080p.mp4, mobile_under_25mb.mp4, credits.md & qc_report.md to a Draft GitHub Release"
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  final-master:
+    name: Build 1080p 30fps Master & <25 MB Phone Copy
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install FFmpeg & font tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fontconfig curl
+
+      - name: Install ViceCut with render & voice extras
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[render,voice]"
+
+      - name: Cache Playwright Chromium
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-v1
+
+      - name: Install Playwright Chromium & system deps
+        run: playwright install --with-deps chromium
+
+      - name: Cache & install Montserrat Black & Bold (SIL OFL)
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/fonts/montserrat
+          key: montserrat-ofl-v1
+
+      - name: Download Montserrat Black (900) & Bold (700) if missing
+        run: |
+          mkdir -p ~/.local/share/fonts/montserrat
+          if [ ! -f ~/.local/share/fonts/montserrat/Montserrat-Black.ttf ]; then
+            curl -fsSL "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Black.ttf" \
+              -o ~/.local/share/fonts/montserrat/Montserrat-Black.ttf
+          fi
+          if [ ! -f ~/.local/share/fonts/montserrat/Montserrat-Bold.ttf ]; then
+            curl -fsSL "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Bold.ttf" \
+              -o ~/.local/share/fonts/montserrat/Montserrat-Bold.ttf
+          fi
+          fc-cache -f ~/.local/share/fonts
+
+      - name: Cache Kokoro v1.0 ONNX voice weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/vicecut/kokoro
+          key: kokoro-v1.0-models
+
+      - name: Download Kokoro v1.0 model & voices if missing
+        if: ${{ inputs.voice_provider == 'kokoro' || inputs.voice_provider == 'project-default' }}
+        run: |
+          mkdir -p ~/.local/share/vicecut/kokoro
+          if [ ! -f ~/.local/share/vicecut/kokoro/kokoro-v1.0.onnx ]; then
+            curl -fsSL "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx" \
+              -o ~/.local/share/vicecut/kokoro/kokoro-v1.0.onnx
+          fi
+          if [ ! -f ~/.local/share/vicecut/kokoro/voices-v1.0.bin ]; then
+            curl -fsSL "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin" \
+              -o ~/.local/share/vicecut/kokoro/voices-v1.0.bin
+          fi
+
+      - name: Hydrate optional GitHub Secrets securely (never logged)
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          YTDLP_COOKIES_B64: ${{ secrets.YTDLP_COOKIES_B64 }}
+        run: |
+          mkdir -p .secrets
+          chmod 700 .secrets
+          if [ -n "$ELEVENLABS_API_KEY" ]; then
+            printf '%s' "$ELEVENLABS_API_KEY" > .secrets/elevenlabs.key
+            chmod 600 .secrets/elevenlabs.key
+            echo "HAS_EL_KEY=true" >> "$GITHUB_ENV"
+          else
+            echo "HAS_EL_KEY=false" >> "$GITHUB_ENV"
+          fi
+          if [ -n "$YTDLP_COOKIES_B64" ]; then
+            printf '%s' "$YTDLP_COOKIES_B64" | base64 -d > .secrets/ytdlp_cookies.txt
+            chmod 600 .secrets/ytdlp_cookies.txt
+            echo "HAS_COOKIES=true" >> "$GITHUB_ENV"
+          else
+            echo "HAS_COOKIES=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Audit research & lint script before master render
+        run: |
+          vicecut audit-research "${{ inputs.project_dir }}"
+          vicecut check "${{ inputs.project_dir }}"
+
+      - name: Fetch official media from media/fetch_plan.yaml (preserving dropped shots in manifest.yaml)
+        run: |
+          COOKIES_ARGS=""
+          if [ "$HAS_COOKIES" = "true" ]; then
+            COOKIES_ARGS="--cookies .secrets/ytdlp_cookies.txt"
+          fi
+          if [ -f "${{ inputs.project_dir }}/media/fetch_plan.yaml" ]; then
+            vicecut media-fetch "${{ inputs.project_dir }}" $COOKIES_ARGS
+          fi
+          vicecut media-budget "${{ inputs.project_dir }}"
+
+      - name: Configure runtime voice & master approvals
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from vicecut.config import ProjectBrief
+
+          proj = Path("${{ inputs.project_dir }}")
+          brief_p = proj / "project.yaml"
+          brief = ProjectBrief.load(brief_p)
+          override = "${{ inputs.voice_provider }}"
+          if override != "project-default":
+              brief.voice.provider = override
+          if brief.voice.provider == "elevenlabs" and os.environ.get("HAS_EL_KEY") == "true":
+              brief.voice.api_key_file = str(Path(".secrets/elevenlabs.key").resolve())
+              brief.approvals.tts_cost_approved = True
+          brief.approvals.script_approved = True
+          brief.approvals.storyboard_approved = True
+          brief.save(brief_p)
+          PY
+
+      - name: Record voice, align words & master audio (-18 LUFS)
+        run: |
+          vicecut voice "${{ inputs.project_dir }}" --force
+          if [ "${{ inputs.voice_provider }}" = "mock" ]; then
+            vicecut align "${{ inputs.project_dir }}" --synthetic
+          else
+            vicecut align "${{ inputs.project_dir }}"
+          fi
+          vicecut audio "${{ inputs.project_dir }}"
+
+      - name: Compile timeline & render 1080p 30fps master + <25 MB phone copy
+        run: |
+          vicecut timeline "${{ inputs.project_dir }}"
+          MUSIC_ARGS=""
+          if [ -n "${{ inputs.music_path }}" ]; then
+            MUSIC_ARGS="--music ${{ inputs.music_path }}"
+          fi
+          vicecut render "${{ inputs.project_dir }}" --mode final $MUSIC_ARGS --force
+          vicecut render "${{ inputs.project_dir }}" --mode mobile --force
+          vicecut qc "${{ inputs.project_dir }}" || true
+
+      - name: Upload 1080p master, <25 MB mobile copy, credits & QC report
+        uses: actions/upload-artifact@v4
+        with:
+          name: vicecut-master-${{ github.run_number }}
+          retention-days: 30
+          path: |
+            ${{ inputs.project_dir }}/renders/final_1080p.mp4
+            ${{ inputs.project_dir }}/renders/mobile_under_25mb.mp4
+            ${{ inputs.project_dir }}/renders/qc_report.md
+            ${{ inputs.project_dir }}/renders/credits.md
+
+      - name: Publish Draft GitHub Release (optional)
+        if: ${{ inputs.publish_draft_release }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="vicecut-master-${{ github.run_number }}"
+          gh release create "$TAG" \
+            "${{ inputs.project_dir }}/renders/final_1080p.mp4" \
+            "${{ inputs.project_dir }}/renders/mobile_under_25mb.mp4" \
+            "${{ inputs.project_dir }}/renders/qc_report.md" \
+            "${{ inputs.project_dir }}/renders/credits.md" \
+            --draft \
+            --title "ViceCut Master #${{ github.run_number }} (${{ inputs.project_dir }})" \
+            --notes-file "${{ inputs.project_dir }}/renders/qc_report.md"
+
+      - name: Wipe runtime secrets directory
+        if: always()
+        run: rm -rf .secrets
