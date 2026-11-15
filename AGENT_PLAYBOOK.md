@@ -1,5 +1,7 @@
 # ViceCut Production Playbook (GTA 6 & General Faceless Explainers)
 
+> **MANDATORY FIRST READ FOR AGENTS:** Always read [`CREATOR_PREFERENCES.md`](CREATOR_PREFERENCES.md) and inspect the embedded viral thumbnail reference screenshots in `docs/references/thumbnails/` before scripting, voicing, mixing audio, or generating thumbnails.
+
 This playbook maps every production rule (`<inputs>`, `<start>`, `<direction>`, `<structure>`, `<build>` #1–#8, and `<gotchas>`) to exact `vicecut` commands and mandatory human approval gates.
 
 ---

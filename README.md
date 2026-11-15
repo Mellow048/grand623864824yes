@@ -1,5 +1,7 @@
 # ViceCut — Faceless GTA 6 & Explainer Video Production Framework
 
+> **AI Agents — Read [`CREATOR_PREFERENCES.md`](CREATOR_PREFERENCES.md) First!** It documents the channel creator's exact script tone (simple 9-year-old-friendly English), brisk/warmer voice settings, CC0 non-copyrighted music defaults, high-CTR thumbnail style, and embedded reference screenshots (`docs/references/thumbnails/`).
+
 **ViceCut** (`src/vicecut/`) is a complete, deterministic, local-first Python production framework for making high-retention **1920×1080 30fps faceless explainer videos** tailored for **GTA 6 content production** — and configurable for any game, hardware launch, film, or topic.
 
 It turns editorial craft, verification discipline, visual direction, audio mastering, and anti-flicker compositing rules into executable, lintable, unit-tested software:
