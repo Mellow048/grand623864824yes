@@ -189,6 +189,29 @@ def scaffold_project(
             encoding="utf-8",
         )
 
+    # Seed declarative media/fetch_plan.yaml for 1-click GitHub Actions / local `vicecut media-fetch`
+    fetch_plan_file = dirs["media"] / "fetch_plan.yaml"
+    if not fetch_plan_file.exists():
+        fetch_plan_file.write_text(
+            f"# Declarative official media fetch plan for `vicecut media-fetch` and GitHub Actions.\n"
+            f"# Populate ONLY with user-approved official publisher URLs (never fan-made/concept/leaks).\n"
+            f"project: {brief.slug}\n"
+            f"videos: []\n"
+            f"# Example video entry:\n"
+            f"#   - id: src_trailer1\n"
+            f"#     title: \"Official Trailer 1\"\n"
+            f"#     channel_or_outlet: \"Rockstar Games\"\n"
+            f"#     url: \"https://www.youtube.com/watch?v=...\"\n"
+            f"#     page_url: \"https://www.rockstargames.com/VI\"\n"
+            f"#     date: \"{brief.research_date}\"\n"
+            f"#     scene_threshold: 0.28\n"
+            f"#     drop_first_s: 2.5\n"
+            f"#     drop_last_s: 4.0\n"
+            f"photos: []\n"
+            f"headlines: []\n",
+            encoding="utf-8",
+        )
+
     # Seed starter annotated script template
     script_file = dirs["script"] / "script.md"
     if not script_file.exists():

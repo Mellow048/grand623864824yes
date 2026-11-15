@@ -1,0 +1,65 @@
+# Declarative official media fetch plan for `vicecut media-fetch` & GitHub Actions!
+# Running `vicecut media-fetch examples/gta6-sample` (or triggering the GitHub Actions
+# "ViceCut Preview Render" workflow with run_media_fetch=true) downloads these official
+# assets, splits trailers into clean 1.7-3.5s scenes with cropdetect & bright/dark scoring,
+# builds Start|Mid|End visual QC sheets, captures headlines (with automatic white-card
+# fallback if paywalled or <1/3 frame wide), and updates media/manifest.yaml automatically.
+project: gta6-before-you-buy-sample
+
+videos:
+  - id: src_trailer1
+    title: "Grand Theft Auto VI Trailer 1"
+    channel_or_outlet: "Rockstar Games"
+    url: "https://www.youtube.com/watch?v=QdBZY2fkU-0"
+    page_url: "https://www.rockstargames.com/VI"
+    date: "2023-12-04"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.28
+    min_clip_s: 1.6
+    max_clip_s: 3.4
+    drop_first_s: 2.5
+    drop_last_s: 5.0
+    tags: [vice_city, leonida, trailer1]
+
+  - id: src_trailer2
+    title: "Grand Theft Auto VI Trailer 2"
+    channel_or_outlet: "Rockstar Games"
+    url: "https://www.youtube.com/watch?v=VQRLujxTm3c"
+    page_url: "https://www.rockstargames.com/VI"
+    date: "2025-05-06"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.28
+    min_clip_s: 1.6
+    max_clip_s: 3.4
+    drop_first_s: 2.5
+    drop_last_s: 5.0
+    tags: [vice_city, leonida, jason, lucia, trailer2]
+
+photos: []
+
+headlines:
+  - id: hl_platforms
+    source_id: src_trailer2
+    outlet: "ROCKSTAR GAMES"
+    headline_text: "Grand Theft Auto VI — Coming to PlayStation 5 and Xbox Series X|S"
+    url: "https://www.rockstargames.com/VI"
+    date: "May 2025"
+    selector: "h1"
+
+  - id: hl_taketwo
+    source_id: src_trailer2
+    outlet: "TAKE-TWO INTERACTIVE"
+    headline_text: "Take-Two Interactive Reaffirms Grand Theft Auto VI Console Rollout Window"
+    url: "https://www.take2games.com/"
+    date: "May 2025"
+    selector: "h1"
+
+  - id: hl_pc_gap
+    source_id: src_trailer2
+    outlet: "ROCKSTAR GAMES"
+    headline_text: "Official GTA VI Platform List Shows Console Releases Only — No PC Date Announced"
+    url: "https://www.rockstargames.com/VI"
+    date: "May 2025"
+    selector: "h1"

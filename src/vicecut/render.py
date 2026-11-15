@@ -44,9 +44,18 @@ def build_pre_render_storyboard_sheet(
         x = pad + c * cell_w
         y = header_h + r * cell_h
 
-        # Draw shot thumbnail if present, else luminance-coded placeholder
-        thumb = thumbnails_dir / f"{shot.shot_id}.png" if thumbnails_dir else None
-        if thumb and thumb.exists():
+        # Draw shot thumbnail if present (supports split_video_into_scenes thumbs/ layout), else luminance-coded placeholder
+        thumb = None
+        if thumbnails_dir:
+            for cand in (
+                thumbnails_dir / "thumbs" / f"{shot.shot_id}_mid.png",
+                thumbnails_dir / f"{shot.shot_id}_mid.png",
+                thumbnails_dir / f"{shot.shot_id}.png",
+            ):
+                if cand.exists():
+                    thumb = cand
+                    break
+        if thumb is not None:
             im = Image.open(thumb).convert("RGB").resize((tw, th), Image.Resampling.LANCZOS)
             canvas.paste(im, (x, y))
         else:
@@ -130,6 +139,7 @@ def build_ffmpeg_composite_command(
     output_mp4: Path,
     preview: bool = False,
     music_path: Path | None = None,
+    project_dir: Path | None = None,
 ) -> list[str]:
     """
     Compile the complete FFmpeg hard-cut + frame-exact blur + transparent overlay command.
@@ -146,8 +156,11 @@ def build_ffmpeg_composite_command(
     for idx, shot in enumerate(timeline.shots):
         dur = max(1 / fps, shot.duration_s)
         n_frames = max(1, shot.end_frame - shot.start_frame)
+        shot_input_path = shot.path
+        if project_dir is not None and shot_input_path and not Path(shot_input_path).is_absolute():
+            shot_input_path = str((project_dir / shot_input_path).resolve())
         if shot.is_still:
-            inputs += ["-loop", "1", "-t", f"{dur:.4f}", "-i", shot.path]
+            inputs += ["-loop", "1", "-t", f"{dur:.4f}", "-i", shot_input_path]
             # Official still: 3% push-in over 2.5s (1.0 -> 1.03)
             zoom_step = 0.03 / (2.5 * fps)
             vf = (
@@ -157,7 +170,7 @@ def build_ffmpeg_composite_command(
                 f"setsar=1,format=yuv420p[s{idx}]"
             )
         else:
-            inputs += ["-i", shot.path]
+            inputs += ["-i", shot_input_path]
             crop_prefix = f"{shot.crop_filter}," if shot.crop_filter else ""
             vf = (
                 f"[{idx}:v]trim=start=0:end={dur:.4f},setpts=PTS-STARTPTS,"

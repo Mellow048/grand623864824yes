@@ -4,6 +4,32 @@ This playbook maps every production rule (`<inputs>`, `<start>`, `<direction>`, 
 
 ---
 
+## Cloud Automation Mode — Arena.ai Agent + GitHub Actions (1-Click Setup)
+
+You do **not** need FFmpeg, Playwright, Kokoro, or Whisper installed on your computer. Connect an **Arena.ai agent** directly to this GitHub repository and let GitHub Actions handle all downloading, voice generation, transcription, and rendering:
+
+### One-Time GitHub Repository Setup
+1. **Enable Actions write permissions** (so preview QC sheets commit back to your branch):
+   - Repo **Settings → Actions → General → Workflow permissions → Read and write permissions**.
+2. **Optional GitHub Secrets** (Repo **Settings → Secrets and variables → Actions**):
+   - `ELEVENLABS_API_KEY`: Only needed if you choose ElevenLabs instead of free local Kokoro AI voice.
+   - `YTDLP_COOKIES_B64`: Base64-encoded Netscape `cookies.txt` (`base64 -w0 cookies.txt`) — optional, useful if YouTube age-gates or bot-checks official GTA 6 trailers from cloud IPs. (Direct Rockstar press-kit `.mp4` URLs or GitHub Release URLs work without cookies.)
+
+### The Arena.ai Agent ↔ GitHub Actions Loop
+1. **Chat with your Arena.ai agent** (connected to this repo):
+   - Agent runs the 6-question intake (`vicecut intake`), researches fresh same-day GTA 6 facts on the web, writes `projects/<slug>/research/facts.yaml`, `script/script.md`, and `media/fetch_plan.yaml` (official Rockstar/PlayStation/Xbox URLs only).
+   - Agent runs `vicecut audit-research` and `vicecut check` inside Arena until **28/28 checks pass**, shows you the script + source list + character count for approval, and **pushes the branch to GitHub**.
+2. **Run Stage A — Cloud Preview & QC** (1 click in GitHub **Actions → "ViceCut — 1-Click Cloud Preview & QC" → Run workflow**, or triggered by the agent via `gh workflow run vicecut-preview.yml -f project_dir=projects/<slug>`):
+   - GitHub Actions automatically installs & caches FFmpeg, `yt-dlp`, Playwright Chromium, `faster-whisper`, Kokoro v1.0, and Montserrat Black & Bold.
+   - Downloads official trailers, auto-splits them into 1.7–3.5s clips (`cropdetect` + bright/dark luminance), captures headlines, records voice, aligns every word, masters audio to `-18 LUFS`, exports transparent 1080p overlays (with 3x–5x lossless static-frame deduplication), renders `preview_540p.mp4` + 4fps QC sheets + full-size card proofs, and commits the lightweight sheets into `projects/<slug>/qc_review/`.
+3. **3 Look-and-Fix Visual QC Rounds**:
+   - Pull the branch in Arena (or open the uploaded GitHub Artifact). Your Arena agent visually inspects `qc_review/contact_sheet_*.png`, `qc_review/storyboard_sheet.png`, `qc_review/proof_*.png`, and `qc_review/preview_4fps_*.png`.
+   - Drop any ESRB/logo/bad shots with `vicecut media-drop projects/<slug> --shots ...`, adjust script/cards/face zones, log `vicecut approve projects/<slug> --gate qc-round`, push, and re-run Preview until all 3 rounds look spotless.
+4. **Run Stage B — 1080p Master & <25 MB Phone Copy** (1 click in GitHub **Actions → "ViceCut — 1-Click 1080p Master & Mobile Export"**, or `gh workflow run vicecut-final.yml -f project_dir=projects/<slug>`):
+   - Download `final_1080p.mp4`, `mobile_under_25mb.mp4`, `credits.md`, and `qc_report.md` straight from the workflow Artifacts (or enable `publish_draft_release: true` to create a Draft GitHub Release automatically).
+
+---
+
 ## Stage 0 — Local Toolchain Check (`<build>` #1)
 
 ```bash
@@ -121,7 +147,7 @@ vicecut audio projects/gta6-launch-guide
 
 ---
 
-## Stage 5 — Official Footage Search, Scene Cuts & Headlines (`<build>` #5)
+## Stage 5 — Official Footage Search, Auto-Download, Scene Split & Headlines (`<build>` #5)
 
 List official publisher candidates **before** downloading anything (Rockstar Games, PlayStation, Xbox, Take-Two):
 
@@ -129,13 +155,33 @@ List official publisher candidates **before** downloading anything (Rockstar Gam
 vicecut media-search "GTA 6 official trailer Rockstar Games" --project projects/gta6-launch-guide
 ```
 
-After user confirms sources:
-1. Download official clips (1080p+, clean of watermarks, never fan-made/concept/reupload/AI).
-2. Split into clean scenes, run `detect_letterbox_crop()` on every clip (strip black bars/overlays), measure brightness (`compute_image_luminance()`), and build Start|Mid|End contact sheets (`build_scene_contact_sheet()`) to visually drop bad/menu/spoiler shots.
-3. Capture article headlines via Playwright (`capture_headline_with_playwright()`), automatically falling back to clean white text cards whenever the headline fills `< 1/3` of the frame width or hits a paywall/cookie wall.
-4. Register all verified clips, headlines, and official stills in `media/manifest.yaml` and verify shot budget (`>= 25 unique shots/min`, official stills `< 10%`):
+Once the user confirms official sources, list them in `projects/gta6-launch-guide/media/fetch_plan.yaml` and execute everything in one shot (locally or automatically via GitHub Actions):
 
 ```bash
+vicecut media-fetch projects/gta6-launch-guide [--cookies .secrets/ytdlp_cookies.txt]
+```
+
+Or run individual media commands step-by-step:
+
+```bash
+# 1. Download an approved official trailer or press-kit .mp4
+vicecut media-download projects/gta6-launch-guide \
+  --id src_trailer1 --channel "Rockstar Games" \
+  --url "https://www.youtube.com/watch?v=..."
+
+# 2. Auto-split into 1.7-3.5s clips (skips ESRB/endplates, cropdetects black bars,
+#    measures bright/dark luminance & generates Start|Mid|End contact sheets)
+vicecut media-split projects/gta6-launch-guide --drop-first 2.5 --drop-last 5.0
+
+# 3. Download official press-kit photos & capture headlines (auto white-card fallback)
+vicecut media-photo projects/gta6-launch-guide --id ph_lucia --label "LUCIA" --url "https://..."
+vicecut media-headline projects/gta6-launch-guide --id hl_platforms --outlet "ROCKSTAR GAMES" \
+  --text "Coming to PlayStation 5 and Xbox Series X|S" --url "https://www.rockstargames.com/VI"
+
+# 4. Drop any bad/logo/ESRB shots spotted on the Start|Mid|End contact sheets
+vicecut media-drop projects/gta6-launch-guide --shots src_trailer1_s001,src_trailer1_s024 --reason "logo_plate"
+
+# 5. Verify shot pool budget (>= 25 unique shots/min, official stills < 10%)
 vicecut media-budget projects/gta6-launch-guide
 ```
 

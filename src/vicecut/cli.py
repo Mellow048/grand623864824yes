@@ -19,7 +19,21 @@ from .config import ProjectBrief, project_dirs
 from .doctor import format_doctor_report, install_missing_python_tools, run_doctor
 from .graphics import build_overlay_html, export_card_type_proofs, export_overlay_frames_playwright
 from .intake import build_intake_message, scaffold_project
-from .media import MediaManifest, evaluate_shot_pool, search_official_candidates
+from .media import (
+    FetchPlan,
+    HeadlineAsset,
+    MediaManifest,
+    PhotoFetchItem,
+    VideoFetchItem,
+    capture_headline_with_playwright,
+    download_official_photo,
+    download_official_video,
+    drop_shots,
+    evaluate_shot_pool,
+    execute_fetch_plan,
+    search_official_candidates,
+    split_video_into_scenes,
+)
 from .pronunciation import PronunciationLexicon
 from .qc import generate_credits_markdown, measure_timeline_qc
 from .render import (
@@ -276,8 +290,177 @@ def cmd_media_budget(args: argparse.Namespace) -> int:
     return 0 if budget.ok else 1
 
 
-def cmd_timeline(args: argparse.Namespace) -> int:
+def cmd_media_download(args: argparse.Namespace) -> int:
+    proj_dir, dirs, brief = _load_project(args.project)
+    manifest_p = dirs["media"] / "manifest.yaml"
+    manifest = MediaManifest.load(manifest_p) if manifest_p.exists() else MediaManifest(project=brief.slug)
+    item = VideoFetchItem(
+        id=args.id,
+        title=args.title or args.id,
+        channel_or_outlet=args.channel,
+        url=args.url,
+        page_url=args.page_url or args.url,
+        date=args.date or brief.research_date,
+        license=args.license,
+    )
+    cookies = Path(args.cookies) if args.cookies else None
+    out_mp4, rec = download_official_video(
+        item=item,
+        raw_dir=dirs["media_raw"],
+        blocked_sources=brief.media.blocked_sources,
+        cookies_file=cookies,
+    )
+    manifest.upsert_source(rec)
+    manifest.save(manifest_p)
+    print(f"Downloaded official video -> {out_mp4} (registered as {rec.id} in {manifest_p})")
+    return 0
+
+
+def cmd_media_split(args: argparse.Namespace) -> int:
+    proj_dir, dirs, brief = _load_project(args.project)
+    manifest_p = dirs["media"] / "manifest.yaml"
+    manifest = MediaManifest.load(manifest_p) if manifest_p.exists() else MediaManifest(project=brief.slug)
+
+    targets: list[tuple[str, Path]] = []
+    if args.source_id:
+        src = manifest.source_by_id(args.source_id)
+        cand = Path(src.local_path) if (src and src.local_path) else (dirs["media_raw"] / f"{args.source_id}.mp4")
+        if not cand.is_absolute():
+            cand = (proj_dir / cand).resolve()
+        targets.append((args.source_id, cand))
+    else:
+        for mp4 in sorted(dirs["media_raw"].glob("*.mp4")):
+            targets.append((mp4.stem, mp4))
+
+    if not targets:
+        print(f"No raw .mp4 files found in {dirs['media_raw']}.")
+        return 1
+
+    total_shots = 0
+    for sid, vpath in targets:
+        shots, sheet = split_video_into_scenes(
+            video_path=vpath,
+            source_id=sid,
+            scenes_dir=dirs["media_scenes"],
+            scene_threshold=args.threshold,
+            min_clip_s=args.min_clip,
+            max_clip_s=args.max_clip,
+            drop_first_s=args.drop_first,
+            drop_last_s=args.drop_last,
+            project_root=proj_dir,
+        )
+        for sh in shots:
+            manifest.upsert_shot(sh)
+        total_shots += len(shots)
+        print(f"Split {vpath.name} -> {len(shots)} unique scene clips (Start|Mid|End sheet: {sheet})")
+
+    manifest.save(manifest_p)
+    print(f"Updated {manifest_p} ({total_shots} scenes added/updated).")
+    return 0
+
+
+def cmd_media_photo(args: argparse.Namespace) -> int:
+    proj_dir, dirs, brief = _load_project(args.project)
+    manifest_p = dirs["media"] / "manifest.yaml"
+    manifest = MediaManifest.load(manifest_p) if manifest_p.exists() else MediaManifest(project=brief.slug)
+    item = PhotoFetchItem(
+        id=args.id,
+        source_id=args.source_id,
+        label=args.label,
+        url=args.url,
+        page_url=args.page_url or args.url,
+        date=args.date or brief.research_date,
+        is_mockup=args.mockup,
+    )
+    asset, src = download_official_photo(
+        item=item,
+        photos_dir=dirs["media_photos"],
+        blocked_sources=brief.media.blocked_sources,
+        project_root=proj_dir,
+    )
+    manifest.upsert_photo(asset)
+    manifest.upsert_source(src)
+    manifest.save(manifest_p)
+    print(f"Saved official photo [{asset.id}] ({asset.width_px}x{asset.height_px}) -> {asset.image_path}")
+    return 0
+
+
+def cmd_media_headline(args: argparse.Namespace) -> int:
     _, dirs, brief = _load_project(args.project)
+    manifest_p = dirs["media"] / "manifest.yaml"
+    manifest = MediaManifest.load(manifest_p) if manifest_p.exists() else MediaManifest(project=brief.slug)
+    out_png = dirs["media_headlines"] / f"{args.id}.png"
+    try:
+        asset = capture_headline_with_playwright(
+            url=args.url,
+            selector=args.selector,
+            output_png=out_png,
+            outlet=args.outlet,
+            headline_text=args.text,
+            pub_date=args.date or brief.research_date,
+            headline_id=args.id,
+            source_id=args.source_id,
+        )
+    except Exception as exc:
+        print(f"[WARN] Live headline screenshot failed ({exc}); saving clean white-card fallback.")
+        asset = HeadlineAsset(
+            id=args.id,
+            source_id=args.source_id,
+            outlet=args.outlet,
+            headline_text=args.text,
+            date=args.date or brief.research_date,
+            use_text_fallback=True,
+        )
+    manifest.upsert_headline(asset)
+    manifest.save(manifest_p)
+    mode = "WHITE-CARD FALLBACK" if asset.use_text_fallback else f"SCREENSHOT ({asset.width_px}x{asset.height_px})"
+    print(f"Registered headline [{asset.id}] ({mode}) in {manifest_p}")
+    return 0
+
+
+def cmd_media_fetch(args: argparse.Namespace) -> int:
+    proj_dir, dirs, brief = _load_project(args.project)
+    plan_p = Path(args.plan) if args.plan else (dirs["media"] / "fetch_plan.yaml")
+    if not plan_p.exists():
+        raise FileNotFoundError(f"Missing declarative fetch plan {plan_p}")
+    plan = FetchPlan.load(plan_p)
+    manifest_p = dirs["media"] / "manifest.yaml"
+    manifest = MediaManifest.load(manifest_p) if manifest_p.exists() else MediaManifest(project=brief.slug)
+    cookies = Path(args.cookies) if args.cookies else None
+
+    summary = execute_fetch_plan(
+        plan=plan,
+        manifest=manifest,
+        project_root=proj_dir,
+        dirs=dirs,
+        blocked_sources=brief.media.blocked_sources,
+        cookies_file=cookies,
+        skip_headlines=args.skip_headlines,
+    )
+    print(f"Media Fetch Complete -> {manifest_p}")
+    print(f"  Videos downloaded:  {summary['videos_fetched']} -> {summary['shots_created']} scene clips")
+    print(f"  Official photos:    {summary['photos_fetched']}")
+    print(f"  Headlines captured: {summary['headlines_captured']} (white-card fallbacks: {summary['headlines_fallback']})")
+    for cs in summary["contact_sheets"]:
+        print(f"  Start|Mid|End sheet: {cs}")
+    for err in summary["errors"]:
+        print(f"  [WARN] {err}")
+    return 0
+
+
+def cmd_media_drop(args: argparse.Namespace) -> int:
+    _, dirs, _ = _load_project(args.project)
+    manifest_p = dirs["media"] / "manifest.yaml"
+    manifest = MediaManifest.load(manifest_p)
+    ids = [s.strip() for s in args.shots.split(",") if s.strip()]
+    dropped = drop_shots(manifest, ids, reason=args.reason)
+    manifest.save(manifest_p)
+    print(f"Marked {len(dropped)} shots dropped ({args.reason}): {', '.join(dropped)}")
+    return 0
+
+
+def cmd_timeline(args: argparse.Namespace) -> int:
+    proj_dir, dirs, brief = _load_project(args.project)
     script = parse_script_file(dirs["script"] / "script.md")
     mastered_align = dirs["voice_aligned"] / "words_mastered.json"
     raw_align = dirs["voice_aligned"] / "words.json"
@@ -299,8 +482,12 @@ def cmd_timeline(args: argparse.Namespace) -> int:
     tl_path = dirs["timeline"] / "timeline.json"
     tl.save(tl_path)
 
-    ov_html = build_overlay_html(tl, dirs["renders"] / "overlay_page.html")
-    sb_png = build_pre_render_storyboard_sheet(tl, dirs["timeline"] / "storyboard_sheet.png")
+    ov_html = build_overlay_html(tl, dirs["renders"] / "overlay_page.html", project_dir=proj_dir)
+    sb_png = build_pre_render_storyboard_sheet(
+        tl,
+        dirs["timeline"] / "storyboard_sheet.png",
+        thumbnails_dir=dirs["media_scenes"],
+    )
 
     print(f"Compiled timeline -> {tl_path}")
     print(f"  Duration: {tl.duration_s:.1f}s ({tl.total_frames} frames @ {tl.fps}fps)")
@@ -313,19 +500,37 @@ def cmd_timeline(args: argparse.Namespace) -> int:
 
 
 def cmd_card_proofs(args: argparse.Namespace) -> int:
-    _, dirs, _ = _load_project(args.project)
+    proj_dir, dirs, _ = _load_project(args.project)
     tl = Timeline.load(dirs["timeline"] / "timeline.json")
     ov_html = dirs["renders"] / "overlay_page.html"
     if not ov_html.exists():
-        build_overlay_html(tl, ov_html)
+        build_overlay_html(tl, ov_html, project_dir=proj_dir)
     proofs = export_card_type_proofs(tl, ov_html, dirs["renders_proofs"])
     for ctype, p in proofs.items():
         print(f"Exported full-size 1920x1080 proof [{ctype}] -> {p}")
     return 0
 
 
+def cmd_overlays(args: argparse.Namespace) -> int:
+    proj_dir, dirs, _ = _load_project(args.project)
+    tl = Timeline.load(dirs["timeline"] / "timeline.json")
+    ov_html = dirs["renders"] / "overlay_page.html"
+    if not ov_html.exists():
+        build_overlay_html(tl, ov_html, project_dir=proj_dir)
+    paths = export_overlay_frames_playwright(
+        overlay_html=ov_html,
+        frames_dir=dirs["renders_frames"],
+        total_frames=tl.total_frames,
+        timeline=tl,
+        start_frame=args.start_frame,
+        end_frame=args.end_frame,
+    )
+    print(f"Exported {len(paths)} transparent 1920x1080 overlay frames -> {dirs['renders_frames']}")
+    return 0
+
+
 def cmd_render(args: argparse.Namespace) -> int:
-    _, dirs, brief = _load_project(args.project)
+    proj_dir, dirs, brief = _load_project(args.project)
     if not brief.approvals.storyboard_approved and not args.force:
         raise PermissionError(
             "Gate 3 blocked: inspect `timeline/storyboard_sheet.png` first and run "
@@ -356,13 +561,14 @@ def cmd_render(args: argparse.Namespace) -> int:
         output_mp4=out_mp4,
         preview=is_preview,
         music_path=Path(args.music) if args.music else None,
+        project_dir=proj_dir,
     )
     if args.dry_run:
         print(" ".join(cmd))
         return 0
 
     if not args.skip_overlay_export:
-        export_overlay_frames_playwright(ov_html, dirs["renders_frames"], tl.total_frames)
+        export_overlay_frames_playwright(ov_html, dirs["renders_frames"], tl.total_frames, timeline=tl)
     subprocess.run(cmd, check=True)
     print(f"Rendered -> {out_mp4}")
 
@@ -472,6 +678,63 @@ def build_parser() -> argparse.ArgumentParser:
     mb.add_argument("project")
     mb.set_defaults(func=cmd_media_budget)
 
+    md = sub.add_parser("media-download", help="Download an approved official video via yt-dlp or direct URL")
+    md.add_argument("project")
+    md.add_argument("--id", required=True, help="Source ID, e.g. src_trailer1")
+    md.add_argument("--url", required=True, help="Official YouTube, press-kit, or direct .mp4 URL")
+    md.add_argument("--channel", required=True, help="Official publisher/channel name, e.g. 'Rockstar Games'")
+    md.add_argument("--title", default="")
+    md.add_argument("--page-url", default="")
+    md.add_argument("--date", default="")
+    md.add_argument("--license", default="official-trailer-commentary")
+    md.add_argument("--cookies", default=None, help="Optional yt-dlp cookies.txt file for age-gated trailers")
+    md.set_defaults(func=cmd_media_download)
+
+    msp = sub.add_parser("media-split", help="Auto-split official videos into clean 1.7-3.5s scenes + Start|Mid|End sheets")
+    msp.add_argument("project")
+    msp.add_argument("--source-id", default=None, help="Split one source ID (default: all raw .mp4 files)")
+    msp.add_argument("--threshold", type=float, default=0.28, help="FFmpeg scene change threshold (default 0.28)")
+    msp.add_argument("--min-clip", type=float, default=1.6)
+    msp.add_argument("--max-clip", type=float, default=3.5)
+    msp.add_argument("--drop-first", type=float, default=2.5, help="Skip opening rating card seconds")
+    msp.add_argument("--drop-last", type=float, default=4.0, help="Skip closing publisher logo seconds")
+    msp.set_defaults(func=cmd_media_split)
+
+    mph = sub.add_parser("media-photo", help="Download an official press-kit photo and register in manifest.yaml")
+    mph.add_argument("project")
+    mph.add_argument("--id", required=True)
+    mph.add_argument("--url", required=True)
+    mph.add_argument("--label", required=True)
+    mph.add_argument("--source-id", default="official_press")
+    mph.add_argument("--page-url", default="")
+    mph.add_argument("--date", default="")
+    mph.add_argument("--mockup", action="store_true")
+    mph.set_defaults(func=cmd_media_photo)
+
+    mhl = sub.add_parser("media-headline", help="Capture article headline screenshot with automatic white-card fallback")
+    mhl.add_argument("project")
+    mhl.add_argument("--id", required=True)
+    mhl.add_argument("--url", required=True)
+    mhl.add_argument("--outlet", required=True)
+    mhl.add_argument("--text", required=True, help="Exact headline text")
+    mhl.add_argument("--selector", default="h1")
+    mhl.add_argument("--source-id", default="article")
+    mhl.add_argument("--date", default="")
+    mhl.set_defaults(func=cmd_media_headline)
+
+    mf = sub.add_parser("media-fetch", help="Execute declarative media/fetch_plan.yaml (download, split, photos, headlines)")
+    mf.add_argument("project")
+    mf.add_argument("--plan", default=None, help="Path to fetch_plan.yaml (default: <project>/media/fetch_plan.yaml)")
+    mf.add_argument("--cookies", default=None, help="Optional yt-dlp cookies.txt file")
+    mf.add_argument("--skip-headlines", action="store_true")
+    mf.set_defaults(func=cmd_media_fetch)
+
+    mdr = sub.add_parser("media-drop", help="Mark bad shots dropped after inspecting Start|Mid|End contact sheets")
+    mdr.add_argument("project")
+    mdr.add_argument("--shots", required=True, help="Comma-separated shot IDs to drop, e.g. src_t1_s001,src_t1_s019")
+    mdr.add_argument("--reason", default="visual_qc_drop")
+    mdr.set_defaults(func=cmd_media_drop)
+
     tl = sub.add_parser("timeline", help="Compile word-keyed timeline.json, overlay_page.html & storyboard_sheet.png")
     tl.add_argument("project")
     tl.add_argument("--auto-synthetic", action="store_true", help="Auto-generate synthetic alignment if missing")
@@ -480,6 +743,12 @@ def build_parser() -> argparse.ArgumentParser:
     cp = sub.add_parser("card-proofs", help="Export full-size 1920x1080 single-frame proof PNG of every card type")
     cp.add_argument("project")
     cp.set_defaults(func=cmd_card_proofs)
+
+    ov = sub.add_parser("overlays", help="Export transparent 1920x1080 overlay PNG frames (supports chunked ranges)")
+    ov.add_argument("project")
+    ov.add_argument("--start-frame", type=int, default=0)
+    ov.add_argument("--end-frame", type=int, default=None)
+    ov.set_defaults(func=cmd_overlays)
 
     rn = sub.add_parser("render", help="Render 540p preview + 4fps QC sheets, 1080p master, or <25 MB mobile copy")
     rn.add_argument("project")

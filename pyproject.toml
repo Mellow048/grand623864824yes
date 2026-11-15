@@ -23,12 +23,14 @@ render = [
 voice = [
     "faster-whisper>=1.0",
     "kokoro-onnx>=0.3",
+    "soundfile>=0.12",
 ]
 all = [
     "playwright>=1.45",
     "yt-dlp>=2024.8",
     "faster-whisper>=1.0",
     "kokoro-onnx>=0.3",
+    "soundfile>=0.12",
 ]
 dev = [
     "pytest>=8.0",

@@ -11,7 +11,22 @@ It turns editorial craft, verification discipline, visual direction, audio maste
 
 ---
 
-## Quickstart
+## One-Click Cloud Automation (Arena.ai Agent + GitHub Actions)
+
+You don't have to install FFmpeg, Chromium, Whisper, or Kokoro on your own computer. Connect an **Arena.ai agent** to this GitHub repo:
+1. Ask the agent to research fresh GTA 6 news, write and lint (`28/28`) your script, fill `media/fetch_plan.yaml` with approved official Rockstar/PlayStation/Xbox URLs, and push to GitHub.
+2. Open **GitHub → Actions → `ViceCut — 1-Click Cloud Preview & QC` → Run workflow** (or let your agent trigger it with `gh workflow run vicecut-preview.yml -f project_dir=projects/<slug>`).
+   - Auto-installs & caches FFmpeg, `yt-dlp`, Playwright Chromium, `faster-whisper`, Kokoro v1.0 AI voice, and Montserrat Black & Bold fonts.
+   - Downloads official footage, splits into 1.7–3.5s clips, captures headlines, voices, aligns, masters audio to `-18 LUFS`, renders `preview_540p.mp4` + 4fps QC sheets + full-size 1080p card proofs, and commits the lightweight QC sheets into `<project>/qc_review/` so your Arena agent can visually inspect them and iterate!
+3. Once approved, run **`ViceCut — 1-Click 1080p Master & Mobile Export`** to download `final_1080p.mp4`, `< 25 MB` `mobile_under_25mb.mp4`, `credits.md`, and `qc_report.md` (with optional Draft GitHub Release publishing).
+
+Optional GitHub Secrets (**Settings → Secrets and variables → Actions**):
+- `ELEVENLABS_API_KEY` — optional (only if using ElevenLabs instead of free Kokoro voice).
+- `YTDLP_COOKIES_B64` — optional base64-encoded `cookies.txt` if YouTube age-gates or bot-checks cloud downloads.
+
+---
+
+## Quickstart (Local Machine)
 
 ### 1. Install the Package
 ```bash
@@ -62,9 +77,16 @@ Open [`docs/graphics_preview.html`](docs/graphics_preview.html) in any browser t
 | `vicecut align <dir>` | `<build>` #4 | Runs `faster-whisper` (`large-v3-turbo` `int8`) + `difflib` forced word alignment (or `--synthetic` dry run) and flags sections needing re-recording. |
 | `vicecut audio <dir>` | `<build>` #4 | Trims true silences (`<-35 dB` → `0.30s` w/ `35ms` pads), remaps word timestamps, caps tempo at `1.12x`, compresses & 2-pass loudnorms to `-18 LUFS`. |
 | `vicecut media-search <query>` | `<build>` #5 | Lists `yt-dlp` official publisher candidates *before* downloading anything. |
+| `vicecut media-download <dir>` | `<build>` #5 | Downloads an approved official trailer/press-kit clip via `yt-dlp` or direct URL (enforcing blocklist). |
+| `vicecut media-split <dir>` | `<build>` #5 | Auto-splits official clips via FFmpeg scene detection into 1.7–3.5s muted 30fps shots, crops black bars, scores luminance & builds Start\|Mid\|End QC sheets. |
+| `vicecut media-photo <dir>` | `<build>` #5 | Downloads an official press-kit image, measures dimensions & registers it in `media/manifest.yaml`. |
+| `vicecut media-headline <dir>` | `<build>` #5 | Screenshots an article headline via Playwright with automatic white-card fallback if `< 1/3` frame wide or paywalled. |
+| `vicecut media-fetch <dir>` | `<build>` #5 | Executes the entire declarative `media/fetch_plan.yaml` (download → split → photos → headlines) in one command. |
+| `vicecut media-drop <dir>` | `<build>` #5 | Marks bad/logo/ESRB shots dropped after inspecting Start\|Mid\|End contact sheets. |
 | `vicecut media-budget <dir>` | `<build>` #5 | Verifies unique shot pool (`~25 shots/min`) and official stills cap (`< 10%`). |
 | `vicecut timeline <dir>` | `<build>` #6–#7 | Compiles deterministic 30fps `timeline.json`, `overlay_page.html`, and pre-render `storyboard_sheet.png`. |
 | `vicecut card-proofs <dir>` | `<build>` #7 | Renders full-size `1920x1080` single-frame PNG proofs of every card type via Playwright. |
+| `vicecut overlays <dir>` | `<build>` #7 | Exports transparent `1920x1080` overlay PNG frames (with 3x–5x lossless static-frame dedup & `--start-frame`/`--end-frame` chunking). |
 | `vicecut render <dir> --mode ...` | `<build>` #7 | Runs FFmpeg hard-cut + exact-frame 26px blur/darken + RGBA overlay composite (`preview` 540p + 4fps QC sheets, `final` 1080p, `mobile` `< 25 MB`). |
 | `vicecut qc <dir>` | `<build>` #8 | Measures all 12 quantitative QC metrics, writes `renders/qc_report.md` (including honest shortfalls) and `renders/credits.md`. |
 

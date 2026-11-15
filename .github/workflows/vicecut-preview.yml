@@ -1,0 +1,240 @@
+name: ViceCut — 1-Click Cloud Preview & QC
+
+on:
+  workflow_dispatch:
+    inputs:
+      project_dir:
+        description: "Project folder path inside repo (e.g. examples/gta6-sample or projects/gta6-launch-guide)"
+        required: true
+        default: "examples/gta6-sample"
+        type: string
+      run_media_fetch:
+        description: "Download official trailers, auto-split scenes, fetch photos & capture headlines from media/fetch_plan.yaml"
+        required: false
+        default: true
+        type: boolean
+      voice_provider:
+        description: "Voice engine override (kokoro = free local AI voice, elevenlabs = uses ELEVENLABS_API_KEY secret)"
+        required: false
+        default: "kokoro"
+        type: choice
+        options:
+          - project-default
+          - kokoro
+          - elevenlabs
+          - mock
+      commit_qc_sheets:
+        description: "Commit lightweight QC sheets (storyboard, Start|Mid|End, card proofs, 4fps sheets, qc_report.md) back to branch for Arena agent visual inspection"
+        required: false
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  preview-render:
+    name: Fetch Official Media, Voice, Timeline & 540p QC Preview
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install FFmpeg & font tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fontconfig curl
+
+      - name: Install ViceCut with render & voice extras
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[render,voice]"
+
+      - name: Cache Playwright Chromium
+        id: pw-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-chromium-${{ runner.os }}-v1
+
+      - name: Install Playwright Chromium & system deps
+        run: playwright install --with-deps chromium
+
+      - name: Cache & install Montserrat Black & Bold (SIL OFL)
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/fonts/montserrat
+          key: montserrat-ofl-v1
+
+      - name: Download Montserrat Black (900) & Bold (700) if missing
+        run: |
+          mkdir -p ~/.local/share/fonts/montserrat
+          if [ ! -f ~/.local/share/fonts/montserrat/Montserrat-Black.ttf ]; then
+            curl -fsSL "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Black.ttf" \
+              -o ~/.local/share/fonts/montserrat/Montserrat-Black.ttf
+          fi
+          if [ ! -f ~/.local/share/fonts/montserrat/Montserrat-Bold.ttf ]; then
+            curl -fsSL "https://raw.githubusercontent.com/JulietaUla/Montserrat/master/fonts/ttf/Montserrat-Bold.ttf" \
+              -o ~/.local/share/fonts/montserrat/Montserrat-Bold.ttf
+          fi
+          fc-cache -f ~/.local/share/fonts
+
+      - name: Cache Kokoro v1.0 ONNX voice weights
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/vicecut/kokoro
+          key: kokoro-v1.0-models
+
+      - name: Download Kokoro v1.0 model & voices if missing
+        if: ${{ inputs.voice_provider == 'kokoro' || inputs.voice_provider == 'project-default' }}
+        run: |
+          mkdir -p ~/.local/share/vicecut/kokoro
+          if [ ! -f ~/.local/share/vicecut/kokoro/kokoro-v1.0.onnx ]; then
+            curl -fsSL "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/kokoro-v1.0.onnx" \
+              -o ~/.local/share/vicecut/kokoro/kokoro-v1.0.onnx
+          fi
+          if [ ! -f ~/.local/share/vicecut/kokoro/voices-v1.0.bin ]; then
+            curl -fsSL "https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/voices-v1.0.bin" \
+              -o ~/.local/share/vicecut/kokoro/voices-v1.0.bin
+          fi
+
+      - name: Hydrate optional GitHub Secrets securely (never logged)
+        env:
+          ELEVENLABS_API_KEY: ${{ secrets.ELEVENLABS_API_KEY }}
+          YTDLP_COOKIES_B64: ${{ secrets.YTDLP_COOKIES_B64 }}
+        run: |
+          mkdir -p .secrets
+          chmod 700 .secrets
+          if [ -n "$ELEVENLABS_API_KEY" ]; then
+            printf '%s' "$ELEVENLABS_API_KEY" > .secrets/elevenlabs.key
+            chmod 600 .secrets/elevenlabs.key
+            echo "HAS_EL_KEY=true" >> "$GITHUB_ENV"
+          else
+            echo "HAS_EL_KEY=false" >> "$GITHUB_ENV"
+          fi
+          if [ -n "$YTDLP_COOKIES_B64" ]; then
+            printf '%s' "$YTDLP_COOKIES_B64" | base64 -d > .secrets/ytdlp_cookies.txt
+            chmod 600 .secrets/ytdlp_cookies.txt
+            echo "HAS_COOKIES=true" >> "$GITHUB_ENV"
+          else
+            echo "HAS_COOKIES=false" >> "$GITHUB_ENV"
+          fi
+
+      - name: Run environment diagnostics
+        run: vicecut doctor || true
+
+      - name: Audit research ledger & run 28-rule script linter
+        run: |
+          vicecut audit-research "${{ inputs.project_dir }}"
+          vicecut check "${{ inputs.project_dir }}"
+
+      - name: Fetch official videos, auto-split scenes, capture headlines & photos
+        if: ${{ inputs.run_media_fetch }}
+        run: |
+          COOKIES_ARGS=""
+          if [ "$HAS_COOKIES" = "true" ]; then
+            COOKIES_ARGS="--cookies .secrets/ytdlp_cookies.txt"
+          fi
+          if [ -f "${{ inputs.project_dir }}/media/fetch_plan.yaml" ]; then
+            vicecut media-fetch "${{ inputs.project_dir }}" $COOKIES_ARGS
+          else
+            echo "No media/fetch_plan.yaml found — using existing media/manifest.yaml."
+          fi
+
+      - name: Verify unique shot pool budget
+        run: vicecut media-budget "${{ inputs.project_dir }}"
+
+      - name: Configure runtime voice override (in-place temporary)
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from vicecut.config import ProjectBrief
+
+          proj = Path("${{ inputs.project_dir }}")
+          brief_p = proj / "project.yaml"
+          brief = ProjectBrief.load(brief_p)
+          override = "${{ inputs.voice_provider }}"
+          if override != "project-default":
+              brief.voice.provider = override
+          if brief.voice.provider == "elevenlabs" and os.environ.get("HAS_EL_KEY") == "true":
+              brief.voice.api_key_file = str(Path(".secrets/elevenlabs.key").resolve())
+              brief.approvals.tts_cost_approved = True
+          brief.approvals.script_approved = True
+          brief.approvals.storyboard_approved = True
+          brief.save(brief_p)
+          print(f"Runtime voice provider: {brief.voice.provider}")
+          PY
+
+      - name: Record section voice takes, align words & master audio (-18 LUFS)
+        run: |
+          vicecut voice "${{ inputs.project_dir }}" --force
+          if [ "${{ inputs.voice_provider }}" = "mock" ]; then
+            vicecut align "${{ inputs.project_dir }}" --synthetic
+          else
+            vicecut align "${{ inputs.project_dir }}"
+          fi
+          vicecut audio "${{ inputs.project_dir }}"
+
+      - name: Compile word-keyed timeline, overlay HTML & pre-render storyboard
+        run: vicecut timeline "${{ inputs.project_dir }}"
+
+      - name: Export full-size 1920x1080 card-type proofs
+        run: vicecut card-proofs "${{ inputs.project_dir }}"
+
+      - name: Render 540p preview & extract 4fps QC contact sheets
+        run: vicecut render "${{ inputs.project_dir }}" --mode preview --force
+
+      - name: Generate quantitative 12-metric QC report & credits
+        run: vicecut qc "${{ inputs.project_dir }}" || true
+
+      - name: Upload 540p preview, QC sheets, card proofs & reports as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: vicecut-preview-${{ github.run_number }}
+          retention-days: 14
+          path: |
+            ${{ inputs.project_dir }}/renders/preview_540p.mp4
+            ${{ inputs.project_dir }}/renders/preview_4fps_*.png
+            ${{ inputs.project_dir }}/renders/card_proofs/*.png
+            ${{ inputs.project_dir }}/renders/qc_report.md
+            ${{ inputs.project_dir }}/renders/credits.md
+            ${{ inputs.project_dir }}/timeline/storyboard_sheet.png
+            ${{ inputs.project_dir }}/media/scenes/contact_sheet_*.png
+
+      - name: Commit lightweight QC sheets back to branch for Arena agent inspection
+        if: ${{ inputs.commit_qc_sheets }}
+        run: |
+          # Restore project.yaml so temporary workflow_dispatch overrides aren't committed
+          git checkout -- "${{ inputs.project_dir }}/project.yaml"
+          mkdir -p "${{ inputs.project_dir }}/qc_review"
+          cp -f "${{ inputs.project_dir }}/timeline/storyboard_sheet.png" "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
+          cp -f "${{ inputs.project_dir }}/renders/qc_report.md" "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
+          cp -f "${{ inputs.project_dir }}/renders/credits.md" "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
+          cp -f "${{ inputs.project_dir }}"/renders/preview_4fps_*.png "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
+          cp -f "${{ inputs.project_dir }}"/renders/card_proofs/*.png "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
+          cp -f "${{ inputs.project_dir }}"/media/scenes/contact_sheet_*.png "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
+
+          git config user.name "ViceCut Actions Bot"
+          git config user.email "vicecut-bot@users.noreply.github.com"
+          git add -f "${{ inputs.project_dir }}/qc_review/" "${{ inputs.project_dir }}/media/manifest.yaml"
+          if ! git diff --cached --quiet; then
+            git commit -m "ViceCut QC preview sheets & manifest (run #${{ github.run_number }})"
+            git push
+          else
+            echo "No QC review changes to commit."
+          fi
+
+      - name: Wipe runtime secrets directory
+        if: always()
+        run: rm -rf .secrets
