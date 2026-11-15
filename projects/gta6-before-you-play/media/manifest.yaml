@@ -80,8 +80,8 @@ shots:
   - trailer2
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer2_s002
   source_id: src_trailer2
@@ -97,8 +97,8 @@ shots:
   - trailer2
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer2_s003
   source_id: src_trailer2
@@ -522,8 +522,8 @@ shots:
   - trailer2
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer2_s028
   source_id: src_trailer2
@@ -539,8 +539,8 @@ shots:
   - trailer2
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer2_s029
   source_id: src_trailer2
@@ -556,8 +556,8 @@ shots:
   - trailer2
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer2_s030
   source_id: src_trailer2
@@ -1015,8 +1015,8 @@ shots:
   - trailer2
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer2_s057
   source_id: src_trailer2
@@ -1032,8 +1032,8 @@ shots:
   - trailer2
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer1_s001
   source_id: src_trailer1
@@ -1104,8 +1104,8 @@ shots:
   - trailer1
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer1_s005
   source_id: src_trailer1
@@ -1122,8 +1122,8 @@ shots:
   - trailer1
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer1_s006
   source_id: src_trailer1
@@ -1356,8 +1356,8 @@ shots:
   - trailer1
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer1_s019
   source_id: src_trailer1
@@ -1374,8 +1374,8 @@ shots:
   - trailer1
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 - id: src_trailer1_s020
   source_id: src_trailer1
@@ -1392,8 +1392,8 @@ shots:
   - trailer1
   face_zones: []
   has_burned_text: false
-  dropped: false
-  drop_reason: ''
+  dropped: true
+  drop_reason: logo_or_presents_plate
   crop_filter: ''
 headlines:
 - id: hl_launch_date

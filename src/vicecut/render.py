@@ -150,13 +150,32 @@ def render_background_cuts_track(
     seg_dir.mkdir(parents=True, exist_ok=True)
     seg_paths: list[Path] = []
 
+    # Collect valid real footage paths so if unique clips exhaust on long cloud renders
+    # (e.g. without YouTube cookies), we NEVER render minutes of blank black screens —
+    # we pull from earliest-used clips (max temporal distance) with a subtle 1.08x push-in!
+    valid_real_shots: list[tuple[str, str]] = []
+    for sh in timeline.shots:
+        sp = sh.path
+        if project_dir is not None and sp and not Path(sp).is_absolute():
+            sp = str((project_dir / sp).resolve())
+        if sp and Path(sp).exists() and not sh.is_still:
+            valid_real_shots.append((sp, sh.crop_filter))
+    recycle_idx = 0
+
     for idx, shot in enumerate(timeline.shots):
         dur = max(1 / fps, shot.duration_s)
         n_frames = max(1, shot.end_frame - shot.start_frame)
         seg_out = seg_dir / f"seg_{idx:04d}.mp4"
         shot_input_path = shot.path
+        crop_f = shot.crop_filter
+        recycled = False
         if project_dir is not None and shot_input_path and not Path(shot_input_path).is_absolute():
             shot_input_path = str((project_dir / shot_input_path).resolve())
+
+        if (not shot_input_path or not Path(shot_input_path).exists()) and valid_real_shots:
+            shot_input_path, crop_f = valid_real_shots[recycle_idx % len(valid_real_shots)]
+            recycle_idx += 1
+            recycled = True
 
         if not shot_input_path or not Path(shot_input_path).exists():
             cmd = [
@@ -166,7 +185,7 @@ def render_background_cuts_track(
                 "-c:v", "libx264", "-preset", "ultrafast", "-crf", "16", "-pix_fmt", "yuv420p",
                 str(seg_out),
             ]
-        elif shot.is_still:
+        elif shot.is_still and not recycled:
             zoom_step = 0.03 / (2.5 * fps)
             vf = (
                 f"scale={w*2}:{h*2}:force_original_aspect_ratio=increase,"
@@ -182,11 +201,18 @@ def render_background_cuts_track(
                 str(seg_out),
             ]
         else:
-            crop_prefix = f"{shot.crop_filter}," if shot.crop_filter else ""
-            vf = (
-                f"{crop_prefix}scale={w}:{h}:force_original_aspect_ratio=increase,"
-                f"crop={w}:{h},fps={fps},setsar=1,format=yuv420p"
-            )
+            crop_prefix = f"{crop_f}," if crop_f else ""
+            if recycled:
+                sw, sh_px = int(w * 1.08), int(h * 1.08)
+                vf = (
+                    f"{crop_prefix}scale={sw}:{sh_px}:force_original_aspect_ratio=increase,"
+                    f"crop={w}:{h},fps={fps},setsar=1,format=yuv420p"
+                )
+            else:
+                vf = (
+                    f"{crop_prefix}scale={w}:{h}:force_original_aspect_ratio=increase,"
+                    f"crop={w}:{h},fps={fps},setsar=1,format=yuv420p"
+                )
             cmd = [
                 "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
                 "-stream_loop", "-1", "-i", shot_input_path,

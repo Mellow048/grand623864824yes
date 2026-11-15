@@ -166,3 +166,72 @@ def test_arena_prebuilt_voice_provider_concatenates_wav_parts(tmp_path: Path) ->
         assert tk.audio_path.exists()
         with wave.open(str(tk.audio_path), "rb") as wf:
             assert wf.getnframes() == 2400
+
+
+def test_background_cuts_track_recycles_real_footage_instead_of_black_frames(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """When unique clips exhaust on long cloud renders, MISSING_SHOT uses earliest real footage + 1.08x push-in, never #120B17."""
+    from vicecut.render import render_background_cuts_track
+    from vicecut.timeline import ShotEvent, Timeline
+
+    real_clip = tmp_path / "clip1.mp4"
+    real_clip.write_bytes(b"fake-mp4")
+
+    tl = Timeline(
+        project_slug="recycle-test",
+        fps=30,
+        width=1920,
+        height=1080,
+        duration_s=4.0,
+        total_frames=120,
+        theme={},
+        shots=[
+            ShotEvent(
+                shot_id="s1",
+                source_id="src1",
+                path=str(real_clip),
+                start_s=0.0,
+                end_s=2.0,
+                start_frame=0,
+                end_frame=60,
+                luma_mean=0.5,
+                is_still=False,
+            ),
+            ShotEvent(
+                shot_id="MISSING_SHOT",
+                source_id="none",
+                path="",
+                start_s=2.0,
+                end_s=4.0,
+                start_frame=60,
+                end_frame=120,
+                luma_mean=0.5,
+                is_still=False,
+            ),
+        ],
+    )
+
+    recorded_cmds: list[list[str]] = []
+
+    def fake_run(cmd, **kwargs):
+        recorded_cmds.append(list(cmd))
+        out_p = Path(cmd[-1])
+        out_p.parent.mkdir(parents=True, exist_ok=True)
+        out_p.write_bytes(b"seg")
+
+        class _R:
+            returncode = 0
+
+        return _R()
+
+    monkeypatch.setattr("vicecut.render.subprocess.run", fake_run)
+    out_bg = tmp_path / "bg.mp4"
+    render_background_cuts_track(tl, out_bg, preview=True)
+
+    assert len(recorded_cmds) == 3  # seg0, seg1 (recycled), concat
+    seg1_cmd = " ".join(recorded_cmds[1])
+    assert "color=c=#120B17" not in seg1_cmd
+    assert str(real_clip) in seg1_cmd
+    assert "scale=1036:583" in seg1_cmd  # 960*1.08 x 540*1.08 subtle push-in
+
