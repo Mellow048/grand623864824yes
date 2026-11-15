@@ -1,0 +1,48 @@
+slug: gta6-before-you-buy-sample
+topic: "everything you need to know about GTA 6 before you buy"
+subject: "GTA 6"
+action: "buy"
+viewer: "Console and PC players deciding whether to pre-order GTA 6 or wait for launch impressions"
+length_preset: "sample"
+research_date: "2026-11-15"
+motif: "wait for real proof"
+voice:
+  provider: "mock"
+  voice_id: "af_heart"
+  api_key_file: null
+  speed: 1.0
+  language: "en-us"
+  whisper_model: "large-v3-turbo"
+  whisper_compute_type: "int8"
+media:
+  existing_footage: []
+  allowed_official_channels:
+    - "Rockstar Games"
+    - "PlayStation"
+    - "Xbox"
+  blocked_sources:
+    - "fan made"
+    - "concept trailer"
+  max_sources_per_10min: 4
+  min_sources_per_10min: 2
+  max_stills_ratio: 0.10
+theme:
+  name: "vice-neon"
+  panel_bg: "#1E1322"
+  border_color: "#F7D3EA"
+  glow_rgb: [255, 120, 205]
+  gradient_start: "#FF93DC"
+  gradient_end: "#FFB27C"
+  pill_pink: "#FB96E6"
+  pill_cream: "#FFF1DE"
+  pill_peach: "#FFBA90"
+  pill_text: "#1A1020"
+  font_display: "Montserrat"
+  blur_px: 26
+  derived_from_key_art: null
+approvals:
+  script_approved: true
+  tts_cost_approved: false
+  tts_estimated_chars: 0
+  storyboard_approved: false
+  qc_rounds_completed: 0

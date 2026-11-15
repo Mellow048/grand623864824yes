@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+dist/
+build/
+
+# Secrets (NEVER commit API keys!)
+.secrets/
+*.key
+.env
+.env.*
+
+# Heavy local media / renders inside active user projects
+projects/*/media/raw/
+projects/*/media/scenes/*.mp4
+projects/*/voice/takes/*.wav
+projects/*/voice/master/*.wav
+projects/*/renders/frames/
+projects/*/renders/*.mp4
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+*.swp

@@ -1,0 +1,54 @@
+# Flagship GTA 6 Vice City Production Preset for ViceCut
+name: gta6-vice-neon
+default_motif: wait for real proof before you spend
+
+theme:
+  name: vice-neon
+  panel_bg: "#1E1322"
+  border_color: "#F7D3EA"
+  glow_rgb: [255, 120, 205]
+  gradient_start: "#FF93DC"
+  gradient_end: "#FFB27C"
+  pill_pink: "#FB96E6"
+  pill_cream: "#FFF1DE"
+  pill_peach: "#FFBA90"
+  pill_text: "#1A1020"
+  font_display: "Montserrat"
+  blur_px: 26
+
+media:
+  allowed_official_channels:
+    - "Rockstar Games"
+    - "PlayStation"
+    - "Xbox"
+    - "Take-Two Interactive"
+  blocked_sources:
+    - "concept trailer"
+    - "fan made"
+    - "leaked build"
+    - "ai trailer"
+    - "watermark"
+
+pronunciations:
+  "GTA VI": "G T A six"
+  "GTA 6": "G T A six"
+  "GTA V": "G T A five"
+  "GTA 5": "G T A five"
+  "GTA Online": "G T A Online"
+  "Leonida": "Lee-oh-nee-dah"
+  "Vice City": "Vice City"
+  "Grassrivers": "Grass Rivers"
+  "Port Gellhorn": "Port Gellhorn"
+  "Ambrosia": "Am-bro-zhuh"
+  "Mount Kalaga": "Mount Kah-lah-gah"
+  "RAGE": "Rage"
+  "RAGE 9": "Rage nine"
+  "Take-Two": "Take Two"
+  "PS5": "P S five"
+  "PS5 Pro": "P S five Pro"
+  "Xbox Series X|S": "Xbox Series X and S"
+  "PC": "P C"
+  "DLC": "D L C"
+  "NPCs": "N P Cs"
+  "30fps": "thirty frames a second"
+  "60fps": "sixty frames a second"
