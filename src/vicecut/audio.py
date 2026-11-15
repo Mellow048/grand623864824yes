@@ -161,8 +161,12 @@ def compute_longest_pause(words: list[AlignedWord]) -> float:
     return round(max(max(0.0, b.start_s - a.end_s) for a, b in zip(words, words[1:])), 4)
 
 
-def build_trim_filter_complex(keeps: list[TimeSpan], tempo_factor: float) -> str:
-    """Generate FFmpeg filter_complex string for lossless silence-cut + optional atempo + light compressor."""
+def build_trim_filter_complex(
+    keeps: list[TimeSpan],
+    tempo_factor: float,
+    pitch_semitones: float = 0.0,
+) -> str:
+    """Generate FFmpeg filter_complex string for lossless silence-cut + optional pitch/tempo + light compressor."""
     parts = []
     labels = []
     for idx, seg in enumerate(keeps):
@@ -172,8 +176,21 @@ def build_trim_filter_complex(keeps: list[TimeSpan], tempo_factor: float) -> str
         )
         labels.append(f"[{lbl}]")
     chain = f"{''.join(labels)}concat=n={len(keeps)}:v=0:a=1"
-    if tempo_factor > 1.0001:
-        chain += f",atempo={tempo_factor:.4f}"
+
+    if abs(pitch_semitones) > 0.01:
+        # Exact duration-preserving pitch shift combined with desired tempo_factor:
+        # asetrate(48000*p) shifts pitch by p & speed by p; atempo(tempo_factor/p) yields net speed = tempo_factor!
+        pitch_ratio = 2.0 ** (pitch_semitones / 12.0)
+        shifted_sr = max(16000, int(round(48000.0 * pitch_ratio)))
+        comp_tempo = max(0.5, min(2.0, tempo_factor / pitch_ratio))
+        chain += (
+            f",aresample=48000,asetrate={shifted_sr},aresample=48000"
+            f",atempo={comp_tempo:.4f}"
+            ",equalizer=f=210:width_type=o:width=1.2:g=1.6,highshelf=f=6800:g=-1.6"
+        )
+    elif tempo_factor > 1.0001 or tempo_factor < 0.9999:
+        chain += f",atempo={max(0.5, min(2.0, tempo_factor)):.4f}"
+
     # Light broadcast vocal compressor before 2-pass loudnorm
     chain += ",acompressor=threshold=-20dB:ratio=2.4:attack=8:release=90:makeup=2dB[aout]"
     parts.append(chain)
@@ -192,12 +209,15 @@ def master_audio_with_ffmpeg(
     input_wav: Path,
     output_wav: Path,
     words: list[AlignedWord],
+    pitch_semitones: float = 0.0,
+    speed_override: float | None = None,
+    max_keep_silence_s: float = SILENCE_MAX_KEEP_S,
 ) -> tuple[list[AlignedWord], AudioMasterStats]:
     """
     Full FFmpeg mastering pipeline:
     1. Probe duration & detect real silences (< -35 dB)
-    2. Trim silences down to 0.30s keeping 35ms pads
-    3. Compute WPM and cap speedup at 1.12x if < 205 wpm
+    2. Trim silences down to max_keep_silence_s keeping 35ms pads
+    3. Compute WPM (capped at 1.12x by default, or explicit speed_override when requested) + optional natural pitch shift
     4. Light compression + true two-pass loudnorm (-18 LUFS, LRA <= 3 LU, TP < -2 dB)
     """
     probe = subprocess.run(
@@ -215,7 +235,7 @@ def master_audio_with_ffmpeg(
     det = subprocess.run(
         [
             "ffmpeg", "-hide_banner", "-i", str(input_wav),
-            "-af", f"silencedetect=noise={SILENCE_THRESHOLD_DB}dB:d={SILENCE_MAX_KEEP_S}",
+            "-af", f"silencedetect=noise={SILENCE_THRESHOLD_DB}dB:d={max_keep_silence_s}",
             "-f", "null", "-",
         ],
         capture_output=True,
@@ -223,16 +243,19 @@ def master_audio_with_ffmpeg(
         check=True,
     )
     silences = parse_silencedetect_stderr(det.stderr, raw_dur)
-    keeps = compute_keep_segments(silences, raw_dur)
+    keeps = compute_keep_segments(silences, raw_dur, max_keep_silence_s=max_keep_silence_s)
     trimmed_dur = sum(seg.duration_s for seg in keeps)
-    tempo = compute_tempo_factor(len(words), trimmed_dur)
+    if speed_override is not None:
+        tempo = round(max(0.85, min(1.40, float(speed_override))), 4)
+    else:
+        tempo = compute_tempo_factor(len(words), trimmed_dur)
     final_dur = trimmed_dur / tempo
 
     output_wav.parent.mkdir(parents=True, exist_ok=True)
     intermediate = output_wav.with_suffix(".pre_loudnorm.wav")
 
-    # 2. Cut silences + optional atempo (<= 1.12x) + light compressor
-    fc = build_trim_filter_complex(keeps, tempo)
+    # 2. Cut silences + optional pitch/tempo + light compressor
+    fc = build_trim_filter_complex(keeps, tempo, pitch_semitones=pitch_semitones)
     subprocess.run(
         [
             "ffmpeg", "-y", "-hide_banner", "-i", str(input_wav),

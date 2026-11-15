@@ -235,3 +235,57 @@ def test_background_cuts_track_recycles_real_footage_instead_of_black_frames(
     assert str(real_clip) in seg1_cmd
     assert "scale=1036:583" in seg1_cmd  # 960*1.08 x 540*1.08 subtle push-in
 
+
+def test_audio_pitch_shift_speed_remaster_and_music_sidechain_mix(tmp_path: Path) -> None:
+    """Remaster audio builds exact duration-preserving pitch+speed filter and ducked CC0 music mix."""
+    from vicecut.audio import TimeSpan, build_trim_filter_complex
+    from vicecut.media import FetchPlan
+    from vicecut.render import build_ffmpeg_composite_command
+    from vicecut.timeline import ShotEvent, Timeline
+
+    fc = build_trim_filter_complex([TimeSpan(0.0, 10.0)], tempo_factor=1.18, pitch_semitones=-1.75)
+    assert "asetrate=43385" in fc
+    assert "atempo=1.3055" in fc
+    assert "equalizer=" in fc
+
+    plan = FetchPlan.load(GTA6_LAUNCH_PROJ / "media" / "fetch_plan.yaml")
+    assert len(plan.music) == 3
+    assert all("CC0" in m.license for m in plan.music)
+
+    music_bed = tmp_path / "soundtrack_bed.wav"
+    music_bed.write_bytes(b"RIFF")
+    tl = Timeline(
+        project_slug="music-test",
+        fps=30,
+        width=1920,
+        height=1080,
+        duration_s=10.0,
+        total_frames=300,
+        theme={},
+        shots=[
+            ShotEvent(
+                shot_id="s1",
+                source_id="src1",
+                path=str(tmp_path / "clip.mp4"),
+                start_s=0.0,
+                end_s=10.0,
+                start_frame=0,
+                end_frame=300,
+                luma_mean=0.5,
+                is_still=False,
+            )
+        ],
+    )
+    cmd = build_ffmpeg_composite_command(
+        timeline=tl,
+        overlay_frames_dir=tmp_path / "frames",
+        master_audio_wav=tmp_path / "voice.wav",
+        output_mp4=tmp_path / "out.mp4",
+        music_path=music_bed,
+    )
+    joined = " ".join(cmd)
+    assert "sidechaincompress" in joined
+    assert "volume=-14dB" in joined
+    assert "alimiter" in joined
+
+

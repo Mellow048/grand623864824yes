@@ -1,13 +1,13 @@
 {
   "passed": true,
-  "estimated_duration_s": 283.7,
-  "total_words": 993,
+  "estimated_duration_s": 292.6,
+  "total_words": 1024,
   "assumed_wpm": 210.0,
   "checks": [
     {
       "rule": "Length & word budget",
       "status": "PASS",
-      "measured": "993 w (284s)",
+      "measured": "1024 w (293s)",
       "target": "950-1160 w",
       "detail": ""
     },
@@ -35,7 +35,7 @@
     {
       "rule": "Intro duration",
       "status": "PASS",
-      "measured": "36.0s (126w)",
+      "measured": "38.0s (133w)",
       "target": "30-65s (110-230w)",
       "detail": ""
     },
@@ -56,7 +56,7 @@
     {
       "rule": "Intro handoff length",
       "status": "PASS",
-      "measured": "7 words",
+      "measured": "5 words",
       "target": "< 8 words",
       "detail": ""
     },
@@ -77,14 +77,14 @@
     {
       "rule": "Last payoff in final 10%",
       "status": "PASS",
-      "measured": "at 90.5%",
+      "measured": "at 90.7%",
       "target": ">= 90%",
       "detail": ""
     },
     {
       "rule": "End promise re-tease window",
       "status": "PASS",
-      "measured": "at 27.8%",
+      "measured": "at 29.4%",
       "target": "20%-40%",
       "detail": ""
     },
@@ -105,14 +105,14 @@
     {
       "rule": "Subscribe ask placement & form",
       "status": "PASS",
-      "measured": "3 sents @ 40.6%, because=True",
+      "measured": "3 sents @ 42.9%, because=True",
       "target": "2-4 sents @ 30%-50% with 'because'",
       "detail": ""
     },
     {
       "rule": "Close duration",
       "status": "PASS",
-      "measured": "38.0s",
+      "measured": "39.4s",
       "target": "<= 60.0s",
       "detail": ""
     },
@@ -126,14 +126,14 @@
     {
       "rule": "Mean sentence length",
       "status": "PASS",
-      "measured": "11.8 words",
+      "measured": "12.0 words",
       "target": "12-14 words",
       "detail": ""
     },
     {
       "rule": "Short sentences (<= 8 words)",
       "status": "PASS",
-      "measured": "28.6%",
+      "measured": "29.4%",
       "target": ">= 28%",
       "detail": ""
     },
@@ -147,21 +147,21 @@
     {
       "rule": "One-syllable words",
       "status": "PASS",
-      "measured": "77.0%",
+      "measured": "72.7%",
       "target": ">= 72%",
       "detail": ""
     },
     {
       "rule": "'You/your' cadence",
       "status": "PASS",
-      "measured": "8.2/min",
+      "measured": "12.1/min",
       "target": ">= 8.0/min",
       "detail": ""
     },
     {
       "rule": "'I' cadence",
       "status": "PASS",
-      "measured": "2.5/min",
+      "measured": "2.3/min",
       "target": "2-4/min",
       "detail": ""
     },
@@ -175,28 +175,28 @@
     {
       "rule": "Sentences starting 'And'/'So'",
       "status": "PASS",
-      "measured": "29.8%",
+      "measured": "34.1%",
       "target": "30%-40%",
       "detail": ""
     },
     {
       "rule": "Named source frequency",
       "status": "PASS",
-      "measured": "every 13.5s",
+      "measured": "every 13.9s",
       "target": "<= 20s avg",
       "detail": ""
     },
     {
       "rule": "Max gap without named source",
       "status": "PASS",
-      "measured": "36.0s",
+      "measured": "38.0s",
       "target": "<= 85s max",
       "detail": ""
     },
     {
       "rule": "'So' action-line cadence",
       "status": "PASS",
-      "measured": "avg 25.8s (max 39.7s)",
+      "measured": "avg 22.5s (max 37.7s)",
       "target": "<= 30s",
       "detail": ""
     },

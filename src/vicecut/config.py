@@ -144,10 +144,13 @@ class ThemeConfig:
 class VoiceConfig:
     """Voice synthesis configuration. API keys are NEVER stored in YAML or printed."""
 
-    provider: str = "kokoro"  # "kokoro" (free local), "elevenlabs" (paid), "mock"
-    voice_id: str = "af_heart"  # Kokoro local default or ElevenLabs voice ID
+    provider: str = "kokoro"  # "kokoro" (free local), "elevenlabs" (paid), "arena", "mock"
+    voice_id: str = "af_heart"  # Kokoro local default or ElevenLabs/Arena voice ID
     api_key_file: str | None = None  # Path to local key file; read strictly on demand
     speed: float = 1.0
+    speed_override: float | None = None  # Optional post-alignment tempo override (e.g. 1.18)
+    pitch_semitones: float = 0.0  # Optional natural pitch shift in semitones (e.g. -1.75 warmer/deeper)
+    max_silence_s: float = SILENCE_MAX_KEEP_S  # Max pause kept after silence trimming
     language: str = "en-us"
     whisper_model: str = "large-v3-turbo"
     whisper_compute_type: str = "int8"

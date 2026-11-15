@@ -272,7 +272,14 @@ def cmd_audio(args: argparse.Namespace) -> int:
         )
 
     master_wav = dirs["voice_master"] / "voice_master.wav"
-    remapped, stats = master_audio_with_ffmpeg(raw_full, master_wav, alignment.words)
+    remapped, stats = master_audio_with_ffmpeg(
+        raw_full,
+        master_wav,
+        alignment.words,
+        pitch_semitones=brief.voice.pitch_semitones,
+        speed_override=brief.voice.speed_override,
+        max_keep_silence_s=brief.voice.max_silence_s,
+    )
     AlignmentResult(words=remapped, mismatches=alignment.mismatches, sections_needing_redo=[]).save(
         dirs["voice_aligned"] / "words_mastered.json"
     )
@@ -461,6 +468,8 @@ def cmd_media_fetch(args: argparse.Namespace) -> int:
     print(f"Media Fetch Complete -> {manifest_p}")
     print(f"  Videos downloaded:  {summary['videos_fetched']} -> {summary['shots_created']} scene clips")
     print(f"  Official photos:    {summary['photos_fetched']}")
+    if summary.get("music_bed"):
+        print(f"  Music soundtrack:   {summary['music_tracks_fetched']} CC0 tracks -> {summary['music_bed']}")
     print(f"  Headlines captured: {summary['headlines_captured']} (white-card fallbacks: {summary['headlines_fallback']})")
     for cs in summary["contact_sheets"]:
         print(f"  Start|Mid|End sheet: {cs}")
@@ -577,6 +586,8 @@ def cmd_render(args: argparse.Namespace) -> int:
 
     is_preview = args.mode == "preview"
     out_mp4 = dirs["renders"] / ("preview_540p.mp4" if is_preview else "final_1080p.mp4")
+    auto_music = dirs["media"] / "music" / "soundtrack_bed.wav"
+    music_path = Path(args.music) if args.music else (auto_music if auto_music.exists() else None)
     if args.dry_run:
         cmd = build_ffmpeg_composite_command(
             timeline=tl,
@@ -584,7 +595,7 @@ def cmd_render(args: argparse.Namespace) -> int:
             master_audio_wav=master_wav,
             output_mp4=out_mp4,
             preview=is_preview,
-            music_path=Path(args.music) if args.music else None,
+            music_path=music_path,
             project_dir=proj_dir,
         )
         print(" ".join(cmd))
@@ -601,7 +612,7 @@ def cmd_render(args: argparse.Namespace) -> int:
         master_audio_wav=master_wav,
         output_mp4=out_mp4,
         preview=is_preview,
-        music_path=Path(args.music) if args.music else None,
+        music_path=music_path,
         project_dir=proj_dir,
         preconcat_bg_mp4=bg_mp4,
     )

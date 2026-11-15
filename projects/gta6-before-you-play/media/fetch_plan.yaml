@@ -90,6 +90,39 @@ videos:
 #   prop_consoles.png, prop_ssd_storage.png, prop_code_box.png, prop_midnight_globe.png
 photos: []
 
+# 100% Non-Copyrighted CC0 1.0 Universal / Public Domain instrumental soundtrack tracks!
+# Downloaded, normalized to -18 LUFS, crossfaded smoothly across video sections, and sidechain-ducked under voice.
+music:
+  - id: bgm_01_synth_intro
+    title: "Everyone is so alive"
+    artist: "Loyalty Freak Music"
+    url: "https://archive.org/download/ROBOTDANCE/Loyalty%20Freak%20Music%20-%20ROBOT%20DANCE%20%21%20-%2001%20Everyone%20is%20so%20alive.mp3"
+    fallback_url: "https://archive.org/download/yt-5s.com-no-copyright-10-minutes-lofi-chill-instrumental-beat-mellow-128-kbps/yt5s.com%20-%20%5BNo%20Copyright%5D%2010%20Minutes%20%E2%99%AB%20LOFI%20Chill%20Instrumental%20Beat%20-%20_Mellow_%20%28128%20kbps%29.mp3"
+    page_url: "https://archive.org/details/ROBOTDANCE"
+    license: "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: 2.0
+    segment_duration_s: 115.0
+
+  - id: bgm_02_chill_mid
+    title: "One Cool Minute"
+    artist: "Loyalty Freak Music"
+    url: "https://archive.org/download/MINIMALAMBIENTBOUNCE/Loyalty%20Freak%20Music%20-%20MINIMAL%20AMBIENT%20BOUNCE%20-%2002%20One%20Cool%20Minute.mp3"
+    fallback_url: "https://archive.org/download/yt-5s.com-no-copyright-10-minutes-lofi-chill-instrumental-beat-mellow-128-kbps/yt5s.com%20-%20%5BNo%20Copyright%5D%2010%20Minutes%20%E2%99%AB%20LOFI%20Chill%20Instrumental%20Beat%20-%20_Mellow_%20%28128%20kbps%29.mp3"
+    page_url: "https://archive.org/details/MINIMALAMBIENTBOUNCE"
+    license: "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: 1.0
+    segment_duration_s: 115.0
+
+  - id: bgm_03_afterparty_outro
+    title: "After Party"
+    artist: "Loyalty Freak Music"
+    url: "https://archive.org/download/ROBOTDANCE/Loyalty%20Freak%20Music%20-%20ROBOT%20DANCE%20%21%20-%2003%20After%20Party.mp3"
+    fallback_url: "https://archive.org/download/yt-5s.com-no-copyright-10-minutes-lofi-chill-instrumental-beat-mellow-128-kbps/yt5s.com%20-%20%5BNo%20Copyright%5D%2010%20Minutes%20%E2%99%AB%20LOFI%20Chill%20Instrumental%20Beat%20-%20_Mellow_%20%28128%20kbps%29.mp3"
+    page_url: "https://archive.org/details/ROBOTDANCE"
+    license: "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: 1.0
+    segment_duration_s: 120.0
+
 headlines:
   - id: hl_launch_date
     source_id: src_launch_trailer

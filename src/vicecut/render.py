@@ -325,9 +325,19 @@ def build_ffmpeg_composite_command(
     else:
         filter_parts.append(f"[vbg][{ov_idx}:v]overlay=0:0:shortest=1:format=auto[vout]")
 
-    # 4. Audio mix (voice mastered at -18 LUFS; optional subtle bed at -34 dB)
+    # 4. Audio mix (voice mastered at -18 LUFS; optional non-copyrighted music bed w/ warm EQ + sidechain ducking)
     if mus_idx is not None:
-        filter_parts.append(f"[{mus_idx}:a]volume=-34dB[mlow];[{aud_idx}:a][mlow]amix=inputs=2:duration=first:normalize=0[aout]")
+        mus_trim = timeline.duration_s + 0.5
+        fade_out_st = max(0.0, timeline.duration_s - 2.5)
+        filter_parts.append(
+            f"[{aud_idx}:a]aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,asplit=2[vmain][vkey];"
+            f"[{mus_idx}:a]atrim=0:{mus_trim:.2f},asetpts=PTS-STARTPTS,"
+            f"aformat=sample_fmts=fltp:sample_rates=48000:channel_layouts=stereo,"
+            f"highpass=f=45,lowpass=f=6500,volume=-14dB,"
+            f"afade=t=in:st=0:d=1.5,afade=t=out:st={fade_out_st:.2f}:d=2.5[mpre];"
+            f"[mpre][vkey]sidechaincompress=threshold=0.03:ratio=4.0:attack=25:release=260:makeup=1[mduck];"
+            f"[vmain][mduck]amix=inputs=2:duration=first:normalize=0,alimiter=limit=0.89[aout]"
+        )
         audio_map = "[aout]"
     else:
         audio_map = f"{aud_idx}:a"

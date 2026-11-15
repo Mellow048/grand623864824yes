@@ -451,6 +451,21 @@ class PhotoFetchItem:
 
 
 @dataclass
+class MusicFetchItem:
+    """Single non-copyrighted / CC0 / Public Domain background music track."""
+
+    id: str
+    title: str
+    artist: str
+    url: str
+    fallback_url: str = ""
+    page_url: str = ""
+    license: str = "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: float = 2.0
+    segment_duration_s: float = 105.0
+
+
+@dataclass
 class FetchPlan:
     """Declarative media/fetch_plan.yaml executed by `vicecut media-fetch` or GitHub Actions."""
 
@@ -458,20 +473,20 @@ class FetchPlan:
     videos: list[VideoFetchItem] = field(default_factory=list)
     headlines: list[HeadlineFetchItem] = field(default_factory=list)
     photos: list[PhotoFetchItem] = field(default_factory=list)
+    music: list[MusicFetchItem] = field(default_factory=list)
 
     def save(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
+        payload: dict[str, Any] = {
+            "project": self.project,
+            "videos": [asdict(v) for v in self.videos],
+            "headlines": [asdict(h) for h in self.headlines],
+            "photos": [asdict(p) for p in self.photos],
+        }
+        if self.music:
+            payload["music"] = [asdict(m) for m in self.music]
         path.write_text(
-            yaml.safe_dump(
-                {
-                    "project": self.project,
-                    "videos": [asdict(v) for v in self.videos],
-                    "headlines": [asdict(h) for h in self.headlines],
-                    "photos": [asdict(p) for p in self.photos],
-                },
-                sort_keys=False,
-                allow_unicode=True,
-            ),
+            yaml.safe_dump(payload, sort_keys=False, allow_unicode=True),
             encoding="utf-8",
         )
 
@@ -483,6 +498,7 @@ class FetchPlan:
             videos=[VideoFetchItem(**v) for v in raw.get("videos", [])],
             headlines=[HeadlineFetchItem(**h) for h in raw.get("headlines", [])],
             photos=[PhotoFetchItem(**p) for p in raw.get("photos", [])],
+            music=[MusicFetchItem(**m) for m in raw.get("music", [])],
         )
 
 
@@ -835,6 +851,126 @@ def drop_shots(manifest: MediaManifest, shot_ids: list[str], reason: str = "visu
     return dropped_now
 
 
+def fetch_and_mix_music_bed(
+    items: list[MusicFetchItem],
+    music_dir: Path,
+    manifest: MediaManifest,
+    project_root: Path,
+) -> tuple[Path | None, list[str]]:
+    """
+    Download non-copyrighted CC0 / Public Domain background tracks, register them in
+    media/manifest.yaml (so credits.md lists every track), normalize each to -18 LUFS,
+    and crossfade them smoothly (2.5s acrossfade) into a single stereo soundtrack_bed.wav.
+    """
+    if not items:
+        return None, []
+
+    music_dir.mkdir(parents=True, exist_ok=True)
+    downloaded: list[tuple[MusicFetchItem, Path]] = []
+    errors: list[str] = []
+
+    for item in items:
+        out_mp3 = music_dir / f"{item.id}.mp3"
+        ok = False
+        urls = [u for u in (item.url, item.fallback_url) if u]
+        last_exc: Exception | None = None
+        for target in urls:
+            try:
+                local_cand = Path(target)
+                if local_cand.exists() and local_cand.is_file():
+                    if local_cand.resolve() != out_mp3.resolve():
+                        shutil.copy2(local_cand, out_mp3)
+                else:
+                    req = urllib.request.Request(
+                        target,
+                        headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) ViceCut/1.0"},
+                    )
+                    with urllib.request.urlopen(req, timeout=120) as resp, out_mp3.open("wb") as dst:
+                        shutil.copyfileobj(resp, dst)
+                if out_mp3.exists() and out_mp3.stat().st_size > 10_000:
+                    ok = True
+                    break
+            except Exception as exc:
+                last_exc = exc
+        if ok:
+            downloaded.append((item, out_mp3))
+            try:
+                rel_p = str(out_mp3.resolve().relative_to(project_root.resolve()))
+            except ValueError:
+                rel_p = str(out_mp3)
+            manifest.upsert_source(
+                MediaSourceRecord(
+                    id=item.id,
+                    title=f"{item.title} — {item.artist}",
+                    channel_or_outlet=item.artist,
+                    page_url=item.page_url or item.url,
+                    asset_url=item.url,
+                    license=item.license,
+                    local_path=rel_p,
+                    is_official=True,
+                )
+            )
+        else:
+            errors.append(f"music {item.id}: {last_exc}")
+
+    if not downloaded:
+        return None, errors
+
+    # Normalize & trim each track to consistent -18 LUFS stereo 48kHz WAV segments
+    norm_segs: list[Path] = []
+    for idx, (item, mp3_p) in enumerate(downloaded):
+        seg_wav = music_dir / f".norm_{idx:02d}_{item.id}.wav"
+        trim_filter = (
+            f"atrim=start={max(0.0, item.trim_start_s):.2f}:duration={max(15.0, item.segment_duration_s):.2f},"
+            "asetpts=PTS-STARTPTS,"
+            "loudnorm=I=-18.0:LRA=7.0:TP=-2.0"
+        )
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                "-i", str(mp3_p),
+                "-af", trim_filter,
+                "-ar", "48000", "-ac", "2",
+                str(seg_wav),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+        norm_segs.append(seg_wav)
+
+    bed_wav = music_dir / "soundtrack_bed.wav"
+    if len(norm_segs) == 1:
+        shutil.copy2(norm_segs[0], bed_wav)
+    else:
+        ff_inputs: list[str] = []
+        for seg in norm_segs:
+            ff_inputs += ["-i", str(seg)]
+        parts: list[str] = []
+        cur = "0:a"
+        for i in range(1, len(norm_segs)):
+            nxt_lbl = f"xf{i}" if i < len(norm_segs) - 1 else "aout"
+            parts.append(f"[{cur}][{i}:a]acrossfade=d=2.5:c1=tri:c2=tri[{nxt_lbl}]")
+            cur = nxt_lbl
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                *ff_inputs,
+                "-filter_complex", ";".join(parts),
+                "-map", "[aout]",
+                "-ar", "48000", "-ac", "2",
+                str(bed_wav),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+    for seg in norm_segs:
+        seg.unlink(missing_ok=True)
+    return bed_wav, errors
+
+
 def execute_fetch_plan(
     plan: FetchPlan,
     manifest: MediaManifest,
@@ -848,14 +984,17 @@ def execute_fetch_plan(
     Execute an entire declarative media/fetch_plan.yaml end-to-end:
     1. Download official videos -> auto-split into scenes -> build Start|Mid|End sheets
     2. Download official press-kit photos
-    3. Capture article headlines via Playwright (auto-falling back to white text cards on paywall/small crop)
-    4. Save updated media/manifest.yaml
+    3. Download & crossfade non-copyrighted CC0/PD music tracks into media/music/soundtrack_bed.wav
+    4. Capture article headlines via Playwright (auto-falling back to white text cards on paywall/small crop)
+    5. Save updated media/manifest.yaml
     """
     summary: dict[str, Any] = {
         "videos_fetched": 0,
         "shots_created": 0,
         "contact_sheets": [],
         "photos_fetched": 0,
+        "music_tracks_fetched": 0,
+        "music_bed": "",
         "headlines_captured": 0,
         "headlines_fallback": 0,
         "errors": [],
@@ -927,6 +1066,18 @@ def execute_fetch_plan(
         manifest.upsert_photo(asset)
         manifest.upsert_source(src)
         summary["photos_fetched"] += 1
+
+    if plan.music:
+        bed_wav, music_errs = fetch_and_mix_music_bed(
+            items=plan.music,
+            music_dir=dirs["media"] / "music",
+            manifest=manifest,
+            project_root=project_root,
+        )
+        if bed_wav is not None:
+            summary["music_bed"] = str(bed_wav)
+            summary["music_tracks_fetched"] = len(plan.music) - len(music_errs)
+        summary["errors"].extend(music_errs)
 
     if not skip_headlines:
         for hl in plan.headlines:
