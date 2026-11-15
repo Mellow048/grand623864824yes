@@ -45,6 +45,7 @@ CARD_HOLDS_S: dict[str, float] = {
     "photo": 2.6,
     "headline": 2.8,
     "character": 2.8,
+    "prop": 2.9,       # Animated white-background studio object prop (zero people!)
     "number": 1.5,
     "chapter": 2.0,
     # Quote holds until 0.9s after its last spoken word (computed dynamically).
@@ -55,6 +56,7 @@ CARD_DARKEN_ALPHA: dict[str, float] = {
     "photo": 0.42,
     "headline": 0.50,
     "character": 0.0,   # Sharp footage, no darkening
+    "prop": 0.0,        # Compact floating PiP card — keep full-motion gameplay crisp & unblurred behind it!
     "quote": 0.55,
     "number": 0.48,
     "chapter": 0.60,

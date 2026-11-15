@@ -1,0 +1,103 @@
+topic: everything you need to know about GTA 6 before you play
+research_date: '2026-11-15'
+sources:
+- name: Rockstar Games
+  url: https://www.rockstargames.com/VI
+  date: '2026-10-15'
+  tier: maker
+  fact_ids:
+  - F01
+  - F02
+  - F15
+  - F03
+  - F14
+  - F20
+  - F21
+- name: Video Games Chronicle
+  url: https://www.videogameschronicle.com/news/rockstar-has-revealed-the-official-launch-trailer-for-grand-theft-auto-6/
+  date: '2026-10-15'
+  tier: corroboration
+  fact_ids:
+  - F01
+- name: PlayStation
+  url: https://www.youtube.com/watch?v=YlP-OTqp6ig
+  date: '2026-10-15'
+  tier: corroboration
+  fact_ids:
+  - F02
+  - F13
+- name: iTechGuides
+  url: https://www.itechguides.com/all-gta-6-locations-in-leonida-every-confirmed-region-and-vice-city-area/
+  date: '2026-10-15'
+  tier: corroboration
+  fact_ids:
+  - F15
+- name: Rockstar Games
+  url: https://www.youtube.com/watch?v=8u_lV1LQr1Q
+  date: '2026-10-15'
+  tier: maker
+  fact_ids:
+  - F16
+  - F18
+- name: Ghacks
+  url: https://www.ghacks.net/2026/10/16/rockstar-releases-the-gta-6-launch-trailer-ahead-of-the-november-19-console-release/
+  date: '2026-10-15'
+  tier: corroboration
+  fact_ids:
+  - F18
+- name: Rockstar Games
+  url: https://www.youtube.com/watch?v=tJbzMqJGH4k
+  date: '2026-10-29'
+  tier: maker
+  fact_ids:
+  - F17
+- name: VICE
+  url: https://www.vice.com/en/article/gta-6-extended-look-youtube-download-4k/
+  date: '2026-10-29'
+  tier: corroboration
+  fact_ids:
+  - F17
+- name: VICE
+  url: https://www.vice.com/en/article/gta-6-midnight-release-times-file-size-preload/
+  date: '2026-11-12'
+  tier: corroboration
+  fact_ids:
+  - F03
+  - F07
+- name: VICE
+  url: https://www.vice.com/en/article/gta-6-release-date-launch-times-new-zealand-method/
+  date: '2026-11-12'
+  tier: maker
+  fact_ids:
+  - F04
+  - F05
+- name: PanStag
+  url: https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html
+  date: '2026-11-12'
+  tier: corroboration
+  fact_ids:
+  - F04
+  - F08
+  - F09
+  - F10
+- name: PlayStation Blog
+  url: https://blog.playstation.com/
+  date: '2026-11-12'
+  tier: maker
+  fact_ids:
+  - F06
+- name: GameBrief
+  url: https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026
+  date: '2026-11-12'
+  tier: corroboration
+  fact_ids:
+  - F14
+  - F11
+  - F12
+- name: Tech Insider
+  url: https://tech-insider.org/gta-6-price-leak-relief-79-99-standard-edition-2026/
+  date: '2026-11-10'
+  tier: corroboration
+  fact_ids:
+  - F08
+  - F19

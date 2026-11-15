@@ -1,0 +1,4304 @@
+{
+  "project_slug": "gta6-before-you-play",
+  "fps": 30,
+  "width": 1920,
+  "height": 1080,
+  "duration_s": 299.1566,
+  "total_frames": 8975,
+  "theme": {
+    "--vc-panel-bg": "#1E1322",
+    "--vc-border": "#F7D3EA",
+    "--vc-glow-rgb": "255, 120, 205",
+    "--vc-grad-start": "#FF93DC",
+    "--vc-grad-end": "#FFB27C",
+    "--vc-pill-pink": "#FB96E6",
+    "--vc-pill-cream": "#FFF1DE",
+    "--vc-pill-peach": "#FFBA90",
+    "--vc-pill-text": "#1A1020",
+    "--vc-font": "'Montserrat', 'Arial Black', sans-serif",
+    "--vc-blur": "26px"
+  },
+  "shots": [
+    {
+      "shot_id": "shot_004",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s004.mp4",
+      "start_s": 0.0,
+      "end_s": 2.1333,
+      "start_frame": 0,
+      "end_frame": 64,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_001",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s001.mp4",
+      "start_s": 2.1333,
+      "end_s": 4.5333,
+      "start_frame": 64,
+      "end_frame": 136,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_008",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s008.mp4",
+      "start_s": 4.5333,
+      "end_s": 6.4,
+      "start_frame": 136,
+      "end_frame": 192,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_003",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s003.mp4",
+      "start_s": 6.4,
+      "end_s": 9.2333,
+      "start_frame": 192,
+      "end_frame": 277,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_012",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s012.mp4",
+      "start_s": 9.2333,
+      "end_s": 11.5,
+      "start_frame": 277,
+      "end_frame": 345,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_007",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s007.mp4",
+      "start_s": 11.5,
+      "end_s": 14.3,
+      "start_frame": 345,
+      "end_frame": 429,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_016",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s016.mp4",
+      "start_s": 14.3,
+      "end_s": 16.3333,
+      "start_frame": 429,
+      "end_frame": 490,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_005",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s005.mp4",
+      "start_s": 16.3333,
+      "end_s": 18.2667,
+      "start_frame": 490,
+      "end_frame": 548,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_020",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s020.mp4",
+      "start_s": 18.2667,
+      "end_s": 20.3667,
+      "start_frame": 548,
+      "end_frame": 611,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_009",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s009.mp4",
+      "start_s": 20.3667,
+      "end_s": 22.7667,
+      "start_frame": 611,
+      "end_frame": 683,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_024",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s024.mp4",
+      "start_s": 22.7667,
+      "end_s": 24.6333,
+      "start_frame": 683,
+      "end_frame": 739,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_013",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s013.mp4",
+      "start_s": 24.6333,
+      "end_s": 26.9667,
+      "start_frame": 739,
+      "end_frame": 809,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_028",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s028.mp4",
+      "start_s": 26.9667,
+      "end_s": 29.0,
+      "start_frame": 809,
+      "end_frame": 870,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_017",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s017.mp4",
+      "start_s": 29.0,
+      "end_s": 31.7667,
+      "start_frame": 870,
+      "end_frame": 953,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_032",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s032.mp4",
+      "start_s": 31.7667,
+      "end_s": 33.8333,
+      "start_frame": 953,
+      "end_frame": 1015,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_021",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s021.mp4",
+      "start_s": 33.8333,
+      "end_s": 36.1333,
+      "start_frame": 1015,
+      "end_frame": 1084,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_036",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s036.mp4",
+      "start_s": 36.1333,
+      "end_s": 38.2333,
+      "start_frame": 1084,
+      "end_frame": 1147,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_025",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s025.mp4",
+      "start_s": 38.2333,
+      "end_s": 40.6667,
+      "start_frame": 1147,
+      "end_frame": 1220,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_040",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s040.mp4",
+      "start_s": 40.6667,
+      "end_s": 42.5333,
+      "start_frame": 1220,
+      "end_frame": 1276,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_029",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s029.mp4",
+      "start_s": 42.5333,
+      "end_s": 45.0,
+      "start_frame": 1276,
+      "end_frame": 1350,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_044",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s044.mp4",
+      "start_s": 45.0,
+      "end_s": 47.3,
+      "start_frame": 1350,
+      "end_frame": 1419,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_033",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s033.mp4",
+      "start_s": 47.3,
+      "end_s": 49.9667,
+      "start_frame": 1419,
+      "end_frame": 1499,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_048",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s048.mp4",
+      "start_s": 49.9667,
+      "end_s": 51.9667,
+      "start_frame": 1499,
+      "end_frame": 1559,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_037",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s037.mp4",
+      "start_s": 51.9667,
+      "end_s": 54.2333,
+      "start_frame": 1559,
+      "end_frame": 1627,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_052",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s052.mp4",
+      "start_s": 54.2333,
+      "end_s": 56.3667,
+      "start_frame": 1627,
+      "end_frame": 1691,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_011",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s011.mp4",
+      "start_s": 56.3667,
+      "end_s": 59.2,
+      "start_frame": 1691,
+      "end_frame": 1776,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_056",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s056.mp4",
+      "start_s": 59.2,
+      "end_s": 61.1333,
+      "start_frame": 1776,
+      "end_frame": 1834,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_041",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s041.mp4",
+      "start_s": 61.1333,
+      "end_s": 63.6667,
+      "start_frame": 1834,
+      "end_frame": 1910,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_060",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s060.mp4",
+      "start_s": 63.6667,
+      "end_s": 65.7667,
+      "start_frame": 1910,
+      "end_frame": 1973,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_045",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s045.mp4",
+      "start_s": 65.7667,
+      "end_s": 68.5333,
+      "start_frame": 1973,
+      "end_frame": 2056,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_064",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s064.mp4",
+      "start_s": 68.5333,
+      "end_s": 70.5667,
+      "start_frame": 2056,
+      "end_frame": 2117,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_049",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s049.mp4",
+      "start_s": 70.5667,
+      "end_s": 72.9667,
+      "start_frame": 2117,
+      "end_frame": 2189,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_068",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s068.mp4",
+      "start_s": 72.9667,
+      "end_s": 75.0,
+      "start_frame": 2189,
+      "end_frame": 2250,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_053",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s053.mp4",
+      "start_s": 75.0,
+      "end_s": 77.2333,
+      "start_frame": 2250,
+      "end_frame": 2317,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_072",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s072.mp4",
+      "start_s": 77.2333,
+      "end_s": 79.1,
+      "start_frame": 2317,
+      "end_frame": 2373,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_057",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s057.mp4",
+      "start_s": 79.1,
+      "end_s": 81.6,
+      "start_frame": 2373,
+      "end_frame": 2448,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_076",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s076.mp4",
+      "start_s": 81.6,
+      "end_s": 83.6667,
+      "start_frame": 2448,
+      "end_frame": 2510,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_015",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s015.mp4",
+      "start_s": 83.6667,
+      "end_s": 86.5667,
+      "start_frame": 2510,
+      "end_frame": 2597,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_080",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s080.mp4",
+      "start_s": 86.5667,
+      "end_s": 88.6667,
+      "start_frame": 2597,
+      "end_frame": 2660,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_061",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s061.mp4",
+      "start_s": 88.6667,
+      "end_s": 91.0667,
+      "start_frame": 2660,
+      "end_frame": 2732,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_084",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s084.mp4",
+      "start_s": 91.0667,
+      "end_s": 93.2667,
+      "start_frame": 2732,
+      "end_frame": 2798,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_065",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s065.mp4",
+      "start_s": 93.2667,
+      "end_s": 95.8667,
+      "start_frame": 2798,
+      "end_frame": 2876,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_088",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s088.mp4",
+      "start_s": 95.8667,
+      "end_s": 97.7,
+      "start_frame": 2876,
+      "end_frame": 2931,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_069",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s069.mp4",
+      "start_s": 97.7,
+      "end_s": 100.1667,
+      "start_frame": 2931,
+      "end_frame": 3005,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_092",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s092.mp4",
+      "start_s": 100.1667,
+      "end_s": 102.3,
+      "start_frame": 3005,
+      "end_frame": 3069,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_073",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s073.mp4",
+      "start_s": 102.3,
+      "end_s": 104.9333,
+      "start_frame": 3069,
+      "end_frame": 3148,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_096",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s096.mp4",
+      "start_s": 104.9333,
+      "end_s": 107.0333,
+      "start_frame": 3148,
+      "end_frame": 3211,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_077",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s077.mp4",
+      "start_s": 107.0333,
+      "end_s": 109.3,
+      "start_frame": 3211,
+      "end_frame": 3279,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_100",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s100.mp4",
+      "start_s": 109.3,
+      "end_s": 111.2333,
+      "start_frame": 3279,
+      "end_frame": 3337,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_081",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s081.mp4",
+      "start_s": 111.2333,
+      "end_s": 113.7667,
+      "start_frame": 3337,
+      "end_frame": 3413,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_104",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s104.mp4",
+      "start_s": 113.7667,
+      "end_s": 115.6667,
+      "start_frame": 3413,
+      "end_frame": 3470,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_085",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s085.mp4",
+      "start_s": 115.6667,
+      "end_s": 118.1333,
+      "start_frame": 3470,
+      "end_frame": 3544,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_108",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s108.mp4",
+      "start_s": 118.1333,
+      "end_s": 120.3667,
+      "start_frame": 3544,
+      "end_frame": 3611,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_019",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s019.mp4",
+      "start_s": 120.3667,
+      "end_s": 123.1667,
+      "start_frame": 3611,
+      "end_frame": 3695,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_112",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s112.mp4",
+      "start_s": 123.1667,
+      "end_s": 125.1667,
+      "start_frame": 3695,
+      "end_frame": 3755,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_089",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s089.mp4",
+      "start_s": 125.1667,
+      "end_s": 127.6,
+      "start_frame": 3755,
+      "end_frame": 3828,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_116",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s116.mp4",
+      "start_s": 127.6,
+      "end_s": 129.8,
+      "start_frame": 3828,
+      "end_frame": 3894,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_093",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s093.mp4",
+      "start_s": 129.8,
+      "end_s": 132.2333,
+      "start_frame": 3894,
+      "end_frame": 3967,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_120",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s120.mp4",
+      "start_s": 132.2333,
+      "end_s": 134.0333,
+      "start_frame": 3967,
+      "end_frame": 4021,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_097",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s097.mp4",
+      "start_s": 134.0333,
+      "end_s": 136.3667,
+      "start_frame": 4021,
+      "end_frame": 4091,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_124",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s124.mp4",
+      "start_s": 136.3667,
+      "end_s": 138.4667,
+      "start_frame": 4091,
+      "end_frame": 4154,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_101",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s101.mp4",
+      "start_s": 138.4667,
+      "end_s": 141.1667,
+      "start_frame": 4154,
+      "end_frame": 4235,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_128",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s128.mp4",
+      "start_s": 141.1667,
+      "end_s": 143.4,
+      "start_frame": 4235,
+      "end_frame": 4302,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_105",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s105.mp4",
+      "start_s": 143.4,
+      "end_s": 145.7,
+      "start_frame": 4302,
+      "end_frame": 4371,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_132",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s132.mp4",
+      "start_s": 145.7,
+      "end_s": 147.9333,
+      "start_frame": 4371,
+      "end_frame": 4438,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_109",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s109.mp4",
+      "start_s": 147.9333,
+      "end_s": 150.5667,
+      "start_frame": 4438,
+      "end_frame": 4517,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_136",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s136.mp4",
+      "start_s": 150.5667,
+      "end_s": 152.3333,
+      "start_frame": 4517,
+      "end_frame": 4570,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_113",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s113.mp4",
+      "start_s": 152.3333,
+      "end_s": 154.7667,
+      "start_frame": 4570,
+      "end_frame": 4643,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_140",
+      "source_id": "src_trailer1",
+      "path": "media/scenes/dryrun_s140.mp4",
+      "start_s": 154.7667,
+      "end_s": 156.9667,
+      "start_frame": 4643,
+      "end_frame": 4709,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_117",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s117.mp4",
+      "start_s": 156.9667,
+      "end_s": 159.6,
+      "start_frame": 4709,
+      "end_frame": 4788,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_002",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s002.mp4",
+      "start_s": 159.6,
+      "end_s": 161.5667,
+      "start_frame": 4788,
+      "end_frame": 4847,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_121",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s121.mp4",
+      "start_s": 161.5667,
+      "end_s": 163.9,
+      "start_frame": 4847,
+      "end_frame": 4917,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_006",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s006.mp4",
+      "start_s": 163.9,
+      "end_s": 165.9,
+      "start_frame": 4917,
+      "end_frame": 4977,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_125",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s125.mp4",
+      "start_s": 165.9,
+      "end_s": 168.4667,
+      "start_frame": 4977,
+      "end_frame": 5054,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_010",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s010.mp4",
+      "start_s": 168.4667,
+      "end_s": 170.3333,
+      "start_frame": 5054,
+      "end_frame": 5110,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_129",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s129.mp4",
+      "start_s": 170.3333,
+      "end_s": 172.6,
+      "start_frame": 5110,
+      "end_frame": 5178,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_014",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s014.mp4",
+      "start_s": 172.6,
+      "end_s": 174.7667,
+      "start_frame": 5178,
+      "end_frame": 5243,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_133",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s133.mp4",
+      "start_s": 174.7667,
+      "end_s": 177.4667,
+      "start_frame": 5243,
+      "end_frame": 5324,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_018",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s018.mp4",
+      "start_s": 177.4667,
+      "end_s": 179.5667,
+      "start_frame": 5324,
+      "end_frame": 5387,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_137",
+      "source_id": "src_launch_trailer",
+      "path": "media/scenes/dryrun_s137.mp4",
+      "start_s": 179.5667,
+      "end_s": 181.9,
+      "start_frame": 5387,
+      "end_frame": 5457,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_022",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s022.mp4",
+      "start_s": 181.9,
+      "end_s": 184.2,
+      "start_frame": 5457,
+      "end_frame": 5526,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_023",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s023.mp4",
+      "start_s": 184.2,
+      "end_s": 186.8333,
+      "start_frame": 5526,
+      "end_frame": 5605,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_026",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s026.mp4",
+      "start_s": 186.8333,
+      "end_s": 188.6667,
+      "start_frame": 5605,
+      "end_frame": 5660,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_027",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s027.mp4",
+      "start_s": 188.6667,
+      "end_s": 191.0,
+      "start_frame": 5660,
+      "end_frame": 5730,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_030",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s030.mp4",
+      "start_s": 191.0,
+      "end_s": 193.1,
+      "start_frame": 5730,
+      "end_frame": 5793,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_031",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s031.mp4",
+      "start_s": 193.1,
+      "end_s": 195.9,
+      "start_frame": 5793,
+      "end_frame": 5877,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_034",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s034.mp4",
+      "start_s": 195.9,
+      "end_s": 197.6333,
+      "start_frame": 5877,
+      "end_frame": 5929,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_035",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s035.mp4",
+      "start_s": 197.6333,
+      "end_s": 200.0333,
+      "start_frame": 5929,
+      "end_frame": 6001,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_038",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s038.mp4",
+      "start_s": 200.0333,
+      "end_s": 202.1667,
+      "start_frame": 6001,
+      "end_frame": 6065,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_039",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s039.mp4",
+      "start_s": 202.1667,
+      "end_s": 204.8,
+      "start_frame": 6065,
+      "end_frame": 6144,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_042",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s042.mp4",
+      "start_s": 204.8,
+      "end_s": 206.6667,
+      "start_frame": 6144,
+      "end_frame": 6200,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_043",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s043.mp4",
+      "start_s": 206.6667,
+      "end_s": 209.4667,
+      "start_frame": 6200,
+      "end_frame": 6284,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_046",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s046.mp4",
+      "start_s": 209.4667,
+      "end_s": 211.7333,
+      "start_frame": 6284,
+      "end_frame": 6352,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_047",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s047.mp4",
+      "start_s": 211.7333,
+      "end_s": 214.3667,
+      "start_frame": 6352,
+      "end_frame": 6431,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_050",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s050.mp4",
+      "start_s": 214.3667,
+      "end_s": 216.4667,
+      "start_frame": 6431,
+      "end_frame": 6494,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_051",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s051.mp4",
+      "start_s": 216.4667,
+      "end_s": 218.3333,
+      "start_frame": 6494,
+      "end_frame": 6550,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_054",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s054.mp4",
+      "start_s": 218.3333,
+      "end_s": 220.5333,
+      "start_frame": 6550,
+      "end_frame": 6616,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_055",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s055.mp4",
+      "start_s": 220.5333,
+      "end_s": 222.7667,
+      "start_frame": 6616,
+      "end_frame": 6683,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_058",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s058.mp4",
+      "start_s": 222.7667,
+      "end_s": 224.7667,
+      "start_frame": 6683,
+      "end_frame": 6743,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_059",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s059.mp4",
+      "start_s": 224.7667,
+      "end_s": 227.2333,
+      "start_frame": 6743,
+      "end_frame": 6817,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_062",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s062.mp4",
+      "start_s": 227.2333,
+      "end_s": 229.5,
+      "start_frame": 6817,
+      "end_frame": 6885,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_063",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s063.mp4",
+      "start_s": 229.5,
+      "end_s": 232.3333,
+      "start_frame": 6885,
+      "end_frame": 6970,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_066",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s066.mp4",
+      "start_s": 232.3333,
+      "end_s": 234.4,
+      "start_frame": 6970,
+      "end_frame": 7032,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_067",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s067.mp4",
+      "start_s": 234.4,
+      "end_s": 236.7,
+      "start_frame": 7032,
+      "end_frame": 7101,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_070",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s070.mp4",
+      "start_s": 236.7,
+      "end_s": 238.8667,
+      "start_frame": 7101,
+      "end_frame": 7166,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_071",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s071.mp4",
+      "start_s": 238.8667,
+      "end_s": 241.3,
+      "start_frame": 7166,
+      "end_frame": 7239,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_074",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s074.mp4",
+      "start_s": 241.3,
+      "end_s": 243.2333,
+      "start_frame": 7239,
+      "end_frame": 7297,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_075",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s075.mp4",
+      "start_s": 243.2333,
+      "end_s": 245.7,
+      "start_frame": 7297,
+      "end_frame": 7371,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_078",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s078.mp4",
+      "start_s": 245.7,
+      "end_s": 247.9,
+      "start_frame": 7371,
+      "end_frame": 7437,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_079",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s079.mp4",
+      "start_s": 247.9,
+      "end_s": 250.5333,
+      "start_frame": 7437,
+      "end_frame": 7516,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_082",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s082.mp4",
+      "start_s": 250.5333,
+      "end_s": 252.6,
+      "start_frame": 7516,
+      "end_frame": 7578,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_083",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s083.mp4",
+      "start_s": 252.6,
+      "end_s": 254.8667,
+      "start_frame": 7578,
+      "end_frame": 7646,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_086",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s086.mp4",
+      "start_s": 254.8667,
+      "end_s": 257.0333,
+      "start_frame": 7646,
+      "end_frame": 7711,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_087",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s087.mp4",
+      "start_s": 257.0333,
+      "end_s": 259.3667,
+      "start_frame": 7711,
+      "end_frame": 7781,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_090",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s090.mp4",
+      "start_s": 259.3667,
+      "end_s": 261.3333,
+      "start_frame": 7781,
+      "end_frame": 7840,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_091",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s091.mp4",
+      "start_s": 261.3333,
+      "end_s": 263.7333,
+      "start_frame": 7840,
+      "end_frame": 7912,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_094",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s094.mp4",
+      "start_s": 263.7333,
+      "end_s": 266.0333,
+      "start_frame": 7912,
+      "end_frame": 7981,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_095",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s095.mp4",
+      "start_s": 266.0333,
+      "end_s": 268.6333,
+      "start_frame": 7981,
+      "end_frame": 8059,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_098",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s098.mp4",
+      "start_s": 268.6333,
+      "end_s": 270.7,
+      "start_frame": 8059,
+      "end_frame": 8121,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_099",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s099.mp4",
+      "start_s": 270.7,
+      "end_s": 272.9333,
+      "start_frame": 8121,
+      "end_frame": 8188,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_102",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s102.mp4",
+      "start_s": 272.9333,
+      "end_s": 275.0,
+      "start_frame": 8188,
+      "end_frame": 8250,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_103",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s103.mp4",
+      "start_s": 275.0,
+      "end_s": 277.6667,
+      "start_frame": 8250,
+      "end_frame": 8330,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_106",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s106.mp4",
+      "start_s": 277.6667,
+      "end_s": 279.4,
+      "start_frame": 8330,
+      "end_frame": 8382,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_107",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s107.mp4",
+      "start_s": 279.4,
+      "end_s": 281.7667,
+      "start_frame": 8382,
+      "end_frame": 8453,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_110",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s110.mp4",
+      "start_s": 281.7667,
+      "end_s": 284.0333,
+      "start_frame": 8453,
+      "end_frame": 8521,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_111",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s111.mp4",
+      "start_s": 284.0333,
+      "end_s": 286.6333,
+      "start_frame": 8521,
+      "end_frame": 8599,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_114",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s114.mp4",
+      "start_s": 286.6333,
+      "end_s": 288.6333,
+      "start_frame": 8599,
+      "end_frame": 8659,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_115",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s115.mp4",
+      "start_s": 288.6333,
+      "end_s": 290.5,
+      "start_frame": 8659,
+      "end_frame": 8715,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_118",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s118.mp4",
+      "start_s": 290.5,
+      "end_s": 292.4667,
+      "start_frame": 8715,
+      "end_frame": 8774,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_119",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s119.mp4",
+      "start_s": 292.4667,
+      "end_s": 295.0667,
+      "start_frame": 8774,
+      "end_frame": 8852,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_122",
+      "source_id": "src_ps5_features",
+      "path": "media/scenes/dryrun_s122.mp4",
+      "start_s": 295.0667,
+      "end_s": 296.9,
+      "start_frame": 8852,
+      "end_frame": 8907,
+      "is_still": false,
+      "luma_mean": 0.24,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    },
+    {
+      "shot_id": "shot_123",
+      "source_id": "src_trailer2",
+      "path": "media/scenes/dryrun_s123.mp4",
+      "start_s": 296.9,
+      "end_s": 299.1667,
+      "start_frame": 8907,
+      "end_frame": 8975,
+      "is_still": false,
+      "luma_mean": 0.64,
+      "crop_filter": "",
+      "face_zones": [],
+      "pinned_word_id": null,
+      "still_push_in": false
+    }
+  ],
+  "cards": [
+    {
+      "id": "card_001",
+      "card_type": "number",
+      "anchor_word_id": 1,
+      "start_s": 0.3,
+      "end_s": 1.8,
+      "start_frame": 9,
+      "end_frame": 54,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "4 DAYS LEFT",
+        "subline": "NOV 19, 2026 LAUNCH"
+      }
+    },
+    {
+      "id": "card_002",
+      "card_type": "quote",
+      "anchor_word_id": 32,
+      "start_s": 9.2333,
+      "end_s": 13.5971,
+      "start_frame": 277,
+      "end_frame": 408,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "payload": {
+        "attribution": "VERIFIED NOV 15, 2026",
+        "quote_text": "I checked every Rockstar, Sony, and store page today so you get the real facts.",
+        "typed_words": [
+          {
+            "word_id": 31,
+            "text": "I",
+            "reveal_s": 9.16
+          },
+          {
+            "word_id": 32,
+            "text": "checked",
+            "reveal_s": 9.3686
+          },
+          {
+            "word_id": 33,
+            "text": "every",
+            "reveal_s": 9.7143
+          },
+          {
+            "word_id": 34,
+            "text": "Rockstar",
+            "reveal_s": 10.0143
+          },
+          {
+            "word_id": 35,
+            "text": "Sony",
+            "reveal_s": 10.3829
+          },
+          {
+            "word_id": 36,
+            "text": "and",
+            "reveal_s": 10.66
+          },
+          {
+            "word_id": 37,
+            "text": "store",
+            "reveal_s": 10.9143
+          },
+          {
+            "word_id": 38,
+            "text": "page",
+            "reveal_s": 11.2143
+          },
+          {
+            "word_id": 39,
+            "text": "today",
+            "reveal_s": 11.4914
+          },
+          {
+            "word_id": 40,
+            "text": "so",
+            "reveal_s": 11.7914
+          },
+          {
+            "word_id": 41,
+            "text": "you",
+            "reveal_s": 12.0229
+          },
+          {
+            "word_id": 42,
+            "text": "get",
+            "reveal_s": 12.2771
+          },
+          {
+            "word_id": 43,
+            "text": "the",
+            "reveal_s": 12.5314
+          },
+          {
+            "word_id": 44,
+            "text": "real",
+            "reveal_s": 12.7857
+          },
+          {
+            "word_id": 45,
+            "text": "facts",
+            "reveal_s": 13.0629
+          }
+        ]
+      }
+    },
+    {
+      "id": "card_003",
+      "card_type": "prop",
+      "anchor_word_id": 47,
+      "start_s": 13.6667,
+      "end_s": 16.5667,
+      "start_frame": 410,
+      "end_frame": 497,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_midnight_globe",
+        "image_path": "media/photos/prop_midnight_globe.png",
+        "label": "18 HOURS EARLY?",
+        "subline": "NEW ZEALAND LAUNCH TRICK",
+        "animation": "float_zoom",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_004",
+      "card_type": "number",
+      "anchor_word_id": 63,
+      "start_s": 18.2667,
+      "end_s": 19.7667,
+      "start_frame": 548,
+      "end_frame": 593,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "NO DISC?",
+        "subline": "RETAIL BOX CATCH"
+      }
+    },
+    {
+      "id": "card_005",
+      "card_type": "number",
+      "anchor_word_id": 100,
+      "start_s": 29.0,
+      "end_s": 30.5,
+      "start_frame": 870,
+      "end_frame": 915,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "DAY-ONE PREP",
+        "subline": "PLAY SMART"
+      }
+    },
+    {
+      "id": "card_006",
+      "card_type": "chapter",
+      "anchor_word_id": 126,
+      "start_s": 37.4,
+      "end_s": 39.4,
+      "start_frame": 1122,
+      "end_frame": 1182,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.6,
+      "payload": {
+        "text": "PRE-LOAD & LAUNCH",
+        "section_title": "Launch Times, Pre-Load and the 212 GB Trap"
+      }
+    },
+    {
+      "id": "card_007",
+      "card_type": "prop",
+      "anchor_word_id": 127,
+      "start_s": 39.4667,
+      "end_s": 42.3667,
+      "start_frame": 1184,
+      "end_frame": 1271,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_consoles",
+        "image_path": "media/photos/prop_consoles.png",
+        "label": "CONSOLES ONLY AT LAUNCH",
+        "subline": "PS5 & XBOX SERIES X/S",
+        "animation": "float_zoom",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_008",
+      "card_type": "headline",
+      "anchor_word_id": 152,
+      "start_s": 45.0,
+      "end_s": 47.8,
+      "start_frame": 1350,
+      "end_frame": 1434,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "payload": {
+        "asset_id": "hl_launch_date",
+        "outlet": "ROCKSTAR GAMES",
+        "headline_text": "Grand Theft Auto VI Launches November 19, 2026 on PS5 and Xbox Series X|S",
+        "date": "Oct 2026",
+        "image_path": "",
+        "use_text_fallback": true,
+        "tilt_deg": 1.1,
+        "is_mockup": false
+      }
+    },
+    {
+      "id": "card_009",
+      "card_type": "number",
+      "anchor_word_id": 171,
+      "start_s": 50.7333,
+      "end_s": 52.2333,
+      "start_frame": 1522,
+      "end_frame": 1567,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "12:00 AM",
+        "subline": "LOCAL ROLLING UNLOCK"
+      }
+    },
+    {
+      "id": "card_010",
+      "card_type": "prop",
+      "anchor_word_id": 185,
+      "start_s": 55.1,
+      "end_s": 58.0,
+      "start_frame": 1653,
+      "end_frame": 1740,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_midnight_globe",
+        "image_path": "media/photos/prop_midnight_globe.png",
+        "label": "MIDNIGHT LOCAL UNLOCK",
+        "subline": "NEW ZEALAND 18 HRS EARLY",
+        "animation": "slide_swing",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_011",
+      "card_type": "number",
+      "anchor_word_id": 198,
+      "start_s": 59.2,
+      "end_s": 60.7,
+      "start_frame": 1776,
+      "end_frame": 1821,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "6 AM ET",
+        "subline": "NOV 18 NEW ZEALAND"
+      }
+    },
+    {
+      "id": "card_012",
+      "card_type": "number",
+      "anchor_word_id": 218,
+      "start_s": 65.0667,
+      "end_s": 66.5667,
+      "start_frame": 1952,
+      "end_frame": 1997,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "XBOX TRICK",
+        "subline": "REGION SWAP WORKS"
+      }
+    },
+    {
+      "id": "card_013",
+      "card_type": "quote",
+      "anchor_word_id": 232,
+      "start_s": 69.3333,
+      "end_s": 73.4886,
+      "start_frame": 2080,
+      "end_frame": 2205,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "payload": {
+        "attribution": "VICE LAUNCH GUIDE",
+        "quote_text": "PlayStation locks your store to the zone on your account, so a quick flip fails.",
+        "typed_words": [
+          {
+            "word_id": 231,
+            "text": "PlayStation",
+            "reveal_s": 69.0514
+          },
+          {
+            "word_id": 232,
+            "text": "locks",
+            "reveal_s": 69.4657
+          },
+          {
+            "word_id": 233,
+            "text": "your",
+            "reveal_s": 69.7657
+          },
+          {
+            "word_id": 234,
+            "text": "store",
+            "reveal_s": 70.0429
+          },
+          {
+            "word_id": 235,
+            "text": "to",
+            "reveal_s": 70.3429
+          },
+          {
+            "word_id": 236,
+            "text": "the",
+            "reveal_s": 70.5743
+          },
+          {
+            "word_id": 237,
+            "text": "zone",
+            "reveal_s": 70.8286
+          },
+          {
+            "word_id": 238,
+            "text": "on",
+            "reveal_s": 71.1057
+          },
+          {
+            "word_id": 239,
+            "text": "your",
+            "reveal_s": 71.3371
+          },
+          {
+            "word_id": 240,
+            "text": "account",
+            "reveal_s": 71.6143
+          },
+          {
+            "word_id": 241,
+            "text": "so",
+            "reveal_s": 71.96
+          },
+          {
+            "word_id": 242,
+            "text": "a",
+            "reveal_s": 72.1914
+          },
+          {
+            "word_id": 243,
+            "text": "quick",
+            "reveal_s": 72.4
+          },
+          {
+            "word_id": 244,
+            "text": "flip",
+            "reveal_s": 72.7
+          },
+          {
+            "word_id": 245,
+            "text": "fails",
+            "reveal_s": 72.9771
+          }
+        ]
+      }
+    },
+    {
+      "id": "card_014",
+      "card_type": "number",
+      "anchor_word_id": 247,
+      "start_s": 73.5333,
+      "end_s": 75.0333,
+      "start_frame": 2206,
+      "end_frame": 2251,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "PS5 LOCKED",
+        "subline": "ACCOUNT REGION ONLY"
+      }
+    },
+    {
+      "id": "card_015",
+      "card_type": "prop",
+      "anchor_word_id": 260,
+      "start_s": 77.2333,
+      "end_s": 80.1333,
+      "start_frame": 2317,
+      "end_frame": 2404,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_dualsense",
+        "image_path": "media/photos/prop_dualsense.png",
+        "label": "PS5 MIDNIGHT UNLOCK",
+        "subline": "FRESH LAUNCH EXPERIENCE",
+        "animation": "float_zoom",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_016",
+      "card_type": "prop",
+      "anchor_word_id": 304,
+      "start_s": 89.8667,
+      "end_s": 92.7667,
+      "start_frame": 2696,
+      "end_frame": 2783,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_ssd_storage",
+        "image_path": "media/photos/prop_ssd_storage.png",
+        "label": "CLEAR 212 GB NOW",
+        "subline": "PRE-LOAD LIVE ON CONSOLE",
+        "animation": "bounce_pop",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_017",
+      "card_type": "number",
+      "anchor_word_id": 327,
+      "start_s": 97.0,
+      "end_s": 98.5,
+      "start_frame": 2910,
+      "end_frame": 2955,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "CLEAR 250 GB",
+        "subline": "SAFE PATCH HEADROOM"
+      }
+    },
+    {
+      "id": "card_018",
+      "card_type": "headline",
+      "anchor_word_id": 362,
+      "start_s": 107.7667,
+      "end_s": 110.5667,
+      "start_frame": 3233,
+      "end_frame": 3317,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "payload": {
+        "asset_id": "hl_storage_212gb",
+        "outlet": "PLAYSTATION BLOG",
+        "headline_text": "GTA 6 Official Console Storage Footprint Confirmed at 212 GB Ahead of Pre-Load",
+        "date": "Nov 2026",
+        "image_path": "",
+        "use_text_fallback": true,
+        "tilt_deg": 1.1,
+        "is_mockup": false
+      }
+    },
+    {
+      "id": "card_019",
+      "card_type": "number",
+      "anchor_word_id": 391,
+      "start_s": 116.2,
+      "end_s": 117.7,
+      "start_frame": 3486,
+      "end_frame": 3531,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "REST MODE ON",
+        "subline": "PRE-LOAD BEFORE MIDNIGHT"
+      }
+    },
+    {
+      "id": "card_020",
+      "card_type": "number",
+      "anchor_word_id": 417,
+      "start_s": 123.6667,
+      "end_s": 125.1667,
+      "start_frame": 3710,
+      "end_frame": 3755,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "THURSDAY",
+        "subline": "DAY-ONE FRAME TESTS"
+      }
+    },
+    {
+      "id": "card_021",
+      "card_type": "chapter",
+      "anchor_word_id": 471,
+      "start_s": 139.6,
+      "end_s": 141.6,
+      "start_frame": 4188,
+      "end_frame": 4248,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.6,
+      "payload": {
+        "text": "PRICE & LEONIDA",
+        "section_title": "Price, Retail Box, 30 FPS and Leonida"
+      }
+    },
+    {
+      "id": "card_022",
+      "card_type": "prop",
+      "anchor_word_id": 484,
+      "start_s": 143.4,
+      "end_s": 146.3,
+      "start_frame": 4302,
+      "end_frame": 4389,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_price_tag",
+        "image_path": "media/photos/prop_price_tag.png",
+        "label": "STANDARD: $79.99",
+        "subline": "NOT $100 ON CONSOLE",
+        "animation": "bounce_pop",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_023",
+      "card_type": "headline",
+      "anchor_word_id": 503,
+      "start_s": 149.5667,
+      "end_s": 152.3667,
+      "start_frame": 4487,
+      "end_frame": 4571,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "payload": {
+        "asset_id": "hl_price_79",
+        "outlet": "TECH INSIDER",
+        "headline_text": "GTA 6 Standard Edition Locked at $79.99 \u2014 Viral $100 Base Price Rumor Debunked",
+        "date": "Nov 2026",
+        "image_path": "",
+        "use_text_fallback": true,
+        "tilt_deg": 1.1,
+        "is_mockup": false
+      }
+    },
+    {
+      "id": "card_024",
+      "card_type": "number",
+      "anchor_word_id": 517,
+      "start_s": 154.2667,
+      "end_s": 155.7667,
+      "start_frame": 4628,
+      "end_frame": 4673,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "NOV 20 CUTOFF",
+        "subline": "VINTAGE VICE CITY PACK"
+      }
+    },
+    {
+      "id": "card_025",
+      "card_type": "prop",
+      "anchor_word_id": 565,
+      "start_s": 168.4667,
+      "end_s": 171.3667,
+      "start_frame": 5054,
+      "end_frame": 5141,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_code_box",
+        "image_path": "media/photos/prop_code_box.png",
+        "label": "CODE IN THE BOX \u2014 NO DISC",
+        "subline": "DOWNLOAD VOUCHER INSIDE",
+        "animation": "slide_swing",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_026",
+      "card_type": "headline",
+      "anchor_word_id": 587,
+      "start_s": 175.3333,
+      "end_s": 178.1333,
+      "start_frame": 5260,
+      "end_frame": 5344,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "payload": {
+        "asset_id": "hl_no_disc",
+        "outlet": "PANSTAG",
+        "headline_text": "GTA 6 Retail Boxed Editions Include Digital Download Code Only With No Physical Disc",
+        "date": "Nov 2026",
+        "image_path": "",
+        "use_text_fallback": true,
+        "tilt_deg": 1.1,
+        "is_mockup": false
+      }
+    },
+    {
+      "id": "card_027",
+      "card_type": "number",
+      "anchor_word_id": 617,
+      "start_s": 184.2,
+      "end_s": 185.7,
+      "start_frame": 5526,
+      "end_frame": 5571,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "BUY DIGITAL",
+        "subline": "SKIP MIDNIGHT LINE"
+      }
+    },
+    {
+      "id": "card_028",
+      "card_type": "prop",
+      "anchor_word_id": 641,
+      "start_s": 191.0,
+      "end_s": 193.9,
+      "start_frame": 5730,
+      "end_frame": 5817,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_tv_30fps",
+        "image_path": "media/photos/prop_tv_30fps.png",
+        "label": "30 FPS ON CONSOLE",
+        "subline": "PS5 PRO RAY TRACING",
+        "animation": "float_zoom",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_029",
+      "card_type": "prop",
+      "anchor_word_id": 662,
+      "start_s": 197.6333,
+      "end_s": 200.5333,
+      "start_frame": 5929,
+      "end_frame": 6016,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_dualsense",
+        "image_path": "media/photos/prop_dualsense.png",
+        "label": "PS5 DUALSENSE HAPTICS",
+        "subline": "ADAPTIVE TRIGGERS & 3D AUDIO",
+        "animation": "slide_swing",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_030",
+      "card_type": "headline",
+      "anchor_word_id": 682,
+      "start_s": 203.7,
+      "end_s": 206.5,
+      "start_frame": 6111,
+      "end_frame": 6195,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "payload": {
+        "asset_id": "hl_pc_wait",
+        "outlet": "GAMEBRIEF",
+        "headline_text": "GTA 6 Launches Console-Only on November 19 With No Official PC Date Announced Yet",
+        "date": "Nov 2026",
+        "image_path": "",
+        "use_text_fallback": true,
+        "tilt_deg": -1.1,
+        "is_mockup": false
+      }
+    },
+    {
+      "id": "card_031",
+      "card_type": "number",
+      "anchor_word_id": 701,
+      "start_s": 209.4667,
+      "end_s": 210.9667,
+      "start_frame": 6284,
+      "end_frame": 6329,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "NO PC DATE",
+        "subline": "SKIP FAKE BETA KEYS"
+      }
+    },
+    {
+      "id": "card_032",
+      "card_type": "prop",
+      "anchor_word_id": 731,
+      "start_s": 218.3333,
+      "end_s": 221.2333,
+      "start_frame": 6550,
+      "end_frame": 6637,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_palm_compass",
+        "image_path": "media/photos/prop_palm_compass.png",
+        "label": "6 LEONIDA REGIONS",
+        "subline": "VICE CITY TO MOUNT KALAGA",
+        "animation": "float_zoom",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_033",
+      "card_type": "quote",
+      "anchor_word_id": 746,
+      "start_s": 222.7667,
+      "end_s": 227.9333,
+      "start_frame": 6683,
+      "end_frame": 6838,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "payload": {
+        "attribution": "ROCKSTAR GAMES \u2014 STATE OF LEONIDA",
+        "quote_text": "You also cross the Leonida Keys, Grassrivers, Port Gellhorn, and Ambrosia on your main run.",
+        "typed_words": [
+          {
+            "word_id": 745,
+            "text": "You",
+            "reveal_s": 222.64
+          },
+          {
+            "word_id": 746,
+            "text": "also",
+            "reveal_s": 222.8943
+          },
+          {
+            "word_id": 747,
+            "text": "cross",
+            "reveal_s": 223.1714
+          },
+          {
+            "word_id": 748,
+            "text": "the",
+            "reveal_s": 223.4714
+          },
+          {
+            "word_id": 749,
+            "text": "Leonida",
+            "reveal_s": 223.7257
+          },
+          {
+            "word_id": 750,
+            "text": "Keys",
+            "reveal_s": 224.0714
+          },
+          {
+            "word_id": 751,
+            "text": "Grassrivers",
+            "reveal_s": 224.3486
+          },
+          {
+            "word_id": 752,
+            "text": "Port",
+            "reveal_s": 224.7629
+          },
+          {
+            "word_id": 753,
+            "text": "Gellhorn",
+            "reveal_s": 225.04
+          },
+          {
+            "word_id": 754,
+            "text": "and",
+            "reveal_s": 225.4086
+          },
+          {
+            "word_id": 755,
+            "text": "Ambrosia",
+            "reveal_s": 225.6629
+          },
+          {
+            "word_id": 756,
+            "text": "on",
+            "reveal_s": 226.0314
+          },
+          {
+            "word_id": 757,
+            "text": "your",
+            "reveal_s": 226.2629
+          },
+          {
+            "word_id": 758,
+            "text": "main",
+            "reveal_s": 226.54
+          },
+          {
+            "word_id": 759,
+            "text": "run",
+            "reveal_s": 226.8171
+          }
+        ]
+      }
+    },
+    {
+      "id": "card_034",
+      "card_type": "number",
+      "anchor_word_id": 771,
+      "start_s": 230.4667,
+      "end_s": 231.9667,
+      "start_frame": 6914,
+      "end_frame": 6959,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "JASON & LUCIA",
+        "subline": "DUAL PLAYABLE LEADS"
+      }
+    },
+    {
+      "id": "card_035",
+      "card_type": "number",
+      "anchor_word_id": 786,
+      "start_s": 235.0333,
+      "end_s": 236.5333,
+      "start_frame": 7051,
+      "end_frame": 7096,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "26 MINUTES",
+        "subline": "OFFICIAL EXTENDED LOOK"
+      }
+    },
+    {
+      "id": "card_036",
+      "card_type": "quote",
+      "anchor_word_id": 800,
+      "start_s": 239.5333,
+      "end_s": 244.6667,
+      "start_frame": 7186,
+      "end_frame": 7340,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "payload": {
+        "attribution": "ROCKSTAR GAMES \u2014 LAUNCH TRAILER",
+        "quote_text": "And Rockstar Games captured the October launch trailer on PS5 with a score by Justice.",
+        "typed_words": [
+          {
+            "word_id": 799,
+            "text": "And",
+            "reveal_s": 239.4114
+          },
+          {
+            "word_id": 800,
+            "text": "Rockstar",
+            "reveal_s": 239.6657
+          },
+          {
+            "word_id": 801,
+            "text": "Games",
+            "reveal_s": 240.0343
+          },
+          {
+            "word_id": 802,
+            "text": "captured",
+            "reveal_s": 240.3343
+          },
+          {
+            "word_id": 803,
+            "text": "the",
+            "reveal_s": 240.7029
+          },
+          {
+            "word_id": 804,
+            "text": "October",
+            "reveal_s": 240.9571
+          },
+          {
+            "word_id": 805,
+            "text": "launch",
+            "reveal_s": 241.3029
+          },
+          {
+            "word_id": 806,
+            "text": "trailer",
+            "reveal_s": 241.6257
+          },
+          {
+            "word_id": 807,
+            "text": "on",
+            "reveal_s": 241.9714
+          },
+          {
+            "word_id": 808,
+            "text": "PS5",
+            "reveal_s": 242.2029
+          },
+          {
+            "word_id": 809,
+            "text": "with",
+            "reveal_s": 242.4571
+          },
+          {
+            "word_id": 810,
+            "text": "a",
+            "reveal_s": 242.7343
+          },
+          {
+            "word_id": 811,
+            "text": "score",
+            "reveal_s": 242.9429
+          },
+          {
+            "word_id": 812,
+            "text": "by",
+            "reveal_s": 243.2429
+          },
+          {
+            "word_id": 813,
+            "text": "Justice",
+            "reveal_s": 243.4743
+          }
+        ]
+      }
+    },
+    {
+      "id": "card_037",
+      "card_type": "prop",
+      "anchor_word_id": 832,
+      "start_s": 249.0333,
+      "end_s": 251.9333,
+      "start_frame": 7471,
+      "end_frame": 7558,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_tv_30fps",
+        "image_path": "media/photos/prop_tv_30fps.png",
+        "label": "26-MIN EXTENDED LOOK",
+        "subline": "OFFICIAL ROCKSTAR GAMEPLAY",
+        "animation": "slide_swing",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_038",
+      "card_type": "prop",
+      "anchor_word_id": 861,
+      "start_s": 258.3,
+      "end_s": 261.2,
+      "start_frame": 7749,
+      "end_frame": 7836,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_ssd_storage",
+        "image_path": "media/photos/prop_ssd_storage.png",
+        "label": "3-STEP LAUNCH PLAN",
+        "subline": "250 GB \u2022 PRE-LOAD \u2022 DIGITAL",
+        "animation": "bounce_pop",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_039",
+      "card_type": "number",
+      "anchor_word_id": 883,
+      "start_s": 265.2333,
+      "end_s": 266.7333,
+      "start_frame": 7957,
+      "end_frame": 8002,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "payload": {
+        "figure": "GTA ONLINE?",
+        "subline": "NO START DATE SHOWN"
+      }
+    },
+    {
+      "id": "card_040",
+      "card_type": "prop",
+      "anchor_word_id": 913,
+      "start_s": 274.2667,
+      "end_s": 277.1667,
+      "start_frame": 8228,
+      "end_frame": 8315,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_price_tag",
+        "image_path": "media/photos/prop_price_tag.png",
+        "label": "$100 BASE? FALSE!",
+        "subline": "$79.99 STANDARD CONFIRMED",
+        "animation": "slide_swing",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_041",
+      "card_type": "prop",
+      "anchor_word_id": 931,
+      "start_s": 280.1,
+      "end_s": 283.0,
+      "start_frame": 8403,
+      "end_frame": 8490,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_midnight_globe",
+        "image_path": "media/photos/prop_midnight_globe.png",
+        "label": "2027 DELAY? FALSE!",
+        "subline": "LOCKED FOR NOV 19, 2026",
+        "animation": "float_zoom",
+        "position": "right"
+      }
+    },
+    {
+      "id": "card_042",
+      "card_type": "quote",
+      "anchor_word_id": 950,
+      "start_s": 285.9333,
+      "end_s": 290.4286,
+      "start_frame": 8578,
+      "end_frame": 8713,
+      "fade_s": 0.25,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "payload": {
+        "attribution": "THE VERDICT",
+        "quote_text": "My honest hot take: Standard at seventy-nine ninety-nine beats Ultimate for almost every player.",
+        "typed_words": [
+          {
+            "word_id": 949,
+            "text": "My",
+            "reveal_s": 285.8343
+          },
+          {
+            "word_id": 950,
+            "text": "honest",
+            "reveal_s": 286.0657
+          },
+          {
+            "word_id": 951,
+            "text": "hot",
+            "reveal_s": 286.3886
+          },
+          {
+            "word_id": 952,
+            "text": "take",
+            "reveal_s": 286.6429
+          },
+          {
+            "word_id": 953,
+            "text": "Standard",
+            "reveal_s": 286.92
+          },
+          {
+            "word_id": 954,
+            "text": "at",
+            "reveal_s": 287.2886
+          },
+          {
+            "word_id": 955,
+            "text": "seventy-nine",
+            "reveal_s": 287.52
+          },
+          {
+            "word_id": 956,
+            "text": "ninety-nine",
+            "reveal_s": 287.9343
+          },
+          {
+            "word_id": 957,
+            "text": "beats",
+            "reveal_s": 288.3486
+          },
+          {
+            "word_id": 958,
+            "text": "Ultimate",
+            "reveal_s": 288.6486
+          },
+          {
+            "word_id": 959,
+            "text": "for",
+            "reveal_s": 289.0171
+          },
+          {
+            "word_id": 960,
+            "text": "almost",
+            "reveal_s": 289.2714
+          },
+          {
+            "word_id": 961,
+            "text": "every",
+            "reveal_s": 289.5943
+          },
+          {
+            "word_id": 962,
+            "text": "player",
+            "reveal_s": 289.8943
+          }
+        ]
+      }
+    },
+    {
+      "id": "card_043",
+      "card_type": "prop",
+      "anchor_word_id": 964,
+      "start_s": 290.5,
+      "end_s": 293.4,
+      "start_frame": 8715,
+      "end_frame": 8802,
+      "fade_s": 0.25,
+      "blur_px": 0,
+      "darken_alpha": 0.0,
+      "payload": {
+        "asset_id": "prop_consoles",
+        "image_path": "media/photos/prop_consoles.png",
+        "label": "CONSOLE OR PC?",
+        "subline": "SOUND OFF BELOW",
+        "animation": "float_zoom",
+        "position": "right"
+      }
+    }
+  ],
+  "captions": [
+    {
+      "id": "cap_001",
+      "start_s": 3.2333,
+      "end_s": 4.5333,
+      "start_frame": 97,
+      "end_frame": 136,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 11,
+          "text": "NOVEMBER",
+          "reveal_s": 3.2286
+        },
+        {
+          "word_id": 12,
+          "text": "19",
+          "reveal_s": 3.5971
+        },
+        {
+          "word_id": 13,
+          "text": "2026",
+          "reveal_s": 3.8286
+        }
+      ]
+    },
+    {
+      "id": "cap_023",
+      "start_s": 6.6667,
+      "end_s": 8.0333,
+      "start_frame": 200,
+      "end_frame": 241,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 22,
+          "text": "NEED",
+          "reveal_s": 6.6657
+        },
+        {
+          "word_id": 23,
+          "text": "TO",
+          "reveal_s": 6.9429
+        },
+        {
+          "word_id": 24,
+          "text": "KNOW",
+          "reveal_s": 7.1743
+        }
+      ]
+    },
+    {
+      "id": "cap_002",
+      "start_s": 17.1333,
+      "end_s": 18.2667,
+      "start_frame": 514,
+      "end_frame": 548,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 59,
+          "text": "GETS",
+          "reveal_s": 17.1257
+        },
+        {
+          "word_id": 60,
+          "text": "LOCKED",
+          "reveal_s": 17.4029
+        },
+        {
+          "word_id": 61,
+          "text": "OUT",
+          "reveal_s": 17.7257
+        }
+      ]
+    },
+    {
+      "id": "cap_024",
+      "start_s": 23.5333,
+      "end_s": 24.6333,
+      "start_frame": 706,
+      "end_frame": 739,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 81,
+          "text": "THE",
+          "reveal_s": 23.52
+        },
+        {
+          "word_id": 82,
+          "text": "VIRAL",
+          "reveal_s": 23.7743
+        },
+        {
+          "word_id": 83,
+          "text": "DELAY",
+          "reveal_s": 24.0743
+        }
+      ]
+    },
+    {
+      "id": "cap_003",
+      "start_s": 27.9333,
+      "end_s": 29.0,
+      "start_frame": 838,
+      "end_frame": 870,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 96,
+          "text": "AND",
+          "reveal_s": 27.9286
+        },
+        {
+          "word_id": 97,
+          "text": "NO",
+          "reveal_s": 28.1829
+        },
+        {
+          "word_id": 98,
+          "text": "LEAKS",
+          "reveal_s": 28.4143
+        }
+      ]
+    },
+    {
+      "id": "cap_025",
+      "start_s": 32.9667,
+      "end_s": 33.8333,
+      "start_frame": 989,
+      "end_frame": 1015,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 113,
+          "text": "LAUNCH",
+          "reveal_s": 32.9829
+        },
+        {
+          "word_id": 114,
+          "text": "RIGHT",
+          "reveal_s": 33.3057
+        },
+        {
+          "word_id": 115,
+          "text": "ON",
+          "reveal_s": 33.6057
+        }
+      ]
+    },
+    {
+      "id": "cap_004",
+      "start_s": 36.1333,
+      "end_s": 37.3667,
+      "start_frame": 1084,
+      "end_frame": 1121,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 123,
+          "text": "TIMES",
+          "reveal_s": 36.1429
+        },
+        {
+          "word_id": 124,
+          "text": "AND",
+          "reveal_s": 36.4429
+        },
+        {
+          "word_id": 125,
+          "text": "PRE-LOAD",
+          "reveal_s": 36.6971
+        }
+      ]
+    },
+    {
+      "id": "cap_005",
+      "start_s": 47.8667,
+      "end_s": 49.2667,
+      "start_frame": 1436,
+      "end_frame": 1478,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 161,
+          "text": "ON",
+          "reveal_s": 47.8686
+        },
+        {
+          "word_id": 162,
+          "text": "NOVEMBER",
+          "reveal_s": 48.1
+        },
+        {
+          "word_id": 163,
+          "text": "19",
+          "reveal_s": 48.4686
+        }
+      ]
+    },
+    {
+      "id": "cap_006",
+      "start_s": 61.7,
+      "end_s": 63.2667,
+      "start_frame": 1851,
+      "end_frame": 1898,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 207,
+          "text": "WEDNESDAY",
+          "reveal_s": 61.7143
+        },
+        {
+          "word_id": 208,
+          "text": "NOVEMBER",
+          "reveal_s": 62.1057
+        },
+        {
+          "word_id": 209,
+          "text": "18",
+          "reveal_s": 62.4743
+        }
+      ]
+    },
+    {
+      "id": "cap_007",
+      "start_s": 76.1,
+      "end_s": 77.2333,
+      "start_frame": 2283,
+      "end_frame": 2317,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 256,
+          "text": "QUICK",
+          "reveal_s": 76.0943
+        },
+        {
+          "word_id": 257,
+          "text": "MENU",
+          "reveal_s": 76.3943
+        },
+        {
+          "word_id": 258,
+          "text": "SWAP",
+          "reveal_s": 76.6714
+        }
+      ]
+    },
+    {
+      "id": "cap_026",
+      "start_s": 84.1667,
+      "end_s": 85.5333,
+      "start_frame": 2525,
+      "end_frame": 2566,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 284,
+          "text": "KILL",
+          "reveal_s": 84.1743
+        },
+        {
+          "word_id": 285,
+          "text": "THE",
+          "reveal_s": 84.4514
+        },
+        {
+          "word_id": 286,
+          "text": "FAKE",
+          "reveal_s": 84.7057
+        }
+      ]
+    },
+    {
+      "id": "cap_008",
+      "start_s": 88.6667,
+      "end_s": 89.8333,
+      "start_frame": 2660,
+      "end_frame": 2695,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 300,
+          "text": "CAN",
+          "reveal_s": 88.6771
+        },
+        {
+          "word_id": 301,
+          "text": "DODGE",
+          "reveal_s": 88.9314
+        },
+        {
+          "word_id": 302,
+          "text": "TONIGHT",
+          "reveal_s": 89.2314
+        }
+      ]
+    },
+    {
+      "id": "cap_009",
+      "start_s": 104.3667,
+      "end_s": 105.7333,
+      "start_frame": 3131,
+      "end_frame": 3172,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 351,
+          "text": "SSD",
+          "reveal_s": 104.3657
+        },
+        {
+          "word_id": 352,
+          "text": "RIGHT",
+          "reveal_s": 104.62
+        },
+        {
+          "word_id": 353,
+          "text": "NOW",
+          "reveal_s": 104.92
+        }
+      ]
+    },
+    {
+      "id": "cap_010",
+      "start_s": 118.9667,
+      "end_s": 120.2667,
+      "start_frame": 3569,
+      "end_frame": 3608,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 400,
+          "text": "ON",
+          "reveal_s": 118.9514
+        },
+        {
+          "word_id": 401,
+          "text": "DAY",
+          "reveal_s": 119.1829
+        },
+        {
+          "word_id": 402,
+          "text": "ONE",
+          "reveal_s": 119.4371
+        }
+      ]
+    },
+    {
+      "id": "cap_027",
+      "start_s": 128.4333,
+      "end_s": 129.8,
+      "start_frame": 3853,
+      "end_frame": 3894,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 433,
+          "text": "THURSDAY",
+          "reveal_s": 128.44
+        },
+        {
+          "word_id": 434,
+          "text": "YOU",
+          "reveal_s": 128.9686
+        },
+        {
+          "word_id": 435,
+          "text": "WILL",
+          "reveal_s": 129.2229
+        }
+      ]
+    },
+    {
+      "id": "cap_011",
+      "start_s": 132.4667,
+      "end_s": 133.9,
+      "start_frame": 3974,
+      "end_frame": 4017,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 447,
+          "text": "THE",
+          "reveal_s": 132.48
+        },
+        {
+          "word_id": 448,
+          "text": "NEON",
+          "reveal_s": 132.7343
+        },
+        {
+          "word_id": 449,
+          "text": "STREETS",
+          "reveal_s": 133.0114
+        }
+      ]
+    },
+    {
+      "id": "cap_012",
+      "start_s": 146.7667,
+      "end_s": 147.9333,
+      "start_frame": 4403,
+      "end_frame": 4438,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 494,
+          "text": "NINETY-NINE",
+          "reveal_s": 146.7686
+        },
+        {
+          "word_id": 495,
+          "text": "ON",
+          "reveal_s": 147.1829
+        },
+        {
+          "word_id": 496,
+          "text": "CONSOLE",
+          "reveal_s": 147.4143
+        }
+      ]
+    },
+    {
+      "id": "cap_013",
+      "start_s": 161.3,
+      "end_s": 162.7667,
+      "start_frame": 4839,
+      "end_frame": 4883,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 540,
+          "text": "SAVE",
+          "reveal_s": 161.3
+        },
+        {
+          "word_id": 541,
+          "text": "TWENTY",
+          "reveal_s": 161.5771
+        },
+        {
+          "word_id": 542,
+          "text": "BUCKS",
+          "reveal_s": 161.9
+        }
+      ]
+    },
+    {
+      "id": "cap_014",
+      "start_s": 172.6,
+      "end_s": 174.0333,
+      "start_frame": 5178,
+      "end_frame": 5221,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 578,
+          "text": "READ",
+          "reveal_s": 172.6086
+        },
+        {
+          "word_id": 579,
+          "text": "THAT",
+          "reveal_s": 172.8857
+        },
+        {
+          "word_id": 580,
+          "text": "TWICE",
+          "reveal_s": 173.1629
+        }
+      ]
+    },
+    {
+      "id": "cap_015",
+      "start_s": 187.3,
+      "end_s": 188.6667,
+      "start_frame": 5619,
+      "end_frame": 5660,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 628,
+          "text": "WANT",
+          "reveal_s": 187.3114
+        },
+        {
+          "word_id": 629,
+          "text": "MIDNIGHT",
+          "reveal_s": 187.5886
+        },
+        {
+          "word_id": 630,
+          "text": "PLAY",
+          "reveal_s": 187.9571
+        }
+      ]
+    },
+    {
+      "id": "cap_016",
+      "start_s": 200.8667,
+      "end_s": 202.1667,
+      "start_frame": 6026,
+      "end_frame": 6065,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 672,
+          "text": "NEW",
+          "reveal_s": 200.8771
+        },
+        {
+          "word_id": 673,
+          "text": "PS5",
+          "reveal_s": 201.1314
+        },
+        {
+          "word_id": 674,
+          "text": "TRAILER",
+          "reveal_s": 201.3857
+        }
+      ]
+    },
+    {
+      "id": "cap_017",
+      "start_s": 217.0,
+      "end_s": 218.3333,
+      "start_frame": 6510,
+      "end_frame": 6550,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 727,
+          "text": "LIVING",
+          "reveal_s": 216.9886
+        },
+        {
+          "word_id": 728,
+          "text": "ROOM",
+          "reveal_s": 217.3114
+        },
+        {
+          "word_id": 729,
+          "text": "SCREEN",
+          "reveal_s": 217.5886
+        }
+      ]
+    },
+    {
+      "id": "cap_018",
+      "start_s": 228.0667,
+      "end_s": 229.3667,
+      "start_frame": 6842,
+      "end_frame": 6881,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 763,
+          "text": "ON",
+          "reveal_s": 228.0629
+        },
+        {
+          "word_id": 764,
+          "text": "DAY",
+          "reveal_s": 228.2943
+        },
+        {
+          "word_id": 765,
+          "text": "ONE",
+          "reveal_s": 228.5486
+        }
+      ]
+    },
+    {
+      "id": "cap_019",
+      "start_s": 247.9,
+      "end_s": 249.0,
+      "start_frame": 7437,
+      "end_frame": 7470,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 828,
+          "text": "ACROSS",
+          "reveal_s": 247.9057
+        },
+        {
+          "word_id": 829,
+          "text": "THE",
+          "reveal_s": 248.2286
+        },
+        {
+          "word_id": 830,
+          "text": "KEYS",
+          "reveal_s": 248.4829
+        }
+      ]
+    },
+    {
+      "id": "cap_020",
+      "start_s": 264.0,
+      "end_s": 265.2,
+      "start_frame": 7920,
+      "end_frame": 7956,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 879,
+          "text": "DISC-FREE",
+          "reveal_s": 263.9886
+        },
+        {
+          "word_id": 880,
+          "text": "STORE",
+          "reveal_s": 264.38
+        },
+        {
+          "word_id": 881,
+          "text": "BOX",
+          "reveal_s": 264.68
+        }
+      ]
+    },
+    {
+      "id": "cap_021",
+      "start_s": 277.3333,
+      "end_s": 278.8,
+      "start_frame": 8320,
+      "end_frame": 8364,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 923,
+          "text": "EDITION",
+          "reveal_s": 277.3257
+        },
+        {
+          "word_id": 924,
+          "text": "ARE",
+          "reveal_s": 277.6714
+        },
+        {
+          "word_id": 925,
+          "text": "FALSE",
+          "reveal_s": 277.9257
+        }
+      ]
+    },
+    {
+      "id": "cap_022",
+      "start_s": 294.5667,
+      "end_s": 295.8667,
+      "start_frame": 8837,
+      "end_frame": 8876,
+      "font_size_px": 106,
+      "y_pct": 80.0,
+      "words": [
+        {
+          "word_id": 978,
+          "text": "OUT",
+          "reveal_s": 294.5571
+        },
+        {
+          "word_id": 979,
+          "text": "FOR",
+          "reveal_s": 294.8114
+        },
+        {
+          "word_id": 980,
+          "text": "PC",
+          "reveal_s": 295.0657
+        }
+      ]
+    }
+  ],
+  "pills": [
+    {
+      "id": "pill_001",
+      "label": "ROCKSTAR GAMES",
+      "color_variant": "pink",
+      "slot_index": 0,
+      "tilt_deg": -2.2,
+      "anchor_word_id": 0,
+      "start_s": 0.0667,
+      "end_s": 4.5667,
+      "start_frame": 2,
+      "end_frame": 137
+    },
+    {
+      "id": "pill_002",
+      "label": "ROCKSTAR GAMES",
+      "color_variant": "cream",
+      "slot_index": 0,
+      "tilt_deg": 1.8,
+      "anchor_word_id": 126,
+      "start_s": 37.4,
+      "end_s": 42.0667,
+      "start_frame": 1122,
+      "end_frame": 1262
+    },
+    {
+      "id": "pill_003",
+      "label": "VICE",
+      "color_variant": "peach",
+      "slot_index": 0,
+      "tilt_deg": -1.5,
+      "anchor_word_id": 184,
+      "start_s": 54.8333,
+      "end_s": 59.3333,
+      "start_frame": 1645,
+      "end_frame": 1780
+    },
+    {
+      "id": "pill_004",
+      "label": "PLAYSTATION BLOG",
+      "color_variant": "pink",
+      "slot_index": 0,
+      "tilt_deg": -2.2,
+      "anchor_word_id": 303,
+      "start_s": 89.6333,
+      "end_s": 94.3,
+      "start_frame": 2689,
+      "end_frame": 2829
+    },
+    {
+      "id": "pill_005",
+      "label": "PLAYSTATION",
+      "color_variant": "cream",
+      "slot_index": 0,
+      "tilt_deg": 1.8,
+      "anchor_word_id": 361,
+      "start_s": 107.3667,
+      "end_s": 111.9667,
+      "start_frame": 3221,
+      "end_frame": 3359
+    },
+    {
+      "id": "pill_006",
+      "label": "PANSTAG",
+      "color_variant": "peach",
+      "slot_index": 0,
+      "tilt_deg": -1.5,
+      "anchor_word_id": 483,
+      "start_s": 143.1333,
+      "end_s": 148.2333,
+      "start_frame": 4294,
+      "end_frame": 4447
+    },
+    {
+      "id": "pill_007",
+      "label": "GAMEBRIEF",
+      "color_variant": "pink",
+      "slot_index": 0,
+      "tilt_deg": -2.2,
+      "anchor_word_id": 516,
+      "start_s": 154.0,
+      "end_s": 158.6333,
+      "start_frame": 4620,
+      "end_frame": 4759
+    },
+    {
+      "id": "pill_008",
+      "label": "PLAYSTATION",
+      "color_variant": "cream",
+      "slot_index": 0,
+      "tilt_deg": 1.8,
+      "anchor_word_id": 661,
+      "start_s": 197.3667,
+      "end_s": 202.2,
+      "start_frame": 5921,
+      "end_frame": 6066
+    },
+    {
+      "id": "pill_009",
+      "label": "ROCKSTAR GAMES",
+      "color_variant": "peach",
+      "slot_index": 0,
+      "tilt_deg": -1.5,
+      "anchor_word_id": 681,
+      "start_s": 203.4333,
+      "end_s": 208.3,
+      "start_frame": 6103,
+      "end_frame": 6249
+    },
+    {
+      "id": "pill_010",
+      "label": "UNCONFIRMED",
+      "color_variant": "pink",
+      "slot_index": 1,
+      "tilt_deg": -2.2,
+      "anchor_word_id": 681,
+      "start_s": 203.4333,
+      "end_s": 208.3,
+      "start_frame": 6103,
+      "end_frame": 6249
+    },
+    {
+      "id": "pill_011",
+      "label": "ROCKSTAR GAMES",
+      "color_variant": "cream",
+      "slot_index": 0,
+      "tilt_deg": 1.8,
+      "anchor_word_id": 882,
+      "start_s": 264.9667,
+      "end_s": 269.3667,
+      "start_frame": 7949,
+      "end_frame": 8081
+    },
+    {
+      "id": "pill_012",
+      "label": "UNCONFIRMED",
+      "color_variant": "peach",
+      "slot_index": 1,
+      "tilt_deg": -1.5,
+      "anchor_word_id": 882,
+      "start_s": 264.9667,
+      "end_s": 269.3667,
+      "start_frame": 7949,
+      "end_frame": 8081
+    },
+    {
+      "id": "pill_013",
+      "label": "TECH INSIDER",
+      "color_variant": "pink",
+      "slot_index": 0,
+      "tilt_deg": -2.2,
+      "anchor_word_id": 912,
+      "start_s": 274.0,
+      "end_s": 278.7,
+      "start_frame": 8220,
+      "end_frame": 8361
+    },
+    {
+      "id": "pill_014",
+      "label": "BUSTED",
+      "color_variant": "peach",
+      "slot_index": 1,
+      "tilt_deg": 1.8,
+      "anchor_word_id": 912,
+      "start_s": 274.0,
+      "end_s": 278.7,
+      "start_frame": 8220,
+      "end_frame": 8361
+    },
+    {
+      "id": "pill_015",
+      "label": "BUSTED",
+      "color_variant": "peach",
+      "slot_index": 0,
+      "tilt_deg": -1.5,
+      "anchor_word_id": 930,
+      "start_s": 279.8667,
+      "end_s": 284.7667,
+      "start_frame": 8396,
+      "end_frame": 8543
+    }
+  ],
+  "blur_intervals": [
+    {
+      "start_frame": 9,
+      "end_frame": 54,
+      "start_s": 0.3,
+      "end_s": 1.8,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_001"
+    },
+    {
+      "start_frame": 277,
+      "end_frame": 408,
+      "start_s": 9.2333,
+      "end_s": 13.5971,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "card_id": "card_002"
+    },
+    {
+      "start_frame": 548,
+      "end_frame": 593,
+      "start_s": 18.2667,
+      "end_s": 19.7667,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_004"
+    },
+    {
+      "start_frame": 870,
+      "end_frame": 915,
+      "start_s": 29.0,
+      "end_s": 30.5,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_005"
+    },
+    {
+      "start_frame": 1122,
+      "end_frame": 1182,
+      "start_s": 37.4,
+      "end_s": 39.4,
+      "blur_px": 26,
+      "darken_alpha": 0.6,
+      "card_id": "card_006"
+    },
+    {
+      "start_frame": 1350,
+      "end_frame": 1434,
+      "start_s": 45.0,
+      "end_s": 47.8,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "card_id": "card_008"
+    },
+    {
+      "start_frame": 1522,
+      "end_frame": 1567,
+      "start_s": 50.7333,
+      "end_s": 52.2333,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_009"
+    },
+    {
+      "start_frame": 1776,
+      "end_frame": 1821,
+      "start_s": 59.2,
+      "end_s": 60.7,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_011"
+    },
+    {
+      "start_frame": 1952,
+      "end_frame": 1997,
+      "start_s": 65.0667,
+      "end_s": 66.5667,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_012"
+    },
+    {
+      "start_frame": 2080,
+      "end_frame": 2205,
+      "start_s": 69.3333,
+      "end_s": 73.4886,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "card_id": "card_013"
+    },
+    {
+      "start_frame": 2206,
+      "end_frame": 2251,
+      "start_s": 73.5333,
+      "end_s": 75.0333,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_014"
+    },
+    {
+      "start_frame": 2910,
+      "end_frame": 2955,
+      "start_s": 97.0,
+      "end_s": 98.5,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_017"
+    },
+    {
+      "start_frame": 3233,
+      "end_frame": 3317,
+      "start_s": 107.7667,
+      "end_s": 110.5667,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "card_id": "card_018"
+    },
+    {
+      "start_frame": 3486,
+      "end_frame": 3531,
+      "start_s": 116.2,
+      "end_s": 117.7,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_019"
+    },
+    {
+      "start_frame": 3710,
+      "end_frame": 3755,
+      "start_s": 123.6667,
+      "end_s": 125.1667,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_020"
+    },
+    {
+      "start_frame": 4188,
+      "end_frame": 4248,
+      "start_s": 139.6,
+      "end_s": 141.6,
+      "blur_px": 26,
+      "darken_alpha": 0.6,
+      "card_id": "card_021"
+    },
+    {
+      "start_frame": 4487,
+      "end_frame": 4571,
+      "start_s": 149.5667,
+      "end_s": 152.3667,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "card_id": "card_023"
+    },
+    {
+      "start_frame": 4628,
+      "end_frame": 4673,
+      "start_s": 154.2667,
+      "end_s": 155.7667,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_024"
+    },
+    {
+      "start_frame": 5260,
+      "end_frame": 5344,
+      "start_s": 175.3333,
+      "end_s": 178.1333,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "card_id": "card_026"
+    },
+    {
+      "start_frame": 5526,
+      "end_frame": 5571,
+      "start_s": 184.2,
+      "end_s": 185.7,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_027"
+    },
+    {
+      "start_frame": 6111,
+      "end_frame": 6195,
+      "start_s": 203.7,
+      "end_s": 206.5,
+      "blur_px": 26,
+      "darken_alpha": 0.5,
+      "card_id": "card_030"
+    },
+    {
+      "start_frame": 6284,
+      "end_frame": 6329,
+      "start_s": 209.4667,
+      "end_s": 210.9667,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_031"
+    },
+    {
+      "start_frame": 6683,
+      "end_frame": 6838,
+      "start_s": 222.7667,
+      "end_s": 227.9333,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "card_id": "card_033"
+    },
+    {
+      "start_frame": 6914,
+      "end_frame": 6959,
+      "start_s": 230.4667,
+      "end_s": 231.9667,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_034"
+    },
+    {
+      "start_frame": 7051,
+      "end_frame": 7096,
+      "start_s": 235.0333,
+      "end_s": 236.5333,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_035"
+    },
+    {
+      "start_frame": 7186,
+      "end_frame": 7340,
+      "start_s": 239.5333,
+      "end_s": 244.6667,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "card_id": "card_036"
+    },
+    {
+      "start_frame": 7957,
+      "end_frame": 8002,
+      "start_s": 265.2333,
+      "end_s": 266.7333,
+      "blur_px": 26,
+      "darken_alpha": 0.48,
+      "card_id": "card_039"
+    },
+    {
+      "start_frame": 8578,
+      "end_frame": 8713,
+      "start_s": 285.9333,
+      "end_s": 290.4286,
+      "blur_px": 26,
+      "darken_alpha": 0.55,
+      "card_id": "card_042"
+    }
+  ],
+  "warnings": []
+}

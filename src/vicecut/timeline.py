@@ -362,6 +362,28 @@ def compile_timeline(
                     "subline": cue.meta.upper(),
                 }
                 pending_cards.append((anchor_w.start_s, "number", anchor_w, CARD_HOLDS_S["number"], payload))
+            elif ctype == "prop":
+                # Animated white-background studio object prop (NO people — smooth 30fps float/swing/bounce!)
+                photo = manifest.photo_by_id(cue.asset_or_value)
+                meta_parts = [p.strip() for p in cue.meta.split(";")] if cue.meta else []
+                label = meta_parts[0] if len(meta_parts) >= 1 and meta_parts[0] else (photo.label if photo else cue.asset_or_value)
+                subline = meta_parts[1] if len(meta_parts) >= 2 else ""
+                anim_cycle = ("float_zoom", "slide_swing", "bounce_pop")
+                animation = (
+                    meta_parts[2].lower()
+                    if len(meta_parts) >= 3 and meta_parts[2].strip()
+                    else anim_cycle[tilt_toggle % len(anim_cycle)]
+                )
+                tilt_toggle += 1
+                payload = {
+                    "asset_id": cue.asset_or_value,
+                    "image_path": photo.image_path if photo else "",
+                    "label": label.upper(),
+                    "subline": subline.upper(),
+                    "animation": animation,
+                    "position": "right",
+                }
+                pending_cards.append((anchor_w.start_s, "prop", anchor_w, CARD_HOLDS_S["prop"], payload))
 
     # Sort ALL cards chronologically before resolving consecutive overlaps!
     pending_cards.sort(key=lambda item: (item[0], 0 if item[1] == "chapter" else 1))
@@ -383,7 +405,7 @@ def compile_timeline(
                 end_s = min(duration_s, start_s + hold_s)
         if end_s - start_s < CARD_MIN_HOLD_S:
             continue
-        blur = 0 if card_type == "character" else BLUR_RADIUS_PX
+        blur = 0 if card_type in {"character", "prop"} else BLUR_RADIUS_PX
         darken = CARD_DARKEN_ALPHA.get(card_type, 0.45)
         sf = sec_to_frame(start_s)
         ef = sec_to_frame(end_s)
@@ -552,7 +574,7 @@ def compile_timeline(
                     return sc, pwid
 
         active_c = _active_cards_for(t0, t1)
-        needs_center_clear = any(c.card_type in {"photo", "headline", "quote", "number"} for c in active_c)
+        needs_center_clear = any(c.card_type in {"photo", "headline", "quote", "number", "prop"} for c in active_c)
 
         candidates = [s for s in motion_pool if s.id not in used_ids]
         if not candidates and stills_used < max_stills:
@@ -639,7 +661,7 @@ def compile_timeline(
 
     def _centered_card_at(t0: float, t1: float) -> CardEvent | None:
         for c in cards:
-            if c.card_type in {"photo", "headline", "quote", "number", "chapter"}:
+            if c.card_type in {"photo", "headline", "quote", "number", "chapter", "prop"}:
                 if not (c.end_s <= t0 or c.start_s >= t1):
                     return c
         return None

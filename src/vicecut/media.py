@@ -409,6 +409,7 @@ class VideoFetchItem:
     title: str
     channel_or_outlet: str
     url: str
+    fallback_url: str = ""
     page_url: str = ""
     date: str = ""
     license: str = "official-trailer-commentary"
@@ -513,30 +514,39 @@ def download_official_video(
     raw_dir.mkdir(parents=True, exist_ok=True)
     out_mp4 = raw_dir / f"{item.id}.mp4"
 
-    # Local file copy support (useful for pre-provided official footage & testing)
-    local_candidate = Path(item.url)
-    if local_candidate.exists() and local_candidate.is_file():
-        if local_candidate.resolve() != out_mp4.resolve():
-            shutil.copy2(local_candidate, out_mp4)
-    elif _is_direct_media_url(item.url):
-        req = urllib.request.Request(item.url, headers={"User-Agent": "ViceCut/1.0 (+official-press-fetch)"})
-        with urllib.request.urlopen(req, timeout=120) as resp, out_mp4.open("wb") as dst:
-            shutil.copyfileobj(resp, dst)
-    else:
-        cmd = [
-            "yt-dlp",
-            "--no-playlist",
-            "--format",
-            "bestvideo[height>=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height>=720]+bestaudio/best[ext=mp4]/best",
-            "--merge-output-format",
-            "mp4",
-            "--output",
-            str(out_mp4),
-        ]
-        if cookies_file and cookies_file.exists():
-            cmd.extend(["--cookies", str(cookies_file)])
-        cmd.append(item.url)
-        subprocess.run(cmd, check=True)
+    def _fetch_one(target_url: str) -> None:
+        local_candidate = Path(target_url)
+        if local_candidate.exists() and local_candidate.is_file():
+            if local_candidate.resolve() != out_mp4.resolve():
+                shutil.copy2(local_candidate, out_mp4)
+        elif _is_direct_media_url(target_url):
+            req = urllib.request.Request(target_url, headers={"User-Agent": "ViceCut/1.0 (+official-press-fetch)"})
+            with urllib.request.urlopen(req, timeout=180) as resp, out_mp4.open("wb") as dst:
+                shutil.copyfileobj(resp, dst)
+        else:
+            cmd = [
+                "yt-dlp",
+                "--no-playlist",
+                "--format",
+                "bestvideo[height>=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height>=720]+bestaudio/best[ext=mp4]/best",
+                "--merge-output-format",
+                "mp4",
+                "--output",
+                str(out_mp4),
+            ]
+            if cookies_file and cookies_file.exists():
+                cmd.extend(["--cookies", str(cookies_file)])
+            cmd.append(target_url)
+            subprocess.run(cmd, check=True)
+
+    try:
+        _fetch_one(item.url)
+    except Exception:
+        if item.fallback_url:
+            _assert_not_blocked([item.fallback_url], blocked_sources)
+            _fetch_one(item.fallback_url)
+        else:
+            raise
 
     rec = MediaSourceRecord(
         id=item.id,
@@ -846,32 +856,43 @@ def execute_fetch_plan(
     }
 
     for v in plan.videos:
-        raw_path, rec = download_official_video(
-            item=v,
-            raw_dir=dirs["media_raw"],
-            blocked_sources=blocked_sources,
-            cookies_file=cookies_file,
-        )
-        manifest.upsert_source(rec)
-        summary["videos_fetched"] += 1
+        try:
+            raw_path, rec = download_official_video(
+                item=v,
+                raw_dir=dirs["media_raw"],
+                blocked_sources=blocked_sources,
+                cookies_file=cookies_file,
+            )
+            manifest.upsert_source(rec)
+            summary["videos_fetched"] += 1
 
-        new_shots, sheet = split_video_into_scenes(
-            video_path=raw_path,
-            source_id=v.id,
-            scenes_dir=dirs["media_scenes"],
-            scene_threshold=v.scene_threshold,
-            min_clip_s=v.min_clip_s,
-            max_clip_s=v.max_clip_s,
-            drop_first_s=v.drop_first_s,
-            drop_last_s=v.drop_last_s,
-            tags=v.tags,
-            project_root=project_root,
+            new_shots, sheet = split_video_into_scenes(
+                video_path=raw_path,
+                source_id=v.id,
+                scenes_dir=dirs["media_scenes"],
+                scene_threshold=v.scene_threshold,
+                min_clip_s=v.min_clip_s,
+                max_clip_s=v.max_clip_s,
+                drop_first_s=v.drop_first_s,
+                drop_last_s=v.drop_last_s,
+                tags=v.tags,
+                project_root=project_root,
+            )
+            for sh in new_shots:
+                manifest.upsert_shot(sh)
+            summary["shots_created"] += len(new_shots)
+            if sheet:
+                summary["contact_sheets"].append(str(sheet))
+        except ValueError:
+            # Hard policy rejection (blocked source / fan-made / watermarked) — always fail loudly!
+            raise
+        except Exception as exc:
+            summary["errors"].append(f"video {v.id}: {exc}")
+
+    if plan.videos and summary["videos_fetched"] == 0:
+        raise RuntimeError(
+            "All planned videos failed to download: " + "; ".join(summary["errors"])
         )
-        for sh in new_shots:
-            manifest.upsert_shot(sh)
-        summary["shots_created"] += len(new_shots)
-        if sheet:
-            summary["contact_sheets"].append(str(sheet))
 
     # If real scene clips were just generated on disk, prune stale dry-run placeholder shots
     # whose files don't exist so FFmpeg never hits a missing path during cloud renders!

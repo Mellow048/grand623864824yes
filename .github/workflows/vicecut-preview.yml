@@ -14,12 +14,13 @@ on:
         default: true
         type: boolean
       voice_provider:
-        description: "Voice engine override (kokoro = free local AI voice, elevenlabs = uses ELEVENLABS_API_KEY secret)"
+        description: "Voice engine override (project-default respects project.yaml including arena TTS; kokoro = free local AI voice; elevenlabs = uses ELEVENLABS_API_KEY secret)"
         required: false
-        default: "kokoro"
+        default: "project-default"
         type: choice
         options:
           - project-default
+          - arena
           - kokoro
           - elevenlabs
           - mock

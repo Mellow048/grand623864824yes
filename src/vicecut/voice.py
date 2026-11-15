@@ -4,7 +4,9 @@ from __future__ import annotations
 
 import json
 import math
+import shutil
 import struct
+import subprocess
 import urllib.request
 import wave
 from dataclasses import dataclass
@@ -140,6 +142,79 @@ def _record_elevenlabs(
         wf.writeframes(pcm_bytes)
 
 
+def _materialize_prebuilt_take(takes_dir: Path, section_index: int, out_wav: Path) -> Path:
+    """
+    Use pre-recorded voice takes (e.g. synthesized via Arena TTS `generate_speech`).
+    Supports `section_XX.wav`, `section_XX.mp3`, or multi-part `section_XX_partNN.{wav,mp3}`.
+    """
+    if out_wav.exists() and out_wav.stat().st_size > 44:
+        return out_wav
+
+    part_files = sorted(
+        p for p in takes_dir.glob(f"section_{section_index:02d}_part*")
+        if p.suffix.lower() in {".wav", ".mp3", ".m4a", ".ogg", ".flac", ".aac"}
+    )
+    single_alt = next(
+        (
+            takes_dir / f"section_{section_index:02d}{ext}"
+            for ext in (".mp3", ".m4a", ".ogg", ".flac", ".aac")
+            if (takes_dir / f"section_{section_index:02d}{ext}").exists()
+        ),
+        None,
+    )
+    sources = part_files if part_files else ([single_alt] if single_alt else [])
+    if not sources:
+        raise FileNotFoundError(
+            f"Prebuilt/Arena voice take missing for section {section_index:02d} in {takes_dir}. "
+            f"Expected section_{section_index:02d}.wav/.mp3 or section_{section_index:02d}_part*.mp3."
+        )
+
+    ffmpeg = shutil.which("ffmpeg")
+    if len(sources) == 1 and sources[0].suffix.lower() == ".wav":
+        shutil.copy2(sources[0], out_wav)
+        return out_wav
+
+    if ffmpeg:
+        if len(sources) == 1:
+            subprocess.run(
+                [ffmpeg, "-y", "-hide_banner", "-loglevel", "error", "-i", str(sources[0]), "-ac", "1", "-ar", "24000", str(out_wav)],
+                check=True,
+            )
+        else:
+            list_txt = takes_dir / f".concat_sec_{section_index:02d}.txt"
+            list_txt.write_text(
+                "\n".join(f"file '{p.resolve().as_posix()}'" for p in sources) + "\n",
+                encoding="utf-8",
+            )
+            try:
+                subprocess.run(
+                    [
+                        ffmpeg, "-y", "-hide_banner", "-loglevel", "error",
+                        "-f", "concat", "-safe", "0", "-i", str(list_txt),
+                        "-ac", "1", "-ar", "24000", str(out_wav),
+                    ],
+                    check=True,
+                )
+            finally:
+                list_txt.unlink(missing_ok=True)
+        return out_wav
+
+    # Pure-Python fallback when all parts are uncompressed WAVs
+    if all(p.suffix.lower() == ".wav" for p in sources):
+        with wave.open(str(sources[0]), "rb") as w0:
+            params = w0.getparams()
+        with wave.open(str(out_wav), "wb") as wout:
+            wout.setparams(params)
+            for p in sources:
+                with wave.open(str(p), "rb") as wi:
+                    wout.writeframes(wi.readframes(wi.getnframes()))
+        return out_wav
+
+    raise RuntimeError(
+        f"FFmpeg is required to decode prebuilt audio {[p.name for p in sources]} into {out_wav.name}."
+    )
+
+
 def record_sections(
     script: ParsedScript,
     brief: ProjectBrief,
@@ -179,6 +254,8 @@ def record_sections(
             _record_kokoro(spoken, out_wav, brief.voice.voice_id, brief.voice.speed, brief.voice.language)
         elif brief.voice.provider == "elevenlabs":
             _record_elevenlabs(spoken, out_wav, brief.voice.voice_id, api_key)
+        elif brief.voice.provider in {"arena", "prebuilt"}:
+            _materialize_prebuilt_take(takes_dir, sec.index, out_wav)
         elif brief.voice.provider == "mock":
             # Target ~210 WPM cadence for mock tests
             est_sec = max(1.0, (sec.word_count / 210.0) * 60.0)
