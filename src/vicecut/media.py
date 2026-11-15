@@ -905,8 +905,10 @@ def fetch_and_mix_music_bed(
                     channel_or_outlet=item.artist,
                     page_url=item.page_url or item.url,
                     asset_url=item.url,
-                    license=item.license,
+                    date="2017",
+                    asset_type="music",
                     local_path=rel_p,
+                    license=item.license,
                     is_official=True,
                 )
             )
@@ -925,19 +927,26 @@ def fetch_and_mix_music_bed(
             "asetpts=PTS-STARTPTS,"
             "loudnorm=I=-18.0:LRA=7.0:TP=-2.0"
         )
-        subprocess.run(
-            [
-                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
-                "-i", str(mp3_p),
-                "-af", trim_filter,
-                "-ar", "48000", "-ac", "2",
-                str(seg_wav),
-            ],
-            check=True,
-            capture_output=True,
-            text=True,
-        )
-        norm_segs.append(seg_wav)
+        try:
+            subprocess.run(
+                [
+                    "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                    "-i", str(mp3_p),
+                    "-af", trim_filter,
+                    "-ar", "48000", "-ac", "2",
+                    str(seg_wav),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            norm_segs.append(seg_wav)
+        except Exception as exc:
+            errors.append(f"music normalize {item.id}: {exc}")
+            seg_wav.unlink(missing_ok=True)
+
+    if not norm_segs:
+        return None, errors
 
     bed_wav = music_dir / "soundtrack_bed.wav"
     if len(norm_segs) == 1:

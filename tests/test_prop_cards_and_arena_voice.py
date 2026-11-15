@@ -236,10 +236,12 @@ def test_background_cuts_track_recycles_real_footage_instead_of_black_frames(
     assert "scale=1036:583" in seg1_cmd  # 960*1.08 x 540*1.08 subtle push-in
 
 
-def test_audio_pitch_shift_speed_remaster_and_music_sidechain_mix(tmp_path: Path) -> None:
-    """Remaster audio builds exact duration-preserving pitch+speed filter and ducked CC0 music mix."""
+def test_audio_pitch_shift_speed_remaster_and_music_sidechain_mix(
+    tmp_path: Path, monkeypatch
+) -> None:
+    """Remaster audio builds exact duration-preserving pitch+speed filter, music bed, and ducked CC0 mix."""
     from vicecut.audio import TimeSpan, build_trim_filter_complex
-    from vicecut.media import FetchPlan
+    from vicecut.media import FetchPlan, MediaManifest, MusicFetchItem, fetch_and_mix_music_bed
     from vicecut.render import build_ffmpeg_composite_command
     from vicecut.timeline import ShotEvent, Timeline
 
@@ -251,6 +253,41 @@ def test_audio_pitch_shift_speed_remaster_and_music_sidechain_mix(tmp_path: Path
     plan = FetchPlan.load(GTA6_LAUNCH_PROJ / "media" / "fetch_plan.yaml")
     assert len(plan.music) == 3
     assert all("CC0" in m.license for m in plan.music)
+
+    # Verify fetch_and_mix_music_bed constructs valid MediaSourceRecord & crossfades 2 tracks
+    src_a = tmp_path / "a.mp3"
+    src_b = tmp_path / "b.mp3"
+    src_a.write_bytes(b"ID3" + b"\x00" * 12000)
+    src_b.write_bytes(b"ID3" + b"\x00" * 12000)
+    ff_calls: list[list[str]] = []
+
+    def fake_ff(cmd, **kwargs):
+        ff_calls.append(list(cmd))
+        out_p = Path(cmd[-1])
+        out_p.parent.mkdir(parents=True, exist_ok=True)
+        out_p.write_bytes(b"RIFF" + b"\x00" * 1000)
+
+        class _R:
+            returncode = 0
+
+        return _R()
+
+    monkeypatch.setattr("vicecut.media.subprocess.run", fake_ff)
+    m = MediaManifest(project="music-test")
+    bed, errs = fetch_and_mix_music_bed(
+        [
+            MusicFetchItem(id="m1", title="T1", artist="A1", url=str(src_a)),
+            MusicFetchItem(id="m2", title="T2", artist="A2", url=str(src_b)),
+        ],
+        music_dir=tmp_path / "music",
+        manifest=m,
+        project_root=tmp_path,
+    )
+    assert errs == []
+    assert bed is not None and bed.exists()
+    assert len(m.sources) == 2
+    assert m.sources[0].asset_type == "music"
+    assert any("acrossfade" in " ".join(c) for c in ff_calls)
 
     music_bed = tmp_path / "soundtrack_bed.wav"
     music_bed.write_bytes(b"RIFF")
