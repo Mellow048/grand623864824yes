@@ -132,6 +132,91 @@ def _build_blur_darken_chain(intervals: list[BlurInterval], width: int, height: 
     return ";".join(chain_parts)
 
 
+def render_background_cuts_track(
+    timeline: Timeline,
+    output_bg_mp4: Path,
+    preview: bool = False,
+    project_dir: Path | None = None,
+) -> Path:
+    """
+    Pre-concatenate all hard-cut background shots sequentially (1 decoder at a time = <100 MB RAM)
+    so 100+ shot videos never OOM FFmpeg on 7 GB cloud runners!
+    """
+    w = PREVIEW_WIDTH if preview else VIDEO_WIDTH
+    h = PREVIEW_HEIGHT if preview else VIDEO_HEIGHT
+    fps = timeline.fps
+
+    seg_dir = output_bg_mp4.parent / f".bg_segs_{'prev' if preview else 'final'}"
+    seg_dir.mkdir(parents=True, exist_ok=True)
+    seg_paths: list[Path] = []
+
+    for idx, shot in enumerate(timeline.shots):
+        dur = max(1 / fps, shot.duration_s)
+        n_frames = max(1, shot.end_frame - shot.start_frame)
+        seg_out = seg_dir / f"seg_{idx:04d}.mp4"
+        shot_input_path = shot.path
+        if project_dir is not None and shot_input_path and not Path(shot_input_path).is_absolute():
+            shot_input_path = str((project_dir / shot_input_path).resolve())
+
+        if not shot_input_path or not Path(shot_input_path).exists():
+            cmd = [
+                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                "-f", "lavfi", "-i", f"color=c=#120B17:s={w}x{h}:r={fps}:d={dur:.4f}",
+                "-frames:v", str(n_frames),
+                "-c:v", "libx264", "-preset", "ultrafast", "-crf", "16", "-pix_fmt", "yuv420p",
+                str(seg_out),
+            ]
+        elif shot.is_still:
+            zoom_step = 0.03 / (2.5 * fps)
+            vf = (
+                f"scale={w*2}:{h*2}:force_original_aspect_ratio=increase,"
+                f"crop={w*2}:{h*2},"
+                f"zoompan=z='min(1.03,1+{zoom_step:.6f}*on)':d={n_frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps},"
+                f"setsar=1,format=yuv420p"
+            )
+            cmd = [
+                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                "-loop", "1", "-t", f"{dur:.4f}", "-i", shot_input_path,
+                "-vf", vf, "-frames:v", str(n_frames),
+                "-an", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "16", "-pix_fmt", "yuv420p",
+                str(seg_out),
+            ]
+        else:
+            crop_prefix = f"{shot.crop_filter}," if shot.crop_filter else ""
+            vf = (
+                f"{crop_prefix}scale={w}:{h}:force_original_aspect_ratio=increase,"
+                f"crop={w}:{h},fps={fps},setsar=1,format=yuv420p"
+            )
+            cmd = [
+                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                "-stream_loop", "-1", "-i", shot_input_path,
+                "-vf", vf, "-frames:v", str(n_frames),
+                "-an", "-c:v", "libx264", "-preset", "ultrafast", "-crf", "16", "-pix_fmt", "yuv420p",
+                str(seg_out),
+            ]
+        subprocess.run(cmd, check=True)
+        seg_paths.append(seg_out)
+
+    list_txt = seg_dir / "concat.txt"
+    list_txt.write_text(
+        "\n".join(f"file '{p.resolve().as_posix()}'" for p in seg_paths) + "\n",
+        encoding="utf-8",
+    )
+    output_bg_mp4.parent.mkdir(parents=True, exist_ok=True)
+    subprocess.run(
+        [
+            "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+            "-f", "concat", "-safe", "0", "-i", str(list_txt),
+            "-c", "copy", str(output_bg_mp4),
+        ],
+        check=True,
+    )
+    for p in seg_paths:
+        p.unlink(missing_ok=True)
+    list_txt.unlink(missing_ok=True)
+    return output_bg_mp4
+
+
 def build_ffmpeg_composite_command(
     timeline: Timeline,
     overlay_frames_dir: Path,
@@ -140,6 +225,7 @@ def build_ffmpeg_composite_command(
     preview: bool = False,
     music_path: Path | None = None,
     project_dir: Path | None = None,
+    preconcat_bg_mp4: Path | None = None,
 ) -> list[str]:
     """
     Compile the complete FFmpeg hard-cut + frame-exact blur + transparent overlay command.
@@ -153,35 +239,40 @@ def build_ffmpeg_composite_command(
     filter_parts: list[str] = []
     concat_labels: list[str] = []
 
-    for idx, shot in enumerate(timeline.shots):
-        dur = max(1 / fps, shot.duration_s)
-        n_frames = max(1, shot.end_frame - shot.start_frame)
-        shot_input_path = shot.path
-        if project_dir is not None and shot_input_path and not Path(shot_input_path).is_absolute():
-            shot_input_path = str((project_dir / shot_input_path).resolve())
-        if shot.is_still:
-            inputs += ["-loop", "1", "-t", f"{dur:.4f}", "-i", shot_input_path]
-            # Official still: 3% push-in over 2.5s (1.0 -> 1.03)
-            zoom_step = 0.03 / (2.5 * fps)
-            vf = (
-                f"[{idx}:v]scale={w*2}:{h*2}:force_original_aspect_ratio=increase,"
-                f"crop={w*2}:{h*2},"
-                f"zoompan=z='min(1.03,1+{zoom_step:.6f}*on)':d={n_frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps},"
-                f"setsar=1,format=yuv420p[s{idx}]"
-            )
-        else:
-            inputs += ["-i", shot_input_path]
-            crop_prefix = f"{shot.crop_filter}," if shot.crop_filter else ""
-            vf = (
-                f"[{idx}:v]trim=start=0:end={dur:.4f},setpts=PTS-STARTPTS,"
-                f"{crop_prefix}scale={w}:{h}:force_original_aspect_ratio=increase,"
-                f"crop={w}:{h},fps={fps},setsar=1,format=yuv420p[s{idx}]"
-            )
-        filter_parts.append(vf)
-        concat_labels.append(f"[s{idx}]")
+    if preconcat_bg_mp4 is not None:
+        inputs += ["-i", str(preconcat_bg_mp4)]
+        filter_parts.append(f"[0:v]fps={fps},setsar=1,format=yuv420p[vcuts]")
+        ov_idx = 1
+    else:
+        for idx, shot in enumerate(timeline.shots):
+            dur = max(1 / fps, shot.duration_s)
+            n_frames = max(1, shot.end_frame - shot.start_frame)
+            shot_input_path = shot.path
+            if project_dir is not None and shot_input_path and not Path(shot_input_path).is_absolute():
+                shot_input_path = str((project_dir / shot_input_path).resolve())
+            if shot.is_still:
+                inputs += ["-loop", "1", "-t", f"{dur:.4f}", "-i", shot_input_path]
+                # Official still: 3% push-in over 2.5s (1.0 -> 1.03)
+                zoom_step = 0.03 / (2.5 * fps)
+                vf = (
+                    f"[{idx}:v]scale={w*2}:{h*2}:force_original_aspect_ratio=increase,"
+                    f"crop={w*2}:{h*2},"
+                    f"zoompan=z='min(1.03,1+{zoom_step:.6f}*on)':d={n_frames}:x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':s={w}x{h}:fps={fps},"
+                    f"setsar=1,format=yuv420p[s{idx}]"
+                )
+            else:
+                inputs += ["-i", shot_input_path]
+                crop_prefix = f"{shot.crop_filter}," if shot.crop_filter else ""
+                vf = (
+                    f"[{idx}:v]trim=start=0:end={dur:.4f},setpts=PTS-STARTPTS,"
+                    f"{crop_prefix}scale={w}:{h}:force_original_aspect_ratio=increase,"
+                    f"crop={w}:{h},fps={fps},setsar=1,format=yuv420p[s{idx}]"
+                )
+            filter_parts.append(vf)
+            concat_labels.append(f"[s{idx}]")
+        ov_idx = len(timeline.shots)
 
     # Overlay PNG sequence input
-    ov_idx = len(timeline.shots)
     inputs += ["-framerate", str(fps), "-i", str(overlay_frames_dir / "frame_%06d.png")]
 
     # Mastered voice audio input
@@ -195,7 +286,8 @@ def build_ffmpeg_composite_command(
         inputs += ["-stream_loop", "-1", "-i", str(music_path)]
 
     # 1. Hard-cut concat (zero dissolves!)
-    filter_parts.append(f"{''.join(concat_labels)}concat=n={len(concat_labels)}:v=1:a=0[vcuts]")
+    if preconcat_bg_mp4 is None:
+        filter_parts.append(f"{''.join(concat_labels)}concat=n={len(concat_labels)}:v=1:a=0[vcuts]")
 
     # 2. Exact frame-gated 26px blur + card darkening
     filter_parts.append(_build_blur_darken_chain(timeline.blur_intervals, w, h, is_preview=preview))
@@ -240,11 +332,11 @@ def compute_mobile_video_bitrate_kbps(duration_s: float, max_mb: float = MOBILE_
 
 def build_mobile_export_command(master_1080p: Path, mobile_mp4: Path, duration_s: float) -> list[str]:
     """Generate FFmpeg command for a crisp phone delivery copy strictly under 25 MB (<build> #7)."""
-    v_kbps = compute_mobile_video_bitrate_kbps(duration_s)
+    v_kbps = compute_mobile_video_bitrate_kbps(duration_s, max_mb=MOBILE_MAX_MB - 1.0)
     return [
         "ffmpeg", "-y", "-hide_banner", "-i", str(master_1080p),
         "-vf", "scale=1280:720:flags=lanczos",
-        "-c:v", "libx264", "-preset", "slow",
+        "-c:v", "libx264", "-preset", "medium",
         "-b:v", f"{v_kbps}k", "-maxrate", f"{int(v_kbps * 1.15)}k", "-bufsize", f"{v_kbps * 2}k",
         "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k",

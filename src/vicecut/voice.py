@@ -181,22 +181,21 @@ def _materialize_prebuilt_take(takes_dir: Path, section_index: int, out_wav: Pat
                 check=True,
             )
         else:
-            list_txt = takes_dir / f".concat_sec_{section_index:02d}.txt"
-            list_txt.write_text(
-                "\n".join(f"file '{p.resolve().as_posix()}'" for p in sources) + "\n",
-                encoding="utf-8",
+            # Decode each MP3/WAV part independently via filter_complex concat so ID3 tags never glitch!
+            ff_inputs: list[str] = []
+            tags: list[str] = []
+            for idx, p in enumerate(sources):
+                ff_inputs += ["-i", str(p)]
+                tags.append(f"[{idx}:a]")
+            fc = f"{''.join(tags)}concat=n={len(sources)}:v=0:a=1[aout]"
+            subprocess.run(
+                [
+                    ffmpeg, "-y", "-hide_banner", "-loglevel", "error",
+                    *ff_inputs, "-filter_complex", fc, "-map", "[aout]",
+                    "-ac", "1", "-ar", "24000", str(out_wav),
+                ],
+                check=True,
             )
-            try:
-                subprocess.run(
-                    [
-                        ffmpeg, "-y", "-hide_banner", "-loglevel", "error",
-                        "-f", "concat", "-safe", "0", "-i", str(list_txt),
-                        "-ac", "1", "-ar", "24000", str(out_wav),
-                    ],
-                    check=True,
-                )
-            finally:
-                list_txt.unlink(missing_ok=True)
         return out_wav
 
     # Pure-Python fallback when all parts are uncompressed WAVs

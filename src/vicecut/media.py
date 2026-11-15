@@ -665,22 +665,22 @@ def split_video_into_scenes(
     thumbs_dir.mkdir(parents=True, exist_ok=True)
 
     duration_s = probe_media_duration(video_path)
+    scan_limit_s = min(duration_s, 300.0) if duration_s > 360.0 else duration_s
     crop_filter = detect_letterbox_crop(video_path)
 
-    # Detect real visual scene changes via FFmpeg
-    det = subprocess.run(
-        [
-            "ffmpeg", "-hide_banner", "-i", str(video_path),
-            "-vf", f"select='gt(scene,{scene_threshold:.2f})',showinfo",
-            "-f", "null", "-",
-        ],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    # Detect real visual scene changes via FFmpeg (cap scan to first 5 min on 20+ min gameplay videos for speed!)
+    det_cmd = ["ffmpeg", "-hide_banner"]
+    if scan_limit_s < duration_s:
+        det_cmd += ["-t", f"{scan_limit_s:.1f}"]
+    det_cmd += [
+        "-i", str(video_path),
+        "-vf", f"select='gt(scene,{scene_threshold:.2f})',showinfo",
+        "-f", "null", "-",
+    ]
+    det = subprocess.run(det_cmd, capture_output=True, text=True, check=False)
     raw_cuts = parse_ffmpeg_scene_timestamps(det.stderr)
     segments = plan_scene_cuts(
-        duration_s=duration_s,
+        duration_s=scan_limit_s,
         detected_cuts_s=raw_cuts,
         min_clip_s=min_clip_s,
         max_clip_s=max_clip_s,
