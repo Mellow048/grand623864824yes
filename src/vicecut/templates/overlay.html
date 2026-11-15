@@ -328,6 +328,82 @@
       display: inline-block;
     }
 
+    /* ---------------- Compact Floating White-Background Motion Prop PiP (Zero People!) ---------------- */
+    /* Intentionally small (~9% of frame, top-right PiP) so crisp moving gameplay ALWAYS dominates behind it! */
+    .card-prop-wrap {
+      position: absolute;
+      right: 72px;
+      top: 118px;
+      width: 520px;
+      height: 370px;
+      background: #FFFFFF;
+      border: 3px solid var(--vc-border);
+      border-radius: 22px;
+      box-shadow:
+        0 0 28px rgba(var(--vc-glow-rgb), 0.40),
+        0 18px 46px rgba(0, 0, 0, 0.58);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .prop-stage {
+      position: relative;
+      width: 100%;
+      flex: 1;
+      background: #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .prop-shadow {
+      position: absolute;
+      bottom: 18px;
+      width: 210px;
+      height: 22px;
+      border-radius: 50%;
+      background: radial-gradient(ellipse at center, rgba(30, 19, 34, 0.24) 0%, rgba(30, 19, 34, 0) 72%);
+      pointer-events: none;
+    }
+    .prop-img {
+      max-width: 82%;
+      max-height: 235px;
+      object-fit: contain;
+      will-change: transform;
+      user-select: none;
+    }
+    .prop-footer {
+      width: 100%;
+      background: #1E1322;
+      border-top: 2px solid var(--vc-border);
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 3px;
+    }
+    .prop-label {
+      font-size: 22px;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.08;
+    }
+    .prop-subline {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--vc-pill-cream);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
     /* ---------------- Key-Word Captions (y=80%, width 60%, fixed non-shifting layout) ---------------- */
     .caption-wrap {
       position: absolute;
@@ -472,6 +548,61 @@
           el.innerHTML = `<div class="chapter-word grad-text">${esc(p.text)}</div>`;
           stage.appendChild(el);
           fitWidthText(el.querySelector('.chapter-word'), 1920 * 0.72);
+        } else if (card.card_type === 'prop') {
+          // Animated white-background studio prop (deterministic 30fps motion, zero people!)
+          const dt = Math.max(0, t - card.start_s);
+          const dur = Math.max(0.4, card.end_s - card.start_s);
+          const prog = clamp01(dt / dur);
+          const inP = clamp01(dt / 0.42);
+          // Smooth overshoot easeOutBack curve
+          const c1 = 1.70158, c3 = c1 + 1;
+          const easeBack = 1 + c3 * Math.pow(inP - 1, 3) + c1 * Math.pow(inP - 1, 2);
+          const anim = p.animation || 'float_zoom';
+
+          let cardTx = 0, cardTy = 0, cardScale = 1, cardRot = 0;
+          let objTx = 0, objTy = 0, objScale = 1, objRot = 0;
+          if (anim === 'slide_swing') {
+            cardTx = (1 - easeBack) * 110;
+            cardRot = -1.0 + 0.5 * Math.sin(dt * 1.6);
+            objTy = -9 * Math.sin(dt * 2.8);
+            objRot = 3.2 * Math.sin(dt * 2.4);
+            objScale = 0.94 + 0.08 * prog;
+          } else if (anim === 'bounce_pop') {
+            cardScale = 0.84 + 0.16 * easeBack;
+            cardRot = 1.0 * Math.cos(dt * 1.4);
+            objTx = 8 * Math.sin(dt * 2.4);
+            objTy = -11 * Math.abs(Math.sin(dt * 2.6));
+            objScale = 0.96 + 0.04 * Math.sin(dt * 4.2) + 0.05 * prog;
+            objRot = -2.2 * Math.sin(dt * 2.2);
+          } else {
+            // float_zoom (default): smooth spring pop + levitation + gentle zoom & tilt
+            cardScale = 0.86 + 0.14 * easeBack;
+            cardRot = -0.8 + 0.4 * Math.sin(dt * 1.5);
+            objTy = -11 * Math.sin(dt * 3.0);
+            objRot = 2.4 * Math.sin(dt * 2.0);
+            objScale = 0.95 + 0.09 * prog;
+          }
+
+          // Floor shadow responds dynamically to object height!
+          const liftNorm = clamp01((-objTy) / 14);
+          const shadScale = (1 - 0.22 * liftNorm).toFixed(3);
+          const shadAlpha = (0.9 - 0.35 * liftNorm).toFixed(3);
+
+          el.className = 'card-prop-wrap';
+          el.style.transform = `translate(${cardTx.toFixed(1)}px, ${cardTy.toFixed(1)}px) scale(${cardScale.toFixed(4)}) rotate(${cardRot.toFixed(2)}deg)`;
+          const imgHtml = p.image_path
+            ? `<img class="prop-img" src="${esc(p.image_path)}" alt="${esc(p.label)}" style="transform: translate(${objTx.toFixed(1)}px, ${objTy.toFixed(1)}px) scale(${objScale.toFixed(4)}) rotate(${objRot.toFixed(2)}deg);">`
+            : `<div class="photo-placeholder" style="color:#1E1322;background:#F6EEF8;">${esc(p.label || p.asset_id)}</div>`;
+          el.innerHTML = `
+            <div class="prop-stage">
+              <div class="prop-shadow" style="transform: scale(${shadScale}); opacity:${shadAlpha};"></div>
+              ${imgHtml}
+            </div>
+            <div class="prop-footer">
+              <div class="prop-label grad-text">${esc(p.label)}</div>
+              ${p.subline ? `<div class="prop-subline">${esc(p.subline)}</div>` : ''}
+            </div>`;
+          stage.appendChild(el);
         }
       }
 

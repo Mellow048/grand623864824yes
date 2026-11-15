@@ -1,0 +1,241 @@
+{
+  "passed": true,
+  "estimated_duration_s": 292.6,
+  "total_words": 1024,
+  "assumed_wpm": 210.0,
+  "checks": [
+    {
+      "rule": "Length & word budget",
+      "status": "PASS",
+      "measured": "1024 w (293s)",
+      "target": "950-1160 w",
+      "detail": ""
+    },
+    {
+      "rule": "Banned phrases",
+      "status": "PASS",
+      "measured": "0 hits",
+      "target": "0 hits",
+      "detail": ""
+    },
+    {
+      "rule": "Line 1 hook (fact or 'you')",
+      "status": "PASS",
+      "measured": "fact/'you'",
+      "target": "fact or 'you' line",
+      "detail": ""
+    },
+    {
+      "rule": "First concrete fact timing",
+      "status": "PASS",
+      "measured": "0.0s",
+      "target": "<= 10.0s",
+      "detail": ""
+    },
+    {
+      "rule": "Intro duration",
+      "status": "PASS",
+      "measured": "38.0s (133w)",
+      "target": "30-65s (110-230w)",
+      "detail": ""
+    },
+    {
+      "rule": "Intro teasers (3-6)",
+      "status": "PASS",
+      "measured": "3",
+      "target": "3-6 teasers",
+      "detail": ""
+    },
+    {
+      "rule": "Intro scope + trust + end promise",
+      "status": "PASS",
+      "measured": "scope=True, trust=True, end=True",
+      "target": "all true",
+      "detail": ""
+    },
+    {
+      "rule": "Intro handoff length",
+      "status": "PASS",
+      "measured": "5 words",
+      "target": "< 8 words",
+      "detail": ""
+    },
+    {
+      "rule": "Every teaser paid off",
+      "status": "PASS",
+      "measured": "3/3",
+      "target": "100%",
+      "detail": ""
+    },
+    {
+      "rule": "Max 1 payoff per section",
+      "status": "PASS",
+      "measured": "0 violations",
+      "target": "0 sections with >1 payoff",
+      "detail": ""
+    },
+    {
+      "rule": "Last payoff in final 10%",
+      "status": "PASS",
+      "measured": "at 90.7%",
+      "target": ">= 90%",
+      "detail": ""
+    },
+    {
+      "rule": "End promise re-tease window",
+      "status": "PASS",
+      "measured": "at 29.4%",
+      "target": "20%-40%",
+      "detail": ""
+    },
+    {
+      "rule": "Body section count",
+      "status": "PASS",
+      "measured": "2 sections",
+      "target": "2-2",
+      "detail": ""
+    },
+    {
+      "rule": "Body section durations",
+      "status": "PASS",
+      "measured": "0 out of bounds",
+      "target": "0:55-4:15 (ideal 2:10-2:40)",
+      "detail": ""
+    },
+    {
+      "rule": "Subscribe ask placement & form",
+      "status": "PASS",
+      "measured": "3 sents @ 42.9%, because=True",
+      "target": "2-4 sents @ 30%-50% with 'because'",
+      "detail": ""
+    },
+    {
+      "rule": "Close duration",
+      "status": "PASS",
+      "measured": "39.4s",
+      "target": "<= 60.0s",
+      "detail": ""
+    },
+    {
+      "rule": "Close elements (plan/hot take/either-or)",
+      "status": "PASS",
+      "measured": "plan=True, hot=True, choice=True",
+      "target": "all 3 present",
+      "detail": ""
+    },
+    {
+      "rule": "Mean sentence length",
+      "status": "PASS",
+      "measured": "12.0 words",
+      "target": "12-14 words",
+      "detail": ""
+    },
+    {
+      "rule": "Short sentences (<= 8 words)",
+      "status": "PASS",
+      "measured": "29.4%",
+      "target": ">= 28%",
+      "detail": ""
+    },
+    {
+      "rule": "Max sentence length",
+      "status": "PASS",
+      "measured": "21 words",
+      "target": "<= 50 words",
+      "detail": ""
+    },
+    {
+      "rule": "One-syllable words",
+      "status": "PASS",
+      "measured": "72.7%",
+      "target": ">= 72%",
+      "detail": ""
+    },
+    {
+      "rule": "'You/your' cadence",
+      "status": "PASS",
+      "measured": "12.1/min",
+      "target": ">= 8.0/min",
+      "detail": ""
+    },
+    {
+      "rule": "'I' cadence",
+      "status": "PASS",
+      "measured": "2.3/min",
+      "target": "2-4/min",
+      "detail": ""
+    },
+    {
+      "rule": "'We' avoidance",
+      "status": "PASS",
+      "measured": "0.2/min (1)",
+      "target": "almost never (<=1/min)",
+      "detail": ""
+    },
+    {
+      "rule": "Sentences starting 'And'/'So'",
+      "status": "PASS",
+      "measured": "34.1%",
+      "target": "30%-40%",
+      "detail": ""
+    },
+    {
+      "rule": "Named source frequency",
+      "status": "PASS",
+      "measured": "every 13.9s",
+      "target": "<= 20s avg",
+      "detail": ""
+    },
+    {
+      "rule": "Max gap without named source",
+      "status": "PASS",
+      "measured": "38.0s",
+      "target": "<= 85s max",
+      "detail": ""
+    },
+    {
+      "rule": "'So' action-line cadence",
+      "status": "PASS",
+      "measured": "avg 22.5s (max 37.7s)",
+      "target": "<= 30s",
+      "detail": ""
+    },
+    {
+      "rule": "Fact claim length (<= 15w)",
+      "status": "PASS",
+      "measured": "0 over",
+      "target": "<= 15 words",
+      "detail": ""
+    },
+    {
+      "rule": "No consecutive jokes",
+      "status": "PASS",
+      "measured": "0 pairs",
+      "target": "0 consecutive jokes",
+      "detail": ""
+    },
+    {
+      "rule": "All [FACT] IDs in research ledger",
+      "status": "PASS",
+      "measured": "0 missing",
+      "target": "0 missing",
+      "detail": ""
+    },
+    {
+      "rule": "Non-official confidence caveats",
+      "status": "PASS",
+      "measured": "0 missing",
+      "target": "0 missing",
+      "detail": ""
+    },
+    {
+      "rule": "Advice motif repetition",
+      "status": "PASS",
+      "measured": "4x (last=True)",
+      "target": ">= 4x including final line",
+      "detail": ""
+    }
+  ],
+  "errors": [],
+  "warnings": []
+}

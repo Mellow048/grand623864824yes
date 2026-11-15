@@ -409,6 +409,7 @@ class VideoFetchItem:
     title: str
     channel_or_outlet: str
     url: str
+    fallback_url: str = ""
     page_url: str = ""
     date: str = ""
     license: str = "official-trailer-commentary"
@@ -418,6 +419,7 @@ class VideoFetchItem:
     max_clip_s: float = 3.5
     drop_first_s: float = 2.5   # skips ESRB/PEGI rating card at start of official trailers
     drop_last_s: float = 4.0    # skips publisher logo/date endplate
+    max_clips: int = 90         # cap evenly across long gameplay videos so splitting stays fast
     tags: list[str] = field(default_factory=list)
 
 
@@ -449,6 +451,21 @@ class PhotoFetchItem:
 
 
 @dataclass
+class MusicFetchItem:
+    """Single non-copyrighted / CC0 / Public Domain background music track."""
+
+    id: str
+    title: str
+    artist: str
+    url: str
+    fallback_url: str = ""
+    page_url: str = ""
+    license: str = "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: float = 2.0
+    segment_duration_s: float = 105.0
+
+
+@dataclass
 class FetchPlan:
     """Declarative media/fetch_plan.yaml executed by `vicecut media-fetch` or GitHub Actions."""
 
@@ -456,20 +473,20 @@ class FetchPlan:
     videos: list[VideoFetchItem] = field(default_factory=list)
     headlines: list[HeadlineFetchItem] = field(default_factory=list)
     photos: list[PhotoFetchItem] = field(default_factory=list)
+    music: list[MusicFetchItem] = field(default_factory=list)
 
     def save(self, path: Path) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
+        payload: dict[str, Any] = {
+            "project": self.project,
+            "videos": [asdict(v) for v in self.videos],
+            "headlines": [asdict(h) for h in self.headlines],
+            "photos": [asdict(p) for p in self.photos],
+        }
+        if self.music:
+            payload["music"] = [asdict(m) for m in self.music]
         path.write_text(
-            yaml.safe_dump(
-                {
-                    "project": self.project,
-                    "videos": [asdict(v) for v in self.videos],
-                    "headlines": [asdict(h) for h in self.headlines],
-                    "photos": [asdict(p) for p in self.photos],
-                },
-                sort_keys=False,
-                allow_unicode=True,
-            ),
+            yaml.safe_dump(payload, sort_keys=False, allow_unicode=True),
             encoding="utf-8",
         )
 
@@ -481,6 +498,7 @@ class FetchPlan:
             videos=[VideoFetchItem(**v) for v in raw.get("videos", [])],
             headlines=[HeadlineFetchItem(**h) for h in raw.get("headlines", [])],
             photos=[PhotoFetchItem(**p) for p in raw.get("photos", [])],
+            music=[MusicFetchItem(**m) for m in raw.get("music", [])],
         )
 
 
@@ -513,30 +531,39 @@ def download_official_video(
     raw_dir.mkdir(parents=True, exist_ok=True)
     out_mp4 = raw_dir / f"{item.id}.mp4"
 
-    # Local file copy support (useful for pre-provided official footage & testing)
-    local_candidate = Path(item.url)
-    if local_candidate.exists() and local_candidate.is_file():
-        if local_candidate.resolve() != out_mp4.resolve():
-            shutil.copy2(local_candidate, out_mp4)
-    elif _is_direct_media_url(item.url):
-        req = urllib.request.Request(item.url, headers={"User-Agent": "ViceCut/1.0 (+official-press-fetch)"})
-        with urllib.request.urlopen(req, timeout=120) as resp, out_mp4.open("wb") as dst:
-            shutil.copyfileobj(resp, dst)
-    else:
-        cmd = [
-            "yt-dlp",
-            "--no-playlist",
-            "--format",
-            "bestvideo[height>=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height>=720]+bestaudio/best[ext=mp4]/best",
-            "--merge-output-format",
-            "mp4",
-            "--output",
-            str(out_mp4),
-        ]
-        if cookies_file and cookies_file.exists():
-            cmd.extend(["--cookies", str(cookies_file)])
-        cmd.append(item.url)
-        subprocess.run(cmd, check=True)
+    def _fetch_one(target_url: str) -> None:
+        local_candidate = Path(target_url)
+        if local_candidate.exists() and local_candidate.is_file():
+            if local_candidate.resolve() != out_mp4.resolve():
+                shutil.copy2(local_candidate, out_mp4)
+        elif _is_direct_media_url(target_url):
+            req = urllib.request.Request(target_url, headers={"User-Agent": "ViceCut/1.0 (+official-press-fetch)"})
+            with urllib.request.urlopen(req, timeout=180) as resp, out_mp4.open("wb") as dst:
+                shutil.copyfileobj(resp, dst)
+        else:
+            cmd = [
+                "yt-dlp",
+                "--no-playlist",
+                "--format",
+                "bestvideo[height>=1080][ext=mp4]+bestaudio[ext=m4a]/bestvideo[height>=720]+bestaudio/best[ext=mp4]/best",
+                "--merge-output-format",
+                "mp4",
+                "--output",
+                str(out_mp4),
+            ]
+            if cookies_file and cookies_file.exists():
+                cmd.extend(["--cookies", str(cookies_file)])
+            cmd.append(target_url)
+            subprocess.run(cmd, check=True)
+
+    try:
+        _fetch_one(item.url)
+    except Exception:
+        if item.fallback_url:
+            _assert_not_blocked([item.fallback_url], blocked_sources)
+            _fetch_one(item.fallback_url)
+        else:
+            raise
 
     rec = MediaSourceRecord(
         id=item.id,
@@ -640,6 +667,7 @@ def split_video_into_scenes(
     max_clip_s: float = 3.5,
     drop_first_s: float = 2.5,
     drop_last_s: float = 4.0,
+    max_clips: int = 90,
     tags: list[str] | None = None,
     project_root: Path | None = None,
 ) -> tuple[list[ShotClip], Path | None]:
@@ -653,28 +681,32 @@ def split_video_into_scenes(
     thumbs_dir.mkdir(parents=True, exist_ok=True)
 
     duration_s = probe_media_duration(video_path)
+    scan_limit_s = min(duration_s, 300.0) if duration_s > 360.0 else duration_s
     crop_filter = detect_letterbox_crop(video_path)
 
-    # Detect real visual scene changes via FFmpeg
-    det = subprocess.run(
-        [
-            "ffmpeg", "-hide_banner", "-i", str(video_path),
-            "-vf", f"select='gt(scene,{scene_threshold:.2f})',showinfo",
-            "-f", "null", "-",
-        ],
-        capture_output=True,
-        text=True,
-        check=False,
-    )
+    # Detect real visual scene changes via FFmpeg (cap scan to first 5 min on 20+ min gameplay videos for speed!)
+    det_cmd = ["ffmpeg", "-hide_banner"]
+    if scan_limit_s < duration_s:
+        det_cmd += ["-t", f"{scan_limit_s:.1f}"]
+    det_cmd += [
+        "-i", str(video_path),
+        "-vf", f"select='gt(scene,{scene_threshold:.2f})',showinfo",
+        "-f", "null", "-",
+    ]
+    det = subprocess.run(det_cmd, capture_output=True, text=True, check=False)
     raw_cuts = parse_ffmpeg_scene_timestamps(det.stderr)
     segments = plan_scene_cuts(
-        duration_s=duration_s,
+        duration_s=scan_limit_s,
         detected_cuts_s=raw_cuts,
         min_clip_s=min_clip_s,
         max_clip_s=max_clip_s,
         drop_first_s=drop_first_s,
         drop_last_s=drop_last_s,
     )
+    if max_clips > 0 and len(segments) > max_clips:
+        # Evenly sample across the full video duration so long gameplay tours stay fast & varied!
+        step = len(segments) / max_clips
+        segments = [segments[int(i * step)] for i in range(max_clips)]
 
     shots: list[ShotClip] = []
     triplets: list[tuple[str, Path, Path, Path, str]] = []
@@ -819,6 +851,135 @@ def drop_shots(manifest: MediaManifest, shot_ids: list[str], reason: str = "visu
     return dropped_now
 
 
+def fetch_and_mix_music_bed(
+    items: list[MusicFetchItem],
+    music_dir: Path,
+    manifest: MediaManifest,
+    project_root: Path,
+) -> tuple[Path | None, list[str]]:
+    """
+    Download non-copyrighted CC0 / Public Domain background tracks, register them in
+    media/manifest.yaml (so credits.md lists every track), normalize each to -18 LUFS,
+    and crossfade them smoothly (2.5s acrossfade) into a single stereo soundtrack_bed.wav.
+    """
+    if not items:
+        return None, []
+
+    music_dir.mkdir(parents=True, exist_ok=True)
+    downloaded: list[tuple[MusicFetchItem, Path]] = []
+    errors: list[str] = []
+
+    for item in items:
+        out_mp3 = music_dir / f"{item.id}.mp3"
+        ok = False
+        urls = [u for u in (item.url, item.fallback_url) if u]
+        last_exc: Exception | None = None
+        for target in urls:
+            try:
+                local_cand = Path(target)
+                if local_cand.exists() and local_cand.is_file():
+                    if local_cand.resolve() != out_mp3.resolve():
+                        shutil.copy2(local_cand, out_mp3)
+                else:
+                    req = urllib.request.Request(
+                        target,
+                        headers={"User-Agent": "Mozilla/5.0 (X11; Linux x86_64) ViceCut/1.0"},
+                    )
+                    with urllib.request.urlopen(req, timeout=120) as resp, out_mp3.open("wb") as dst:
+                        shutil.copyfileobj(resp, dst)
+                if out_mp3.exists() and out_mp3.stat().st_size > 10_000:
+                    ok = True
+                    break
+            except Exception as exc:
+                last_exc = exc
+        if ok:
+            downloaded.append((item, out_mp3))
+            try:
+                rel_p = str(out_mp3.resolve().relative_to(project_root.resolve()))
+            except ValueError:
+                rel_p = str(out_mp3)
+            manifest.upsert_source(
+                MediaSourceRecord(
+                    id=item.id,
+                    title=f"{item.title} — {item.artist}",
+                    channel_or_outlet=item.artist,
+                    page_url=item.page_url or item.url,
+                    asset_url=item.url,
+                    date="2017",
+                    asset_type="music",
+                    local_path=rel_p,
+                    license=item.license,
+                    is_official=True,
+                )
+            )
+        else:
+            errors.append(f"music {item.id}: {last_exc}")
+
+    if not downloaded:
+        return None, errors
+
+    # Normalize & trim each track to consistent -18 LUFS stereo 48kHz WAV segments
+    norm_segs: list[Path] = []
+    for idx, (item, mp3_p) in enumerate(downloaded):
+        seg_wav = music_dir / f".norm_{idx:02d}_{item.id}.wav"
+        trim_filter = (
+            f"atrim=start={max(0.0, item.trim_start_s):.2f}:duration={max(15.0, item.segment_duration_s):.2f},"
+            "asetpts=PTS-STARTPTS,"
+            "loudnorm=I=-18.0:LRA=7.0:TP=-2.0"
+        )
+        try:
+            subprocess.run(
+                [
+                    "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                    "-i", str(mp3_p),
+                    "-af", trim_filter,
+                    "-ar", "48000", "-ac", "2",
+                    str(seg_wav),
+                ],
+                check=True,
+                capture_output=True,
+                text=True,
+            )
+            norm_segs.append(seg_wav)
+        except Exception as exc:
+            errors.append(f"music normalize {item.id}: {exc}")
+            seg_wav.unlink(missing_ok=True)
+
+    if not norm_segs:
+        return None, errors
+
+    bed_wav = music_dir / "soundtrack_bed.wav"
+    if len(norm_segs) == 1:
+        shutil.copy2(norm_segs[0], bed_wav)
+    else:
+        ff_inputs: list[str] = []
+        for seg in norm_segs:
+            ff_inputs += ["-i", str(seg)]
+        parts: list[str] = []
+        cur = "0:a"
+        for i in range(1, len(norm_segs)):
+            nxt_lbl = f"xf{i}" if i < len(norm_segs) - 1 else "aout"
+            parts.append(f"[{cur}][{i}:a]acrossfade=d=2.5:c1=tri:c2=tri[{nxt_lbl}]")
+            cur = nxt_lbl
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                *ff_inputs,
+                "-filter_complex", ";".join(parts),
+                "-map", "[aout]",
+                "-ar", "48000", "-ac", "2",
+                str(bed_wav),
+            ],
+            check=True,
+            capture_output=True,
+            text=True,
+        )
+
+    for seg in norm_segs:
+        seg.unlink(missing_ok=True)
+    return bed_wav, errors
+
+
 def execute_fetch_plan(
     plan: FetchPlan,
     manifest: MediaManifest,
@@ -832,46 +993,61 @@ def execute_fetch_plan(
     Execute an entire declarative media/fetch_plan.yaml end-to-end:
     1. Download official videos -> auto-split into scenes -> build Start|Mid|End sheets
     2. Download official press-kit photos
-    3. Capture article headlines via Playwright (auto-falling back to white text cards on paywall/small crop)
-    4. Save updated media/manifest.yaml
+    3. Download & crossfade non-copyrighted CC0/PD music tracks into media/music/soundtrack_bed.wav
+    4. Capture article headlines via Playwright (auto-falling back to white text cards on paywall/small crop)
+    5. Save updated media/manifest.yaml
     """
     summary: dict[str, Any] = {
         "videos_fetched": 0,
         "shots_created": 0,
         "contact_sheets": [],
         "photos_fetched": 0,
+        "music_tracks_fetched": 0,
+        "music_bed": "",
         "headlines_captured": 0,
         "headlines_fallback": 0,
         "errors": [],
     }
 
     for v in plan.videos:
-        raw_path, rec = download_official_video(
-            item=v,
-            raw_dir=dirs["media_raw"],
-            blocked_sources=blocked_sources,
-            cookies_file=cookies_file,
-        )
-        manifest.upsert_source(rec)
-        summary["videos_fetched"] += 1
+        try:
+            raw_path, rec = download_official_video(
+                item=v,
+                raw_dir=dirs["media_raw"],
+                blocked_sources=blocked_sources,
+                cookies_file=cookies_file,
+            )
+            manifest.upsert_source(rec)
+            summary["videos_fetched"] += 1
 
-        new_shots, sheet = split_video_into_scenes(
-            video_path=raw_path,
-            source_id=v.id,
-            scenes_dir=dirs["media_scenes"],
-            scene_threshold=v.scene_threshold,
-            min_clip_s=v.min_clip_s,
-            max_clip_s=v.max_clip_s,
-            drop_first_s=v.drop_first_s,
-            drop_last_s=v.drop_last_s,
-            tags=v.tags,
-            project_root=project_root,
+            new_shots, sheet = split_video_into_scenes(
+                video_path=raw_path,
+                source_id=v.id,
+                scenes_dir=dirs["media_scenes"],
+                scene_threshold=v.scene_threshold,
+                min_clip_s=v.min_clip_s,
+                max_clip_s=v.max_clip_s,
+                drop_first_s=v.drop_first_s,
+                drop_last_s=v.drop_last_s,
+                max_clips=v.max_clips,
+                tags=v.tags,
+                project_root=project_root,
+            )
+            for sh in new_shots:
+                manifest.upsert_shot(sh)
+            summary["shots_created"] += len(new_shots)
+            if sheet:
+                summary["contact_sheets"].append(str(sheet))
+        except ValueError:
+            # Hard policy rejection (blocked source / fan-made / watermarked) — always fail loudly!
+            raise
+        except Exception as exc:
+            summary["errors"].append(f"video {v.id}: {exc}")
+
+    if plan.videos and summary["videos_fetched"] == 0:
+        raise RuntimeError(
+            "All planned videos failed to download: " + "; ".join(summary["errors"])
         )
-        for sh in new_shots:
-            manifest.upsert_shot(sh)
-        summary["shots_created"] += len(new_shots)
-        if sheet:
-            summary["contact_sheets"].append(str(sheet))
 
     # If real scene clips were just generated on disk, prune stale dry-run placeholder shots
     # whose files don't exist so FFmpeg never hits a missing path during cloud renders!
@@ -899,6 +1075,18 @@ def execute_fetch_plan(
         manifest.upsert_photo(asset)
         manifest.upsert_source(src)
         summary["photos_fetched"] += 1
+
+    if plan.music:
+        bed_wav, music_errs = fetch_and_mix_music_bed(
+            items=plan.music,
+            music_dir=dirs["media"] / "music",
+            manifest=manifest,
+            project_root=project_root,
+        )
+        if bed_wav is not None:
+            summary["music_bed"] = str(bed_wav)
+            summary["music_tracks_fetched"] = len(plan.music) - len(music_errs)
+        summary["errors"].extend(music_errs)
 
     if not skip_headlines:
         for hl in plan.headlines:

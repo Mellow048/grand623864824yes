@@ -1,0 +1,277 @@
+# Verified Launch-Week Fact Ledger for GTA 6 ("Everything You Need To Know Before You Play")
+# Researched fresh on 2026-11-15 — 4 days before the November 19, 2026 console release.
+topic: "everything you need to know about GTA 6 before you play"
+research_date: "2026-11-15"
+facts:
+  - id: F01
+    claim: "GTA 6 launches worldwide on Thursday, November 19, 2026."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Grand Theft Auto VI launches November 19, 2026 on PlayStation 5 and Xbox Series X|S."
+    date: "2026-10-15"
+    confidence: "official"
+    second_source_name: "Video Games Chronicle"
+    second_source_url: "https://www.videogameschronicle.com/news/rockstar-has-revealed-the-official-launch-trailer-for-grand-theft-auto-6/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F02
+    claim: "Day one is PlayStation 5 and Xbox Series X and S only."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Official platform list displays PlayStation 5 and Xbox Series X|S."
+    date: "2026-10-15"
+    confidence: "official"
+    second_source_name: "PlayStation"
+    second_source_url: "https://www.youtube.com/watch?v=YlP-OTqp6ig"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F03
+    claim: "Digital copies unlock at midnight local time in each region on November 19."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Digital console releases unlock at 12:00 AM local time on November 19, 2026."
+    date: "2026-11-12"
+    confidence: "official"
+    second_source_name: "VICE"
+    second_source_url: "https://www.vice.com/en/article/gta-6-midnight-release-times-file-size-preload/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F04
+    claim: "New Zealand unlocks first at midnight NZDT, eighteen hours before US Eastern."
+    source_name: "VICE"
+    source_url: "https://www.vice.com/en/article/gta-6-release-date-launch-times-new-zealand-method/"
+    exact_quote: "New Zealand hits midnight NZDT on November 19 at 6:00 AM ET and 3:00 AM PT on November 18, eighteen hours ahead of US Eastern."
+    date: "2026-11-12"
+    confidence: "official"
+    second_source_name: "PanStag"
+    second_source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F05
+    claim: "Xbox region switching lets you start early, while PlayStation locks accounts to region."
+    source_name: "VICE"
+    source_url: "https://www.vice.com/en/article/gta-6-release-date-launch-times-new-zealand-method/"
+    exact_quote: "Xbox lets players switch console location to New Zealand in Settings, while PlayStation requires an account tied to the New Zealand storefront."
+    date: "2026-11-12"
+    confidence: "official"
+    second_source_name: "PanStag"
+    second_source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false
+
+  - id: F06
+    claim: "The PlayStation Blog confirmed GTA 6 takes two hundred twelve gigabytes of storage."
+    source_name: "PlayStation Blog"
+    source_url: "https://blog.playstation.com/"
+    exact_quote: "PlayStation Blog confirmed the GTA 6 install footprint at 212 GB on console SSD."
+    date: "2026-11-12"
+    confidence: "official"
+    second_source_name: "VICE"
+    second_source_url: "https://www.vice.com/en/article/gta-6-midnight-release-times-file-size-preload/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F07
+    claim: "Digital pre-load opens ahead of launch so your download finishes before midnight."
+    source_name: "PlayStation"
+    source_url: "https://www.vice.com/en/article/gta-6-midnight-release-times-file-size-preload/"
+    exact_quote: "Digital pre-load is scheduled ahead of the November 19 midnight unlock on PlayStation 5 and Xbox Series X|S."
+    date: "2026-11-12"
+    confidence: "official"
+    second_source_name: "PanStag"
+    second_source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F08
+    claim: "The Standard Edition costs seventy-nine dollars ninety-nine on console."
+    source_name: "PanStag"
+    source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    exact_quote: "GTA 6 Standard Edition is priced at $79.99 on PlayStation 5 and Xbox Series X|S."
+    date: "2026-11-10"
+    confidence: "official"
+    second_source_name: "Tech Insider"
+    second_source_url: "https://tech-insider.org/gta-6-price-leak-relief-79-99-standard-edition-2026/"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false
+
+  - id: F09
+    claim: "The Ultimate Edition costs ninety-nine dollars ninety-nine with extra digital packs."
+    source_name: "PanStag"
+    source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    exact_quote: "GTA 6 Ultimate Edition launches at $99.99 and bundles extra digital content."
+    date: "2026-11-10"
+    confidence: "official"
+    second_source_name: "GameBrief"
+    second_source_url: "https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false
+
+  - id: F10
+    claim: "Retail store boxes pack a download code instead of a physical game disc."
+    source_name: "PanStag"
+    source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    exact_quote: "Retail boxed copies of GTA 6 ship as a download code in the box with no physical disc."
+    date: "2026-11-10"
+    confidence: "official"
+    second_source_name: "GameBrief"
+    second_source_url: "https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false
+
+  - id: F11
+    claim: "Pre-orders include the Vintage Vice City Pack before the November 20 cutoff."
+    source_name: "GameBrief"
+    source_url: "https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026"
+    exact_quote: "Pre-ordering prior to November 20 unlocks the Vintage Vice City Pack digital bonus."
+    date: "2026-11-10"
+    confidence: "official"
+    second_source_name: "PanStag"
+    second_source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false
+
+  - id: F12
+    claim: "Consoles target thirty frames per second, with ray tracing upgrades on PS5 Pro."
+    source_name: "GameBrief"
+    source_url: "https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026"
+    exact_quote: "GTA 6 targets 30fps on PS5 and Xbox Series X|S, with enhanced ray tracing on PS5 Pro."
+    date: "2026-11-10"
+    confidence: "official"
+    second_source_name: "PanStag"
+    second_source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: false
+
+  - id: F13
+    claim: "Sony showed DualSense trigger resistance and haptic feedback in its PS5 trailer."
+    source_name: "PlayStation"
+    source_url: "https://www.youtube.com/watch?v=YlP-OTqp6ig"
+    exact_quote: "Grand Theft Auto VI - PS5 Features Overview Trailer highlights DualSense adaptive triggers, haptic feedback, and 3D audio."
+    date: "2026-11-10"
+    confidence: "official"
+    second_source_name: "Rockstar Games"
+    second_source_url: "https://www.rockstargames.com/VI"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F14
+    claim: "Rockstar still has not announced a PC release date for GTA 6."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Official Rockstar platform listing includes PS5 and Xbox Series X|S only with no PC window announced."
+    date: "2026-11-12"
+    confidence: "unknown"
+    second_source_name: "GameBrief"
+    second_source_url: "https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F15
+    claim: "The map covers six named Leonida regions from Vice City to Mount Kalaga."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Explore six official Leonida destinations: Vice City, Leonida Keys, Grassrivers, Port Gellhorn, Ambrosia, and Mount Kalaga National Park."
+    date: "2026-10-15"
+    confidence: "official"
+    second_source_name: "iTechGuides"
+    second_source_url: "https://www.itechguides.com/all-gta-6-locations-in-leonida-every-confirmed-region-and-vice-city-area/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F16
+    claim: "You play dual leads Jason Duval and Lucia Caminos across the main story."
+    source_name: "Rockstar Games"
+    source_url: "https://www.youtube.com/watch?v=8u_lV1LQr1Q"
+    exact_quote: "Official Launch Trailer and Rockstar VI site feature playable leads Jason Duval and Lucia Caminos."
+    date: "2026-10-15"
+    confidence: "official"
+    second_source_name: "Video Games Chronicle"
+    second_source_url: "https://www.videogameschronicle.com/news/rockstar-has-revealed-the-official-launch-trailer-for-grand-theft-auto-6/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F17
+    claim: "Rockstar dropped a twenty-six minute Extended Look gameplay tour before launch."
+    source_name: "Rockstar Games"
+    source_url: "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+    exact_quote: "Grand Theft Auto VI: An Extended Look runs 26 minutes of official gameplay captured on console."
+    date: "2026-10-29"
+    confidence: "official"
+    second_source_name: "VICE"
+    second_source_url: "https://www.vice.com/en/article/gta-6-extended-look-youtube-download-4k/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F18
+    claim: "The October launch trailer was captured on PS5 and scored by Justice."
+    source_name: "Rockstar Games"
+    source_url: "https://www.youtube.com/watch?v=8u_lV1LQr1Q"
+    exact_quote: "Captured on PS5 — official Grand Theft Auto VI Launch Trailer features original score music by Justice."
+    date: "2026-10-15"
+    confidence: "official"
+    second_source_name: "Ghacks"
+    second_source_url: "https://www.ghacks.net/2026/10/16/rockstar-releases-the-gta-6-launch-trailer-ahead-of-the-november-19-console-release/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false
+
+  - id: F19
+    claim: "Rumors of a flat one hundred dollar standard edition turned out false."
+    source_name: "Tech Insider"
+    source_url: "https://tech-insider.org/gta-6-price-leak-relief-79-99-standard-edition-2026/"
+    exact_quote: "The $100 base game price rumor is false; Standard Edition launched at $79.99."
+    date: "2026-11-10"
+    confidence: "false"
+    second_source_name: "PanStag"
+    second_source_url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    source_tier: "outlet"
+    is_leak: false
+    is_debunk: true
+
+  - id: F20
+    claim: "Viral posts claiming a last-minute delay into 2027 are completely false."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "November 19, 2026 launch date remains locked with live pre-loads and launch trailer."
+    date: "2026-11-15"
+    confidence: "false"
+    second_source_name: "VICE"
+    second_source_url: "https://www.vice.com/en/article/gta-6-midnight-release-times-file-size-preload/"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: true
+
+  - id: F21
+    claim: "Rockstar has not shown any official GTA Online next-gen start date yet."
+    source_name: "Rockstar Games"
+    source_url: "https://www.rockstargames.com/VI"
+    exact_quote: "Launch week spotlight remains focused on the Leonida story mode with no separate online launch date confirmed on the game page."
+    date: "2026-11-15"
+    confidence: "unknown"
+    second_source_name: "GameBrief"
+    second_source_url: "https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026"
+    source_tier: "maker"
+    is_leak: false
+    is_debunk: false

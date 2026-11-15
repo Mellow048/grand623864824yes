@@ -62,8 +62,10 @@ def compute_frame_render_key(timeline: Timeline, frame_idx: int) -> str | None:
     if not active_cards and not active_caps and not active_pills:
         return "EMPTY"
 
-    # Check if any active card is fading or typing
+    # Check if any active card is fading, typing, or a continuously animated motion prop!
     for c in active_cards:
+        if c.card_type == "prop":
+            return None  # Motion prop moves smoothly every single frame!
         fade_f = max(1, int(round(c.fade_s * fps))) + 1
         if frame_idx < c.start_frame + fade_f or frame_idx >= c.end_frame - fade_f:
             return None

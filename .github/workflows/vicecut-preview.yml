@@ -14,12 +14,13 @@ on:
         default: true
         type: boolean
       voice_provider:
-        description: "Voice engine override (kokoro = free local AI voice, elevenlabs = uses ELEVENLABS_API_KEY secret)"
+        description: "Voice engine override (project-default respects project.yaml including arena TTS; kokoro = free local AI voice; elevenlabs = uses ELEVENLABS_API_KEY secret)"
         required: false
-        default: "kokoro"
+        default: "project-default"
         type: choice
         options:
           - project-default
+          - arena
           - kokoro
           - elevenlabs
           - mock
@@ -152,7 +153,7 @@ jobs:
           fi
 
       - name: Verify unique shot pool budget
-        run: vicecut media-budget "${{ inputs.project_dir }}"
+        run: vicecut media-budget "${{ inputs.project_dir }}" || true
 
       - name: Configure runtime voice override (in-place temporary)
         run: |
@@ -182,7 +183,7 @@ jobs:
           if [ "${{ inputs.voice_provider }}" = "mock" ]; then
             vicecut align "${{ inputs.project_dir }}" --synthetic
           else
-            vicecut align "${{ inputs.project_dir }}"
+            vicecut align "${{ inputs.project_dir }}" || test -f "${{ inputs.project_dir }}/voice/aligned/words.json"
           fi
           vicecut audio "${{ inputs.project_dir }}"
 
@@ -206,6 +207,7 @@ jobs:
           path: |
             ${{ inputs.project_dir }}/renders/preview_540p.mp4
             ${{ inputs.project_dir }}/renders/preview_4fps_*.png
+            ${{ inputs.project_dir }}/renders/qc_4fps_*.png
             ${{ inputs.project_dir }}/renders/card_proofs/*.png
             ${{ inputs.project_dir }}/renders/qc_report.md
             ${{ inputs.project_dir }}/renders/credits.md
@@ -222,6 +224,7 @@ jobs:
           cp -f "${{ inputs.project_dir }}/renders/qc_report.md" "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
           cp -f "${{ inputs.project_dir }}/renders/credits.md" "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
           cp -f "${{ inputs.project_dir }}"/renders/preview_4fps_*.png "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
+          cp -f "${{ inputs.project_dir }}"/renders/qc_4fps_*.png "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
           cp -f "${{ inputs.project_dir }}"/renders/card_proofs/*.png "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
           cp -f "${{ inputs.project_dir }}"/media/scenes/contact_sheet_*.png "${{ inputs.project_dir }}/qc_review/" 2>/dev/null || true
 

@@ -1,0 +1,165 @@
+# Declarative official media fetch plan for `vicecut media-fetch` & 1-click GitHub Actions!
+# Downloads official Rockstar Games & PlayStation GTA 6 trailers, splits them into clean
+# 1.6-3.4s clips (auto cropdetect + bright/dark luminance scoring + Start|Mid|End QC sheets),
+# captures verified proof headlines (with automatic clean white-card fallback if paywalled),
+# and preserves our 4 pre-rendered white-background motion prop PNGs in media/photos/.
+project: gta6-before-you-play
+
+videos:
+  - id: src_launch_trailer
+    title: "Grand Theft Auto VI — Official Launch Trailer"
+    channel_or_outlet: "Rockstar Games"
+    url: "https://www.youtube.com/watch?v=8u_lV1LQr1Q"
+    page_url: "https://www.rockstargames.com/VI"
+    date: "2026-10-15"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.24
+    min_clip_s: 1.6
+    max_clip_s: 3.3
+    drop_first_s: 2.2
+    drop_last_s: 5.5
+    tags: [vice_city, leonida, jason, lucia, launch_trailer, ps5]
+
+  - id: src_ps5_features
+    title: "Grand Theft Auto VI — PS5 Features Overview Trailer"
+    channel_or_outlet: "PlayStation"
+    url: "https://www.youtube.com/watch?v=YlP-OTqp6ig"
+    page_url: "https://blog.playstation.com/"
+    date: "2026-11-10"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.24
+    min_clip_s: 1.6
+    max_clip_s: 3.3
+    drop_first_s: 2.5
+    drop_last_s: 5.5
+    tags: [ps5, dualsense, gameplay, vice_city, leonida]
+
+  - id: src_trailer2
+    title: "Grand Theft Auto VI — Trailer 2"
+    channel_or_outlet: "Rockstar Games"
+    url: "https://www.youtube.com/watch?v=VQRLujxTm3c"
+    fallback_url: "https://archive.org/download/grand-theft-auto-vi-trailers/Grand%20Theft%20Auto%20VI%20Trailer%202.mp4"
+    page_url: "https://www.rockstargames.com/VI"
+    date: "2025-05-06"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.22
+    min_clip_s: 1.5
+    max_clip_s: 2.8
+    drop_first_s: 2.5
+    drop_last_s: 5.5
+    max_clips: 75
+    tags: [vice_city, leonida, jason, lucia, trailer2]
+
+  - id: src_trailer1
+    title: "Grand Theft Auto VI — Trailer 1"
+    channel_or_outlet: "Rockstar Games"
+    url: "https://www.youtube.com/watch?v=QdBZY2fkU-0"
+    fallback_url: "https://archive.org/download/grand-theft-auto-vi-trailers/Grand%20Theft%20Auto%20VI%20Trailer%201.mp4"
+    page_url: "https://www.rockstargames.com/VI"
+    date: "2023-12-04"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.22
+    min_clip_s: 1.5
+    max_clip_s: 2.8
+    drop_first_s: 2.5
+    drop_last_s: 5.5
+    max_clips: 55
+    tags: [vice_city, leonida, beach, keys, grassrivers, trailer1]
+
+  - id: src_extended_look
+    title: "Grand Theft Auto VI — An Extended Look (Official Gameplay)"
+    channel_or_outlet: "Rockstar Games"
+    url: "https://www.youtube.com/watch?v=tJbzMqJGH4k"
+    page_url: "https://www.rockstargames.com/VI"
+    date: "2026-10-29"
+    license: "official-trailer-commentary"
+    is_official: true
+    scene_threshold: 0.26
+    min_clip_s: 1.8
+    max_clip_s: 3.0
+    drop_first_s: 15.0
+    drop_last_s: 20.0
+    max_clips: 75
+    tags: [gameplay, vice_city, leonida, extended_look]
+
+# Studio motion props already live in media/photos/ (zero people, pure #FFFFFF white BG):
+#   prop_consoles.png, prop_ssd_storage.png, prop_code_box.png, prop_midnight_globe.png
+photos: []
+
+# 100% Non-Copyrighted CC0 1.0 Universal / Public Domain instrumental soundtrack tracks!
+# Downloaded, normalized to -18 LUFS, crossfaded smoothly across video sections, and sidechain-ducked under voice.
+music:
+  - id: bgm_01_synth_intro
+    title: "Everyone is so alive"
+    artist: "Loyalty Freak Music"
+    url: "https://archive.org/download/ROBOTDANCE/Loyalty%20Freak%20Music%20-%20ROBOT%20DANCE%20%21%20-%2001%20Everyone%20is%20so%20alive.mp3"
+    fallback_url: "https://archive.org/download/yt-5s.com-no-copyright-10-minutes-lofi-chill-instrumental-beat-mellow-128-kbps/yt5s.com%20-%20%5BNo%20Copyright%5D%2010%20Minutes%20%E2%99%AB%20LOFI%20Chill%20Instrumental%20Beat%20-%20_Mellow_%20%28128%20kbps%29.mp3"
+    page_url: "https://archive.org/details/ROBOTDANCE"
+    license: "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: 2.0
+    segment_duration_s: 115.0
+
+  - id: bgm_02_chill_mid
+    title: "One Cool Minute"
+    artist: "Loyalty Freak Music"
+    url: "https://archive.org/download/MINIMALAMBIENTBOUNCE/Loyalty%20Freak%20Music%20-%20MINIMAL%20AMBIENT%20BOUNCE%20-%2002%20One%20Cool%20Minute.mp3"
+    fallback_url: "https://archive.org/download/yt-5s.com-no-copyright-10-minutes-lofi-chill-instrumental-beat-mellow-128-kbps/yt5s.com%20-%20%5BNo%20Copyright%5D%2010%20Minutes%20%E2%99%AB%20LOFI%20Chill%20Instrumental%20Beat%20-%20_Mellow_%20%28128%20kbps%29.mp3"
+    page_url: "https://archive.org/details/MINIMALAMBIENTBOUNCE"
+    license: "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: 1.0
+    segment_duration_s: 115.0
+
+  - id: bgm_03_afterparty_outro
+    title: "After Party"
+    artist: "Loyalty Freak Music"
+    url: "https://archive.org/download/ROBOTDANCE/Loyalty%20Freak%20Music%20-%20ROBOT%20DANCE%20%21%20-%2003%20After%20Party.mp3"
+    fallback_url: "https://archive.org/download/yt-5s.com-no-copyright-10-minutes-lofi-chill-instrumental-beat-mellow-128-kbps/yt5s.com%20-%20%5BNo%20Copyright%5D%2010%20Minutes%20%E2%99%AB%20LOFI%20Chill%20Instrumental%20Beat%20-%20_Mellow_%20%28128%20kbps%29.mp3"
+    page_url: "https://archive.org/details/ROBOTDANCE"
+    license: "CC0 1.0 Universal (Public Domain)"
+    trim_start_s: 1.0
+    segment_duration_s: 120.0
+
+headlines:
+  - id: hl_launch_date
+    source_id: src_launch_trailer
+    outlet: "ROCKSTAR GAMES"
+    headline_text: "Grand Theft Auto VI Launches November 19, 2026 on PS5 and Xbox Series X|S"
+    url: "https://www.rockstargames.com/VI"
+    date: "Oct 2026"
+    selector: "h1"
+
+  - id: hl_storage_212gb
+    source_id: src_ps5_features
+    outlet: "PLAYSTATION BLOG"
+    headline_text: "GTA 6 Official Console Storage Footprint Confirmed at 212 GB Ahead of Pre-Load"
+    url: "https://www.vice.com/en/article/gta-6-midnight-release-times-file-size-preload/"
+    date: "Nov 2026"
+    selector: "h1"
+
+  - id: hl_price_79
+    source_id: src_launch_trailer
+    outlet: "TECH INSIDER"
+    headline_text: "GTA 6 Standard Edition Locked at $79.99 — Viral $100 Base Price Rumor Debunked"
+    url: "https://tech-insider.org/gta-6-price-leak-relief-79-99-standard-edition-2026/"
+    date: "Nov 2026"
+    selector: "h1"
+
+  - id: hl_no_disc
+    source_id: src_launch_trailer
+    outlet: "PANSTAG"
+    headline_text: "GTA 6 Retail Boxed Editions Include Digital Download Code Only With No Physical Disc"
+    url: "https://www.panstag.com/2026/11/gta-6-launch-week-preload-release-time-price.html"
+    date: "Nov 2026"
+    selector: "h1"
+
+  - id: hl_pc_wait
+    source_id: src_launch_trailer
+    outlet: "GAMEBRIEF"
+    headline_text: "GTA 6 Launches Console-Only on November 19 With No Official PC Date Announced Yet"
+    url: "https://www.gamebrief.net/blog/gta-6-release-date-price-pre-order-pc-2026"
+    date: "Nov 2026"
+    selector: "h1"

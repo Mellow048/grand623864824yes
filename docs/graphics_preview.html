@@ -385,6 +385,55 @@
     filter: drop-shadow(0 0 38px rgba(var(--vc-glow-rgb), 0.50)) drop-shadow(0 10px 24px rgba(0,0,0,0.85));
   }
 
+  /* 8. Compact Floating White-Background Motion Prop PiP (Zero People! Gameplay plays live behind it!) */
+  .card-prop {
+    position: absolute;
+    right: 72px;
+    top: 118px;
+    width: 520px;
+    height: 370px;
+    background: #FFFFFF;
+    border: 3px solid var(--vc-border);
+    border-radius: 22px;
+    box-shadow: 0 0 28px rgba(var(--vc-glow-rgb), 0.40), 0 18px 46px rgba(0,0,0,0.58);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-prop .stage {
+    flex: 1;
+    background: #FFFFFF;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .card-prop .shadow {
+    position: absolute;
+    bottom: 18px;
+    width: 210px;
+    height: 22px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(30, 19, 34, 0.24) 0%, rgba(30, 19, 34, 0) 72%);
+  }
+  .card-prop img {
+    max-width: 82%;
+    max-height: 235px;
+    object-fit: contain;
+  }
+  .card-prop .footer {
+    background: #1E1322;
+    border-top: 2px solid var(--vc-border);
+    padding: 12px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  .card-prop .label { font-size: 22px; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; line-height: 1.08; }
+  .card-prop .sub { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--vc-pill-cream); }
+
   /* Key-Word Caption (never shifts layout — words fade in place!) */
   .caption-layer {
     position: absolute;
@@ -438,7 +487,7 @@
   <header>
     <div class="brand">
       <h1>ViceCut — 1920×1080 Broadcast Graphics Playground</h1>
-      <p>Inspect all 6 proof-card families, non-shifting key-word captions, stacked source pills &amp; 26px blur/darken rules</p>
+      <p>Inspect all 7 proof-card families (including moving white-BG studio props with zero people), key-word captions &amp; 26px blur/darken rules</p>
     </div>
     <div class="controls" id="cardTabs">
       <button class="tab active" data-mode="headline">1. Headline</button>
@@ -448,6 +497,7 @@
       <button class="tab" data-mode="number">5. Big Number</button>
       <button class="tab" data-mode="chapter">6. Chapter</button>
       <button class="tab" data-mode="caption">7. Key-Word Caption</button>
+      <button class="tab" data-mode="prop">8. Moving Prop (White BG)</button>
     </div>
   </header>
 
@@ -480,7 +530,24 @@
   </div>
 
   <div class="spec-strip">
-    <div class="spec-box"><div class="k">Panel Glass</div><div class="v">#1E1322 @ 90% • Border #F7D3EA • Pink Glow</div></div>
+    <div class="spec-box" style="grid-column: 1 / -1; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+      <div>
+        <div class="k">Synthesized Arena Voiceover (voice-02)</div>
+        <div class="v" id="voiceTrackLabel">Intro — section_00.mp3 (click Play to preview while watching the animated props!)</div>
+      </div>
+      <div style="display:flex; align-items:center; gap:8px; flex-wrap:wrap;">
+        <audio id="voicePlayer" controls style="height:34px;" src="../projects/gta6-before-you-play/voice/takes/section_00.mp3"></audio>
+        <select id="voiceTrackSelect" style="background:#2A1731;color:#FFF1DE;border:1px solid rgba(247,211,234,0.35);border-radius:8px;padding:6px 10px;font-weight:700;font-size:12px;">
+          <option value="../projects/gta6-before-you-play/voice/takes/section_00.mp3">1. Intro (0:00-0:36)</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_01_part01.mp3">2. Launch Times &amp; NZ Trick</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_01_part02.mp3">3. 212 GB SSD Pre-Load</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_02_part01.mp3">4. $79.99, No-Disc Box &amp; 30 FPS</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_02_part02.mp3">5. PC Wait &amp; 6 Leonida Regions</option>
+          <option value="../projects/gta6-before-you-play/voice/takes/section_03.mp3">6. Close &amp; Rumors Busted</option>
+        </select>
+      </div>
+    </div>
+    <div class="spec-box"><div class="k">Compact Prop PiP</div><div class="v">520×370 (9% frame) • 0 Blur / 0 Darken • Live Gameplay Behind</div></div>
     <div class="spec-box"><div class="k">Typography</div><div class="v">Montserrat Black (900) ALL CAPS • Bold (700) Body</div></div>
     <div class="spec-box"><div class="k">Motion Rules</div><div class="v">0.25s Ease Fade • Hard Cuts Only • Zero SFX</div></div>
     <div class="spec-box"><div class="k">Anti-Flicker</div><div class="v">Cut Snaps to Card Start • Blur Matches Card Frame</div></div>
@@ -565,19 +632,84 @@ const MODES = {
     pills: [['ROCKSTAR GAMES', 'pill-pink']],
     html: ``,
     captionWords: ['WAIT', 'FOR', 'PROOF']
+  },
+  prop: {
+    blur: false, darken: 0.0, spec: 'Compact PiP (520×370 = 9% of frame, Zero Blur/Darken) | Crisp Moving Gameplay Plays Behind Floating White-BG Prop (ZERO PEOPLE)',
+    pills: [['ROCKSTAR GAMES', 'pill-pink']],
+    animateProp: true,
+    html: `<div class="card-prop" id="livePropCard">
+      <div class="stage">
+        <div class="shadow" id="livePropShadow"></div>
+        <img id="livePropImg" src="../projects/gta6-before-you-play/media/photos/prop_consoles.png" alt="Consoles Only Launch Prop" />
+      </div>
+      <div class="footer">
+        <div class="label grad-text" id="livePropLabel">CONSOLES ONLY AT LAUNCH</div>
+        <div class="sub" id="livePropSub">PS5 &amp; XBOX SERIES X/S</div>
+      </div>
+    </div>`
   }
 };
+
+const PROP_GALLERY = [
+  { id: 'prop_consoles', btn: 'Consoles', label: 'CONSOLES ONLY AT LAUNCH', sub: 'PS5 & XBOX SERIES X/S', anim: 'float_zoom' },
+  { id: 'prop_midnight_globe', btn: 'Midnight Globe', label: 'MIDNIGHT LOCAL UNLOCK', sub: 'NEW ZEALAND 18 HRS EARLY', anim: 'slide_swing' },
+  { id: 'prop_ssd_storage', btn: '212 GB SSD', label: 'CLEAR 212 GB NOW', sub: 'PRE-LOAD LIVE ON CONSOLE', anim: 'bounce_pop' },
+  { id: 'prop_price_tag', btn: '$79.99 Tag', label: 'STANDARD: $79.99', sub: 'NOT $100 ON CONSOLE', anim: 'bounce_pop' },
+  { id: 'prop_code_box', btn: 'No-Disc Box', label: 'CODE IN THE BOX — NO DISC', sub: 'DOWNLOAD VOUCHER INSIDE', anim: 'slide_swing' },
+  { id: 'prop_tv_30fps', btn: '30 FPS OLED', label: '30 FPS ON CONSOLE', sub: 'PS5 PRO RAY TRACING', anim: 'float_zoom' },
+  { id: 'prop_dualsense', btn: 'DualSense', label: 'PS5 DUALSENSE HAPTICS', sub: 'ADAPTIVE TRIGGERS & 3D AUDIO', anim: 'slide_swing' },
+  { id: 'prop_palm_compass', btn: '6 Regions', label: '6 LEONIDA REGIONS', sub: 'VICE CITY TO MOUNT KALAGA', anim: 'float_zoom' },
+];
+let currentPropIdx = 0;
+
+function renderPropSwitcher(visible) {
+  let bar = document.getElementById('propGalleryBar');
+  if (!bar) {
+    bar = document.createElement('div');
+    bar.id = 'propGalleryBar';
+    bar.style.cssText = 'width:100%;max-width:1180px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:-6px;';
+    const specBar = document.querySelector('.palette-bar');
+    specBar.parentNode.insertBefore(bar, specBar.nextSibling);
+  }
+  bar.style.display = visible ? 'flex' : 'none';
+  if (!visible) return;
+  bar.innerHTML = `<span style="font-size:12px;color:#CDB4D8;font-weight:700;">Switch Live Prop (8 Zero-People Studio Assets):</span>` +
+    PROP_GALLERY.map((p, i) => `<button class="swatch-btn ${i === currentPropIdx ? 'active' : ''}" data-prop-idx="${i}">${p.btn} (${p.anim})</button>`).join('');
+  bar.querySelectorAll('button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentPropIdx = Number(btn.dataset.propIdx);
+      applyCurrentProp();
+      renderPropSwitcher(true);
+    });
+  });
+}
+
+function applyCurrentProp() {
+  const p = PROP_GALLERY[currentPropIdx];
+  const img = document.getElementById('livePropImg');
+  const lbl = document.getElementById('livePropLabel');
+  const sub = document.getElementById('livePropSub');
+  if (img) img.src = `../projects/gta6-before-you-play/media/photos/${p.id}.png`;
+  if (lbl) lbl.textContent = p.label;
+  if (sub) sub.textContent = p.sub;
+}
 
 function rescale() {
   const shell = document.getElementById('stageShell');
   const scaler = document.getElementById('stageScaler');
-  const s = shell.clientWidth / 1920;
+  const w = shell.clientWidth || Math.min(window.innerWidth - 40, 1180) || 960;
+  const s = Math.max(0.18, w / 1920);
   scaler.style.transform = `scale(${s})`;
 }
 window.addEventListener('resize', rescale);
+if (typeof ResizeObserver !== 'undefined') {
+  new ResizeObserver(rescale).observe(document.getElementById('stageShell'));
+}
 rescale();
+requestAnimationFrame(rescale);
 
 let captionTimer = null;
+let propRaf = null;
 function setMode(name) {
   const m = MODES[name];
   document.querySelectorAll('#cardTabs .tab').forEach(b => b.classList.toggle('active', b.dataset.mode === name));
@@ -586,6 +718,50 @@ function setMode(name) {
   document.getElementById('footageDarken').style.background = `rgba(0,0,0,${m.darken})`;
   document.getElementById('pillsLayer').innerHTML = m.pills.map(([t, cls]) => `<div class="source-pill ${cls}">${t}</div>`).join('');
   document.getElementById('cardLayer').innerHTML = m.html;
+  renderPropSwitcher(Boolean(m.animateProp));
+
+  if (propRaf) { cancelAnimationFrame(propRaf); propRaf = null; }
+  const bgEl = document.getElementById('footageBg');
+  if (bgEl) bgEl.style.transform = '';
+  if (m.animateProp) {
+    applyCurrentProp();
+    const startTs = performance.now();
+    function tick(now) {
+      const p = PROP_GALLERY[currentPropIdx];
+      const dt = (now - startTs) / 1000;
+      const img = document.getElementById('livePropImg');
+      const shad = document.getElementById('livePropShadow');
+      // Subtle continuous gameplay camera motion behind the compact floating PiP card
+      if (bgEl) {
+        const bgX = 24 * Math.sin(dt * 0.45);
+        const bgS = 1.05 + 0.025 * Math.sin(dt * 0.35);
+        bgEl.style.transform = `translateX(${bgX.toFixed(1)}px) scale(${bgS.toFixed(4)})`;
+      }
+      let tx = 0, ty = 0, rot = 0, sc = 1.0;
+      if (p.anim === 'slide_swing') {
+        tx = 10 * Math.sin(dt * 1.9);
+        ty = -7 * Math.sin(dt * 3.1);
+        rot = 4.0 * Math.sin(dt * 2.2);
+        sc = 0.96 + 0.04 * (0.5 + 0.5 * Math.sin(dt * 1.4));
+      } else if (p.anim === 'bounce_pop') {
+        ty = -12 * Math.abs(Math.sin(dt * 2.4));
+        rot = 2.0 * Math.sin(dt * 2.4);
+        sc = 0.95 + 0.06 * (0.5 + 0.5 * Math.sin(dt * 2.4));
+      } else {
+        ty = -10 * Math.sin(dt * 3.0);
+        rot = 2.4 * Math.sin(dt * 2.0);
+        sc = 0.95 + 0.05 * (0.5 + 0.5 * Math.sin(dt * 1.1));
+      }
+      if (img) img.style.transform = `translate(${tx.toFixed(1)}px, ${ty.toFixed(1)}px) scale(${sc.toFixed(4)}) rotate(${rot.toFixed(2)}deg)`;
+      const lift = Math.max(0, Math.min(1, (-ty) / 14));
+      if (shad) {
+        shad.style.transform = `translateX(${(tx * 0.6).toFixed(1)}px) scale(${(1 - 0.22 * lift).toFixed(3)})`;
+        shad.style.opacity = (0.9 - 0.35 * lift).toFixed(3);
+      }
+      propRaf = requestAnimationFrame(tick);
+    }
+    propRaf = requestAnimationFrame(tick);
+  }
 
   const capLayer = document.getElementById('captionLayer');
   const capLine = document.getElementById('captionLine');
@@ -608,16 +784,27 @@ function setMode(name) {
 }
 
 document.querySelectorAll('#cardTabs .tab').forEach(btn => btn.addEventListener('click', () => setMode(btn.dataset.mode)));
-document.querySelectorAll('.swatch-btn').forEach(btn => {
+document.querySelectorAll('.palette-bar .swatch-btn').forEach(btn => {
   btn.addEventListener('click', () => {
-    document.querySelectorAll('.swatch-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.palette-bar .swatch-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
     const vars = PALETTES[btn.dataset.palette];
     Object.entries(vars).forEach(([k, v]) => document.documentElement.style.setProperty(k, v));
   });
 });
 
-setMode('headline');
+const voiceSelect = document.getElementById('voiceTrackSelect');
+const voicePlayer = document.getElementById('voicePlayer');
+const voiceLabel = document.getElementById('voiceTrackLabel');
+if (voiceSelect && voicePlayer) {
+  voiceSelect.addEventListener('change', () => {
+    voicePlayer.src = voiceSelect.value;
+    voiceLabel.textContent = voiceSelect.options[voiceSelect.selectedIndex].text + ' — ready to play';
+    voicePlayer.play().catch(() => {});
+  });
+}
+
+setMode('prop');
 </script>
 </body>
 </html>

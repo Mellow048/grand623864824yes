@@ -45,6 +45,7 @@ CARD_HOLDS_S: dict[str, float] = {
     "photo": 2.6,
     "headline": 2.8,
     "character": 2.8,
+    "prop": 2.9,       # Animated white-background studio object prop (zero people!)
     "number": 1.5,
     "chapter": 2.0,
     # Quote holds until 0.9s after its last spoken word (computed dynamically).
@@ -55,6 +56,7 @@ CARD_DARKEN_ALPHA: dict[str, float] = {
     "photo": 0.42,
     "headline": 0.50,
     "character": 0.0,   # Sharp footage, no darkening
+    "prop": 0.0,        # Compact floating PiP card — keep full-motion gameplay crisp & unblurred behind it!
     "quote": 0.55,
     "number": 0.48,
     "chapter": 0.60,
@@ -142,10 +144,13 @@ class ThemeConfig:
 class VoiceConfig:
     """Voice synthesis configuration. API keys are NEVER stored in YAML or printed."""
 
-    provider: str = "kokoro"  # "kokoro" (free local), "elevenlabs" (paid), "mock"
-    voice_id: str = "af_heart"  # Kokoro local default or ElevenLabs voice ID
+    provider: str = "kokoro"  # "kokoro" (free local), "elevenlabs" (paid), "arena", "mock"
+    voice_id: str = "af_heart"  # Kokoro local default or ElevenLabs/Arena voice ID
     api_key_file: str | None = None  # Path to local key file; read strictly on demand
     speed: float = 1.0
+    speed_override: float | None = None  # Optional post-alignment tempo override (e.g. 1.18)
+    pitch_semitones: float = 0.0  # Optional natural pitch shift in semitones (e.g. -1.75 warmer/deeper)
+    max_silence_s: float = SILENCE_MAX_KEEP_S  # Max pause kept after silence trimming
     language: str = "en-us"
     whisper_model: str = "large-v3-turbo"
     whisper_compute_type: str = "int8"
